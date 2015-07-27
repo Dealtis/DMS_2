@@ -1,0 +1,8 @@
+C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard\obj\Debug\assemblies\DMSvStandard.dll
+C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard\obj\Debug\assemblies\AndHUD.dll
+C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard\obj\Debug\assemblies\Newtonsoft.Json.dll
+C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard\obj\Debug\assemblies\SignaturePad.Android.dll
+C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard\obj\Debug\assemblies\Xamarin.Android.Support.v4.dll
+C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard\obj\Debug\assemblies\Xamarin.Insights.dll
+C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard\obj\Debug\assemblies\zxing.monoandroid.dll
+C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard\obj\Debug\assemblies\ZXing.Net.Mobile.dll

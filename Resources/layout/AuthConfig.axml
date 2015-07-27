@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="13.5">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:id="@+id/linearLayout2"
+        android:layout_weight="1"
+        android:weightSum="5">
+        <ImageButton
+            android:background="@drawable/back"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight=".65"
+            android:id="@+id/imageButton1" />
+        <TextView
+            android:id="@+id/lblTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Main Menu"
+            android:textStyle="bold"
+            android:textColor="#fff28218"
+            android:layout_weight="3.7"
+            android:gravity="center_horizontal" />
+        <ImageButton
+            android:background="@drawable/send"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight=".65"
+            android:id="@+id/imageButton2" />
+    </LinearLayout>
+    <View
+        android:id="@+id/strut"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:background="#ffdcdcdc"
+        android:layout_weight=".2" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:id="@+id/rowLayout1"
+        android:weightSum="1"
+        android:layout_weight="1"
+        android:background="#ffdcdcdc">
+        <TextView
+            android:text="DTMD Authentication:"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/textViewHeader1"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:textColor="#ff000000"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical" />
+    </LinearLayout>
+    <View
+        android:id="@+id/strut"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:background="#ffdcdcdc"
+        android:layout_weight=".2" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:id="@+id/rowLayout2"
+        android:layout_weight="1"
+        android:weightSum="2"
+        android:background="#ffdcdcdc">
+        <TextView
+            android:text="User Name:"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/textViewUserName"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:textColor="#ff000000"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:textSize="12dp" />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:id="@+id/editTextUserName"
+            android:background="@drawable/rounded_text"
+            android:layout_marginRight="10dp"
+            android:textColor="#ff060000" />
+    </LinearLayout>
+    <View
+        android:id="@+id/strut"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:background="#ffdcdcdc"
+        android:layout_weight=".2" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:id="@+id/rowLayout3"
+        android:layout_weight="1"
+        android:weightSum="2"
+        android:background="#ffdcdcdc">
+        <TextView
+            android:text="User Barcode:"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/textViewBarcode"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:textColor="#ff000000"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:textSize="12dp" />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:id="@+id/editTextBarcode"
+            android:background="@drawable/rounded_text"
+            android:layout_marginRight="10dp"
+            android:textColor="#ff060000" />
+    </LinearLayout>
+    <View
+        android:id="@+id/strut"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:background="#ffdcdcdc"
+        android:layout_weight=".6" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:id="@+id/rowLayout4"
+        android:layout_weight="1"
+        android:weightSum="2"
+        android:background="#ffdcdcdc">
+        <TextView
+            android:text="Transics Authentication:"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/textViewHeader2"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:textColor="#ff000000"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical" />
+    </LinearLayout>
+    <View
+        android:id="@+id/strut"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:background="#ffdcdcdc"
+        android:layout_weight=".2" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:id="@+id/rowLayout5"
+        android:layout_weight="1"
+        android:weightSum="2"
+        android:background="#ffdcdcdc">
+        <TextView
+            android:text="Truck ID:"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/textViewTruckID"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:textColor="#ff000000"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:textSize="12dp" />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:id="@+id/editTextTruckID"
+            android:background="@drawable/rounded_text"
+            android:layout_marginRight="10dp"
+            android:textColor="#ff060000" />
+    </LinearLayout>
+    <View
+        android:id="@+id/strut"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:background="#ffdcdcdc"
+        android:layout_weight=".2" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:id="@+id/rowLayout6"
+        android:layout_weight="1"
+        android:weightSum="2"
+        android:background="#ffdcdcdc">
+        <TextView
+            android:text="Password:"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/textViewTXPassword"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:textColor="#ff000000"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:textSize="12dp" />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:id="@+id/editTextTXPassword"
+            android:background="@drawable/rounded_text"
+            android:layout_marginRight="10dp"
+            android:textColor="#ff060000" />
+    </LinearLayout>
+    <View
+        android:id="@+id/strut"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:background="#ffdcdcdc"
+        android:layout_weight=".2" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:id="@+id/rowLayout7"
+        android:layout_weight="1"
+        android:weightSum="2"
+        android:background="#ffdcdcdc">
+        <TextView
+            android:text="System Nr:"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/textViewTXSystemNr"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:textColor="#ff000000"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:textSize="12dp" />
+        <EditText
+            android:inputType="number"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:id="@+id/editTextTXSystemNr"
+            android:background="@drawable/rounded_text"
+            android:layout_marginRight="10dp"
+            android:textColor="#ff060000" />
+    </LinearLayout>
+    <View
+        android:id="@+id/strut"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:background="#ffdcdcdc"
+        android:layout_weight=".2" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:id="@+id/rowLayout10"
+        android:layout_weight="1"
+        android:weightSum="2"
+        android:background="#ffdcdcdc">
+        <TextView
+            android:text="Transics Activities:"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/textViewHeader10"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:textColor="#ff000000"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical" />
+    </LinearLayout>
+    <View
+        android:id="@+id/strut"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:background="#ffdcdcdc"
+        android:layout_weight=".2" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:id="@+id/rowLayout11"
+        android:layout_weight="1"
+        android:weightSum="2"
+        android:background="#ffdcdcdc">
+        <TextView
+            android:text="Driving:"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/textViewDriving"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:textColor="#ff000000"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:textSize="12dp" />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:id="@+id/editTextDriving"
+            android:background="@drawable/rounded_text"
+            android:layout_marginRight="10dp"
+            android:textColor="#ff060000" />
+    </LinearLayout>
+    <View
+        android:id="@+id/strut"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:background="#ffdcdcdc"
+        android:layout_weight=".2" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:id="@+id/rowLayout12"
+        android:layout_weight="1"
+        android:weightSum="2"
+        android:background="#ffdcdcdc">
+        <TextView
+            android:text="Waiting:"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/textViewWaiting"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:textColor="#ff000000"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:textSize="12dp" />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:id="@+id/editTextWaiting"
+            android:background="@drawable/rounded_text"
+            android:layout_marginRight="10dp"
+            android:textColor="#ff060000" />
+    </LinearLayout>
+    <View
+        android:id="@+id/strut"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:background="#ffdcdcdc"
+        android:layout_weight=".2" />
+</LinearLayout>

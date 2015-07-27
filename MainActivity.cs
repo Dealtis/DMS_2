@@ -1,0 +1,692 @@
+using System;
+using Android.App;
+using Android.Content;
+using Android.Runtime;
+using Android.Views;
+using Android.Media;
+using Android.Widget;
+using Android.OS;
+using AndroidHUD;
+using System.Collections.Generic;
+using System.Linq;
+using DMSvStandard.ORM;
+using Android.Locations;
+using System.IO;
+using Android.Graphics;
+using System.Data;
+using SQLite;
+using System.Json;
+using System.Xml;
+using Newtonsoft;
+using System.Net;
+using System.Xml.Linq;
+
+using DMSvStandard;
+
+using Xamarin;
+
+
+using Environment = System.Environment;
+using String = System.String;
+using Newtonsoft.Json.Linq;
+using Android.Net;
+using System.Threading.Tasks;
+using System.Threading;
+
+namespace DMSvStandard
+{
+	/*	public class TrustAllCertificatePolicy : System.Net.ICertificatePolicy
+	{
+		public TrustAllCertificatePolicy() 
+		{}
+
+		public bool CheckValidationResult(ServicePoint sp, 
+			X509Certificate cert,WebRequest req, int problem)
+		{
+			return true;
+		}
+	}*/
+
+	[Activity (Label = "Menu",Theme = "@android:style/Theme.Black.NoTitleBar.Fullscreen",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+	public class MainActivity : Activity
+	{
+		
+
+
+		TextView m_lblDelivery=null;
+		TextView m_lblPeekup=null;
+		TextView m_lblNewMsg=null;
+		TextView m_lblInbox=null;
+		TextView m_lblOutbox=null;
+		TextView m_lblActivity=null;
+		//TextView m_lblTrip=null;
+		TextView m_lblConfig=null;
+		TextView m_lblTitle=null;
+
+		RelativeLayout m_deliveryBadge=null;
+		RelativeLayout m_peekupBadge=null;
+		RelativeLayout m_newMsgBadge=null;
+		RelativeLayout m_inboxBadge=null;
+		RelativeLayout m_outboxBadge=null;
+		RelativeLayout m_activityBadge=null;
+		RelativeLayout m_tripBadge=null;
+		RelativeLayout m_configBadge=null;
+
+		TextView m_deliveryBadgeText=null;
+		TextView m_peekupBadgeText=null;
+		TextView m_newMsgBadgeText=null;
+		TextView m_inboxBadgeText=null;
+		TextView m_outboxBadgeText=null;
+		TextView m_activityBadgeText=null;
+		TextView m_tripBadgeText=null;
+		TextView m_configBadgeText=null;
+
+
+
+		System.Timers.Timer indicatorTimer;
+
+		private static MainActivity appContext;
+		public bool loginCanceled = false;
+		private static readonly int ButtonClickNotificationId = 1000;
+
+
+
+		protected override void OnCreate (Bundle bundle)
+		{
+			base.OnCreate (bundle);
+
+			System.Net.ServicePointManager.ServerCertificateValidationCallback += (s, c, ch, ssl) => true;
+
+
+
+			// Set our view from the "main" layout resource
+            SetContentView(Resource.Layout.Main);
+			//ApplicationData.Instance.setUserLogin (false);
+
+			if (ApplicationData.Instance.userLogin && ApplicationData.ithread <= 0) {
+
+				//ShowProgressDemo(progress => AndHUD.Shared.Show(this, null, progress, MaskType.Clear));
+				//LANCEMENT THREAD
+				Threadapp ();
+
+
+				Console.Out.Write (">>>>>>>>>>>>>>>>>>THREAD START<<<<<<<<<<<<<<<<<<<<<<");
+				ApplicationData.ithread++;
+			} else {
+				Console.Out.Write (">>>>>>>>>>>>>>>>>>LOG FALSE<<<<<<<<<<<<<<<<<<<<<<");
+			}
+
+
+
+			//SET BADGE
+
+			Data.countliv = 0;
+			Data.countram = 0;
+			string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+				(Environment.SpecialFolder.Personal), "ormDMS.db3");
+
+			var db = new SQLiteConnection(dbPath);
+			var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV'");
+
+
+
+			foreach( var row in tableliv){ 
+
+				Data.countliv++;
+			}
+
+
+			var tableram = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM'");
+			foreach( var rows in tableram){
+
+				Data.countram++;
+			}
+			if (ApplicationData.Instance.getLivraisonIndicator () == Data.countliv)  {
+				ImageView bggLiv = FindViewById<ImageView>(Resource.Id.bdgLiv);
+				bggLiv.SetImageResource(Resource.Drawable.SBBadgeBGUP);
+			}
+			if (ApplicationData.Instance.getEnlevementIndicator ()  == Data.countram) {
+				ImageView bggLiv = FindViewById<ImageView>(Resource.Id.bdgRam);
+				bggLiv.SetImageResource(Resource.Drawable.SBBadgeBGUP);
+				
+			}
+
+
+
+			ApplicationData.Instance.setLivraisonIndicator (Data.countliv);
+			ApplicationData.Instance.setEnlevementIndicator(Data.countram);
+            
+
+
+
+			var datedujour = DateTime.Today.DayOfWeek;
+
+			Context context = this.ApplicationContext;
+			var version = context.PackageManager.GetPackageInfo(context.PackageName, 0).VersionName;
+
+
+
+			appContext = this;
+
+			// Get our button from the layout resource,
+			// and attach an event to it
+			m_lblDelivery = FindViewById<TextView> (Resource.Id.lblButton1);
+			m_lblPeekup = FindViewById<TextView> (Resource.Id.lblButton2);
+			m_lblNewMsg = FindViewById<TextView> (Resource.Id.lblButton3);
+			m_lblInbox = FindViewById<TextView> (Resource.Id.lblButton4);
+			m_lblOutbox = FindViewById<TextView> (Resource.Id.lblButton5);
+//			m_lblActivity = FindViewById<TextView> (Resource.Id.lblButton6);
+//			m_lblTrip = FindViewById<TextView> (Resource.Id.lblButton7);
+			m_lblConfig = FindViewById<TextView> (Resource.Id.lblButton8);
+			m_lblTitle = FindViewById<TextView> (Resource.Id.lblTitle);
+			m_lblTitle.Text = ApplicationData.Instance.getConfigurationModel ().getTxUserName()+" "+version;
+
+			Typeface tf = Typeface.CreateFromAsset (Application.Context.Assets, "fonts/NexaBold.ttf");
+			m_lblTitle.SetTypeface(tf, TypefaceStyle.Normal);
+
+
+			LinearLayout btn1 = FindViewById<LinearLayout> (Resource.Id.columnlayout1_1);
+			btn1.Click += delegate { delivery_Click();	};
+
+			LinearLayout btn2 = FindViewById<LinearLayout> (Resource.Id.columnlayout1_2);
+			btn2.Click += delegate { peekup_Click();	};
+
+			LinearLayout btn3 = FindViewById<LinearLayout> (Resource.Id.columnlayout2_1);
+			btn3.Click += delegate { newmsg_Click();	};
+
+			LinearLayout btn4 = FindViewById<LinearLayout> (Resource.Id.columnlayout2_2);
+			btn4.Click += delegate { inbox_Click();	};
+
+			LinearLayout btn5 = FindViewById<LinearLayout> (Resource.Id.columnlayout3_1);
+			btn5.Click += delegate { outbox_Click();	};
+
+			LinearLayout btn8 = FindViewById<LinearLayout> (Resource.Id.columnlayout4_2);
+			btn8.Click += delegate { config_Click();	};
+
+			m_deliveryBadge = FindViewById<RelativeLayout> (Resource.Id.deliveryBadge); 
+			m_deliveryBadge.Visibility = ViewStates.Invisible;
+			m_deliveryBadgeText = FindViewById<TextView> (Resource.Id.deliveryBadgeText);
+
+			m_peekupBadge = FindViewById<RelativeLayout> (Resource.Id.peekupBadge);
+			m_peekupBadge.Visibility = ViewStates.Invisible;
+			m_peekupBadgeText = FindViewById<TextView> (Resource.Id.peekupBadgeText);
+
+			m_newMsgBadge = FindViewById<RelativeLayout> (Resource.Id.newMsgBadge);
+			m_newMsgBadge.Visibility = ViewStates.Invisible;
+			m_newMsgBadgeText = FindViewById<TextView> (Resource.Id.newMsgBadgeText);
+
+			m_inboxBadge = FindViewById<RelativeLayout> (Resource.Id.inboxBadge);
+			m_inboxBadge.Visibility = ViewStates.Invisible;
+			m_inboxBadgeText = FindViewById<TextView> (Resource.Id.inboxBadgeText);
+
+			m_outboxBadge = FindViewById<RelativeLayout> (Resource.Id.outboxBadge);
+			m_outboxBadge.Visibility = ViewStates.Invisible;
+			m_outboxBadgeText = FindViewById<TextView> (Resource.Id.outboxBadgeText);
+
+			m_configBadge = FindViewById<RelativeLayout> (Resource.Id.configBadge);
+			m_configBadge.Visibility = ViewStates.Invisible;
+			m_configBadgeText = FindViewById<TextView> (Resource.Id.configBadgeText);
+
+			ConfigurationModel _model = new ConfigurationModel ();
+			_model.loadConfiguration ();
+						
+			ApplicationData.Instance.setConfigurationModel(_model);
+
+			ApplicationData.Instance.setTranslator (ApplicationData.Instance.getConfigurationModel ().getLanguage (), "DTMD");
+
+			if (ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
+				initProcess ();
+
+
+			}
+
+			loginCanceled = false;
+//			if (ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
+//				//START TRIP
+//				if (!ServerActions.Instance.isServerStarted ()) {
+//					ServerActions.Instance.StartServer ();				
+//					ApplicationActions.Instance.initTimers ();
+//
+//					List<TextMessage> existingMessages = ApplicationActions.Instance.loadMessages (TextMessage.MSG_OUTBOX);
+//					ApplicationActions.Instance.updateOutboxMessageList (existingMessages, new List<TextMessage> ());
+//
+//					existingMessages = ApplicationActions.Instance.loadMessages (TextMessage.MSG_INBOX);
+//					ApplicationActions.Instance.updateInboxMessageList (existingMessages, new List<TextMessage> ());
+//				}
+//				if (ApplicationData.Instance.getConfigurationModel().getAutoTrip() == 1)
+//					ApplicationActions.Instance.setTripStarted (false);
+//				else ApplicationActions.Instance.setTripStarted (true);
+//				ApplicationActions.Instance.ChangeTripState ();
+//			}
+			//else ApplicationActions.Instance.restartTimers ();
+
+
+
+			//XAMARIN INSIGHT
+			if (!Insights.IsInitialized) {
+				Xamarin.Insights.Initialize("4845750bb6fdffe0e3bfaebe810ca335f0f87030", this);
+
+			}
+
+
+			Insights.Identify(ApplicationData.Instance.getConfigurationModel ().getTxUserName(),"Name",ApplicationData.Instance.getConfigurationModel ().getTxUserName());
+
+			}
+
+		public void initProcess()
+		{
+
+		}
+
+
+		protected override void OnResume()
+		{
+			base.OnResume();
+
+
+			if ((!loginCanceled)&&(ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ())&&(!ApplicationData.Instance.isUserLogin ())) {
+				loginCanceled = false;
+				StartActivity(typeof(LoginActivity));
+			}
+
+			initView();
+		}
+
+		protected override void OnStop()
+		{
+			base.OnStop();
+
+
+			if (indicatorTimer != null)
+				indicatorTimer.Stop ();
+		}
+
+		protected override void OnDestroy()
+		{
+			base.OnDestroy ();
+
+		}
+
+
+
+		public static MainActivity getContext()
+		{
+			return appContext;
+		}
+
+		protected void initView()
+		{	
+
+			Context context = this.ApplicationContext;
+			var version = context.PackageManager.GetPackageInfo(context.PackageName, 0).VersionName;
+
+			m_lblTitle.Text = ApplicationData.Instance.getConfigurationModel ().getTxUserName()+" "+version;
+
+			this.Title = "DMS";
+			m_lblDelivery.Text = ApplicationData.Instance.getTranslator ().translateMessage ("mainfrom.menuLivraison");
+			m_lblPeekup.Text = ApplicationData.Instance.getTranslator ().translateMessage ("mainfrom.menuEnlevement");
+			m_lblNewMsg.Text = ApplicationData.Instance.getTranslator ().translateMessage ("formmessages.menunew");
+			m_lblInbox.Text = ApplicationData.Instance.getTranslator ().translateMessage ("formmessages.menuinbox");
+			m_lblOutbox.Text = ApplicationData.Instance.getTranslator ().translateMessage ("formmessages.menusentbox");
+			m_lblConfig.Text = ApplicationData.Instance.getTranslator ().translateMessage ("mainfrom.menuconfig");
+
+			if (indicatorTimer != null)
+				indicatorTimer.Stop ();
+
+
+
+
+
+			indicatorTimer = new System.Timers.Timer();
+			indicatorTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnIndicatorTimerHandler);
+			indicatorTimer.Interval = 1000;//ApplicationData.Instance.getConfigurationModel().getInboxUpdateInterval();
+			indicatorTimer.Enabled = true;
+			indicatorTimer.Start();
+
+		}
+
+
+
+		private void OnIndicatorTimerHandler(object source, System.Timers.ElapsedEventArgs args)
+		{
+			if (ApplicationData.Instance.getOutboxIndicator () > 0) {
+				RunOnUiThread (() => m_outboxBadgeText.Text = ApplicationData.Instance.getOutboxIndicator().ToString());
+				RunOnUiThread (() => m_outboxBadge.Visibility = ViewStates.Visible);
+			} else {
+				RunOnUiThread (() => m_outboxBadge.Visibility = ViewStates.Invisible);
+			}
+
+			if (ApplicationData.Instance.getInboxIndicator () > 0) {
+				RunOnUiThread (() => m_inboxBadgeText.Text= ApplicationData.Instance.getInboxIndicator ().ToString());
+				RunOnUiThread (() => m_inboxBadge.Visibility = ViewStates.Visible);
+			} else {
+				RunOnUiThread (() => m_inboxBadge.Visibility = ViewStates.Invisible);
+			}
+
+			if (ApplicationData.Instance.getLivraisonIndicator () > 0) {
+				RunOnUiThread (() => m_deliveryBadgeText.Text= ApplicationData.Instance.getLivraisonIndicator ().ToString());
+				RunOnUiThread (() => m_deliveryBadge.Visibility = ViewStates.Visible);
+			} else {
+				RunOnUiThread (() => m_deliveryBadge.Visibility = ViewStates.Invisible);
+			}
+
+			if (ApplicationData.Instance.getEnlevementIndicator () > 0) {
+				RunOnUiThread (() => m_peekupBadgeText.Text= ApplicationData.Instance.getEnlevementIndicator ().ToString());
+				RunOnUiThread (() => m_peekupBadge.Visibility = ViewStates.Visible);
+			} else {
+				RunOnUiThread (() => m_peekupBadge.Visibility = ViewStates.Invisible);
+			}
+		}
+
+		protected void delivery_Click()
+        {
+            
+			if (!ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
+				Toast.MakeText (this, ApplicationData.Instance.getTranslator ().translateMessage ("confignotdane"), ToastLength.Short).Show ();
+				return;
+			} else if (ApplicationData.Instance.isAdminLogin ()) {
+
+				StartActivity(typeof(ActivityListLivraison));
+			}
+			StartActivity(typeof(ActivityListLivraison));
+		}
+
+
+
+		protected void peekup_Click()
+		{
+			
+			if (!ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
+				Toast.MakeText (this, ApplicationData.Instance.getTranslator ().translateMessage ("confignotdane"), ToastLength.Short).Show ();
+				return;
+			} else if (ApplicationData.Instance.isAdminLogin ()) {
+				StartActivity(typeof(ActivityListEnlevement));
+			}
+			StartActivity(typeof(ActivityListEnlevement));
+		}
+
+		protected void newmsg_Click()
+		{
+
+			//Show an error image with a message with a Dimmed background, and auto-dismiss after 2 seconds
+			AndHUD.Shared.ShowError(this, "Disponible en version business", MaskType.Black, TimeSpan.FromSeconds(2));
+
+
+		}
+
+
+		protected void inbox_Click()
+		{
+			//Show an error image with a message with a Dimmed background, and auto-dismiss after 2 seconds
+			AndHUD.Shared.ShowError(this, "Disponible en version business", MaskType.Black, TimeSpan.FromSeconds(2));
+
+
+		}
+
+		protected void outbox_Click()
+		{
+			//Show an error image with a message with a Dimmed background, and auto-dismiss after 2 seconds
+			AndHUD.Shared.ShowError(this, "Disponible en version business", MaskType.Black, TimeSpan.FromSeconds(2));
+
+		}
+
+		protected void activity_Click()
+		{
+
+
+			//Show an error image with a message with a Dimmed background, and auto-dismiss after 2 seconds
+			AndHUD.Shared.ShowError(this, "Disponible en version business", MaskType.Black, TimeSpan.FromSeconds(2));
+
+		}
+
+		protected void trip_Click()
+		{
+			if (!ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
+				Toast.MakeText (this, ApplicationData.Instance.getTranslator ().translateMessage ("confignotdane"), ToastLength.Short).Show ();
+				return;
+			} else if (ApplicationData.Instance.isAdminLogin ()) {
+				Toast.MakeText (this, ApplicationData.Instance.getTranslator ().translateMessage ("msg.adminlogin"), ToastLength.Short).Show ();
+				return;
+			}
+			
+		}
+
+		protected void config_Click()
+		{
+			ApplicationData.Instance.setTempConfigModel(ApplicationData.Instance.getConfigurationModel().clone());
+			//StartActivity (typeof(GeneralConfigActivity));
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+
+			EditText input = new EditText(this);
+			input.InputType = Android.Text.InputTypes.TextVariationPassword | Android.Text.InputTypes.ClassText;
+			builder.SetTitle("Configuration");
+			builder.SetView (input);
+			//builder.SetMessage("Voulez-vous valider cette livraison ?");
+			builder.SetCancelable(false);
+			builder.SetPositiveButton("Annuler", delegate {  });
+			builder.SetNegativeButton("Connection", delegate {
+				if(input.Text =="Dealtis25-"){
+
+					StartActivity (typeof(GeneralConfigActivity));
+
+				}else{Toast.MakeText (this, "Mauvais MDP", ToastLength.Short).Show ();}
+			});
+			builder.Show();
+
+		}
+		public void Threadapp()
+		{
+			//NEW THREAD 1307 ROMAIN
+
+			Thread ThreadAppInteg = new Thread(new ThreadStart(this.Integdata));
+			Thread ThreadAppCom = new Thread(new ThreadStart(this.ComWebservice));
+			ThreadAppCom.Start();
+			Console.Out.Write ("///////////////ThreadAppCom START///////////////");
+			Thread.Sleep (10);
+			ThreadAppInteg.Start();
+			Console.Out.Write ("///////////////ThreadAppInteg START///////////////");
+
+		}
+
+		public void ComWebservice(){
+			int idcom = 0;
+			while(idcom == 0){
+			string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+				(Environment.SpecialFolder.Personal), "ormDMS.db3");
+
+			var db = new SQLiteConnection(dbPath);
+			var table = db.Query<StatutLivraison> ("SELECT * FROM StatutLivraison");
+			//ApplicationData.datedj =DateTime.Now.Day+"/"+DateTime.Now.Month+"/"+DateTime.Now.Year+""+DateTime.Now.Hour+":"+DateTime.Now.Minute;
+			var connectivityManager = (ConnectivityManager)GetSystemService(ConnectivityService);
+
+			var activeConnection = connectivityManager.ActiveNetworkInfo;
+			if ((activeConnection != null) && activeConnection.IsConnected) {
+
+				foreach (var item in table) {
+
+						try
+						{
+							//API LIVRER OK
+							string _url = "http://dms.jeantettransport.com/api/livraison";
+							var webClient = new WebClient();
+							webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
+							//webClient.Encoding = Encoding.UTF8;
+
+							webClient.UploadString(_url,item.datajson);
+							Console.Out.WriteLine(">>>>>THREAD DATA SEND ....<<<<<");
+						}
+						catch (Exception e)
+						{
+							Insights.Report (e);
+						}
+				}
+
+			
+				DBRepository dbr = new DBRepository();
+				var resultdrop = dbr.DropTableStatut();
+				Console.Out.WriteLine(">>>>>THREAD NO DATA ....<<<<<"+DateTime.Now.Minute);
+				Console.WriteLine("///////Thread Com RUNNING////");
+					Thread.Sleep (300000);
+					//Thread.Sleep (3000);
+			}else{
+				Console.Out.WriteLine(">>>>>NO CONNECTION WAIT ....<<<<<");
+			}
+
+			
+			}
+		}
+
+
+		public void Integdata(){
+			int idcom = 0;
+			while (idcom == 0) {
+
+				// MODIFICATION ALEX Deplacement de la recuperation de l'heure pour la recuperation des data
+
+				if (DateTime.Now.Day < 10) {
+					ApplicationData.day = "0" + DateTime.Now.Day;
+				} else {
+					ApplicationData.day = Convert.ToString (DateTime.Now.Day);
+				}
+
+				if (DateTime.Now.Month < 10) {
+					ApplicationData.mouth = "0" + DateTime.Now.Month;
+				} else {
+					ApplicationData.mouth = Convert.ToString (DateTime.Now.Month);
+				}
+
+				if (DateTime.Now.Hour < 10) {
+					ApplicationData.hour = "0" + DateTime.Now.Hour;
+				} else {
+					ApplicationData.hour = Convert.ToString (DateTime.Now.Hour);
+				}
+
+				if (DateTime.Now.Minute < 10) {
+					ApplicationData.minute = "0" + DateTime.Now.Minute;
+				} else {
+					ApplicationData.minute = Convert.ToString (DateTime.Now.Minute);
+				}
+
+
+				ApplicationData.dateimport = DateTime.Now.Year + ApplicationData.mouth + ApplicationData.day;
+				ApplicationData.datedj = ApplicationData.day + "/" + ApplicationData.mouth + "/" + DateTime.Now.Year + " " + ApplicationData.hour + ":" + ApplicationData.minute;
+
+				//MODIF ROMAIN 1307 HTTPWEBREQUEST TO WEBCLIENT
+
+				try {
+					//API DATA XML
+					string _url = "http://dms.jeantettransport.com/api/commande?codechauffeur=" + ApplicationData.Instance.getConfigurationModel ().getTxUserName () + "&datecommande=" + ApplicationData.dateimport+"";
+					var webClient = new WebClient ();
+					webClient.Headers [HttpRequestHeader.ContentType] = "application/json";
+					//webClient.Encoding = Encoding.UTF8;
+
+					Data.content = webClient.DownloadString (_url);
+					Console.Out.WriteLine (">>>>>THREAD INTEG DONE....<<<<<");
+				} catch (Exception ex) {
+					Data.content = "[]";
+
+				}
+
+
+				Data.countliv = 0;
+				Data.countram = 0;
+
+				//SON
+				if (Data.content == "[]") {
+				} else {
+					alert ();
+				}
+
+				JArray jsonVal = JArray.Parse (Data.content) as JArray;
+				var jsonarr = jsonVal;
+
+				foreach (var item in jsonarr) {
+					DBRepository dbr = new DBRepository ();
+					var resinteg = dbr.InsertData (Convert.ToString (item ["codeLivraison"]), Convert.ToString (item ["numCommande"]), Convert.ToString (item ["refClient"]), Convert.ToString (item ["nomPayeur"]), Convert.ToString (item ["nomExpediteur"]), Convert.ToString (item ["adresseExpediteur"]), Convert.ToString (item ["villeExpediteur"]), Convert.ToString (item ["CpExpediteur"]), Convert.ToString (item ["dateExpe"]), Convert.ToString (item ["nomClient"]), Convert.ToString (item ["adresseLivraison"]), Convert.ToString (item ["villeLivraison"]), Convert.ToString (item ["CpLivraison"]), Convert.ToString (item ["dateHeure"]), Convert.ToString (item ["poids"]), Convert.ToString (item ["nbrPallette"]), Convert.ToString (item ["nbrColis"]), Convert.ToString (item ["instrucLivraison"]), Convert.ToString (item ["typeMission"]), Convert.ToString (item ["typeSegment"]), Convert.ToString (item ["groupage"]), Convert.ToString (item ["ADRCom"]), Convert.ToString (item ["ADRGrp"]), "0", Convert.ToString (item ["CR"]), DateTime.Now.Day, Convert.ToString (item ["Datemission"]), Convert.ToString (item ["Ordremission"]), Convert.ToString (item ["planDeTransport"]));
+
+					Console.WriteLine (item ["numCommande"]);
+					Console.WriteLine (resinteg);
+
+				}
+
+				//SET BADGE
+				string dbPath = System.IO.Path.Combine (Environment.GetFolderPath
+				(Environment.SpecialFolder.Personal), "ormDMS.db3");
+
+				var db = new SQLiteConnection (dbPath);
+				var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV'");
+
+
+
+				foreach (var row in tableliv) {
+
+					Data.countliv++;
+				}
+
+
+				var tableram = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM'");
+				foreach (var rows in tableram) {
+
+					Data.countram++;
+				}
+				ApplicationData.Instance.setLivraisonIndicator (Data.countliv);
+				ApplicationData.Instance.setEnlevementIndicator (Data.countram);
+
+
+
+				// SUPPRESSION DES BORDEREAUX CLOTURER
+
+				string retour = "";
+
+				var tablegroupage = db.Query<ToDoTask> ("SELECT groupage FROM ToDoTask group by groupage");
+				foreach (var items2 in tablegroupage) {
+
+					retour = Convert.ToString (items2.groupage);
+
+					try {
+						string _urlb = "http://dms.jeantettransport.com/api/groupage?voybdx="+ retour+"";
+							var webClient = new WebClient ();
+						webClient.Headers [HttpRequestHeader.ContentType] = "application/json";
+						//webClient.Encoding = Encoding.UTF8;
+						Data.content = webClient.DownloadString (_urlb);
+
+						JObject jsonarr2 = JObject.Parse (Data.content);
+						Console.WriteLine ((string)jsonarr2 ["etat"]);
+						if ((string)jsonarr2 ["etat"] == "CLO") {
+						var supprimegroupage = db.Query<ToDoTask> ("delete from ToDoTask where groupage ='" + retour + "'");
+						Console.Out.WriteLine (">>>>>DELETE DU GROUPAGE ....<<<<<");
+						}
+
+					} catch (Exception ex) {
+						Data.content = "[]";
+
+					}
+
+
+			}
+				Console.WriteLine ("///////Thread Integ RUNNING////"+DateTime.Now.Minute);
+				Thread.Sleep (300000);
+				//Thread.Sleep (3000);
+		}
+		}
+
+
+		public void alert()
+		{
+
+			MediaPlayer _player;
+			_player = MediaPlayer.Create(this,Resource.Raw.beep4);
+			_player.Start();
+		}
+
+		public override void OnBackPressed ()
+		{
+			StartActivity(typeof(MainActivity));
+		}
+
+	}
+}
+
+

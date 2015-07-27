@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{B002B579-96AC-49F1-ADDA-0BB48BFD5A43}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>DMSvStandard</RootNamespace>
+    <AndroidApplication>True</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <AssemblyName>DMSvStandard</AssemblyName>
+    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="AndHUD">
+      <HintPath>Components\AndHUD-1.3.1\lib\android\AndHUD.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SignaturePad.Android">
+      <HintPath>Components\signature-pad-1.3.8\lib\android\SignaturePad.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.monoandroid">
+      <HintPath>Components\zxing.net.mobile-1.4.7.2\lib\android\zxing.monoandroid.dll</HintPath>
+    </Reference>
+    <Reference Include="ZXing.Net.Mobile">
+      <HintPath>Components\zxing.net.mobile-1.4.7.2\lib\android\ZXing.Net.Mobile.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v4">
+      <HintPath>packages\Xamarin.Android.Support.v4.21.0.3.0\lib\MonoAndroid10\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Json" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml.Serialization" />
+    <Reference Include="Xamarin.Insights">
+      <HintPath>packages\Xamarin.Insights.1.10.4.112\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainActivity.cs" />
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web References\TransicsService\Reference.cs">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="ActivityAnomalie.cs" />
+    <Compile Include="ActivityAnomalieEnlevement.cs" />
+    <Compile Include="ActivityDetailEnlevement.cs" />
+    <Compile Include="ActivityDetailLivraison.cs" />
+    <Compile Include="ActivityDetailTraiteeLivraison.cs" />
+    <Compile Include="ActivityListEnlevement.cs" />
+    <Compile Include="ActivityListLivraison.cs" />
+    <Compile Include="ActivityLoginchoose.cs" />
+    <Compile Include="ActivitySignature.cs" />
+    <Compile Include="ActivityTraitee.cs" />
+    <Compile Include="ActivityTraiteeEnlevement.cs" />
+    <Compile Include="ActivityWeb.cs" />
+    <Compile Include="AlertBox.cs" />
+    <Compile Include="ApplicationActions.cs" />
+    <Compile Include="ApplicationData.cs" />
+    <Compile Include="AuthConfigActivity.cs" />
+    <Compile Include="BDDMessages.cs" />
+    <Compile Include="BitmapHelpers.cs" />
+    <Compile Include="ConfigurationModel.cs" />
+    <Compile Include="DBrepository.cs" />
+    <Compile Include="DealtisMessage.cs" />
+    <Compile Include="DtmdLocationManager.cs" />
+    <Compile Include="DTMDQueue.cs" />
+    <Compile Include="GeneralConfigActivity.cs" />
+    <Compile Include="ListeLivraison.cs" />
+    <Compile Include="Livraison.cs" />
+    <Compile Include="LoginActivity.cs" />
+    <Compile Include="MenuCode.cs" />
+    <Compile Include="MessageListActivity.cs" />
+    <Compile Include="MessageListAdapter.cs" />
+    <Compile Include="MessageListDeleteActivity.cs" />
+    <Compile Include="MessageListDeleteAdaptor.cs" />
+    <Compile Include="MessageListSortingActivity.cs" />
+    <Compile Include="MyListViewAdapter.cs" />
+    <Compile Include="NewMessageActivity.cs" />
+    <Compile Include="RequestProcessor.cs" />
+    <Compile Include="RxTerm.cs" />
+    <Compile Include="ServerActions.cs" />
+    <Compile Include="ServerData.cs" />
+    <Compile Include="ServerMainThread.cs" />
+    <Compile Include="SplashScreenActivity.cs" />
+    <Compile Include="StatutLivraison.cs" />
+    <Compile Include="SujListActivity.cs" />
+    <Compile Include="TextMessage.cs" />
+    <Compile Include="ThreadStartWraper.cs" />
+    <Compile Include="Translator.cs" />
+    <Compile Include="Trip.cs" />
+    <Compile Include="ZXing.cs" />
+    <Compile Include="ORM\DBRepository.cs" />
+    <Compile Include="ORM\SQLite.cs" />
+    <Compile Include="ORM\SQLiteAsync.cs" />
+    <Compile Include="ToDoTask.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Properties\AndroidManifest.xml" />
+    <None Include="Assets\AboutAssets.txt" />
+    <None Include="packages.config" />
+    <None Include="Web References\TransicsService\service.wsdl" />
+    <None Include="Web References\TransicsService\service.disco" />
+    <None Include="Web References\TransicsService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Main.axml" />
+    <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable\activity.png" />
+    <AndroidResource Include="Resources\drawable\Anom.png" />
+    <AndroidResource Include="Resources\drawable\anomalie_button.xml" />
+    <AndroidResource Include="Resources\drawable\arrow75.png" />
+    <AndroidResource Include="Resources\drawable\back.png" />
+    <AndroidResource Include="Resources\drawable\bleumenu_button.xml" />
+    <AndroidResource Include="Resources\drawable\bleu_button.xml" />
+    <AndroidResource Include="Resources\drawable\dealtis_fonte.png" />
+    <AndroidResource Include="Resources\drawable\dealtis_fonte_ol.png" />
+    <AndroidResource Include="Resources\drawable\delivery.png" />
+    <AndroidResource Include="Resources\drawable\Draft.jpg" />
+    <AndroidResource Include="Resources\drawable\DTMD.gif" />
+    <AndroidResource Include="Resources\drawable\email19.png" />
+    <AndroidResource Include="Resources\drawable\Enl.png" />
+    <AndroidResource Include="Resources\drawable\fkman.png" />
+    <AndroidResource Include="Resources\drawable\fkmanbis.jpg" />
+    <AndroidResource Include="Resources\drawable\gray_button.xml" />
+    <AndroidResource Include="Resources\drawable\green_listview.xml" />
+    <AndroidResource Include="Resources\drawable\Icon.png" />
+    <AndroidResource Include="Resources\drawable\iconapp.png" />
+    <AndroidResource Include="Resources\drawable\imgButtonBgColor.xml" />
+    <AndroidResource Include="Resources\drawable\Inbox.png" />
+    <AndroidResource Include="Resources\drawable\jaune_button.axml" />
+    <AndroidResource Include="Resources\drawable\Liv.png" />
+    <AndroidResource Include="Resources\drawable\LivAdr.png" />
+    <AndroidResource Include="Resources\drawable\Livpadr.psd" />
+    <AndroidResource Include="Resources\drawable\livraison_button.xml" />
+    <AndroidResource Include="Resources\drawable\magnifier13.png" />
+    <AndroidResource Include="Resources\drawable\man13.png" />
+    <AndroidResource Include="Resources\drawable\man13bis.png" />
+    <AndroidResource Include="Resources\drawable\MessageListSelector.xml" />
+    <AndroidResource Include="Resources\drawable\moinshuitmille.png" />
+    <AndroidResource Include="Resources\drawable\newmessageicon.png" />
+    <AndroidResource Include="Resources\drawable\newMsg.png" />
+    <AndroidResource Include="Resources\drawable\nonewmessagesicon.png" />
+    <AndroidResource Include="Resources\drawable\panneauadrlimite.jpg" />
+    <AndroidResource Include="Resources\drawable\peekup.png" />
+    <AndroidResource Include="Resources\drawable\plushuitmille.png" />
+    <AndroidResource Include="Resources\drawable\receiving5.png" />
+    <AndroidResource Include="Resources\drawable\red_button.xml" />
+    <AndroidResource Include="Resources\drawable\red_listview.xml" />
+    <AndroidResource Include="Resources\drawable\rounded_text.xml" />
+    <AndroidResource Include="Resources\drawable\SBBadgeBG.png" />
+    <AndroidResource Include="Resources\drawable\SBBadgeBGUP.png" />
+    <AndroidResource Include="Resources\drawable\send.png" />
+    <AndroidResource Include="Resources\drawable\Settings.png" />
+    <AndroidResource Include="Resources\drawable\splashscreen.png" />
+    <AndroidResource Include="Resources\drawable\splashscreeng.png" />
+    <AndroidResource Include="Resources\drawable\transport359.png" />
+    <AndroidResource Include="Resources\drawable\transport359b.png" />
+    <AndroidResource Include="Resources\drawable\trip.png" />
+    <AndroidResource Include="Resources\drawable\Val.png" />
+    <AndroidResource Include="Resources\drawable\valide_button.xml" />
+    <AndroidResource Include="Resources\drawable\violet_button.xml" />
+    <AndroidResource Include="Resources\layout\Anomalie.axml" />
+    <AndroidResource Include="Resources\layout\Auth.axml" />
+    <AndroidResource Include="Resources\layout\AuthConfig.axml" />
+    <AndroidResource Include="Resources\layout\btncodebarre.axml" />
+    <AndroidResource Include="Resources\layout\DetailLivraison.axml" />
+    <AndroidResource Include="Resources\layout\GeneralConfig.axml" />
+    <AndroidResource Include="Resources\layout\ListeEnlevement.axml" />
+    <AndroidResource Include="Resources\layout\ListeLivraison.axml" />
+    <AndroidResource Include="Resources\layout\ListeLivraisonMultiGrp.axml" />
+    <AndroidResource Include="Resources\layout\ListeTraitee.axml" />
+    <AndroidResource Include="Resources\layout\ListeTraiteeEnlevement.axml" />
+    <AndroidResource Include="Resources\layout\ListeViewRow.axml" />
+    <AndroidResource Include="Resources\layout\ListeViewRowADR.axml" />
+    <AndroidResource Include="Resources\layout\ListeViewRowAnomalie.axml" />
+    <AndroidResource Include="Resources\layout\ListeViewRowRamasse.axml" />
+    <AndroidResource Include="Resources\layout\ListeViewRowValide.axml" />
+    <AndroidResource Include="Resources\layout\LoginChoose.axml" />
+    <AndroidResource Include="Resources\layout\MessageList.axml" />
+    <AndroidResource Include="Resources\layout\MessageListDelete.axml" />
+    <AndroidResource Include="Resources\layout\MessageListDeleteItem.axml" />
+    <AndroidResource Include="Resources\layout\MessageListItem.axml" />
+    <AndroidResource Include="Resources\layout\MessageListSorting.axml" />
+    <AndroidResource Include="Resources\layout\Modal.axml" />
+    <AndroidResource Include="Resources\layout\NewMessage.axml" />
+    <AndroidResource Include="Resources\layout\Signature.axml" />
+    <AndroidResource Include="Resources\layout\Splashscreen.axml" />
+    <AndroidResource Include="Resources\layout\SujList.axml" />
+    <AndroidResource Include="Resources\layout\Webservice.axml" />
+    <AndroidResource Include="Resources\Raw\beep2.mp3" />
+    <AndroidResource Include="Resources\Raw\beep4.mp3" />
+    <AndroidResource Include="Resources\values\color.xml" />
+    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\drawable\outbox.png" />
+    <AndroidResource Include="Resources\drawable\gray_button.axml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <ItemGroup>
+    <XamarinComponentReference Include="AndHUD">
+      <Version>1.3.1</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="json.net">
+      <Version>6.0.8.1</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="signature-pad">
+      <Version>1.3.8</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="zxing.net.mobile">
+      <Version>1.4.7.2</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://tx-smart.transics.com/IMWS/service.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\TransicsService</RelPath>
+      <UpdateFromURL>http://tx-smart.transics.com/IMWS/service.asmx</UpdateFromURL>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\fonts\" />
+    <Folder Include="Assets\lang\" />
+    <Folder Include="Assets\sound\" />
+    <Folder Include="Resources\drawable\" />
+    <Folder Include="Resources\layout\" />
+    <Folder Include="Resources\Raw\" />
+    <Folder Include="Resources\values\" />
+    <Folder Include="ORM\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\fonts\NexaBold.ttf" />
+    <AndroidAsset Include="Assets\fonts\NexaLight.otf" />
+    <AndroidAsset Include="Assets\fonts\NexaLight.ttf" />
+    <AndroidAsset Include="Assets\lang\DTMD_DE.len" />
+    <AndroidAsset Include="Assets\lang\DTMD_EN.len" />
+    <AndroidAsset Include="Assets\lang\DTMD_FR.len" />
+    <AndroidAsset Include="Assets\lang\DTMD_IT.len" />
+    <AndroidAsset Include="Assets\sound\beep.mp3" />
+    <AndroidAsset Include="Assets\sound\beep2.mp3" />
+  </ItemGroup>
+</Project>
