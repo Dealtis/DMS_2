@@ -302,7 +302,7 @@ namespace DMSvStandard
 
 			}
 			if(App.txtSpin == "Refuse non commande"){
-				App.codeanomalie = "RENSNC";
+				App.codeanomalie = "RENDIV";
 
 			}
 			if(App.txtSpin == "Refuse cause port du"){

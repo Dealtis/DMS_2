@@ -747,7 +747,7 @@ namespace DMSvStandard.ORM
 //					item.remarque = remarque;
 //				}
 //				if(libeAnomalie == "Refus¨¦ non command¨¦"){
-//					codeAnomalie = "RENSNC";
+//					codeAnomalie = "RENDIV";
 //					item.statut = statut;
 //					item.codeAnomalie = codeAnomalie;
 //					item.remarque = remarque;
@@ -901,7 +901,7 @@ namespace DMSvStandard.ORM
 					itembis.imgpath = imgpath;
 				}
 				if(libeAnomalie == "Refuse non commande"){
-					codeAnomalie = "RENSNC";
+					codeAnomalie = "RENDIV";
 					itembis.StatutLivraison = statut;
 					itembis.codeAnomalie = codeAnomalie;
 					itembis.libeAnomalie = libeAnomalie;
