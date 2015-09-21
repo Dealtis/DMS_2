@@ -69,6 +69,27 @@ namespace DMSvStandard.ORM
 			}
 		}
 
+		public string CreateTableUser()
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal),"ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				db.CreateTable<TableUser>();
+				Console.Out.WriteLine("!!!!!!!!!!!!CREATE T3!!!!!!!!!!!!!!!!!!!!!!!!");
+
+
+				string result = "Table crée avec succès";
+				return result;
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
 		//DROP TABLE
 		public string DropTable()
 		{
@@ -90,6 +111,28 @@ namespace DMSvStandard.ORM
 
 			}
 		}
+
+		public string DropTableUser()
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal),"ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				db.DeleteAll<TableUser>();
+
+
+
+				string result = "delete";
+				return result;
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
 
 		//DROP TABLE
 //		public string DropTableDay()
@@ -132,7 +175,7 @@ namespace DMSvStandard.ORM
 				db.DeleteAll<StatutLivraison>();
 
 
-				string result = "Table crée avec succès";
+				string result = "Table vid¨¦e";
 				return result;
 			}
 			catch (Exception ex)
@@ -144,7 +187,7 @@ namespace DMSvStandard.ORM
 
 
         //Insertion des données
-		public string InsertData(string codeLivraison,string numCommande, string refClient, string nomPayeur, string nomExpediteur,string adresseExpediteur, string villeExpediteur, string CpExpediteur, string dateExpe, string nomClient, string adresseLivraison, string villeLivraison, string CpLivraison, string dateHeure, string poids, string nbrPallette, string nbrColis, string instrucLivraison, string typeMission, string typeSegment, string GROUPAGE,string AdrLiv, string AdrGrp, string statutLivraison, string CR,int dateBDD, string Datemission, string Ordremission, string planDeTransport )
+		public string InsertData(string codeLivraison,string numCommande, string refClient, string nomPayeur, string nomExpediteur,string adresseExpediteur, string villeExpediteur, string CpExpediteur, string dateExpe, string nomClient, string adresseLivraison, string villeLivraison, string CpLivraison, string dateHeure, string poids, string nbrPallette, string nbrColis, string instrucLivraison, string typeMission, string typeSegment, string GROUPAGE,string AdrLiv, string AdrGrp, string statutLivraison, string CR,int dateBDD, string Datemission, string Ordremission, string planDeTransport, string Userandsoft)
         {
             try
             {
@@ -182,6 +225,7 @@ namespace DMSvStandard.ORM
 				item.Datemission = Datemission;
 				item.Ordremission = Ordremission;
 				item.planDeTransport = planDeTransport;
+				item.Userandsoft = Userandsoft;
 
 
                 db.Insert(item);
@@ -193,6 +237,36 @@ namespace DMSvStandard.ORM
 
             }
         }
+		//Insertion des don¨¦es USER
+
+		public string InsertDataUser(string userandsoft, string usertransics, string mdp)
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal), "ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				TableUser item = new TableUser();
+
+				item.userandsoft =  userandsoft;
+				item.usertransics = usertransics;
+				item.usermdp = mdp;
+
+
+
+				db.Insert(item);
+				return "Insertion good";
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
+
+
+
 
         //SELECT DES DATA'
         public string SelectData()
@@ -223,6 +297,178 @@ namespace DMSvStandard.ORM
             }
         }
 
+		//SELECT DES DATA USERANDSOFT'
+		public string SelectDataUserAndsoft(string user)
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal), "ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				string output = "";
+				string usertxt = user;
+				var table = db.Query<TableUser>("SELECT * FROM TableUser WHERE userandsoft= ?",usertxt);
+				foreach (var item in table)
+				{
+					output += item.userandsoft;
+
+
+
+				}
+				return output;
+
+
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
+		//SELECT DES DATA USERTRANSICS'
+		public string SelectDataUserTransics(string user)
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal), "ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				string output = "";
+				string usertxt = user;
+				var table = db.Query<TableUser>("SELECT * FROM TableUser WHERE userandsoft= ?",usertxt);
+				foreach (var item in table)
+				{
+					output += item.usertransics;
+
+
+
+				}
+				return output;
+
+
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
+
+		//SELECT DES DATA USERTRANSICS'
+		public string SelectDataUserMdp(string user, string mdp)
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal), "ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				string output = "";
+
+				var table = db.Query<TableUser>("SELECT * FROM TableUser WHERE userandsoft = ?and usermdp= ?",user,mdp);
+				foreach (var item in table)
+				{
+					output += "GOOD";
+
+
+
+				}
+				return output;
+
+
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
+		//SELECT DU STATUT DE LOG
+		public bool Selectlogin(string userandsoft)
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal), "ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				bool output = false;
+				var table = db.Query<TableUser>("SELECT * FROM TableUser WHERE userandsoft = ?",userandsoft);
+				foreach (var item in table)
+				{
+					output = item.login;
+
+				}
+				return output;
+
+
+			}
+			catch (Exception ex)
+			{
+				return false;
+
+			}
+		}
+
+		//SELECT DE LA DATE DE LOG
+		public DateTime Selectdatelog(string userandsoft)
+		{
+			
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal), "ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				DateTime output = DateTime.Now;
+				var table = db.Query<TableUser>("SELECT * FROM TableUser WHERE userandsoft= ?",userandsoft);
+				foreach (var item in table)
+				{
+					output = item.datelog;
+				}
+				return output;
+		}
+		//VERIF SI USERANDSOFT DEJA DANS BASE
+
+
+		public string verifusertable(string userandsoft, string usertransics, string mdp)
+		{
+
+			string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+				(Environment.SpecialFolder.Personal), "ormDMS.db3");
+			var db = new SQLiteConnection(dbPath);
+			string output = "0";
+			var table = db.Query<TableUser>("SELECT * FROM TableUser WHERE userandsoft = ? and usertransics = ? and usermdp = ?",userandsoft,usertransics,mdp);
+			foreach (var item in table)
+			{	
+				
+					output = "1";
+
+			}
+			return output;
+		}
+		//SELECT TABLE SI LOG 1
+		public bool Selectlogone()
+		{
+
+			string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+				(Environment.SpecialFolder.Personal), "ormDMS.db3");
+			var db = new SQLiteConnection(dbPath);
+			bool output = false;
+			var table = db.Query<TableUser>("SELECT * FROM TableUser WHERE login = 1");
+			foreach (var item in table)
+			{	
+				if (((item.datelog.Hour).CompareTo (DateTime.Now.Hour)) < 12) {
+					output = true;
+					ApplicationData.UserAndsoft = item.userandsoft;
+					ApplicationData.UserTransic = item.usertransics;
+				} else {
+					var updatelog = db.Query<TableUser>("UPDATE TableUser SET login = 0 WHERE userandsoft = ?",item.userandsoft);
+					output = false;
+				}
+			}
+			return output;
+		}
+
+
 
         //SELECT PAR ID
         public string GetLivraisonbyID(int id)
@@ -233,6 +479,7 @@ namespace DMSvStandard.ORM
             string output = "";
             var item = db.Get<ToDoTask>(id);
 			ApplicationData.codemissionactive = item.numCommande;
+			ApplicationData.groupagemissionactive = item.groupage;
 			string unite;
 			string cr;
 
@@ -291,7 +538,7 @@ namespace DMSvStandard.ORM
 			var db = new SQLiteConnection(dbPath);
 			string output = "";
 			var item = db.Get<ToDoTask>(id);
-			output += "\n"+item.nomClient + "\nRef: "+item.refClient+"\n"+item.planDeTransport;
+			output += "\n"+item.nomClient + "\nRef: "+item.refClient+"\nTournee : "+item.planDeTransport;
 			return output;
 
 		}
@@ -370,6 +617,58 @@ namespace DMSvStandard.ORM
 
 			}
 		}
+		//UPDATE WHEN LOGIN
+		public string UpdateLogin(bool login, DateTime datelogin, string userandsoft)
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal), "ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+
+				var updatelog = db.Query<TableUser>("UPDATE TableUser SET login = ? WHERE userandsoft = ?",login,userandsoft);
+
+
+
+				return "Upadate good";
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
+		//UPDATE WHEN LOGIN
+		public string UpdateDate(bool login, DateTime datelogin, string userandsoft)
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal), "ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+
+			
+				var updatedate = db.Query<TableUser>("UPDATE TableUser SET datelog = ? WHERE userandsoft = ?",datelogin,userandsoft);
+
+
+				return "Upadate good";
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
+
+
+
+
+
+
+
+
 		//UPDATE STATUT VALIDE
 //		public string UpdateStatutValide(int id, string statut, string libeAnomalie, string remarque, Bitmap imagelink)
 //		{

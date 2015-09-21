@@ -1,37 +1,44 @@
 using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Json;
+using System.Linq;
+using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
+using Android.App;
 using Android.App;
 using Android.Content;
-using Android.Runtime;
-using Android.Views;
-using Android.Media;
-using Android.Widget;
-using Android.OS;
-using AndroidHUD;
-using System.Collections.Generic;
-using System.Linq;
-using DMSvStandard.ORM;
-using Android.Locations;
-using System.IO;
 using Android.Graphics;
-using System.Data;
-using SQLite;
-using System.Json;
-using System.Xml;
-using Newtonsoft;
-using System.Net;
-using System.Xml.Linq;
+using Android.Locations;
+using Android.Locations;
+using Android.Media;
+using Android.Net;
+using Android.OS;
+using Android.OS;
+using Android.Runtime;
+
+using Android.Util;
+using Android.Views;
+using Android.Widget;
+using Android.Widget;
+using AndroidHUD;
+
 
 using DMSvStandard;
 
+using DMSvStandard.ORM;
+
+
+using Newtonsoft;
+using Newtonsoft.Json.Linq;
+using SQLite;
 using Xamarin;
-
-
 using Environment = System.Environment;
 using String = System.String;
-using Newtonsoft.Json.Linq;
-using Android.Net;
-using System.Threading.Tasks;
-using System.Threading;
 
 namespace DMSvStandard
 {
@@ -47,8 +54,8 @@ namespace DMSvStandard
 		}
 	}*/
 
-	[Activity (Label = "Menu",Theme = "@android:style/Theme.Black.NoTitleBar.Fullscreen",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
-	public class MainActivity : Activity
+	[Activity (Label = "Menu",Theme = "@android:style/Theme.Black.NoTitleBar",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+	public class MainActivity : Activity, ILocationListener
 	{
 		
 
@@ -82,6 +89,12 @@ namespace DMSvStandard
 		TextView m_configBadgeText=null;
 
 
+		TextView _addressText;
+		Location _currentLocation;
+		LocationManager _locationManager;
+
+		string _locationProvider;
+		TextView _locationText;
 
 		System.Timers.Timer indicatorTimer;
 
@@ -103,18 +116,34 @@ namespace DMSvStandard
             SetContentView(Resource.Layout.Main);
 			//ApplicationData.Instance.setUserLogin (false);
 
-			if (ApplicationData.Instance.userLogin && ApplicationData.ithread <= 0) {
+			string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+				(Environment.SpecialFolder.Personal), "ormDMS.db3");
+
+			var db = new SQLiteConnection(dbPath);
+
+			DBRepository dbr = new DBRepository ();
+
+			bool resdate = dbr.Selectlogone ();
+
+			if(resdate == false){
+				StartActivity(typeof(LoginActivity));
+				Console.Out.Write (">>>>>>>>>>>>>>>>>>LOG FALSE<<<<<<<<<<<<<<<<<<<<<<");
+
+			}
+
+			bool selectlogin = dbr.Selectlogin (ApplicationData.UserAndsoft);
+			DateTime Selectdatelog = dbr.Selectdatelog (ApplicationData.UserAndsoft);
+
+			if ((selectlogin) && (ApplicationData.ithread == 0 )) {
 
 				//ShowProgressDemo(progress => AndHUD.Shared.Show(this, null, progress, MaskType.Clear));
 				//LANCEMENT THREAD
 				Threadapp ();
-
-
 				Console.Out.Write (">>>>>>>>>>>>>>>>>>THREAD START<<<<<<<<<<<<<<<<<<<<<<");
 				ApplicationData.ithread++;
-			} else {
-				Console.Out.Write (">>>>>>>>>>>>>>>>>>LOG FALSE<<<<<<<<<<<<<<<<<<<<<<");
 			}
+
+
 
 
 
@@ -122,10 +151,9 @@ namespace DMSvStandard
 
 			Data.countliv = 0;
 			Data.countram = 0;
-			string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
-				(Environment.SpecialFolder.Personal), "ormDMS.db3");
 
-			var db = new SQLiteConnection(dbPath);
+
+
 			var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV'");
 
 
@@ -155,7 +183,7 @@ namespace DMSvStandard
 
 			ApplicationData.Instance.setLivraisonIndicator (Data.countliv);
 			ApplicationData.Instance.setEnlevementIndicator(Data.countram);
-            
+
 
 
 
@@ -174,13 +202,13 @@ namespace DMSvStandard
 			m_lblPeekup = FindViewById<TextView> (Resource.Id.lblButton2);
 			m_lblNewMsg = FindViewById<TextView> (Resource.Id.lblButton3);
 			m_lblInbox = FindViewById<TextView> (Resource.Id.lblButton4);
-			m_lblOutbox = FindViewById<TextView> (Resource.Id.lblButton5);
+
 //			m_lblActivity = FindViewById<TextView> (Resource.Id.lblButton6);
 //			m_lblTrip = FindViewById<TextView> (Resource.Id.lblButton7);
 			m_lblConfig = FindViewById<TextView> (Resource.Id.lblButton8);
 			m_lblTitle = FindViewById<TextView> (Resource.Id.lblTitle);
-			m_lblTitle.Text = ApplicationData.Instance.getConfigurationModel ().getTxUserName()+" "+version;
-
+			m_lblTitle.Text = ApplicationData.UserTransic+" "+version;
+			//m_lblTitle.Text = String.Format("{0},{1}", _currentLocation.Latitude, _currentLocation.Longitude);
 			Typeface tf = Typeface.CreateFromAsset (Application.Context.Assets, "fonts/NexaBold.ttf");
 			m_lblTitle.SetTypeface(tf, TypefaceStyle.Normal);
 
@@ -188,6 +216,9 @@ namespace DMSvStandard
 			LinearLayout btn1 = FindViewById<LinearLayout> (Resource.Id.columnlayout1_1);
 			btn1.Click += delegate { delivery_Click();	};
 
+			btn1.LongClick += delegate {
+				delivery_LongClick();
+			};
 			LinearLayout btn2 = FindViewById<LinearLayout> (Resource.Id.columnlayout1_2);
 			btn2.Click += delegate { peekup_Click();	};
 
@@ -202,6 +233,7 @@ namespace DMSvStandard
 
 			LinearLayout btn8 = FindViewById<LinearLayout> (Resource.Id.columnlayout4_2);
 			btn8.Click += delegate { config_Click();	};
+			btn8.LongClick += delegate	{ config_LongClick();};
 
 			m_deliveryBadge = FindViewById<RelativeLayout> (Resource.Id.deliveryBadge); 
 			m_deliveryBadge.Visibility = ViewStates.Invisible;
@@ -227,18 +259,20 @@ namespace DMSvStandard
 			m_configBadge.Visibility = ViewStates.Invisible;
 			m_configBadgeText = FindViewById<TextView> (Resource.Id.configBadgeText);
 
-			ConfigurationModel _model = new ConfigurationModel ();
-			_model.loadConfiguration ();
-						
-			ApplicationData.Instance.setConfigurationModel(_model);
+//			ConfigurationModel _model = new ConfigurationModel ();
+//			_model.loadConfiguration ();
+//						
+//			ApplicationData.Instance.setConfigurationModel(_model);
+//
+//
+//
+//			ApplicationData.Instance.setTranslator (ApplicationData.Instance.getConfigurationModel ().getLanguage (), "DTMD");
+//
+//			if (ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
+		
 
-			ApplicationData.Instance.setTranslator (ApplicationData.Instance.getConfigurationModel ().getLanguage (), "DTMD");
 
-			if (ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
-				initProcess ();
-
-
-			}
+			//}
 
 			loginCanceled = false;
 //			if (ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
@@ -269,25 +303,29 @@ namespace DMSvStandard
 			}
 
 
-			Insights.Identify(ApplicationData.Instance.getConfigurationModel ().getTxUserName(),"Name",ApplicationData.Instance.getConfigurationModel ().getTxUserName());
-
+			Insights.Identify(ApplicationData.UserAndsoft,"Name",ApplicationData.UserAndsoft);
+			InitializeLocationManager ();
 			}
 
-		public void initProcess()
-		{
 
-		}
 
 
 		protected override void OnResume()
 		{
 			base.OnResume();
 
-
-			if ((!loginCanceled)&&(ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ())&&(!ApplicationData.Instance.isUserLogin ())) {
-				loginCanceled = false;
-				StartActivity(typeof(LoginActivity));
+			if (_locationProvider == "") {
+				Toast.MakeText (this, "No location provider find", ToastLength.Long).Show ();
+			} else {
+				_locationManager.RequestLocationUpdates (_locationProvider, 0, 0, this);
+				Console.Out.Write ("Listening for location updates using " + _locationProvider + ".");
 			}
+			//si valeur date de la base + de 12 h login
+
+//			if ((!loginCanceled)&&(ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ())&&(!ApplicationData.Instance.isUserLogin ())) {
+//				loginCanceled = false;
+//				StartActivity(typeof(LoginActivity));
+//			}
 
 			initView();
 		}
@@ -320,15 +358,16 @@ namespace DMSvStandard
 			Context context = this.ApplicationContext;
 			var version = context.PackageManager.GetPackageInfo(context.PackageName, 0).VersionName;
 
-			m_lblTitle.Text = ApplicationData.Instance.getConfigurationModel ().getTxUserName()+" "+version;
+			m_lblTitle.Text = ApplicationData.UserAndsoft+" "+version;
+			//m_lblTitle.Text = String.Format("{0},{1}", _currentLocation.Latitude, _currentLocation.Longitude);
 
 			this.Title = "DMS";
-			m_lblDelivery.Text = ApplicationData.Instance.getTranslator ().translateMessage ("mainfrom.menuLivraison");
-			m_lblPeekup.Text = ApplicationData.Instance.getTranslator ().translateMessage ("mainfrom.menuEnlevement");
-			m_lblNewMsg.Text = ApplicationData.Instance.getTranslator ().translateMessage ("formmessages.menunew");
-			m_lblInbox.Text = ApplicationData.Instance.getTranslator ().translateMessage ("formmessages.menuinbox");
-			m_lblOutbox.Text = ApplicationData.Instance.getTranslator ().translateMessage ("formmessages.menusentbox");
-			m_lblConfig.Text = ApplicationData.Instance.getTranslator ().translateMessage ("mainfrom.menuconfig");
+//			m_lblDelivery.Text = ApplicationData.Instance.getTranslator ().translateMessage ("mainfrom.menuLivraison");
+//			m_lblPeekup.Text = ApplicationData.Instance.getTranslator ().translateMessage ("mainfrom.menuEnlevement");
+//			m_lblNewMsg.Text = ApplicationData.Instance.getTranslator ().translateMessage ("formmessages.menunew");
+//			m_lblInbox.Text = ApplicationData.Instance.getTranslator ().translateMessage ("formmessages.menuinbox");
+//			m_lblOutbox.Text = ApplicationData.Instance.getTranslator ().translateMessage ("formmessages.menusentbox");
+//			m_lblConfig.Text = ApplicationData.Instance.getTranslator ().translateMessage ("mainfrom.menuconfig");
 
 			if (indicatorTimer != null)
 				indicatorTimer.Stop ();
@@ -381,14 +420,15 @@ namespace DMSvStandard
 		protected void delivery_Click()
         {
             
-			if (!ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
-				Toast.MakeText (this, ApplicationData.Instance.getTranslator ().translateMessage ("confignotdane"), ToastLength.Short).Show ();
-				return;
-			} else if (ApplicationData.Instance.isAdminLogin ()) {
+//			if (!ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
+//				Toast.MakeText (this, ApplicationData.Instance.getTranslator ().translateMessage ("confignotdane"), ToastLength.Short).Show ();
+//				return;
+//			} else if (ApplicationData.Instance.isAdminLogin ()) {
+//
+//				StartActivity(typeof(ActivityListLivraison));
+//			}
 
-				StartActivity(typeof(ActivityListLivraison));
-			}
-			StartActivity(typeof(ActivityListLivraison));
+			//StartActivity(typeof(ActivityListLivraison));
 		}
 
 
@@ -396,12 +436,12 @@ namespace DMSvStandard
 		protected void peekup_Click()
 		{
 			
-			if (!ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
-				Toast.MakeText (this, ApplicationData.Instance.getTranslator ().translateMessage ("confignotdane"), ToastLength.Short).Show ();
-				return;
-			} else if (ApplicationData.Instance.isAdminLogin ()) {
-				StartActivity(typeof(ActivityListEnlevement));
-			}
+//			if (!ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
+//				Toast.MakeText (this, ApplicationData.Instance.getTranslator ().translateMessage ("confignotdane"), ToastLength.Short).Show ();
+//				return;
+//			} else if (ApplicationData.Instance.isAdminLogin ()) {
+//				StartActivity(typeof(ActivityListEnlevement));
+//			}
 			StartActivity(typeof(ActivityListEnlevement));
 		}
 
@@ -409,7 +449,7 @@ namespace DMSvStandard
 		{
 
 			//Show an error image with a message with a Dimmed background, and auto-dismiss after 2 seconds
-			AndHUD.Shared.ShowError(this, "Disponible en version business", MaskType.Black, TimeSpan.FromSeconds(2));
+			AndHUD.Shared.ShowError(this, "Non Disponible", MaskType.Black, TimeSpan.FromSeconds(2));
 
 
 		}
@@ -418,7 +458,7 @@ namespace DMSvStandard
 		protected void inbox_Click()
 		{
 			//Show an error image with a message with a Dimmed background, and auto-dismiss after 2 seconds
-			AndHUD.Shared.ShowError(this, "Disponible en version business", MaskType.Black, TimeSpan.FromSeconds(2));
+			AndHUD.Shared.ShowError(this, "Non Disponible", MaskType.Black, TimeSpan.FromSeconds(2));
 
 
 		}
@@ -426,7 +466,7 @@ namespace DMSvStandard
 		protected void outbox_Click()
 		{
 			//Show an error image with a message with a Dimmed background, and auto-dismiss after 2 seconds
-			AndHUD.Shared.ShowError(this, "Disponible en version business", MaskType.Black, TimeSpan.FromSeconds(2));
+			AndHUD.Shared.ShowError(this, "Non Disponible", MaskType.Black, TimeSpan.FromSeconds(2));
 
 		}
 
@@ -435,25 +475,14 @@ namespace DMSvStandard
 
 
 			//Show an error image with a message with a Dimmed background, and auto-dismiss after 2 seconds
-			AndHUD.Shared.ShowError(this, "Disponible en version business", MaskType.Black, TimeSpan.FromSeconds(2));
+			AndHUD.Shared.ShowError(this, "Non Disponible", MaskType.Black, TimeSpan.FromSeconds(2));
 
 		}
 
-		protected void trip_Click()
-		{
-			if (!ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
-				Toast.MakeText (this, ApplicationData.Instance.getTranslator ().translateMessage ("confignotdane"), ToastLength.Short).Show ();
-				return;
-			} else if (ApplicationData.Instance.isAdminLogin ()) {
-				Toast.MakeText (this, ApplicationData.Instance.getTranslator ().translateMessage ("msg.adminlogin"), ToastLength.Short).Show ();
-				return;
-			}
-			
-		}
-
+	
 		protected void config_Click()
 		{
-			ApplicationData.Instance.setTempConfigModel(ApplicationData.Instance.getConfigurationModel().clone());
+			//ApplicationData.Instance.setTempConfigModel(ApplicationData.Instance.getConfigurationModel().clone());
 			//StartActivity (typeof(GeneralConfigActivity));
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -476,20 +505,209 @@ namespace DMSvStandard
 			builder.Show();
 
 		}
+
+		protected void config_LongClick(){
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+
+
+		
+			builder.SetTitle("Deconnexion");
+
+			builder.SetMessage("Voulez-vous vous déconnecter ?");
+			builder.SetCancelable(false);
+			builder.SetPositiveButton("Annuler", delegate {  });
+			builder.SetNegativeButton("Déconnexion", delegate {
+				DBRepository dbr = new DBRepository ();
+				var resetuser = dbr.UpdateLogin(false,DateTime.Now,ApplicationData.UserAndsoft);
+
+				StartActivity (typeof(LoginActivity));
+				
+
+			});
+			builder.Show();
+		}
+
+		protected void delivery_LongClick(){
+
+
+			// MODIFICATION ALEX Deplacement de la recuperation de l'heure pour la recuperation des data
+
+			if (DateTime.Now.Day < 10) {
+				ApplicationData.day = "0" + DateTime.Now.Day;
+			} else {
+				ApplicationData.day = Convert.ToString (DateTime.Now.Day);
+			}
+
+			if (DateTime.Now.Month < 10) {
+				ApplicationData.mouth = "0" + DateTime.Now.Month;
+			} else {
+				ApplicationData.mouth = Convert.ToString (DateTime.Now.Month);
+			}
+
+			if (DateTime.Now.Hour < 10) {
+				ApplicationData.hour = "0" + DateTime.Now.Hour;
+			} else {
+				ApplicationData.hour = Convert.ToString (DateTime.Now.Hour);
+			}
+
+			if (DateTime.Now.Minute < 10) {
+				ApplicationData.minute = "0" + DateTime.Now.Minute;
+			} else {
+				ApplicationData.minute = Convert.ToString (DateTime.Now.Minute);
+			}
+
+
+			ApplicationData.dateimport = DateTime.Now.Year + ApplicationData.mouth + ApplicationData.day;
+			ApplicationData.datedj = ApplicationData.day + "/" + ApplicationData.mouth + "/" + DateTime.Now.Year + " " + ApplicationData.hour + ":" + ApplicationData.minute;
+
+			//MODIF ROMAIN 1307 HTTPWEBREQUEST TO WEBCLIENT
+
+			try {
+				//API DATA XML
+				string _url = "http://dms.jeantettransport.com/api/commande?codechauffeur=" + ApplicationData.UserTransic + "&datecommande=" + ApplicationData.dateimport+"";
+				var webClient = new WebClient ();
+				webClient.Headers [HttpRequestHeader.ContentType] = "application/json";
+				//webClient.Encoding = Encoding.UTF8;
+
+				Data.content = webClient.DownloadString (_url);
+				Console.Out.WriteLine (">>>>>THREAD INTEG DONE....<<<<<");
+			} catch (Exception ex) {
+				Data.content = "[]";
+
+			}
+
+
+			Data.countliv = 0;
+			Data.countram = 0;
+
+			//SON
+			if (Data.content == "[]") {
+			} else {
+				alert ();
+			}
+
+			JArray jsonVal = JArray.Parse (Data.content) as JArray;
+			var jsonarr = jsonVal;
+
+			foreach (var item in jsonarr) {
+				DBRepository dbr = new DBRepository ();
+				var resinteg = dbr.InsertData (Convert.ToString (item ["codeLivraison"]), Convert.ToString (item ["numCommande"]), Convert.ToString (item ["refClient"]), Convert.ToString (item ["nomPayeur"]), Convert.ToString (item ["nomExpediteur"]), Convert.ToString (item ["adresseExpediteur"]), Convert.ToString (item ["villeExpediteur"]), Convert.ToString (item ["CpExpediteur"]), Convert.ToString (item ["dateExpe"]), Convert.ToString (item ["nomClient"]), Convert.ToString (item ["adresseLivraison"]), Convert.ToString (item ["villeLivraison"]), Convert.ToString (item ["CpLivraison"]), Convert.ToString (item ["dateHeure"]), Convert.ToString (item ["poids"]), Convert.ToString (item ["nbrPallette"]), Convert.ToString (item ["nbrColis"]), Convert.ToString (item ["instrucLivraison"]), Convert.ToString (item ["typeMission"]), Convert.ToString (item ["typeSegment"]), Convert.ToString (item ["groupage"]), Convert.ToString (item ["ADRCom"]), Convert.ToString (item ["ADRGrp"]), "0", Convert.ToString (item ["CR"]), DateTime.Now.Day, Convert.ToString (item ["Datemission"]), Convert.ToString (item ["Ordremission"]), Convert.ToString (item ["planDeTransport"]),ApplicationData.UserAndsoft);
+
+				Console.WriteLine (item ["numCommande"]);
+				Console.WriteLine (resinteg);
+
+			}
+
+			//SET BADGE
+			string dbPath = System.IO.Path.Combine (Environment.GetFolderPath
+				(Environment.SpecialFolder.Personal), "ormDMS.db3");
+
+			var db = new SQLiteConnection (dbPath);
+			var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV'");
+
+
+
+			foreach (var row in tableliv) {
+
+				Data.countliv++;
+			}
+
+
+			var tableram = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM'");
+			foreach (var rows in tableram) {
+
+				Data.countram++;
+			}
+			ApplicationData.Instance.setLivraisonIndicator (Data.countliv);
+			ApplicationData.Instance.setEnlevementIndicator (Data.countram);
+
+
+
+
+
+
+
+			// SUPPRESSION DES BORDEREAUX CLOTURER
+
+			string retour = "";
+
+			var tablegroupage = db.Query<ToDoTask> ("SELECT groupage FROM ToDoTask group by groupage");
+			foreach (var items2 in tablegroupage) {
+
+				retour = Convert.ToString (items2.groupage);
+
+				try {
+					string _urlb = "http://dms.jeantettransport.com/api/groupage?voybdx="+ retour+"";
+					var webClient = new WebClient ();
+					webClient.Headers [HttpRequestHeader.ContentType] = "application/json";
+					//webClient.Encoding = Encoding.UTF8;
+					Data.content = webClient.DownloadString (_urlb);
+
+					JObject jsonarr2 = JObject.Parse (Data.content);
+					Console.WriteLine ((string)jsonarr2 ["etat"]);
+					if ((string)jsonarr2 ["etat"] == "CLO") {
+						var supprimegroupage = db.Query<ToDoTask> ("delete from ToDoTask where groupage ='" + retour + "'");
+						Console.Out.WriteLine (">>>>>DELETE DU GROUPAGE ....<<<<<");
+					}
+
+				} catch (Exception ex) {
+					Data.content = "[]";
+
+				}
+
+
+			}
+
+			Toast.MakeText (this,"Mise à jour", ToastLength.Short).Show ();
+		}
 		public void Threadapp()
 		{
 			//NEW THREAD 1307 ROMAIN
 
 			Thread ThreadAppInteg = new Thread(new ThreadStart(this.Integdata));
 			Thread ThreadAppCom = new Thread(new ThreadStart(this.ComWebservice));
+			Thread ThreadAppGPS = new Thread(new ThreadStart(this.ComPosGPS));
 			ThreadAppCom.Start();
 			Console.Out.Write ("///////////////ThreadAppCom START///////////////");
 			Thread.Sleep (10);
 			ThreadAppInteg.Start();
 			Console.Out.Write ("///////////////ThreadAppInteg START///////////////");
-
+			Thread.Sleep (10);
+			ThreadAppGPS.Start ();
+			Console.Out.Write ("///////////////ThreadAppGPS START///////////////");
+//			var gps = new getgpslocation() ;
+//			gps.InitializeLocationManager ();
+			//ApplicationData.ithread++;
 		}
+		public void ComPosGPS(){
+			int idgps = 0;
+			while (idgps == 0) {
 
+
+				try
+				{
+					//API LIVRER OK
+					string _url = "http://dms.jeantettransport.com/api/gps";
+					var webClient = new WebClient();
+					webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
+					//webClient.Encoding = Encoding.UTF8;
+
+					string datagps ="{\"posgps\":\""+ApplicationData.GPS+"\",\"userandsoft\":\""+ApplicationData.UserAndsoft+"\"}";
+
+					webClient.UploadString(_url,datagps);
+					Console.Out.WriteLine(">>>>>THREAD GPS SEND "+datagps);
+
+
+				}
+				catch (Exception e)
+				{
+					Insights.Report (e);
+				}
+
+				Thread.Sleep (300000);
+			}
+		}
 		public void ComWebservice(){
 			int idcom = 0;
 			while(idcom == 0){
@@ -505,32 +723,44 @@ namespace DMSvStandard
 			if ((activeConnection != null) && activeConnection.IsConnected) {
 
 				foreach (var item in table) {
+						Console.Out.WriteLine(">>>>> "+item.commandesuiviliv+" / "+item.IdS+"<br>");
 
 						try
 						{
 							//API LIVRER OK
-							string _url = "http://dms.jeantettransport.com/api/livraison";
+							string _url = "http://dms.jeantettransport.com/api/livraisongroupage";
 							var webClient = new WebClient();
 							webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
 							//webClient.Encoding = Encoding.UTF8;
 
 							webClient.UploadString(_url,item.datajson);
-							Console.Out.WriteLine(">>>>>THREAD DATA SEND ....<<<<<");
+							Console.Out.WriteLine(">>>>>THREAD DATA SEND "+item.datajson);
+							var resultdelete = db.Query<StatutLivraison> (" DELETE FROM StatutLivraison WHERE datajson='"+item.datajson+"'");
+
 						}
 						catch (Exception e)
 						{
 							Insights.Report (e);
 						}
-				}
 
-			
+				}
+				
+
 				DBRepository dbr = new DBRepository();
-				var resultdrop = dbr.DropTableStatut();
+				//var resultdrop = dbr.DropTableStatut();
+					foreach (var item in table) {
+						Console.Out.WriteLine(">>>>>Après "+item.codesuiviliv+""+item.id+"<br>");
+					}
+
+				
+				//Console.Out.WriteLine (resultdrop);
 				Console.Out.WriteLine(">>>>>THREAD NO DATA ....<<<<<"+DateTime.Now.Minute);
 				Console.WriteLine("///////Thread Com RUNNING////");
 					Thread.Sleep (300000);
 					//Thread.Sleep (3000);
 			}else{
+
+				
 				Console.Out.WriteLine(">>>>>NO CONNECTION WAIT ....<<<<<");
 			}
 
@@ -574,21 +804,24 @@ namespace DMSvStandard
 				ApplicationData.datedj = ApplicationData.day + "/" + ApplicationData.mouth + "/" + DateTime.Now.Year + " " + ApplicationData.hour + ":" + ApplicationData.minute;
 
 				//MODIF ROMAIN 1307 HTTPWEBREQUEST TO WEBCLIENT
+				var connectivityManager = (ConnectivityManager)GetSystemService(ConnectivityService);
 
-				try {
-					//API DATA XML
-					string _url = "http://dms.jeantettransport.com/api/commande?codechauffeur=" + ApplicationData.Instance.getConfigurationModel ().getTxUserName () + "&datecommande=" + ApplicationData.dateimport+"";
-					var webClient = new WebClient ();
-					webClient.Headers [HttpRequestHeader.ContentType] = "application/json";
-					//webClient.Encoding = Encoding.UTF8;
+				var activeConnection = connectivityManager.ActiveNetworkInfo;
+				if ((activeConnection != null) && activeConnection.IsConnected) {
+					try {
+						//API DATA XML
+						string _url = "http://dms.jeantettransport.com/api/commande?codechauffeur=" + ApplicationData.UserTransic + "&datecommande=" + ApplicationData.dateimport + "";
+						var webClient = new WebClient ();
+						webClient.Headers [HttpRequestHeader.ContentType] = "application/json";
+						//webClient.Encoding = Encoding.UTF8;
 
-					Data.content = webClient.DownloadString (_url);
-					Console.Out.WriteLine (">>>>>THREAD INTEG DONE....<<<<<");
-				} catch (Exception ex) {
-					Data.content = "[]";
+						Data.content = webClient.DownloadString (_url);
+						Console.Out.WriteLine (">>>>>THREAD INTEG DONE....<<<<<");
+					} catch (Exception ex) {
+						Data.content = "[]";
 
-				}
-
+					}
+				
 
 				Data.countliv = 0;
 				Data.countram = 0;
@@ -604,7 +837,7 @@ namespace DMSvStandard
 
 				foreach (var item in jsonarr) {
 					DBRepository dbr = new DBRepository ();
-					var resinteg = dbr.InsertData (Convert.ToString (item ["codeLivraison"]), Convert.ToString (item ["numCommande"]), Convert.ToString (item ["refClient"]), Convert.ToString (item ["nomPayeur"]), Convert.ToString (item ["nomExpediteur"]), Convert.ToString (item ["adresseExpediteur"]), Convert.ToString (item ["villeExpediteur"]), Convert.ToString (item ["CpExpediteur"]), Convert.ToString (item ["dateExpe"]), Convert.ToString (item ["nomClient"]), Convert.ToString (item ["adresseLivraison"]), Convert.ToString (item ["villeLivraison"]), Convert.ToString (item ["CpLivraison"]), Convert.ToString (item ["dateHeure"]), Convert.ToString (item ["poids"]), Convert.ToString (item ["nbrPallette"]), Convert.ToString (item ["nbrColis"]), Convert.ToString (item ["instrucLivraison"]), Convert.ToString (item ["typeMission"]), Convert.ToString (item ["typeSegment"]), Convert.ToString (item ["groupage"]), Convert.ToString (item ["ADRCom"]), Convert.ToString (item ["ADRGrp"]), "0", Convert.ToString (item ["CR"]), DateTime.Now.Day, Convert.ToString (item ["Datemission"]), Convert.ToString (item ["Ordremission"]), Convert.ToString (item ["planDeTransport"]));
+					var resinteg = dbr.InsertData (Convert.ToString (item ["codeLivraison"]), Convert.ToString (item ["numCommande"]), Convert.ToString (item ["refClient"]), Convert.ToString (item ["nomPayeur"]), Convert.ToString (item ["nomExpediteur"]), Convert.ToString (item ["adresseExpediteur"]), Convert.ToString (item ["villeExpediteur"]), Convert.ToString (item ["CpExpediteur"]), Convert.ToString (item ["dateExpe"]), Convert.ToString (item ["nomClient"]), Convert.ToString (item ["adresseLivraison"]), Convert.ToString (item ["villeLivraison"]), Convert.ToString (item ["CpLivraison"]), Convert.ToString (item ["dateHeure"]), Convert.ToString (item ["poids"]), Convert.ToString (item ["nbrPallette"]), Convert.ToString (item ["nbrColis"]), Convert.ToString (item ["instrucLivraison"]), Convert.ToString (item ["typeMission"]), Convert.ToString (item ["typeSegment"]), Convert.ToString (item ["groupage"]), Convert.ToString (item ["ADRCom"]), Convert.ToString (item ["ADRGrp"]), "0", Convert.ToString (item ["CR"]), DateTime.Now.Day, Convert.ToString (item ["Datemission"]), Convert.ToString (item ["Ordremission"]), Convert.ToString (item ["planDeTransport"]),ApplicationData.UserAndsoft);
 
 					Console.WriteLine (item ["numCommande"]);
 					Console.WriteLine (resinteg);
@@ -633,6 +866,10 @@ namespace DMSvStandard
 				}
 				ApplicationData.Instance.setLivraisonIndicator (Data.countliv);
 				ApplicationData.Instance.setEnlevementIndicator (Data.countram);
+
+
+			
+
 
 
 
@@ -666,6 +903,7 @@ namespace DMSvStandard
 
 
 			}
+		}
 				Console.WriteLine ("///////Thread Integ RUNNING////"+DateTime.Now.Minute);
 				Thread.Sleep (300000);
 				//Thread.Sleep (3000);
@@ -685,6 +923,77 @@ namespace DMSvStandard
 		{
 			StartActivity(typeof(MainActivity));
 		}
+
+		public void OnLocationChanged(Location location)
+		{
+			_currentLocation = location;
+			if (_currentLocation == null)
+			{
+				
+				ApplicationData.GPS = "Unable to determine your location.";
+			}
+			else
+			{
+
+				ApplicationData.GPS = ""+_currentLocation.Latitude+";"+ _currentLocation.Longitude+"";
+					//Toast.MakeText (this,ApplicationData.GPS, ToastLength.Short).Show ();
+
+			}
+		}
+
+		public void OnProviderDisabled(string provider)
+		{
+		}
+
+		public void OnProviderEnabled(string provider)
+		{
+		}
+
+		public void OnStatusChanged(string provider, Availability status, Bundle extras)
+		{
+			Console.Out.Write("{0}, {1}");
+		}
+
+
+
+		void InitializeLocationManager()
+		{
+			_locationManager = (LocationManager)GetSystemService(LocationService);
+		
+			Criteria criteriaForLocationService = new Criteria
+			{
+				Accuracy = Accuracy.Fine
+			};
+			IList<string> acceptableLocationProviders = _locationManager.GetProviders(criteriaForLocationService, true);
+
+			if (acceptableLocationProviders.Any())
+			{
+				_locationProvider = acceptableLocationProviders.First();
+			}
+			else
+			{
+				_locationProvider = String.Empty;
+			}
+			Console.Out.Write("Using " + _locationProvider + ".");
+
+		}
+
+		//		protected override void OnResume()
+		//		{
+		//			base.OnResume();
+		//			_locationManager.RequestLocationUpdates(_locationProvider, 0, 0, this);
+		//			Console.Out.Write("Listening for location updates using " + _locationProvider + ".");
+		//		}
+		//
+		//		protected override void OnPause()
+		//		{
+		//			base.OnPause();
+		//			_locationManager.RemoveUpdates(this);
+		//			Log.Debug(LogTag, "No longer listening for location updates.");
+		//		}
+
+
+
 
 	}
 }

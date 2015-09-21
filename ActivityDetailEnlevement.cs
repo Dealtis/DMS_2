@@ -21,6 +21,8 @@ using System.Data;
 using System.IO;
 using SQLite;
 
+using AndroidHUD;
+
 namespace DMSvStandard
 {
 	[Activity(Label = "ActivityDetailLivraison",Theme = "@android:style/Theme.Black.NoTitleBar.Fullscreen")]
@@ -118,8 +120,8 @@ namespace DMSvStandard
 				var resimg = dbr.GetImageAnomalie (i);
 				_imageView.Visibility = ViewStates.Visible;
 
-				int height = 400;
-				int width = _imageView.Height ;
+				int height = _imageView.Height;
+				int width = _imageView.Width ;
 
 				App.bitmap = resimg.LoadAndResizeBitmap (width, height);
 				_imageView.SetImageBitmap (App.bitmap);
@@ -166,41 +168,120 @@ namespace DMSvStandard
 
 		public void btnValide_Click(object sender, EventArgs e)
 		{	
+
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
 			builder.SetTitle("Validation");
-			builder.SetMessage("Voulez-vous valider cette livraison ?");
+
+			//BNT PART et CR
+			var viewAD = this.LayoutInflater.Inflate (Resource.Layout.checkbox, null);
+
+
+			if (ApplicationData.CR == "") {
+				builder.SetMessage ("Voulez-vous valider cette livraison ?");
+				viewAD.FindViewById<RadioButton> (Resource.Id.radioButton1).Visibility = ViewStates.Gone;
+				viewAD.FindViewById<RadioButton> (Resource.Id.radioButton2).Visibility = ViewStates.Gone;
+			} else {
+				builder.SetMessage ("Avez vous perçu le CR,?\n Si oui, valider cette livraison ?");		
+			}
+
+
+
+			builder.SetView (viewAD);
+
+			viewAD.FindViewById<TextView> (Resource.Id.textcr).Text=ApplicationData.CR;
+
 			builder.SetCancelable(false);
 			builder.SetPositiveButton("Oui", delegate {
 
+				//AJOUT DANS LA BASE POUR ENVOIE AVEC THREAD
+				DBRepository dbr = new DBRepository();
+				//RECUP ID 
+				string id = Intent.GetStringExtra ("ID");
+				int i = int.Parse(id);
+
+				updateValideStatut();			
 
 
-				updateValideStatut();
+				string typecr ="";
 
+				if (viewAD.FindViewById<RadioButton> (Resource.Id.radioButton2).Checked) {
+
+					typecr="Cheque";
+					string datapostcheque ="{\"codesuiviliv\":\"CHEQUE\",\"memosuiviliv\":\"cheque"+ApplicationData.CR+"\",\"libellesuiviliv\":\"\",\"commandesuiviliv\":\""+ApplicationData.codemissionactive+"\",\"groupagesuiviliv\":\""+ApplicationData.groupagemissionactive+"\",\"datesuiviliv\":\""+ApplicationData.datedj+"\",\"posgps\":\""+ApplicationData.GPS+"\"}";
+					var resulfour = dbr.InsertDataStatut(i,"CHEQUE","1","",""+ApplicationData.codemissionactive+"","cheque",""+ApplicationData.datedj+"",""+datapostcheque+"");
+					Console.Out.WriteLine(resulfour);
+				}
+				if (viewAD.FindViewById<RadioButton> (Resource.Id.radioButton1).Checked) {
+
+					typecr="Espece";
+					string datapostparti ="{\"codesuiviliv\":\"ESPECE\",\"memosuiviliv\":\"espece"+ApplicationData.CR+"\",\"libellesuiviliv\":\"\",\"commandesuiviliv\":\""+ApplicationData.codemissionactive+"\",\"groupagesuiviliv\":\""+ApplicationData.groupagemissionactive+"\",\"datesuiviliv\":\""+ApplicationData.datedj+"\",\"posgps\":\""+ApplicationData.GPS+"\"}";
+					var resultfive = dbr.InsertDataStatut(i,"ESPECE","1","",""+ApplicationData.codemissionactive+"","espece",""+ApplicationData.datedj+"",""+datapostparti+"");
+					Console.Out.WriteLine(resultfive);
+				}
+				if (viewAD.FindViewById<CheckBox> (Resource.Id.checkBox1).Checked) {
+					string datapostparti ="{\"codesuiviliv\":\"PARTIC\",\"memosuiviliv\":\"Particulier\",\"libellesuiviliv\":\"\",\"commandesuiviliv\":\""+ApplicationData.codemissionactive+"\",\"groupagesuiviliv\":\""+ApplicationData.groupagemissionactive+"\",\"datesuiviliv\":\""+ApplicationData.datedj+"\",\"posgps\":\""+ApplicationData.GPS+"\"}";
+					var resultri = dbr.InsertDataStatut(i,"PARTIC","1","",""+ApplicationData.codemissionactive+"","CR particulier",""+ApplicationData.datedj+"",""+datapostparti+"");
+					Console.Out.WriteLine(resultri);
+				}
+
+
+
+
+
+
+				string datapost ="{\"codesuiviliv\":\"RAMCFM\",\"memosuiviliv\":\"Validée+"+typecr+"\",\"libellesuiviliv\":\"\",\"commandesuiviliv\":\""+ApplicationData.codemissionactive+"\",\"groupagesuiviliv\":\""+ApplicationData.groupagemissionactive+"\",\"datesuiviliv\":\""+ApplicationData.datedj+"\",\"posgps\":\""+ApplicationData.GPS+"\"}";
+				Console.Out.WriteLine("!!!!!!!!!!!!DATA CREE!!!!!!!!!!!!!!!!!!!!!!!!");
+
+
+
+
+
+				//INSERT DATA STATUT
+				var resultbis = dbr.InsertDataStatut(i,"RAMCFM","1","",""+ApplicationData.codemissionactive+"","Validée",""+ApplicationData.datedj+"",""+datapost+"");
+				Console.Out.WriteLine(resultbis);
+				//IF CR PARTICULIER AUTRE EVENT
+
+
+				//MAJ SIGNATURE
 				StartActivity(typeof(MainActivity));
-
-
 			});
-			builder.SetNegativeButton("Non", delegate {  });
+			builder.SetNegativeButton("Non", delegate {
+
+				AndHUD.Shared.ShowError(this, "Annulée!", AndroidHUD.MaskType.Clear, TimeSpan.FromSeconds(1.5));});
+
+
 			builder.Show();
 		}
 
 		public void updateValideStatut(){
+//
+//
+//			string datapost ="{\"codesuiviliv\":\"RAMCFM\",\"memosuiviliv\":\"Validée\",\"libellesuiviliv\":\"\",\"commandesuiviliv\":\""+ApplicationData.codemissionactive+"\",\"datesuiviliv\":\""+ApplicationData.datedj+"\"}  ";
+//			Console.Out.WriteLine("!!!!!!!!!!!!DATA CREE!!!!!!!!!!!!!!!!!!!!!!!!");
+//
+//
+//			//				Console.Out.WriteLine("!!!!!!!!!!!!!!!SEND!!!!!!!!!!!!!!!!!!!!!!!!");
+//
+//			//RECUP ID 
+//			string id = Intent.GetStringExtra ("ID");
+//			int i = int.Parse(id);
+//
+//			//AJOUT DANS LA BASE POUR ENVOIE AVEC THREAD
+//			DBRepository dbr = new DBRepository();
+//			//INSERT DATA STATUT
+//			var resultbis = dbr.InsertDataStatut(i,"RamCFM","1","",""+ApplicationData.codemissionactive+"","Validée",""+ApplicationData.datedj+"",""+datapost+"");
+//
+//			DBRepository dbrbis = new DBRepository();
+//
+//			//var resulttri = dbrbis.UpdateStatutValide(i,"1","","",null);
+//			var resultfor = dbrbis.UpdateStatutValideLivraison(i,"1","","",null);
+//			//Toast.MakeText(this, "UPDATE VALIDE", ToastLength.Short).Show();
 
-
-			string datapost ="{\"codesuiviliv\":\"RAMCFM\",\"memosuiviliv\":\"Validée\",\"libellesuiviliv\":\"\",\"commandesuiviliv\":\""+ApplicationData.codemissionactive+"\",\"datesuiviliv\":\""+ApplicationData.datedj+"\"}  ";
-			Console.Out.WriteLine("!!!!!!!!!!!!DATA CREE!!!!!!!!!!!!!!!!!!!!!!!!");
-
-
-			//				Console.Out.WriteLine("!!!!!!!!!!!!!!!SEND!!!!!!!!!!!!!!!!!!!!!!!!");
 
 			//RECUP ID 
 			string id = Intent.GetStringExtra ("ID");
 			int i = int.Parse(id);
-
-			//AJOUT DANS LA BASE POUR ENVOIE AVEC THREAD
-			DBRepository dbr = new DBRepository();
-			//INSERT DATA STATUT
-			var resultbis = dbr.InsertDataStatut(i,"RamCFM","1","",""+ApplicationData.codemissionactive+"","Validée",""+ApplicationData.datedj+"",""+datapost+"");
 
 			DBRepository dbrbis = new DBRepository();
 
@@ -219,7 +300,7 @@ namespace DMSvStandard
 			DBRepository dbrbis = new DBRepository();
 
 			//var resulttri = dbrbis.UpdateStatutValide(i,"2","","",null);
-			var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2","","",null);
+			//var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2","","",null);
 			//Toast.MakeText(this, "UPDATE VALIDE", ToastLength.Short).Show();
 		}
 

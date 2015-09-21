@@ -93,6 +93,8 @@ namespace DMSvStandard
 
 		public String CR { get; set; }
 
+		public String imgpath { get; set; }
+
 		public DateTime Datemission{ get; set; }
 
 		public int Ordremission{ get; set; }

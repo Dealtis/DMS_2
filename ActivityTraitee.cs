@@ -87,6 +87,7 @@ namespace DMSvStandard
 					planDeTransport = item.planDeTransport,
 					typeMission = item.typeMission,
 					typeSegment = item.typeSegment,
+					imgpath = item.imgpath,
 					CR = item.CR,
 					Id = Convert.ToString(item.Id)});
 			};
@@ -248,6 +249,7 @@ namespace DMSvStandard
 					typeMission = item.typeMission,
 					typeSegment = item.typeSegment,
 					CR = item.CR,
+					imgpath = item.imgpath,
 					Id = Convert.ToString (item.Id)
 				});
 			}
@@ -315,6 +317,7 @@ namespace DMSvStandard
 					typeMission = item.typeMission,
 					typeSegment = item.typeSegment,
 					CR = item.CR,
+					imgpath = item.imgpath,
 					Id = Convert.ToString (item.Id)
 				});
 			}
@@ -384,6 +387,7 @@ namespace DMSvStandard
 					typeMission = item.typeMission,
 					typeSegment = item.typeSegment,
 					CR = item.CR,
+					imgpath = item.imgpath,
 					Id = Convert.ToString (item.Id)
 				});
 			}
@@ -453,6 +457,7 @@ namespace DMSvStandard
 					typeMission = item.typeMission,
 					typeSegment = item.typeSegment,
 					CR = item.CR,
+					imgpath = item.imgpath,
 					Id = Convert.ToString (item.Id)
 				});
 			}
@@ -522,6 +527,7 @@ namespace DMSvStandard
 					typeMission = item.typeMission,
 					typeSegment = item.typeSegment,
 					CR = item.CR,
+					imgpath = item.imgpath,
 					Id = Convert.ToString (item.Id)
 				});
 			}
@@ -594,6 +600,7 @@ namespace DMSvStandard
 					typeMission = item.typeMission,
 					typeSegment = item.typeSegment,
 					CR = item.CR,
+					imgpath = item.imgpath,
 					Id = Convert.ToString (item.Id)
 				});
 			}
@@ -686,6 +693,7 @@ namespace DMSvStandard
 						typeMission = item.typeMission,
 						typeSegment = item.typeSegment,
 						CR = item.CR,
+						imgpath = item.imgpath,
 						Id = Convert.ToString (item.Id)
 					});
 				}
@@ -820,6 +828,7 @@ namespace DMSvStandard
 					typeMission = item.typeMission,
 					typeSegment = item.typeSegment,
 					CR = item.CR,
+					imgpath = item.imgpath,
 					Id = Convert.ToString (item.Id)
 				});
 			}

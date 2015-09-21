@@ -97,7 +97,7 @@ namespace DMSvStandard
 		
 		public void setUsarName(String _strName)
 		{ strUserName = _strName;
-			ApplicationData.User = _strName;
+			
 		}
 		
 				
@@ -136,7 +136,7 @@ namespace DMSvStandard
 		public void setTxUserName(String _txUserName)
 		{
 			txUserName = _txUserName;
-			ApplicationData.User = _txUserName;
+
 		}
 		
 		private String txUserPassword="";
@@ -387,7 +387,7 @@ namespace DMSvStandard
 							else if (strCurrentNode == "USER_NAME")
 							{
 								setUsarName(reader.Value.Trim());
-								ApplicationData.User = reader.Value.Trim();
+
 							}
 							else if (strCurrentNode == "USER_BARCODE")
 							{

@@ -162,28 +162,28 @@ namespace DMSvStandard
 			ApplicationData.Instance.setConfigurationModel (_model);
 			ApplicationData.Instance.setTranslator (ApplicationData.Instance.getConfigurationModel ().getLanguage (), "DTMD");
 
-			if (ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
-				if (!ServerActions.Instance.isServerStarted ()) {
-					ServerActions.Instance.StartServer ();				
-					ApplicationActions.Instance.initTimers ();
-
-					List<TextMessage> existingMessages = ApplicationActions.Instance.loadMessages (TextMessage.MSG_OUTBOX);
-					ApplicationActions.Instance.updateOutboxMessageList (existingMessages, new List<TextMessage> ());
-
-					existingMessages = ApplicationActions.Instance.loadMessages (TextMessage.MSG_INBOX);
-					ApplicationActions.Instance.updateInboxMessageList (existingMessages, new List<TextMessage> ());
-				}
-				else ApplicationActions.Instance.restartTimers ();
-
-				ApplicationData.Instance.setUserLogin (false);
-				MainActivity.getContext ().loginCanceled = false;
-
-
-				if (ApplicationData.Instance.getConfigurationModel().getAutoTrip() == 1)
-					ApplicationActions.Instance.setTripStarted (false);
-				else ApplicationActions.Instance.setTripStarted (true);
-				ApplicationActions.Instance.ChangeTripState ();
-			}
+//			if (ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
+//				if (!ServerActions.Instance.isServerStarted ()) {
+//					ServerActions.Instance.StartServer ();				
+//					ApplicationActions.Instance.initTimers ();
+//
+//					List<TextMessage> existingMessages = ApplicationActions.Instance.loadMessages (TextMessage.MSG_OUTBOX);
+//					ApplicationActions.Instance.updateOutboxMessageList (existingMessages, new List<TextMessage> ());
+//
+//					existingMessages = ApplicationActions.Instance.loadMessages (TextMessage.MSG_INBOX);
+//					ApplicationActions.Instance.updateInboxMessageList (existingMessages, new List<TextMessage> ());
+//				}
+//				else ApplicationActions.Instance.restartTimers ();
+//
+//				ApplicationData.Instance.setUserLogin (false);
+//				MainActivity.getContext ().loginCanceled = false;
+//
+//
+//				if (ApplicationData.Instance.getConfigurationModel().getAutoTrip() == 1)
+//					ApplicationActions.Instance.setTripStarted (false);
+//				else ApplicationActions.Instance.setTripStarted (true);
+//				ApplicationActions.Instance.ChangeTripState ();
+//			}
 
 
 			Finish ();

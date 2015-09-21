@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="DMS.DMS" android:versionCode="25" android:versionName="2.5.8">
+  <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="21" />
+  <application android:label="DMS" android:icon="@drawable/iconapp" android:name="mono.android.app.Application">
+    <activity android:label="Menu" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.MainActivity" />
+    <activity android:label="ActivityAnomalie" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityAnomalie" />
+    <activity android:label="ActivityAnomalie" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityAnomalieEnlevement" />
+    <activity android:label="ActivityDetailLivraison" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityDetailEnlevement" />
+    <activity android:label="ActivityDetailLivraison" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityDetailLivraison" />
+    <activity android:label="ActivityDetailTraiteeLivraison" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityDetailTraiteeLivraison" />
+    <activity android:label="Enlevement" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityListEnlevement" />
+    <activity android:label="Livraison" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityListLivraison" />
+    <activity android:label="ActivityLoginchoose" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityLoginchoose" />
+    <activity android:label="Signature" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivitySignature" />
+    <activity android:label="ActivityTraitee" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityTraitee" />
+    <activity android:label="ActivityTraitee" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityTraiteeEnlevement" />
+    <activity android:label="AuthConfigActivity" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.AuthConfigActivity" />
+    <activity android:label="GeneralConfigActivity" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.GeneralConfigActivity" />
+    <activity android:configChanges="orientation" android:label="LoginActivity" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.LoginActivity" />
+    <activity android:noHistory="true" android:theme="@style/Theme.Splash" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.SplashActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity android:configChanges="keyboardHidden|orientation|screenLayout" android:label="Scanner" android:name="md5e1d4744ef128cd013cac92521f1a8e76.ZxingActivity" />
+    <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="2147483647" android:authorities="DMS.DMS.mono.MonoRuntimeProvider.__mono_init__" />
+  </application>
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.CAMERA" />
+  <uses-permission android:name="android.permission.CONTROL_LOCATION_UPDATES" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+  <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+  <uses-permission android:name="android.permission.BATTERY_STATS" />
+  <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+  <uses-permission android:name="android.permission.READ_LOGS" />
+</manifest>

@@ -53,7 +53,7 @@
                 android:scrollHorizontally="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
+                android:textSize="20dp"
                 android:textStyle="bold" />
             <TextView
                 android:text="Client"

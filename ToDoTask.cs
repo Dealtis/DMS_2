@@ -122,6 +122,9 @@ namespace DMSvStandard
 		[MaxLength(50)]
 		public string Ordremission{ get; set; }
 
+		[MaxLength(50)]
+		public string Userandsoft{ get; set; }
+
 
            
 	       

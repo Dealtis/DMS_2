@@ -20,7 +20,11 @@ namespace DMSvStandard
     [Table("StatutLivraison")]
     public class StatutLivraison
     {
-       
+       	
+		[PrimaryKey, AutoIncrement]
+		public int IdS { get; set; }
+
+
         [MaxLength(50)]
         public int id { get; set; }
 

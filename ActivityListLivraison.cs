@@ -58,13 +58,13 @@ namespace DMSvStandard
 			var db = new SQLiteConnection (dbPath);
 
 
-			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' ORDER by groupage, Datemission");
+			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND Userandsoft = ? ORDER by groupage, Datemission",ApplicationData.UserAndsoft);
 			var layout = new LinearLayout (this);
 			layout.Orientation = Orientation.Vertical;
 
 			//GRP
 			Appli.nbgroupage = 0;
-			var grp = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' GROUP BY groupage");
+			var grp = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV'  AND Userandsoft = ?  GROUP BY groupage",ApplicationData.UserAndsoft);
 			var i = 0;
 			foreach (var item in grp){
 				Appli.groupagestring = Convert.ToString(item.groupage);
@@ -107,6 +107,7 @@ namespace DMSvStandard
 					typeMission = item.typeMission,
 					typeSegment = item.typeSegment,
 					CR = item.CR,
+					imgpath = item.imgpath,
 					Id = Convert.ToString (item.Id)
 				});
 			}
@@ -236,7 +237,7 @@ namespace DMSvStandard
 				(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
 			var db = new SQLiteConnection (dbPath);
 
-			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' ORDER by groupage, Datemission");
+			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV'  AND Userandsoft = ?  ORDER by groupage, Datemission",ApplicationData.UserAndsoft);
 
 				//LISTVIEW
 				mListView = FindViewById<ListView> (Resource.Id.listView1);
@@ -270,6 +271,7 @@ namespace DMSvStandard
 						typeMission = item.typeMission,
 						typeSegment = item.typeSegment,
 						CR = item.CR,
+						imgpath = item.imgpath,
 						Id = Convert.ToString (item.Id)
 					});
 				}
@@ -303,7 +305,7 @@ namespace DMSvStandard
 				(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
 			var db = new SQLiteConnection (dbPath);
 
-			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[0]+"' ORDER BY Datemission");
+			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND Userandsoft = ? AND groupage='"+Appli.grp[0]+"' ORDER BY Datemission",ApplicationData.UserAndsoft);
 				
 			//LISTVIEW
 				mListView = FindViewById<ListView> (Resource.Id.listView1);
@@ -337,6 +339,7 @@ namespace DMSvStandard
 						typeMission = item.typeMission,
 						typeSegment = item.typeSegment,
 						CR = item.CR,
+						imgpath = item.imgpath,
 						Id = Convert.ToString (item.Id)
 					});
 				}
@@ -375,7 +378,7 @@ namespace DMSvStandard
 				(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
 			var db = new SQLiteConnection (dbPath);
 
-			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[1]+"' ORDER BY Datemission");
+			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV'  AND Userandsoft = ? AND groupage='"+Appli.grp[1]+"' ORDER BY Datemission",ApplicationData.UserAndsoft);
 			//LISTVIEW
 			mListView = FindViewById<ListView> (Resource.Id.listView1);
 
@@ -408,6 +411,7 @@ namespace DMSvStandard
 					typeMission = item.typeMission,
 					typeSegment = item.typeSegment,
 					CR = item.CR,
+					imgpath = item.imgpath,
 					Id = Convert.ToString (item.Id)
 				});
 			}
@@ -442,7 +446,7 @@ namespace DMSvStandard
 				(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
 			var db = new SQLiteConnection (dbPath);
 
-			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[2]+"' ORDER BY Datemission");
+			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV'  AND Userandsoft = ? AND groupage='"+Appli.grp[2]+"' ORDER BY Datemission",ApplicationData.UserAndsoft);
 
 			//LISTVIEW
 			mListView = FindViewById<ListView> (Resource.Id.listView1);
@@ -476,6 +480,7 @@ namespace DMSvStandard
 					typeMission = item.typeMission,
 					typeSegment = item.typeSegment,
 					CR = item.CR,
+					imgpath = item.imgpath,
 					Id = Convert.ToString (item.Id)
 				});
 			}
@@ -511,7 +516,7 @@ namespace DMSvStandard
 
 
 
-			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[3]+"' ORDER BY Datemission");
+			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV'  AND Userandsoft = ? AND groupage='"+Appli.grp[3]+"' ORDER BY Datemission",ApplicationData.UserAndsoft);
 
 			//LISTVIEW
 			mListView = FindViewById<ListView> (Resource.Id.listView1);
@@ -545,6 +550,7 @@ namespace DMSvStandard
 					typeMission = item.typeMission,
 					typeSegment = item.typeSegment,
 					CR = item.CR,
+					imgpath = item.imgpath,
 					Id = Convert.ToString (item.Id)
 				});
 			}
@@ -583,7 +589,7 @@ namespace DMSvStandard
 
 
 
-			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[4]+"' ORDER BY Datemission");
+			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND Userandsoft = ? AND groupage='"+Appli.grp[4]+"' ORDER BY Datemission",ApplicationData.UserAndsoft);
 
 			//LISTVIEW
 			mListView = FindViewById<ListView> (Resource.Id.listView1);
@@ -617,6 +623,7 @@ namespace DMSvStandard
 					typeMission = item.typeMission,
 					typeSegment = item.typeSegment,
 					CR = item.CR,
+					imgpath = item.imgpath,
 					Id = Convert.ToString (item.Id)
 				});
 			}
@@ -674,7 +681,7 @@ namespace DMSvStandard
 			builder.SetPositiveButton("Annuler", delegate {  });
 
 			builder.SetNegativeButton("Chercher", delegate {				
-				var table = db.Query<ToDoTask>("SELECT * FROM ToDoTask WHERE  typeMission='L' AND typeSegment='LIV' AND (numCommande LIKE '%"+editrecherche.Text+"%' OR  villeLivraison LIKE '%"+editrecherche.Text+"%' OR nomPayeur LIKE '%\"+input.Text+\"%'OR CpLivraison LIKE '%"+editrecherche.Text+"%' OR refClient LIKE '%"+editrecherche.Text+"%')");
+				var table = db.Query<ToDoTask>("SELECT * FROM ToDoTask WHERE  typeMission='L' AND typeSegment='LIV' AND Userandsoft = ? AND (numCommande LIKE '%"+editrecherche.Text+"%' OR  villeLivraison LIKE '%"+editrecherche.Text+"%' OR nomPayeur LIKE '%\"+input.Text+\"%'OR CpLivraison LIKE '%"+editrecherche.Text+"%' OR refClient LIKE '%"+editrecherche.Text+"%')",ApplicationData.UserAndsoft);
 				textViewGrp.Text = "Recherche \""+editrecherche.Text+"\"";
 
 				//LISTVIEW
@@ -709,6 +716,7 @@ namespace DMSvStandard
 						typeMission = item.typeMission,
 						typeSegment = item.typeSegment,
 						CR = item.CR,
+						imgpath = item.imgpath,
 						Id = Convert.ToString (item.Id)
 					});
 				}
@@ -796,7 +804,7 @@ namespace DMSvStandard
 			string dbPath = System.IO.Path.Combine (System.Environment.GetFolderPath
 				(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
 			var db = new SQLiteConnection (dbPath);
-			var table = db.Query<ToDoTask>("SELECT * FROM ToDoTask WHERE  typeMission='L' AND typeSegment='LIV' AND (numCommande LIKE '%"+App.codebarre+"%' OR  villeLivraison LIKE '%"+App.codebarre+"%' OR nomPayeur LIKE '%\"+input.Text+\"%'OR CpLivraison LIKE '%"+App.codebarre+"%' OR refClient LIKE '%"+App.codebarre+"%')");
+			var table = db.Query<ToDoTask>("SELECT * FROM ToDoTask WHERE  typeMission='L' AND typeSegment='LIV' AND Userandsoft = ? AND (numCommande LIKE '%"+App.codebarre+"%' OR  villeLivraison LIKE '%"+App.codebarre+"%' OR nomPayeur LIKE '%\"+input.Text+\"%'OR CpLivraison LIKE '%"+App.codebarre+"%' OR refClient LIKE '%"+App.codebarre+"%')",ApplicationData.UserAndsoft);
 			textViewGrp.Text = "Recherche \""+App.codebarre+"\"";
 
 			//LISTVIEW
@@ -831,6 +839,7 @@ namespace DMSvStandard
 					typeMission = item.typeMission,
 					typeSegment = item.typeSegment,
 					CR = item.CR,
+					imgpath = item.imgpath,
 					Id = Convert.ToString (item.Id)
 				});
 			}

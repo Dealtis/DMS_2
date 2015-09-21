@@ -31,6 +31,7 @@ namespace DMSvStandard
 		public bool userLogin=false;
 		private bool adminLogin=false;
 		public static string codemissionactive;
+		public static string groupagemissionactive;
 		public static string datedj;
 		public static string mouth;
 		public static string day;
@@ -38,10 +39,14 @@ namespace DMSvStandard
 		public static string minute;
 		public static string seconde;
 		public static string CR;
-		public static string User = "";
+		public static bool User;
 		public static int ithread;
 		public static string dateimport;
 		public static string GPS;
+
+
+		public static string UserAndsoft;
+		public static string UserTransic;
 
         private ApplicationData()
         {            
@@ -96,20 +101,20 @@ namespace DMSvStandard
 		{
 			messageListOrdering = _order;
 		}
-
-		private DTMDQueue<DealtisMessage> clientMessageQueue = new DTMDQueue<DealtisMessage>();
-
-		public DTMDQueue<DealtisMessage> getClientMessageQueue ()
-		{
-			return clientMessageQueue;
-		}        
-
-		private List<DealtisMessage> serverMessageQueue = new List<DealtisMessage>();
-		
-		public List<DealtisMessage> getServerMessageQueue ()
-		{
-			return serverMessageQueue;
-		}        
+//
+//		private DTMDQueue<DealtisMessage> clientMessageQueue = new DTMDQueue<DealtisMessage>();
+//
+//		public DTMDQueue<DealtisMessage> getClientMessageQueue ()
+//		{
+//			return clientMessageQueue;
+//		}        
+//
+//		private List<DealtisMessage> serverMessageQueue = new List<DealtisMessage>();
+//		
+//		public List<DealtisMessage> getServerMessageQueue ()
+//		{
+//			return serverMessageQueue;
+//		}        
 
 
 		public Translator getTranslator()
@@ -222,21 +227,21 @@ namespace DMSvStandard
         public void setBarcode(String _barcode) { strBarcode = _barcode; }
         public void addBarcode(char _barcode) { strBarcode += _barcode; }
 
-        private List<MenuCode> listMenu;
-        public List<MenuCode> getMenuList() { return listMenu; }
-
-
-        
-
-        private Trip currentTrip;
-
-        public Trip getCurrentTrip()
-        { return currentTrip; }
-
-        public void setCurrentTrip(Trip _currentTrip)
-        {
-            currentTrip = _currentTrip;
-        }
+//        private List<MenuCode> listMenu;
+//        public List<MenuCode> getMenuList() { return listMenu; }
+//
+//
+//        
+//
+//        private Trip currentTrip;
+//
+//        public Trip getCurrentTrip()
+//        { return currentTrip; }
+//
+//        public void setCurrentTrip(Trip _currentTrip)
+//        {
+//            currentTrip = _currentTrip;
+//        }
 
 		private ConfigurationModel tempConfigModel;
 		
@@ -248,13 +253,13 @@ namespace DMSvStandard
 			tempConfigModel = _m;
 		}
 
-		private TextMessage currentTextMessage;
-		
-		public TextMessage CurrentTextMessage
-		{
-			get { return currentTextMessage; }
-			set { currentTextMessage = value; }
-		}
+//		private TextMessage currentTextMessage;
+//		
+//		public TextMessage CurrentTextMessage
+//		{
+//			get { return currentTextMessage; }
+//			set { currentTextMessage = value; }
+//		}
 
 
     }
