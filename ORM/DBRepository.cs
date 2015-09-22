@@ -945,6 +945,22 @@ namespace DMSvStandard.ORM
 					itembis.remarque = remarque;
 					itembis.imgpath = imgpath;
 				}
+				if(libeAnomalie == "Ramasse pas faite"){
+					codeAnomalie = "RAMPFT";
+					itembis.StatutLivraison = statut;
+					itembis.codeAnomalie = codeAnomalie;
+					itembis.libeAnomalie = libeAnomalie;
+					itembis.remarque = remarque;
+					itembis.imgpath = imgpath;
+				}
+				if(libeAnomalie == "Positions non chargees"){
+					codeAnomalie = "RENNCG";
+					itembis.StatutLivraison = statut;
+					itembis.codeAnomalie = codeAnomalie;
+					itembis.libeAnomalie = libeAnomalie;
+					itembis.remarque = remarque;
+					itembis.imgpath = imgpath;
+				}
 				else{
 					itembis.StatutLivraison = statut;
 					itembis.codeAnomalie = codeAnomalie;
