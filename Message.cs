@@ -32,6 +32,9 @@ namespace DMSvStandard
 
 		[MaxLength(20)]
 		public DateTime datemessage { get; set; }
+
+		[MaxLength(20)]
+		public int typemsg { get; set; }
 		
 	}
 }
