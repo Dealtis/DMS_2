@@ -223,7 +223,7 @@ namespace DMSvStandard
 			btn2.Click += delegate { peekup_Click();	};
 
 			LinearLayout btn3 = FindViewById<LinearLayout> (Resource.Id.columnlayout2_1);
-			btn3.Click += delegate { newmsg_Click();	};
+			btn3.Click += delegate { chat_Click();	};
 
 			//LinearLayout btn4 = FindViewById<LinearLayout> (Resource.Id.columnlayout2_2);
 			//btn4.Click += delegate { inbox_Click();	};
@@ -445,7 +445,7 @@ namespace DMSvStandard
 			StartActivity(typeof(ActivityListEnlevement));
 		}
 
-		protected void newmsg_Click()
+		protected void chat_Click()
 		{
 
 			//Show an error image with a message with a Dimmed background, and auto-dismiss after 2 seconds

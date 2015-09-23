@@ -226,6 +226,9 @@
     <AndroidResource Include="Resources\layout\login.axml" />
     <AndroidResource Include="Resources\drawable\Anompj.png" />
     <AndroidResource Include="Resources\layout\ListeViewRowAnomaliePJ.axml" />
+    <AndroidResource Include="Resources\layout\RowLeft.axml" />
+    <AndroidResource Include="Resources\drawable\boxgray.png" />
+    <AndroidResource Include="Resources\layout\RowRight.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="packages\Xamarin.Insights.1.10.6\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('packages\Xamarin.Insights.1.10.6\build\MonoAndroid10\Xamarin.Insights.targets')" />
