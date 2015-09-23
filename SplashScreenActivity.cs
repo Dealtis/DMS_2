@@ -94,7 +94,10 @@ namespace DMSvStandard
 			var resultbis = dbrbis.CreateTable ();
 			DBRepository dbrbiss = new DBRepository ();
 			var resultbiss = dbrbiss.CreateTableStatut ();
+
 			var rgtvtyh = dbrbiss.CreateTableUser();
+
+			var resmessage = dbrbiss.CreateTableMessage();
 
 			// Test de connexion
 			var connectivityManager = (ConnectivityManager)GetSystemService(ConnectivityService);

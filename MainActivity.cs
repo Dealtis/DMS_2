@@ -684,28 +684,30 @@ namespace DMSvStandard
 			int idgps = 0;
 			while (idgps == 0) {
 
+				//CONN
+				var connectivityManager = (ConnectivityManager)GetSystemService(ConnectivityService);
 
-				try
-				{
-					//API LIVRER OK
-					string _url = "http://dms.jeantettransport.com/api/gps";
-					var webClient = new WebClient();
-					webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
-					//webClient.Encoding = Encoding.UTF8;
+				var activeConnection = connectivityManager.ActiveNetworkInfo;
+				if ((activeConnection != null) && activeConnection.IsConnected) {
 
-					string datagps ="{\"posgps\":\""+ApplicationData.GPS+"\",\"userandsoft\":\""+ApplicationData.UserAndsoft+"\"}";
+					try {
+						//API LIVRER OK
+						string _url = "http://dms.jeantettransport.com/api/gps";
+						var webClient = new WebClient ();
+						webClient.Headers [HttpRequestHeader.ContentType] = "application/json";
+						//webClient.Encoding = Encoding.UTF8;
 
-					webClient.UploadString(_url,datagps);
-					Console.Out.WriteLine(">>>>>THREAD GPS SEND "+datagps);
+						string datagps = "{\"posgps\":\"" + ApplicationData.GPS + "\",\"userandsoft\":\"" + ApplicationData.UserAndsoft + "\"}";
+
+						webClient.UploadString (_url, datagps);
+						Console.Out.WriteLine (">>>>>THREAD GPS SEND " + datagps);
 
 
+					} catch (Exception e) {
+						Insights.Report (e);
+					}
 				}
-				catch (Exception e)
-				{
-					Insights.Report (e);
-				}
-
-				Thread.Sleep (300000);
+				Thread.Sleep (120000);
 			}
 		}
 		public void ComWebservice(){

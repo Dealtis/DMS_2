@@ -111,6 +111,7 @@
     <Compile Include="ToDoTask.cs" />
     <Compile Include="ApplicationData.cs" />
     <Compile Include="TableUser.cs" />
+    <Compile Include="Message.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

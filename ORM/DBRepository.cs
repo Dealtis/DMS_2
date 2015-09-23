@@ -56,7 +56,7 @@ namespace DMSvStandard.ORM
 					(Environment.SpecialFolder.Personal),"ormDMS.db3");
 				var db = new SQLiteConnection(dbPath);
 				db.CreateTable<StatutLivraison>();
-				Console.Out.WriteLine("!!!!!!!!!!!!CREATE T2!!!!!!!!!!!!!!!!!!!!!!!!");
+				Console.Out.WriteLine("!!!!!!!!!!!!CREATE STATUT!!!!!!!!!!!!!!!!!!!!!!!!");
 
 
 				string result = "Table crée avec succès";
@@ -77,7 +77,28 @@ namespace DMSvStandard.ORM
 					(Environment.SpecialFolder.Personal),"ormDMS.db3");
 				var db = new SQLiteConnection(dbPath);
 				db.CreateTable<TableUser>();
-				Console.Out.WriteLine("!!!!!!!!!!!!CREATE T3!!!!!!!!!!!!!!!!!!!!!!!!");
+				Console.Out.WriteLine("!!!!!!!!!!!!CREATE USER!!!!!!!!!!!!!!!!!!!!!!!!");
+
+
+				string result = "Table crée avec succès";
+				return result;
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
+		public string CreateTableMessage()
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal),"ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				db.CreateTable<Message>();
+				Console.Out.WriteLine("!!!!!!!!!!!!CREATE MESSAGE!!!!!!!!!!!!!!!!!!!!!!!!");
 
 
 				string result = "Table crée avec succès";
