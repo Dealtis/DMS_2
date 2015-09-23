@@ -23,6 +23,7 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <activity android:label="ActivityChat" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivityChat" />
     <activity android:configChanges="keyboardHidden|orientation|screenLayout" android:label="Scanner" android:name="md5e1d4744ef128cd013cac92521f1a8e76.ZxingActivity" />
     <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="2147483647" android:authorities="DMS.DMS.mono.MonoRuntimeProvider.__mono_init__" />
     <receiver android:name="mono.android.Seppuku">

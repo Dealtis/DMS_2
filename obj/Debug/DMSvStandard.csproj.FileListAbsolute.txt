@@ -466,3 +466,4 @@ C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\o
 C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\res\layout\rowleft.xml
 C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\res\drawable\boxgray.png
 C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\res\layout\rowright.xml
+C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\res\layout\chatlayout.xml

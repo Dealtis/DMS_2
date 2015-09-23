@@ -448,8 +448,7 @@ namespace DMSvStandard
 		protected void chat_Click()
 		{
 
-			//Show an error image with a message with a Dimmed background, and auto-dismiss after 2 seconds
-			AndHUD.Shared.ShowError(this, "Non Disponible", MaskType.Black, TimeSpan.FromSeconds(2));
+			StartActivity(typeof(ActivityChat));
 
 
 		}
