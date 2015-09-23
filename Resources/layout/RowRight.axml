@@ -14,7 +14,7 @@
         android:layout_marginTop="10dp"
         android:layout_gravity="right"
         android:layout_marginRight="10dp"
-        android:background="@color/btnbackred">
+        android:background="@color/bleudms">
         <TextView
             android:text="Ceci est un test de message un petit peu long, pour voir comment cela réagie"
             android:id="@+id/txtName"
@@ -29,7 +29,7 @@
     </TableRow>
     <TextView
         android:text="00:00 Lu"
-        android:id="@+id/textView1"
+        android:id="@+id/textds"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left"

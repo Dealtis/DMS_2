@@ -126,6 +126,7 @@ containing a value of this type.
         public static final int ahTextSize=0x7f010002;
     }
     public static final class color {
+        public static final int bleudms=0x7f060004;
         public static final int btnbackred=0x7f060003;
         public static final int btndef=0x7f060002;
         public static final int btnfocus=0x7f060001;
@@ -197,7 +198,7 @@ containing a value of this type.
     }
     public static final class id {
         public static final int Image=0x7f090081;
-        public static final int SujListView=0x7f09009c;
+        public static final int SujListView=0x7f09009d;
         public static final int Text=0x7f090082;
         public static final int Text1=0x7f090083;
         public static final int Text2=0x7f090084;
@@ -208,8 +209,8 @@ containing a value of this type.
         public static final int bdgLiv=0x7f09006e;
         public static final int bdgRam=0x7f090074;
         public static final int btnLivraison=0x7f09005d;
-        public static final int btnLoad=0x7f09009a;
-        public static final int btnSave=0x7f090099;
+        public static final int btnLoad=0x7f09009b;
+        public static final int btnSave=0x7f09009a;
         public static final int btnsearch=0x7f09002e;
         public static final int button1=0x7f09007f;
         public static final int button2=0x7f090080;
@@ -228,7 +229,7 @@ containing a value of this type.
         public static final int columnlayout2_1=0x7f090076;
         public static final int columnlayout4_2=0x7f09007c;
         public static final int commande=0x7f090038;
-        public static final int contentFrame=0x7f09009d;
+        public static final int contentFrame=0x7f09009e;
         public static final int deliveryBadge=0x7f09006d;
         public static final int deliveryBadgeText=0x7f09006f;
         public static final int editText1=0x7f090095;
@@ -297,13 +298,13 @@ containing a value of this type.
         public static final int pass=0x7f090093;
         public static final int peekupBadge=0x7f090073;
         public static final int peekupBadgeText=0x7f090075;
-        public static final int progressBar1=0x7f09009b;
+        public static final int progressBar1=0x7f09009c;
         public static final int radioButton1=0x7f090035;
         public static final int radioButton2=0x7f090034;
         public static final int radioGroup1=0x7f090033;
         public static final int relativeLayout1=0x7f09002f;
         public static final int relativeLayout2=0x7f090032;
-        public static final int rootView=0x7f090097;
+        public static final int rootView=0x7f090098;
         public static final int rowLayout1=0x7f09000f;
         public static final int rowLayout10=0x7f090022;
         public static final int rowLayout11=0x7f090024;
@@ -316,7 +317,7 @@ containing a value of this type.
         public static final int rowLayout7=0x7f09001f;
         public static final int rowLayout8=0x7f090050;
         public static final int scrollView1=0x7f090036;
-        public static final int signatureView=0x7f090098;
+        public static final int signatureView=0x7f090099;
         public static final int spinnerAnomalie=0x7f090002;
         public static final int spinnerConnection=0x7f09004f;
         public static final int spinnerLanguage=0x7f090052;
@@ -346,6 +347,7 @@ containing a value of this type.
         public static final int textViewUserName=0x7f090012;
         public static final int textViewWaiting=0x7f090028;
         public static final int textcr=0x7f090031;
+        public static final int textds=0x7f090097;
         public static final int title=0x7f09003a;
         public static final int toutgrp=0x7f090053;
         public static final int traitees=0x7f09005b;

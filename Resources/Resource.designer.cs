@@ -136,6 +136,9 @@ namespace DMSvStandard
 		public partial class Color
 		{
 			
+			// aapt resource value: 0x7f060004
+			public const int bleudms = 2131099652;
+			
 			// aapt resource value: 0x7f060003
 			public const int btnbackred = 2131099651;
 			
@@ -363,8 +366,8 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f090081
 			public const int Image = 2131296385;
 			
-			// aapt resource value: 0x7f09009c
-			public const int SujListView = 2131296412;
+			// aapt resource value: 0x7f09009d
+			public const int SujListView = 2131296413;
 			
 			// aapt resource value: 0x7f090082
 			public const int Text = 2131296386;
@@ -396,11 +399,11 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f09005d
 			public const int btnLivraison = 2131296349;
 			
-			// aapt resource value: 0x7f09009a
-			public const int btnLoad = 2131296410;
+			// aapt resource value: 0x7f09009b
+			public const int btnLoad = 2131296411;
 			
-			// aapt resource value: 0x7f090099
-			public const int btnSave = 2131296409;
+			// aapt resource value: 0x7f09009a
+			public const int btnSave = 2131296410;
 			
 			// aapt resource value: 0x7f09002e
 			public const int btnsearch = 2131296302;
@@ -456,8 +459,8 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f090038
 			public const int commande = 2131296312;
 			
-			// aapt resource value: 0x7f09009d
-			public const int contentFrame = 2131296413;
+			// aapt resource value: 0x7f09009e
+			public const int contentFrame = 2131296414;
 			
 			// aapt resource value: 0x7f09006d
 			public const int deliveryBadge = 2131296365;
@@ -663,8 +666,8 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f090075
 			public const int peekupBadgeText = 2131296373;
 			
-			// aapt resource value: 0x7f09009b
-			public const int progressBar1 = 2131296411;
+			// aapt resource value: 0x7f09009c
+			public const int progressBar1 = 2131296412;
 			
 			// aapt resource value: 0x7f090035
 			public const int radioButton1 = 2131296309;
@@ -681,8 +684,8 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f090032
 			public const int relativeLayout2 = 2131296306;
 			
-			// aapt resource value: 0x7f090097
-			public const int rootView = 2131296407;
+			// aapt resource value: 0x7f090098
+			public const int rootView = 2131296408;
 			
 			// aapt resource value: 0x7f09000f
 			public const int rowLayout1 = 2131296271;
@@ -720,8 +723,8 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f090036
 			public const int scrollView1 = 2131296310;
 			
-			// aapt resource value: 0x7f090098
-			public const int signatureView = 2131296408;
+			// aapt resource value: 0x7f090099
+			public const int signatureView = 2131296409;
 			
 			// aapt resource value: 0x7f090002
 			public const int spinnerAnomalie = 2131296258;
@@ -809,6 +812,9 @@ namespace DMSvStandard
 			
 			// aapt resource value: 0x7f090031
 			public const int textcr = 2131296305;
+			
+			// aapt resource value: 0x7f090097
+			public const int textds = 2131296407;
 			
 			// aapt resource value: 0x7f09003a
 			public const int title = 2131296314;

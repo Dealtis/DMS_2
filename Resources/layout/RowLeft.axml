@@ -28,7 +28,7 @@
     </TableRow>
     <TextView
         android:text="00:00 Lu"
-        android:id="@+id/textView1"
+        android:id="@+id/textds"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp" />

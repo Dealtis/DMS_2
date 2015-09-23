@@ -43,11 +43,14 @@ namespace DMSvStandard
 				
 
 				TextView txtName = row.FindViewById<TextView> (Resource.Id.txtName);
+				TextView txtdatestatut = row.FindViewById<TextView> (Resource.Id.textds);
 				//HorizontalScrollView rmq = row.FindViewById<HorizontalScrollView> (Resource.Id.rmq);
 				//FONTSNEXALIGHT
 				Typeface tf = Typeface.CreateFromAsset (Application.Context.Assets, "fonts/NexaLight.ttf");
 				txtName.SetTypeface(tf, TypefaceStyle.Normal);
 				txtName.Text = ""+mItems[position].texte+"";
+
+				txtdatestatut.Text=""+mItems[position].datemessage.Hour+":"+mItems[position].datemessage.Minute+" "+mItems[position].statut+"";
 			}else{
 
 
@@ -56,11 +59,14 @@ namespace DMSvStandard
 
 
 				TextView txtName = row.FindViewById<TextView> (Resource.Id.txtName);
+				TextView txtdatestatut = row.FindViewById<TextView> (Resource.Id.textds);
 				//HorizontalScrollView rmq = row.FindViewById<HorizontalScrollView> (Resource.Id.rmq);
 				//FONTSNEXALIGHT
 				Typeface tf = Typeface.CreateFromAsset (Application.Context.Assets, "fonts/NexaLight.ttf");
 				txtName.SetTypeface(tf, TypefaceStyle.Normal);
 				txtName.Text = ""+mItems[position].texte+"";
+
+				txtdatestatut.Text=""+mItems[position].datemessage.Hour+":"+mItems[position].datemessage.Minute+" "+mItems[position].statut+"";
 			}
 
 			return row;
