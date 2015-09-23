@@ -28,7 +28,7 @@ namespace DMSvStandard
 		public String utilisateurAndsoft { get; set; }
 
 		[MaxLength(20)]
-		public String statut { get; set; }
+		public int statut { get; set; }
 
 		[MaxLength(20)]
 		public DateTime datemessage { get; set; }

@@ -285,7 +285,33 @@ namespace DMSvStandard.ORM
 			}
 		}
 
+		//Insertion des don¨¦es USER
 
+		public string InsertDataMessage(string utilisateurAndsoft, string texte, int statut, DateTime datemessage, int typemsg)
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal), "ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				Message item = new Message();
+
+				item.utilisateurAndsoft =  utilisateurAndsoft;
+				item.texte = texte;
+				item.statut = statut;
+				item.datemessage = datemessage;
+				item.typemsg = typemsg;
+
+
+				db.Insert(item);
+				return "Insertion good";
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
 
 
 
