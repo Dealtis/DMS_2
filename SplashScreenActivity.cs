@@ -57,6 +57,7 @@ namespace DMSvStandard
 	public static class Data{
 
 		public static string content;
+		public static string contentmsg;
 		public static int countliv;
 		public static int countram;
 	}

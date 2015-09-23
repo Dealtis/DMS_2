@@ -201,7 +201,7 @@ namespace DMSvStandard
 			m_lblDelivery = FindViewById<TextView> (Resource.Id.lblButton1);
 			m_lblPeekup = FindViewById<TextView> (Resource.Id.lblButton2);
 			m_lblNewMsg = FindViewById<TextView> (Resource.Id.lblButton3);
-			m_lblInbox = FindViewById<TextView> (Resource.Id.lblButton4);
+			//m_lblInbox = FindViewById<TextView> (Resource.Id.lblButton4);
 
 //			m_lblActivity = FindViewById<TextView> (Resource.Id.lblButton6);
 //			m_lblTrip = FindViewById<TextView> (Resource.Id.lblButton7);
@@ -225,11 +225,11 @@ namespace DMSvStandard
 			LinearLayout btn3 = FindViewById<LinearLayout> (Resource.Id.columnlayout2_1);
 			btn3.Click += delegate { newmsg_Click();	};
 
-			LinearLayout btn4 = FindViewById<LinearLayout> (Resource.Id.columnlayout2_2);
-			btn4.Click += delegate { inbox_Click();	};
+			//LinearLayout btn4 = FindViewById<LinearLayout> (Resource.Id.columnlayout2_2);
+			//btn4.Click += delegate { inbox_Click();	};
 
-			LinearLayout btn5 = FindViewById<LinearLayout> (Resource.Id.columnlayout3_1);
-			btn5.Click += delegate { outbox_Click();	};
+			//LinearLayout btn5 = FindViewById<LinearLayout> (Resource.Id.columnlayout3_1);
+			//btn5.Click += delegate { outbox_Click();	};
 
 			LinearLayout btn8 = FindViewById<LinearLayout> (Resource.Id.columnlayout4_2);
 			btn8.Click += delegate { config_Click();	};
@@ -247,17 +247,17 @@ namespace DMSvStandard
 			m_newMsgBadge.Visibility = ViewStates.Invisible;
 			m_newMsgBadgeText = FindViewById<TextView> (Resource.Id.newMsgBadgeText);
 
-			m_inboxBadge = FindViewById<RelativeLayout> (Resource.Id.inboxBadge);
-			m_inboxBadge.Visibility = ViewStates.Invisible;
-			m_inboxBadgeText = FindViewById<TextView> (Resource.Id.inboxBadgeText);
-
-			m_outboxBadge = FindViewById<RelativeLayout> (Resource.Id.outboxBadge);
-			m_outboxBadge.Visibility = ViewStates.Invisible;
-			m_outboxBadgeText = FindViewById<TextView> (Resource.Id.outboxBadgeText);
-
-			m_configBadge = FindViewById<RelativeLayout> (Resource.Id.configBadge);
-			m_configBadge.Visibility = ViewStates.Invisible;
-			m_configBadgeText = FindViewById<TextView> (Resource.Id.configBadgeText);
+//			m_inboxBadge = FindViewById<RelativeLayout> (Resource.Id.inboxBadge);
+//			m_inboxBadge.Visibility = ViewStates.Invisible;
+//			m_inboxBadgeText = FindViewById<TextView> (Resource.Id.inboxBadgeText);
+//
+//			m_outboxBadge = FindViewById<RelativeLayout> (Resource.Id.outboxBadge);
+//			m_outboxBadge.Visibility = ViewStates.Invisible;
+//			m_outboxBadgeText = FindViewById<TextView> (Resource.Id.outboxBadgeText);
+//
+//			m_configBadge = FindViewById<RelativeLayout> (Resource.Id.configBadge);
+//			m_configBadge.Visibility = ViewStates.Invisible;
+//			m_configBadgeText = FindViewById<TextView> (Resource.Id.configBadgeText);
 
 //			ConfigurationModel _model = new ConfigurationModel ();
 //			_model.loadConfiguration ();
@@ -388,19 +388,19 @@ namespace DMSvStandard
 
 		private void OnIndicatorTimerHandler(object source, System.Timers.ElapsedEventArgs args)
 		{
-			if (ApplicationData.Instance.getOutboxIndicator () > 0) {
-				RunOnUiThread (() => m_outboxBadgeText.Text = ApplicationData.Instance.getOutboxIndicator().ToString());
-				RunOnUiThread (() => m_outboxBadge.Visibility = ViewStates.Visible);
-			} else {
-				RunOnUiThread (() => m_outboxBadge.Visibility = ViewStates.Invisible);
-			}
-
-			if (ApplicationData.Instance.getInboxIndicator () > 0) {
-				RunOnUiThread (() => m_inboxBadgeText.Text= ApplicationData.Instance.getInboxIndicator ().ToString());
-				RunOnUiThread (() => m_inboxBadge.Visibility = ViewStates.Visible);
-			} else {
-				RunOnUiThread (() => m_inboxBadge.Visibility = ViewStates.Invisible);
-			}
+//			if (ApplicationData.Instance.getOutboxIndicator () > 0) {
+//				RunOnUiThread (() => m_outboxBadgeText.Text = ApplicationData.Instance.getOutboxIndicator().ToString());
+//				RunOnUiThread (() => m_outboxBadge.Visibility = ViewStates.Visible);
+//			} else {
+//				RunOnUiThread (() => m_outboxBadge.Visibility = ViewStates.Invisible);
+//			}
+//
+//			if (ApplicationData.Instance.getInboxIndicator () > 0) {
+//				RunOnUiThread (() => m_inboxBadgeText.Text= ApplicationData.Instance.getInboxIndicator ().ToString());
+//				RunOnUiThread (() => m_inboxBadge.Visibility = ViewStates.Visible);
+//			} else {
+//				RunOnUiThread (() => m_inboxBadge.Visibility = ViewStates.Invisible);
+//			}
 
 			if (ApplicationData.Instance.getLivraisonIndicator () > 0) {
 				RunOnUiThread (() => m_deliveryBadgeText.Text= ApplicationData.Instance.getLivraisonIndicator ().ToString());
@@ -428,7 +428,7 @@ namespace DMSvStandard
 //				StartActivity(typeof(ActivityListLivraison));
 //			}
 
-			//StartActivity(typeof(ActivityListLivraison));
+			StartActivity(typeof(ActivityListLivraison));
 		}
 
 
@@ -706,6 +706,33 @@ namespace DMSvStandard
 					} catch (Exception e) {
 						Insights.Report (e);
 					}
+
+
+//					//ROUTINE INTEG MESSAGE
+//					try {
+//						//API LIVRER OK
+//						string _url = "http://dms.jeantettransport.com/api/message?codechauffeur=" + ApplicationData.UserAndsoft +"";
+//						var webClient = new WebClient ();
+//						webClient.Headers [HttpRequestHeader.ContentType] = "application/json";
+//						//webClient.Encoding = Encoding.UTF8;
+//
+//						Data.contentmsg = webClient.DownloadString (_url);
+//						Console.Out.WriteLine (">>>>>THREAD INTEG DONE....<<<<<");
+//					} catch (Exception ex) {
+//						Data.contentmsg = "[]";
+//
+//					}
+//
+//					//SON MSG
+//					if (Data.contentmsg == "[]") {
+//					} else {
+//						alert ();
+//					}
+//
+//					//ROUTINE SEND MESSAGE
+
+
+
 				}
 				Thread.Sleep (120000);
 			}
