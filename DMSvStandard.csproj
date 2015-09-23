@@ -232,6 +232,7 @@
     <AndroidResource Include="Resources\drawable\boxgray.png" />
     <AndroidResource Include="Resources\layout\RowRight.axml" />
     <AndroidResource Include="Resources\layout\ChatLayout.axml" />
+    <AndroidResource Include="Resources\layout\ListeViewDelete.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="packages\Xamarin.Insights.1.10.6\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('packages\Xamarin.Insights.1.10.6\build\MonoAndroid10\Xamarin.Insights.targets')" />

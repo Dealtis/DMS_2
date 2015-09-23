@@ -17,7 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/listViewBox"
-        android:layout_weight=".8" />
+        android:layout_weight=".8"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll" />
 <!--        </LinearLayout>-->
 <!--    </ScrollView>-->
     <LinearLayout
@@ -30,10 +32,10 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/textView1"
+            android:id="@+id/editnewmsg"
             android:layout_weight="1" />
         <Button
-            android:id="@+id/btnsearch"
+            android:id="@+id/btnsend"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/violet_button"
