@@ -37,7 +37,7 @@ namespace DMSvStandard
 		{
 			View row = convertView;
 
-			if(mItems [position].typemsg == 1){
+			if(mItems [position].typeMessage == 1){
 				
 				row = LayoutInflater.From (mContext).Inflate (Resource.Layout.RowRight, null, false);
 				
@@ -48,9 +48,9 @@ namespace DMSvStandard
 				//FONTSNEXALIGHT
 				Typeface tf = Typeface.CreateFromAsset (Application.Context.Assets, "fonts/NexaLight.ttf");
 				txtName.SetTypeface(tf, TypefaceStyle.Normal);
-				txtName.Text = ""+mItems[position].texte+"";
+				txtName.Text = ""+mItems[position].texteMessage+"";
 
-				txtdatestatut.Text=""+mItems[position].datemessage.Hour+":"+mItems[position].datemessage.Minute+" "+mItems[position].statut+"";
+				txtdatestatut.Text=""+mItems[position].dateImportMessage.Hour+":"+mItems[position].dateImportMessage.Minute+" "+mItems[position].statutMessage+"";
 			}else{
 
 
@@ -64,9 +64,9 @@ namespace DMSvStandard
 				//FONTSNEXALIGHT
 				Typeface tf = Typeface.CreateFromAsset (Application.Context.Assets, "fonts/NexaLight.ttf");
 				txtName.SetTypeface(tf, TypefaceStyle.Normal);
-				txtName.Text = ""+mItems[position].texte+"";
+				txtName.Text = ""+mItems[position].texteMessage+"";
 
-				txtdatestatut.Text=""+mItems[position].datemessage.Hour+":"+mItems[position].datemessage.Minute+" "+mItems[position].statut+"";
+				txtdatestatut.Text=""+mItems[position].dateImportMessage.Hour+":"+mItems[position].dateImportMessage.Minute+" "+mItems[position].statutMessage+"";
 			}
 
 			return row;

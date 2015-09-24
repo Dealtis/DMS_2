@@ -51,13 +51,12 @@ namespace DMSvStandard
 
 
 			foreach (var item in table) {
-
 				mItems.Add (new Message () {
-					texte = item.texte,
-					utilisateurAndsoft = item.utilisateurAndsoft,
-					statut = item.statut,
-					datemessage = item.datemessage,
-					typemsg = item.typemsg,
+					texteMessage = item.texteMessage,
+					utilisateurEmetteur = item.utilisateurEmetteur,
+					statutMessage = item.statutMessage,
+					dateImportMessage = item.dateImportMessage,
+					typeMessage = item.typeMessage,
 					Id = item.Id
 				});
 			}
