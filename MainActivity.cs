@@ -27,6 +27,17 @@ using Android.Widget;
 using Android.Widget;
 using AndroidHUD;
 
+using System;
+using Android.App;
+using Android.Content;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+using Android.OS;
+using System.Net;
+using System.IO;
+using System.Json;
+using System.Threading.Tasks;
 
 using DMSvStandard;
 
@@ -700,6 +711,7 @@ namespace DMSvStandard
 						string datagps = "{\"posgps\":\"" + ApplicationData.GPS + "\",\"userandsoft\":\"" + ApplicationData.UserAndsoft + "\"}";
 
 						webClient.UploadString (_url, datagps);
+						ComMessage();
 						Console.Out.WriteLine (">>>>>THREAD GPS SEND " + datagps);
 
 
@@ -737,6 +749,32 @@ namespace DMSvStandard
 				Thread.Sleep (120000);
 			}
 		}
+
+		//ASYNC METHOD
+		public async Task<JsonValue> ComMessage()
+		{
+			//Create an HTTP web request using the URL:
+			HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create (new System.Uri ("http://dms.jeantettransport.com/api/gps"));
+			request.ContentType = "application/json";
+			request.Method = "GET";
+			Console.Out.WriteLine("Waiting for response");
+			//Send the request to the server and wait for the response:
+			using (WebResponse response = await request.GetResponseAsync ())
+			{
+				//Get a stream representation of the HTTP web response:
+				using (System.IO.Stream stream = response.GetResponseStream ())
+				{
+					//Use this stream to build a JSON document object:
+					JsonValue jsonDoc = await Task.Run (() => JsonObject.Load (stream));
+					Console.Out.WriteLine("Response: {0}", jsonDoc.ToString ());
+
+					//Return the JSON document:
+					return jsonDoc;
+				}
+			}
+			
+		}
+
 		public void ComWebservice(){
 			int idcom = 0;
 			while(idcom == 0){

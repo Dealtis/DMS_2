@@ -327,7 +327,7 @@ namespace DMSvStandard
 
 
 
-				StartActivity(typeof(MainActivity));
+				StartActivity(typeof(ActivityListLivraison));
 			});
 			builder.SetNegativeButton("Non", delegate {  });
 
