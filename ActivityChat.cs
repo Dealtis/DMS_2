@@ -113,7 +113,7 @@ namespace DMSvStandard
 //			MessageBoxAdapter adapter = new MessageBoxAdapter (this, mItems);
 //			mListView.Adapter = adapter;
 
-
+			StartActivity(typeof(ActivityChat));
 			
 		}
 
@@ -150,7 +150,7 @@ namespace DMSvStandard
 			//MessageBoxAdapter adapter = new MessageBoxAdapter (this, mItems);
 			//mListView.Adapter = adapter;
 
-
+			StartActivity(typeof(ActivityChat));
 
 		}
 	}

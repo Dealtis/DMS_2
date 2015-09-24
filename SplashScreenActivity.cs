@@ -103,8 +103,8 @@ namespace DMSvStandard
 			var resstatutmessage = dbrbiss.CreateTableStatutMessage ();
 
 			//TEST MESSAGE
-			var msg1 = dbrbiss.InsertDataMessage(ApplicationData.UserAndsoft,"Exploitant","Ceci est un test de message exploitant #HYpe",0,DateTime.Now,1,1);
-			var msg2 = dbrbiss.InsertDataMessage(ApplicationData.UserAndsoft,"Chauffeur","Ceci est un test de message Chauffeur #HYpe",0,DateTime.Now,2,2);
+//			var msg1 = dbrbiss.InsertDataMessage(ApplicationData.UserAndsoft,"Exploitant","Ceci est un test de message exploitant #HYpe",0,DateTime.Now,1,1);
+//			var msg2 = dbrbiss.InsertDataMessage(ApplicationData.UserAndsoft,"Chauffeur","Ceci est un test de message Chauffeur #HYpe",0,DateTime.Now,2,2);
 
 			// Test de connexion
 			var connectivityManager = (ConnectivityManager)GetSystemService(ConnectivityService);
