@@ -83,31 +83,36 @@ namespace DMSvStandard
 
 			DBRepository dbr = new DBRepository ();
 			var newmessage = FindViewById<TextView>(Resource.Id.editnewmsg);
-			var resinteg = dbr.InsertDataMessage ("",newmessage.Text,3,DateTime.Now,2);
+			if (newmessage.Text == "") {
+				
+			} else {
+				var resinteg = dbr.InsertDataMessage ("", newmessage.Text, 3, DateTime.Now, 2);
+			}
+
 
 			string dbPath = System.IO.Path.Combine (System.Environment.GetFolderPath
 				(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
 			var db = new SQLiteConnection (dbPath);
 
 
-			var table = db.Query<Message> ("SELECT * FROM Message");
+//			var table = db.Query<Message> ("SELECT * FROM Message");
+//
+//
+//			foreach (var item in table) {
+//
+//				mItems.Add (new Message () {
+//					texte = item.texte,
+//					utilisateurAndsoft = item.utilisateurAndsoft,
+//					statut = item.statut,
+//					datemessage = item.datemessage,
+//					typemsg = item.typemsg,
+//					Id = item.Id
+//				});
+//			}
 
 
-			foreach (var item in table) {
-
-				mItems.Add (new Message () {
-					texte = item.texte,
-					utilisateurAndsoft = item.utilisateurAndsoft,
-					statut = item.statut,
-					datemessage = item.datemessage,
-					typemsg = item.typemsg,
-					Id = item.Id
-				});
-			}
-
-
-			MessageBoxAdapter adapter = new MessageBoxAdapter (this, mItems);
-			mListView.Adapter = adapter;
+//			MessageBoxAdapter adapter = new MessageBoxAdapter (this, mItems);
+//			mListView.Adapter = adapter;
 
 
 			
@@ -124,26 +129,27 @@ namespace DMSvStandard
 				(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
 			var db = new SQLiteConnection (dbPath);
 
-			var del = db.Query<Message> ("DELETE FROM Message");
 
-			var table = db.Query<Message> ("SELECT * FROM Message");
+//
+//			var table = db.Query<Message> ("SELECT * FROM Message");
+//
+//
+//			foreach (var item in table) {
+//
+//				mItems.Add (new Message () {
+//					texte = item.texte,
+//					utilisateurAndsoft = item.utilisateurAndsoft,
+//					statut = item.statut,
+//					datemessage = item.datemessage,
+//					typemsg = item.typemsg,
+//					Id = item.Id
+//				});
+//			}
 
+			var del = dbr.DropTableMessage();
 
-			foreach (var item in table) {
-
-				mItems.Add (new Message () {
-					texte = item.texte,
-					utilisateurAndsoft = item.utilisateurAndsoft,
-					statut = item.statut,
-					datemessage = item.datemessage,
-					typemsg = item.typemsg,
-					Id = item.Id
-				});
-			}
-
-
-			MessageBoxAdapter adapter = new MessageBoxAdapter (this, mItems);
-			mListView.Adapter = adapter;
+			//MessageBoxAdapter adapter = new MessageBoxAdapter (this, mItems);
+			//mListView.Adapter = adapter;
 
 
 
