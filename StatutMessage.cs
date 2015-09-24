@@ -15,33 +15,21 @@ using System.Data;
 using System.IO;
 
 namespace DMSvStandard
-{   [Table("Message")]
-	public class Message
+{   [Table("StatutMessage")]
+	public class StatutMessage
 	{
 		[PrimaryKey, AutoIncrement, Column("_Id")]
 		public int Id { get; set; }
 
-	
-		public String codeChauffeur{ get; set; }
+
+		public int statutNotificationMessage { get; set; }
 
 
-		public String texteMessage { get; set; }
-
-
-		public String utilisateurEmetteur { get; set; }
-
-
-		public int statutMessage { get; set; }
-
-
-		public DateTime dateImportMessage { get; set; }
-
-
-		public int typeMessage { get; set; }
+		public DateTime dateNotificationMessage { get; set; }
 
 
 		public int numMessage { get; set; }
-		
+
 	}
 }
 

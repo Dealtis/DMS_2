@@ -114,6 +114,7 @@
     <Compile Include="Message.cs" />
     <Compile Include="ActivityChat.cs" />
     <Compile Include="MessageBoxAdapter.cs" />
+    <Compile Include="StatutMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
