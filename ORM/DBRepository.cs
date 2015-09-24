@@ -111,6 +111,27 @@ namespace DMSvStandard.ORM
 			}
 		}
 
+		public string CreateTableStatutMessage()
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal),"ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				db.CreateTable<StatutMessage>();
+				Console.Out.WriteLine("!!!!!!!!!!!!CREATE STATUT MESSAGE!!!!!!!!!!!!!!!!!!!!!!!!");
+
+
+				string result = "Table crée avec succès";
+				return result;
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
 		//DROP TABLE
 		public string DropTable()
 		{
@@ -308,7 +329,7 @@ namespace DMSvStandard.ORM
 
 		//Insertion des don¨¦es USER
 
-		public string InsertDataMessage(string utilisateurAndsoft, string texte, int statut, DateTime datemessage, int typemsg)
+		public string InsertDataMessage(string codeChauffeur,string utilisateurEmetteur, string texteMessage, int statutMessage, DateTime dateImportMessage, int typeMessage, int numMessage)
 		{
 			try
 			{
@@ -316,12 +337,13 @@ namespace DMSvStandard.ORM
 					(Environment.SpecialFolder.Personal), "ormDMS.db3");
 				var db = new SQLiteConnection(dbPath);
 				Message item = new Message();
-
-				item.utilisateurAndsoft =  utilisateurAndsoft;
-				item.texte = texte;
-				item.statut = statut;
-				item.datemessage = datemessage;
-				item.typemsg = typemsg;
+				item.codeChauffeur = codeChauffeur;
+				item.utilisateurEmetteur =  utilisateurEmetteur;				
+				item.texteMessage = texteMessage;
+				item.statutMessage = statutMessage;
+				item.dateImportMessage = dateImportMessage;
+				item.typeMessage = typeMessage;
+				item.numMessage = numMessage;
 
 
 				db.Insert(item);
@@ -333,7 +355,29 @@ namespace DMSvStandard.ORM
 
 			}
 		}
+		//Insertion des donn¨¦rs STATUT USER
 
+		public string InsertDataStatutMessage(int statutNotificationMessage, DateTime dateNotificationMessage, int numMessage)
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal), "ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				StatutMessage item = new StatutMessage();
+				item.statutNotificationMessage = statutNotificationMessage;
+				item.dateNotificationMessage =  dateNotificationMessage;				
+				item.numMessage = numMessage;
+
+				db.Insert(item);
+				return "Insertion good";
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
 
 
         //SELECT DES DATA'

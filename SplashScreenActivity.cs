@@ -100,6 +100,8 @@ namespace DMSvStandard
 
 			var resmessage = dbrbiss.CreateTableMessage();
 
+			var resstatutmessage = dbrbiss.CreateTableStatutMessage ();
+
 			//TEST MESSAGE
 //			var msg1 = dbrbiss.InsertDataMessage("Exploitant","Ceci est un test de message exploitant #HYpe",0,DateTime.Now,1);
 //			var msg2 =dbrbiss.InsertDataMessage("","Ceci est un test de message chauffeur #hoppla",2,DateTime.Now,2);
