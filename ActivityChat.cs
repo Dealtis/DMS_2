@@ -47,8 +47,8 @@ namespace DMSvStandard
 			var db = new SQLiteConnection (dbPath);
 
 
-			var table = db.Query<Message> ("SELECT * FROM Message");
-
+			var table = db.Query<Message> ("SELECT * FROM Message where codeChauffeur=?",ApplicationData.UserAndsoft);
+			var i = 0;
 
 			foreach (var item in table) {
 				mItems.Add (new Message () {
@@ -59,11 +59,15 @@ namespace DMSvStandard
 					typeMessage = item.typeMessage,
 					Id = item.Id
 				});
+				i++;
 			}
 
-			View view = LayoutInflater.From (this).Inflate (Resource.Layout.ListeViewDelete, null, false);
-			mListView.AddHeaderView (view);
-			view.Click += Btndeletemsg_Click;
+			if(i > 3){
+				View view = LayoutInflater.From (this).Inflate (Resource.Layout.ListeViewDelete, null, false);
+				mListView.AddHeaderView (view);
+				view.Click += Btndeletemsg_Click;
+			}
+
 			MessageBoxAdapter adapter = new MessageBoxAdapter (this, mItems);
 			mListView.Adapter = adapter;
 			//mListView.ItemClick += MListView_ItemClick;
@@ -73,8 +77,12 @@ namespace DMSvStandard
 			var btnsend = FindViewById<Button>(Resource.Id.btnsend);
 			btnsend.Click += Btnsend_Click;
 
+			//STATUT DES MESSAGES RECU TO 1
 
-
+			var tablemsgrecu = db.Query<Message> ("SELECT * FROM Message where statutMessage = 0");
+			foreach (var item in tablemsgrecu) {
+				var updatestatut = dbr.UpdateStatutMessage (1,item.Id);
+			}
 
 		}
 
@@ -153,6 +161,11 @@ namespace DMSvStandard
 			StartActivity(typeof(ActivityChat));
 
 		}
+
+		public override void OnBackPressed ()
+		{
+			StartActivity(typeof(MainActivity));
+		}    
 	}
 }
 

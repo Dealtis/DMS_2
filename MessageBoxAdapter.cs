@@ -18,6 +18,7 @@ namespace DMSvStandard
 	public class MessageBoxAdapter : BaseAdapter<Message> {
 		private List<Message> mItems;
 		private Context mContext;
+
 		public MessageBoxAdapter(Context context,List<Message> items){
 			mItems = items;
 			mContext = context;
@@ -36,7 +37,7 @@ namespace DMSvStandard
 		public override View GetView(int position, View convertView, ViewGroup parent)
 		{
 			View row = convertView;
-
+			var txtstatut = "";
 			if(mItems [position].typeMessage == 1){
 				
 				row = LayoutInflater.From (mContext).Inflate (Resource.Layout.RowRight, null, false);
@@ -50,7 +51,24 @@ namespace DMSvStandard
 				txtName.SetTypeface(tf, TypefaceStyle.Normal);
 				txtName.Text = ""+mItems[position].texteMessage+"";
 
-				txtdatestatut.Text=""+mItems[position].dateImportMessage.Hour+":"+mItems[position].dateImportMessage.Minute+" "+mItems[position].statutMessage+"";
+				if(mItems[position].statutMessage == 0){
+					txtstatut ="Importé";
+				}
+				if(mItems[position].statutMessage == 1){
+					txtstatut ="Lu";
+				}
+				if(mItems[position].statutMessage == 2){
+					txtstatut ="En attente";
+				}
+				if(mItems[position].statutMessage == 3){
+					txtstatut ="Envoyé";
+				}
+
+
+
+
+
+				txtdatestatut.Text=""+mItems[position].dateImportMessage.Hour+":"+mItems[position].dateImportMessage.Minute+" "+txtstatut+"";
 			}else{
 
 
@@ -66,7 +84,20 @@ namespace DMSvStandard
 				txtName.SetTypeface(tf, TypefaceStyle.Normal);
 				txtName.Text = ""+mItems[position].texteMessage+"";
 
-				txtdatestatut.Text=""+mItems[position].dateImportMessage.Hour+":"+mItems[position].dateImportMessage.Minute+" "+mItems[position].statutMessage+"";
+				if(mItems[position].statutMessage == 0){
+					txtstatut ="Importé";
+				}
+				if(mItems[position].statutMessage == 1){
+					txtstatut ="Lu";
+				}
+				if(mItems[position].statutMessage == 2){
+					txtstatut ="En attente";
+				}
+				if(mItems[position].statutMessage == 3){
+					txtstatut ="Envoyé";
+				}
+
+				txtdatestatut.Text=""+mItems[position].dateImportMessage.Hour+":"+mItems[position].dateImportMessage.Minute+" "+txtstatut+"";
 			}
 
 			return row;

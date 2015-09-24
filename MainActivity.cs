@@ -425,6 +425,7 @@ namespace DMSvStandard
 //				return;
 //			} else if (ApplicationData.Instance.isAdminLogin ()) {
 //
+
 //				StartActivity(typeof(ActivityListLivraison));
 //			}
 

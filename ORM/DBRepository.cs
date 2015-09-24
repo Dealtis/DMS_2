@@ -1091,6 +1091,27 @@ namespace DMSvStandard.ORM
 
 			}
 		}
+		//UPDATE STATUT MESSAGE 
+		public string UpdateStatutMessage(int statut, int numMessage)
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal), "ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
 
+				var updatelog = db.Query<StatutMessage>("UPDATE StatutMessage SET statutMessage = ? WHERE Id = ?",statut,numMessage);
+
+
+
+				return "Upadate good";
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
     }
+
 }
