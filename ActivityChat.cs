@@ -85,7 +85,7 @@ namespace DMSvStandard
 			if (newmessage.Text == "") {
 				
 			} else {
-				var resinteg = dbr.InsertDataMessage ("", newmessage.Text, 3, DateTime.Now, 2);
+				var resinteg = dbr.InsertDataMessage (ApplicationData.UserAndsoft,"", newmessage.Text, 3, DateTime.Now, 2,2);
 			}
 
 
@@ -122,7 +122,7 @@ namespace DMSvStandard
 
 			DBRepository dbr = new DBRepository ();
 			var newmessage = FindViewById<TextView>(Resource.Id.editnewmsg);
-			var resinteg = dbr.InsertDataMessage ("",newmessage.Text,3,DateTime.Now,2);
+
 
 			string dbPath = System.IO.Path.Combine (System.Environment.GetFolderPath
 				(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
