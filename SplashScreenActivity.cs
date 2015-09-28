@@ -57,7 +57,6 @@ namespace DMSvStandard
 	public static class Data{
 
 		public static string content;
-		public static string contentmsg;
 		public static int countliv;
 		public static int countram;
 	}
@@ -95,16 +94,7 @@ namespace DMSvStandard
 			var resultbis = dbrbis.CreateTable ();
 			DBRepository dbrbiss = new DBRepository ();
 			var resultbiss = dbrbiss.CreateTableStatut ();
-
 			var rgtvtyh = dbrbiss.CreateTableUser();
-
-			var resmessage = dbrbiss.CreateTableMessage();
-
-			var resstatutmessage = dbrbiss.CreateTableStatutMessage ();
-
-			//TEST MESSAGE
-//			var msg1 = dbrbiss.InsertDataMessage(ApplicationData.UserAndsoft,"Exploitant","Ceci est un test de message exploitant #HYpe",0,DateTime.Now,1,1);
-//			var msg2 = dbrbiss.InsertDataMessage(ApplicationData.UserAndsoft,"Chauffeur","Ceci est un test de message Chauffeur #HYpe",0,DateTime.Now,2,2);
 
 			// Test de connexion
 			var connectivityManager = (ConnectivityManager)GetSystemService(ConnectivityService);

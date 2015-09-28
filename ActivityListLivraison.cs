@@ -488,7 +488,6 @@ namespace DMSvStandard
 
 			MyListViewAdapter adapter = new MyListViewAdapter (this, mItems);
 			mListView.Adapter = adapter;
-
 		}
 
 		void BtngrpQuatre_Click (object sender, EventArgs e)

@@ -265,7 +265,7 @@ namespace DMSvStandard
 
 			}
 			if(App.txtSpin == "Refuse non commande"){
-				App.codeanomalie = "RENDIV";
+				App.codeanomalie = "RENSNC";
 
 			}
 			if(App.txtSpin == "Refuse cause port du"){
@@ -282,12 +282,6 @@ namespace DMSvStandard
 			}
 			if(App.txtSpin == "Rendu non justifie"){
 				App.codeanomalie = "RENNJU";
-			}
-			if (App.txtSpin == "Ramasse pas faite") {
-				App.codeanomalie = "RAMPFT";
-			}
-			if (App.txtSpin == "Positions non chargees") {
-				App.codeanomalie = "RENNCG";
 			}
 			if(App.txtSpin == "Restaure en non traite"){
 				var resultyyy = dbrbis.UpdateStatutValideLivraison (i,"0",null,null,null);
@@ -327,7 +321,7 @@ namespace DMSvStandard
 
 
 
-				StartActivity(typeof(ActivityListLivraison));
+				StartActivity(typeof(MainActivity));
 			});
 			builder.SetNegativeButton("Non", delegate {  });
 
