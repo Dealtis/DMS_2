@@ -69,7 +69,7 @@
       <HintPath>packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Insights">
-      <HintPath>packages\Xamarin.Insights.1.10.6\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
+      <HintPath>packages\Xamarin.Insights.1.11.1\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +111,10 @@
     <Compile Include="ToDoTask.cs" />
     <Compile Include="ApplicationData.cs" />
     <Compile Include="TableUser.cs" />
+    <Compile Include="Message.cs" />
+    <Compile Include="ActivityChat.cs" />
+    <Compile Include="MessageBoxAdapter.cs" />
+    <Compile Include="StatutMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -225,9 +229,15 @@
     <AndroidResource Include="Resources\layout\login.axml" />
     <AndroidResource Include="Resources\drawable\Anompj.png" />
     <AndroidResource Include="Resources\layout\ListeViewRowAnomaliePJ.axml" />
+    <AndroidResource Include="Resources\layout\RowLeft.axml" />
+    <AndroidResource Include="Resources\drawable\boxgray.png" />
+    <AndroidResource Include="Resources\layout\RowRight.axml" />
+    <AndroidResource Include="Resources\layout\ChatLayout.axml" />
+    <AndroidResource Include="Resources\layout\ListeViewDelete.axml" />
+    <AndroidResource Include="Resources\Raw\msg.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
-  <Import Project="packages\Xamarin.Insights.1.10.6\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('packages\Xamarin.Insights.1.10.6\build\MonoAndroid10\Xamarin.Insights.targets')" />
+  <Import Project="packages\Xamarin.Insights.1.11.1\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('packages\Xamarin.Insights.1.11.1\build\MonoAndroid10\Xamarin.Insights.targets')" />
   <ItemGroup>
     <XamarinComponentReference Include="AndHUD">
       <Version>1.3.1</Version>
