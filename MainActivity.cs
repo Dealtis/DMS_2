@@ -698,7 +698,7 @@ namespace DMSvStandard
 
 					try {
 						//API LIVRER OK
-						string _url = "http://dms.jeantettransport.com/api/leslie";
+						string _url = "http://dms.jeantettransport.com/api/gps";
 						var webClient = new WebClient ();
 
 						webClient.Headers [HttpRequestHeader.ContentType] = "application/json";
