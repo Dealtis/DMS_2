@@ -81,7 +81,7 @@ namespace DMSvStandard
 
 			var tablemsgrecu = db.Query<Message> ("SELECT * FROM Message where statutMessage = 0");
 			foreach (var item in tablemsgrecu) {
-				var updatestatut = dbr.UpdateStatutMessage (1,item.Id);
+				var updatestatutmessage = db.Query<Message> ("UPDATE Message SET statutMessage = 1 WHERE statutMessage = 0");
 			}
 
 		}
@@ -93,7 +93,8 @@ namespace DMSvStandard
 			if (newmessage.Text == "") {
 				
 			} else {
-				var resinteg = dbr.InsertDataMessage (ApplicationData.UserAndsoft,"", newmessage.Text, 3, DateTime.Now, 2,0);
+				var resinteg = dbr.InsertDataMessage (ApplicationData.UserAndsoft,"", newmessage.Text,2, DateTime.Now, 2,0);
+
 			}
 		
 

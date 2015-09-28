@@ -1001,6 +1001,9 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f040001
 			public const int beep4 = 2130968577;
 			
+			// aapt resource value: 0x7f040002
+			public const int msg = 2130968578;
+			
 			static Raw()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

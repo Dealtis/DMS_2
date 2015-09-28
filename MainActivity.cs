@@ -307,12 +307,7 @@ namespace DMSvStandard
 
 
 
-			//XAMARIN INSIGHT
-			if (!Insights.IsInitialized) {
-				Xamarin.Insights.Initialize("4845750bb6fdffe0e3bfaebe810ca335f0f87030", this);
-
-			}
-
+			Xamarin.Insights.Initialize("4845750bb6fdffe0e3bfaebe810ca335f0f87030", this);
 
 			Insights.Identify(ApplicationData.UserAndsoft,"Name",ApplicationData.UserAndsoft);
 			InitializeLocationManager ();
@@ -703,15 +698,82 @@ namespace DMSvStandard
 
 					try {
 						//API LIVRER OK
-						string _url = "http://dms.jeantettransport.com/api/gps";
+						string _url = "http://dms.jeantettransport.com/api/leslie";
 						var webClient = new WebClient ();
+
 						webClient.Headers [HttpRequestHeader.ContentType] = "application/json";
 						//webClient.Encoding = Encoding.UTF8;
 
 						string datagps = "{\"posgps\":\"" + ApplicationData.GPS + "\",\"userandsoft\":\"" + ApplicationData.UserAndsoft + "\"}";
 
+
 						webClient.UploadString (_url, datagps);
-						ComMessage();
+
+
+						string dbPath = System.IO.Path.Combine (System.Environment.GetFolderPath
+							(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
+						var db = new SQLiteConnection (dbPath);
+
+						var tablestatutmessage = db.Query<StatutMessage> ("SELECT * FROM StatutMessage");
+						foreach (var item in tablestatutmessage) {
+							string datamessage= "{\"statutNotificationMessage\":\"" + item.statutNotificationMessage + "\",\"dateNotificationMessage\":\"" + item.dateNotificationMessage + "\",\"numMessage\":\""+item.numMessage+"\"}";
+
+							webClient.UploadString (_url,datamessage);
+							var resultdelete = db.Query<StatutMessage> (" DELETE FROM StatutLivraison WHERE Id='"+item.Id+"'");
+						}
+
+						//SEND MESSAGE
+						var tablemessage = db.Query<Message> ("SELECT * FROM Message WHERE statutMessage = 2");
+						foreach (var item in tablemessage) {
+							string datamessage= "{\"codeChauffeur\":\"" + item.codeChauffeur + "\",\"texteMessage\":\"" + item.texteMessage + "\",\"utilisateurEmetteur\":\""+item.utilisateurEmetteur+"\",\"dateImportMessage\":\""+item.dateImportMessage+"\",\"typeMessage\":\""+item.typeMessage+"\"}";
+
+							webClient.UploadString (_url,datamessage);
+							var updatestatutmessage = db.Query<Message> ("UPDATE Message SET statutMessage = 3 WHERE Id = ?",item.Id);
+						}
+
+
+
+
+					//ROUTINE INTEG MESSAGE
+						try {
+							//API LIVRER OK
+							string _urlb = "http://dms.jeantettransport.com/api/gps?codechauffeur=" + ApplicationData.UserAndsoft +"";
+							var webClientb = new WebClient ();
+							webClientb.Headers [HttpRequestHeader.ContentType] = "application/json";
+							//webClient.Encoding = Encoding.UTF8;
+
+							Data.contentmsg = webClientb.DownloadString (_urlb);
+							Console.Out.WriteLine (">>>>>THREAD INTEG DONE....<<<<<");
+						} catch (Exception ex) {
+							Data.contentmsg = "[]";
+
+						}
+
+						//SON MSG
+						if (Data.contentmsg == "[]") {
+						} else {
+							alertsms ();
+						}
+
+						JArray jsonVal = JArray.Parse (Data.contentmsg) as JArray;
+						var jsonarr = jsonVal;
+
+						foreach (var item in jsonarr) {
+							DBRepository dbr = new DBRepository ();
+							var resinteg = dbr.InsertDataMessage (Convert.ToString (item ["codeChauffeur"]), Convert.ToString (item ["texteMessage"]), Convert.ToString (item ["utilisateurEmetteur"]),0,DateTime.Now,0, Convert.ToInt32 (item ["numMessage"]));
+							var resintegstatut = dbr.InsertDataStatutMessage(0,DateTime.Now, Convert.ToInt32 (item ["numMessage"]));
+
+							Console.WriteLine (item ["numMessage"]);
+							Console.WriteLine (resinteg);
+
+						}
+
+					
+
+					
+
+
+					
 						Console.Out.WriteLine (">>>>>THREAD GPS SEND " + datagps);
 
 
@@ -720,60 +782,14 @@ namespace DMSvStandard
 					}
 
 
-//					//ROUTINE INTEG MESSAGE
-//					try {
-//						//API LIVRER OK
-//						string _url = "http://dms.jeantettransport.com/api/message?codechauffeur=" + ApplicationData.UserAndsoft +"";
-//						var webClient = new WebClient ();
-//						webClient.Headers [HttpRequestHeader.ContentType] = "application/json";
-//						//webClient.Encoding = Encoding.UTF8;
-//
-//						Data.contentmsg = webClient.DownloadString (_url);
-//						Console.Out.WriteLine (">>>>>THREAD INTEG DONE....<<<<<");
-//					} catch (Exception ex) {
-//						Data.contentmsg = "[]";
-//
-//					}
-//
-//					//SON MSG
-//					if (Data.contentmsg == "[]") {
-//					} else {
-//						alert ();
-//					}
-//
-//					//ROUTINE SEND MESSAGE
-
-
 
 				}
 				Thread.Sleep (120000);
 			}
 		}
 
-		//ASYNC METHOD
-		public async Task<JsonValue> ComMessage()
-		{
-			//Create an HTTP web request using the URL:
-			HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create (new System.Uri ("http://dms.jeantettransport.com/api/gps"));
-			request.ContentType = "application/json";
-			request.Method = "GET";
-			Console.Out.WriteLine("Waiting for response");
-			//Send the request to the server and wait for the response:
-			using (WebResponse response = await request.GetResponseAsync ())
-			{
-				//Get a stream representation of the HTTP web response:
-				using (System.IO.Stream stream = response.GetResponseStream ())
-				{
-					//Use this stream to build a JSON document object:
-					JsonValue jsonDoc = await Task.Run (() => JsonObject.Load (stream));
-					Console.Out.WriteLine("Response: {0}", jsonDoc.ToString ());
 
-					//Return the JSON document:
-					return jsonDoc;
-				}
-			}
-			
-		}
+
 
 		public void ComWebservice(){
 			int idcom = 0;
@@ -983,6 +999,14 @@ namespace DMSvStandard
 
 			MediaPlayer _player;
 			_player = MediaPlayer.Create(this,Resource.Raw.beep4);
+			_player.Start();
+		}
+
+		public void alertsms()
+		{
+
+			MediaPlayer _player;
+			_player = MediaPlayer.Create(this,Resource.Raw.msg);
 			_player.Start();
 		}
 
