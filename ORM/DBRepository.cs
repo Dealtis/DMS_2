@@ -42,7 +42,8 @@ namespace DMSvStandard.ORM
             return result;
             }
             catch (Exception ex)
-            {
+            {	
+				
                 return "Erreur : " + ex.Message;
 
             }

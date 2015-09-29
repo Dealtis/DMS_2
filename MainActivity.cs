@@ -141,7 +141,11 @@ namespace DMSvStandard
 				Console.Out.Write (">>>>>>>>>>>>>>>>>>LOG FALSE<<<<<<<<<<<<<<<<<<<<<<");
 
 			}
+			Xamarin.Insights.Initialize("4845750bb6fdffe0e3bfaebe810ca335f0f87030", this);
 
+			Insights.Identify(ApplicationData.UserAndsoft,"Name",ApplicationData.UserAndsoft);
+
+			InitializeLocationManager ();
 			bool selectlogin = dbr.Selectlogin (ApplicationData.UserAndsoft);
 			DateTime Selectdatelog = dbr.Selectdatelog (ApplicationData.UserAndsoft);
 
@@ -258,60 +262,14 @@ namespace DMSvStandard
 			m_newMsgBadge.Visibility = ViewStates.Invisible;
 			m_newMsgBadgeText = FindViewById<TextView> (Resource.Id.newMsgBadgeText);
 
-//			m_inboxBadge = FindViewById<RelativeLayout> (Resource.Id.inboxBadge);
-//			m_inboxBadge.Visibility = ViewStates.Invisible;
-//			m_inboxBadgeText = FindViewById<TextView> (Resource.Id.inboxBadgeText);
-//
-//			m_outboxBadge = FindViewById<RelativeLayout> (Resource.Id.outboxBadge);
-//			m_outboxBadge.Visibility = ViewStates.Invisible;
-//			m_outboxBadgeText = FindViewById<TextView> (Resource.Id.outboxBadgeText);
-//
-//			m_configBadge = FindViewById<RelativeLayout> (Resource.Id.configBadge);
-//			m_configBadge.Visibility = ViewStates.Invisible;
-//			m_configBadgeText = FindViewById<TextView> (Resource.Id.configBadgeText);
-
-//			ConfigurationModel _model = new ConfigurationModel ();
-//			_model.loadConfiguration ();
-//						
-//			ApplicationData.Instance.setConfigurationModel(_model);
-//
-//
-//
-//			ApplicationData.Instance.setTranslator (ApplicationData.Instance.getConfigurationModel ().getLanguage (), "DTMD");
-//
-//			if (ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
-		
-
-
-			//}
 
 			loginCanceled = false;
-//			if (ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
-//				//START TRIP
-//				if (!ServerActions.Instance.isServerStarted ()) {
-//					ServerActions.Instance.StartServer ();				
-//					ApplicationActions.Instance.initTimers ();
-//
-//					List<TextMessage> existingMessages = ApplicationActions.Instance.loadMessages (TextMessage.MSG_OUTBOX);
-//					ApplicationActions.Instance.updateOutboxMessageList (existingMessages, new List<TextMessage> ());
-//
-//					existingMessages = ApplicationActions.Instance.loadMessages (TextMessage.MSG_INBOX);
-//					ApplicationActions.Instance.updateInboxMessageList (existingMessages, new List<TextMessage> ());
-//				}
-//				if (ApplicationData.Instance.getConfigurationModel().getAutoTrip() == 1)
-//					ApplicationActions.Instance.setTripStarted (false);
-//				else ApplicationActions.Instance.setTripStarted (true);
-//				ApplicationActions.Instance.ChangeTripState ();
-//			}
-			//else ApplicationActions.Instance.restartTimers ();
 
 
 
-			Xamarin.Insights.Initialize("4845750bb6fdffe0e3bfaebe810ca335f0f87030", this);
 
-			Insights.Identify(ApplicationData.UserAndsoft,"Name",ApplicationData.UserAndsoft);
-			InitializeLocationManager ();
-			}
+
+}
 
 
 
@@ -375,18 +333,18 @@ namespace DMSvStandard
 //			m_lblOutbox.Text = ApplicationData.Instance.getTranslator ().translateMessage ("formmessages.menusentbox");
 //			m_lblConfig.Text = ApplicationData.Instance.getTranslator ().translateMessage ("mainfrom.menuconfig");
 
-			if (indicatorTimer != null)
-				indicatorTimer.Stop ();
-
-
-
-
-
-			indicatorTimer = new System.Timers.Timer();
-			indicatorTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnIndicatorTimerHandler);
-			indicatorTimer.Interval = 1000;//ApplicationData.Instance.getConfigurationModel().getInboxUpdateInterval();
-			indicatorTimer.Enabled = true;
-			indicatorTimer.Start();
+//			if (indicatorTimer != null)
+//				indicatorTimer.Stop ();
+//
+//
+//
+//
+//
+//			indicatorTimer = new System.Timers.Timer();
+//			indicatorTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnIndicatorTimerHandler);
+//			indicatorTimer.Interval = 1000;//ApplicationData.Instance.getConfigurationModel().getInboxUpdateInterval();
+//			indicatorTimer.Enabled = true;
+//			indicatorTimer.Start();
 
 		}
 
@@ -449,15 +407,13 @@ namespace DMSvStandard
 //			} else if (ApplicationData.Instance.isAdminLogin ()) {
 //				StartActivity(typeof(ActivityListEnlevement));
 //			}
+
 			StartActivity(typeof(ActivityListEnlevement));
 		}
 
 		protected void chat_Click()
 		{
-
 			StartActivity(typeof(ActivityChat));
-
-
 		}
 
 
@@ -488,9 +444,7 @@ namespace DMSvStandard
 	
 		protected void config_Click()
 		{
-			//ApplicationData.Instance.setTempConfigModel(ApplicationData.Instance.getConfigurationModel().clone());
-			//StartActivity (typeof(GeneralConfigActivity));
-
+			
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
 
@@ -580,7 +534,7 @@ namespace DMSvStandard
 				Console.Out.WriteLine (">>>>>THREAD INTEG DONE....<<<<<");
 			} catch (Exception ex) {
 				Data.content = "[]";
-
+				Insights.Report (ex,Xamarin.Insights.Severity.Error);
 			}
 
 
@@ -659,7 +613,7 @@ namespace DMSvStandard
 
 				} catch (Exception ex) {
 					Data.content = "[]";
-
+					Insights.Report (ex,Xamarin.Insights.Severity.Error);
 				}
 
 
@@ -682,9 +636,7 @@ namespace DMSvStandard
 			Thread.Sleep (10);
 			ThreadAppGPS.Start ();
 			Console.Out.Write ("///////////////ThreadAppGPS START///////////////");
-//			var gps = new getgpslocation() ;
-//			gps.InitializeLocationManager ();
-			//ApplicationData.ithread++;
+
 		}
 		public void ComPosGPS(){
 			int idgps = 0;
@@ -765,22 +717,16 @@ namespace DMSvStandard
 						webClient.UploadString (_url,Data.datajson);
 
 						foreach (var item in tablestatutmessage) {
-							//Data.datanotif += "{\"statutNotificationMessage\":\"" + item.statutNotificationMessage + "\",\"dateNotificationMessage\":\"" + item.dateNotificationMessage + "\",\"numMessage\":\""+item.numMessage+"\"}";
-
-							//	webClient.UploadString (_url,datamessage);
-							var resultdelete = db.Query<StatutMessage> (" DELETE FROM StatutLivraison WHERE Id='"+item.Id+"'");
+							var resultdelete = db.Query<StatutMessage> (" DELETE FROM StatutLivraison WHERE _Id=?",item.Id);
 						}
-
-						foreach (var item in tablestatutmessage) {
-							Data.datanotif += "{\"statutNotificationMessage\":\"" + item.statutNotificationMessage + "\",\"dateNotificationMessage\":\"" + item.dateNotificationMessage + "\",\"numMessage\":\""+item.numMessage+"\"}";
-
-							//	webClient.UploadString (_url,datamessage);
-							var resultdelete = db.Query<StatutMessage> (" DELETE FROM StatutLivraison WHERE Id='"+item.Id+"'");
+						foreach (var item in tablemessage) {							
+							var updatestatutmessage = db.Query<Message> ("UPDATE Message SET statutMessage = 3 WHERE _Id = ?",item.Id);
 						}
 
 
 
 						} catch (Exception ex) {
+							Insights.Report (ex,Xamarin.Insights.Severity.Error);
 							Console.Out.Write(ex);
 
 						}
@@ -798,6 +744,7 @@ namespace DMSvStandard
 							Console.Out.WriteLine (">>>>>THREAD INTEG DONE....<<<<<");
 						} catch (Exception ex) {
 							Data.contentmsg = "[]";
+							Insights.Report (ex,Xamarin.Insights.Severity.Error);
 
 						}
 
@@ -873,7 +820,7 @@ namespace DMSvStandard
 						}
 						catch (Exception e)
 						{
-							Insights.Report (e);
+							Insights.Report (e,Xamarin.Insights.Severity.Error);
 						}
 
 				}
@@ -952,6 +899,7 @@ namespace DMSvStandard
 						Console.Out.WriteLine (">>>>>THREAD INTEG DONE....<<<<<");
 					} catch (Exception ex) {
 						Data.content = "[]";
+						Insights.Report (ex,Xamarin.Insights.Severity.Error);
 
 					}
 				
@@ -1031,7 +979,8 @@ namespace DMSvStandard
 
 					} catch (Exception ex) {
 						Data.content = "[]";
-
+							Insights.Report (ex,Xamarin.Insights.Severity.Error);
+						
 					}
 
 
@@ -1039,7 +988,7 @@ namespace DMSvStandard
 		}
 				Console.WriteLine ("///////Thread Integ RUNNING////"+DateTime.Now.Minute);
 				Thread.Sleep (300000);
-				//Thread.Sleep (3000);
+
 		}
 		}
 
