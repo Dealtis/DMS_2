@@ -714,6 +714,8 @@ namespace DMSvStandard
 
 						Data.datajson = "{\"suivgps\":"+Data.datagps+",\"statutmessage\":["+Data.datanotif+"],\"Message\":["+Data.datamsg+"]}";
 
+
+						//API MSG/NOTIF/GPS
 						webClient.UploadString (_url,Data.datajson);
 
 						foreach (var item in tablestatutmessage) {
