@@ -696,48 +696,100 @@ namespace DMSvStandard
 				var activeConnection = connectivityManager.ActiveNetworkInfo;
 				if ((activeConnection != null) && activeConnection.IsConnected) {
 
-					try {
-						//API LIVRER OK
-						string _url = "http://dms.jeantettransport.com/api/gps";
+
+
+
+						//API GPS OK
+						string _url = "http://dms.jeantettransport.com/api/leslie";
 						var webClient = new WebClient ();
+
+						try {
+
+						Data.datajson ="";
+						Data.datagps="";
+						Data.datamsg="";
+						Data.datanotif="";
 
 						webClient.Headers [HttpRequestHeader.ContentType] = "application/json";
 						//webClient.Encoding = Encoding.UTF8;
 
-						string datagps = "{\"posgps\":\"" + ApplicationData.GPS + "\",\"userandsoft\":\"" + ApplicationData.UserAndsoft + "\"}";
+						Data.datagps = "{\"posgps\":\"" + ApplicationData.GPS + "\",\"userandsoft\":\"" + ApplicationData.UserAndsoft + "\"}";
 
 
-						webClient.UploadString (_url, datagps);
+						//webClient.UploadString (_url, datagps);
 
 
 						string dbPath = System.IO.Path.Combine (System.Environment.GetFolderPath
 							(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
 						var db = new SQLiteConnection (dbPath);
 
-						var tablestatutmessage = db.Query<StatutMessage> ("SELECT * FROM StatutMessage");
-						foreach (var item in tablestatutmessage) {
-							string datamessage= "{\"statutNotificationMessage\":\"" + item.statutNotificationMessage + "\",\"dateNotificationMessage\":\"" + item.dateNotificationMessage + "\",\"numMessage\":\""+item.numMessage+"\"}";
 
-							webClient.UploadString (_url,datamessage);
-							var resultdelete = db.Query<StatutMessage> (" DELETE FROM StatutLivraison WHERE Id='"+item.Id+"'");
+
+
+						var tablestatutmessage = db.Query<StatutMessage> ("SELECT * FROM StatutMessage");
+
+
+						//SEND NOTIF
+						foreach (var item in tablestatutmessage) {
+							Data.datanotif += "{\"statutNotificationMessage\":\"" + item.statutNotificationMessage + "\",\"dateNotificationMessage\":\"" + item.dateNotificationMessage + "\",\"numMessage\":\""+item.numMessage+"\"}";
+
+						//	webClient.UploadString (_url,datamessage);
+						//	var resultdelete = db.Query<StatutMessage> (" DELETE FROM StatutLivraison WHERE Id='"+item.Id+"'");
 						}
+
+						
+
+
 
 						//SEND MESSAGE
 						var tablemessage = db.Query<Message> ("SELECT * FROM Message WHERE statutMessage = 2");
 						foreach (var item in tablemessage) {
-							string datamessage= "{\"codeChauffeur\":\"" + item.codeChauffeur + "\",\"texteMessage\":\"" + item.texteMessage + "\",\"utilisateurEmetteur\":\""+item.utilisateurEmetteur+"\",\"dateImportMessage\":\""+item.dateImportMessage+"\",\"typeMessage\":\""+item.typeMessage+"\"}";
+							Data.datamsg += "{\"codeChauffeur\":\"" + item.codeChauffeur + "\",\"texteMessage\":\"" + item.texteMessage + "\",\"utilisateurEmetteur\":\""+item.utilisateurEmetteur+"\",\"dateImportMessage\":\""+item.dateImportMessage+"\",\"typeMessage\":\""+item.typeMessage+"\"},";
 
-							webClient.UploadString (_url,datamessage);
-							var updatestatutmessage = db.Query<Message> ("UPDATE Message SET statutMessage = 3 WHERE Id = ?",item.Id);
+						//	webClient.UploadString (_url,datamessage);
+						// var updatestatutmessage = db.Query<Message> ("UPDATE Message SET statutMessage = 3 WHERE _Id = ?",item.Id);
+						}
+						if(Data.datanotif == ""){
+							Data.datanotif ="{}";
+						}else{
+							Data.datanotif = Data.datanotif.Remove(Data.datanotif.Length - 1);
+						}
+						if(Data.datamsg == ""){
+							Data.datamsg ="{}";
+						}else{
+							Data.datamsg = Data.datamsg.Remove(Data.datamsg.Length - 1);
+						}
+
+						Data.datajson = "{\"suivgps\":"+Data.datagps+",\"statutmessage\":["+Data.datanotif+"],\"Message\":["+Data.datamsg+"]}";
+
+						webClient.UploadString (_url,Data.datajson);
+
+						foreach (var item in tablestatutmessage) {
+							//Data.datanotif += "{\"statutNotificationMessage\":\"" + item.statutNotificationMessage + "\",\"dateNotificationMessage\":\"" + item.dateNotificationMessage + "\",\"numMessage\":\""+item.numMessage+"\"}";
+
+							//	webClient.UploadString (_url,datamessage);
+							var resultdelete = db.Query<StatutMessage> (" DELETE FROM StatutLivraison WHERE Id='"+item.Id+"'");
+						}
+
+						foreach (var item in tablestatutmessage) {
+							Data.datanotif += "{\"statutNotificationMessage\":\"" + item.statutNotificationMessage + "\",\"dateNotificationMessage\":\"" + item.dateNotificationMessage + "\",\"numMessage\":\""+item.numMessage+"\"}";
+
+							//	webClient.UploadString (_url,datamessage);
+							var resultdelete = db.Query<StatutMessage> (" DELETE FROM StatutLivraison WHERE Id='"+item.Id+"'");
 						}
 
 
+
+						} catch (Exception ex) {
+							Console.Out.Write(ex);
+
+						}
 
 
 					//ROUTINE INTEG MESSAGE
 						try {
 							//API LIVRER OK
-							string _urlb = "http://dms.jeantettransport.com/api/gps?codechauffeur=" + ApplicationData.UserAndsoft +"";
+							string _urlb = "http://dms.jeantettransport.com/api/leslie?codechauffeur=" + ApplicationData.UserAndsoft +"";
 							var webClientb = new WebClient ();
 							webClientb.Headers [HttpRequestHeader.ContentType] = "application/json";
 							//webClient.Encoding = Encoding.UTF8;
@@ -760,7 +812,7 @@ namespace DMSvStandard
 
 						foreach (var item in jsonarr) {
 							DBRepository dbr = new DBRepository ();
-							var resinteg = dbr.InsertDataMessage (Convert.ToString (item ["codeChauffeur"]), Convert.ToString (item ["texteMessage"]), Convert.ToString (item ["utilisateurEmetteur"]),0,DateTime.Now,0, Convert.ToInt32 (item ["numMessage"]));
+							var resinteg = dbr.InsertDataMessage (Convert.ToString (item ["codeChauffeur"]), Convert.ToString (item ["utilisateurEmetteur"]), Convert.ToString (item ["texteMessage"]),0,DateTime.Now,1, Convert.ToInt32 (item ["numMessage"]));
 							var resintegstatut = dbr.InsertDataStatutMessage(0,DateTime.Now, Convert.ToInt32 (item ["numMessage"]));
 
 							Console.WriteLine (item ["numMessage"]);
@@ -774,12 +826,10 @@ namespace DMSvStandard
 
 
 					
-						Console.Out.WriteLine (">>>>>THREAD GPS SEND " + datagps);
+						//Console.Out.WriteLine (">>>>>THREAD GPS SEND " + datagps);
 
 
-					} catch (Exception e) {
-						Insights.Report (e);
-					}
+					
 
 
 

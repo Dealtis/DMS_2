@@ -196,6 +196,27 @@ namespace DMSvStandard.ORM
 			}
 		}
 
+		public string DropTableStatutMessage()
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal),"ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				db.DeleteAll<StatutMessage>();
+
+
+
+				string result = "delete";
+				return result;
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
 
 		//DROP TABLE
 //		public string DropTableDay()

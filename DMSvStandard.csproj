@@ -235,6 +235,7 @@
     <AndroidResource Include="Resources\layout\ChatLayout.axml" />
     <AndroidResource Include="Resources\layout\ListeViewDelete.axml" />
     <AndroidResource Include="Resources\Raw\msg.mp3" />
+    <AndroidResource Include="Resources\Raw\msg2.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="packages\Xamarin.Insights.1.11.1\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('packages\Xamarin.Insights.1.11.1\build\MonoAndroid10\Xamarin.Insights.targets')" />

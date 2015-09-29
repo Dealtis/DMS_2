@@ -60,6 +60,11 @@ namespace DMSvStandard
 		public static string contentmsg;
 		public static int countliv;
 		public static int countram;
+		public static string datajson;
+
+		public static string datanotif;
+		public static string datamsg;
+		public static string datagps;
 	}
 
 	[Activity(Theme = "@style/Theme.Splash",MainLauncher = true, NoHistory = true)]
@@ -111,8 +116,9 @@ namespace DMSvStandard
 
 			var activeConnection = connectivityManager.ActiveNetworkInfo;
 			if ((activeConnection != null) && activeConnection.IsConnected) {
+				
 				//DELETE DE LA BASE
-				//var resdrop = dbr.DropTableUser();
+				//var resdrop = dbr.DropTableStatutMessage();
 				//Si connexion download du xml
 
 
@@ -149,7 +155,7 @@ namespace DMSvStandard
 				}
 				catch (Exception e)
 				{
-					Insights.Report (e);
+					//Insights.Report (e);
 				}
 
 
