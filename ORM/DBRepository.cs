@@ -218,6 +218,25 @@ namespace DMSvStandard.ORM
 			}
 		}
 
+		public string deletenotif(int id)
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal),"ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				db.Delete<StatutMessage>(id);
+
+				string result = "delete";
+				return result;
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
 
 		//DROP TABLE
 //		public string DropTableDay()

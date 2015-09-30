@@ -683,7 +683,7 @@ namespace DMSvStandard
 
 						//SEND NOTIF
 						foreach (var item in tablestatutmessage) {
-							Data.datanotif += "{\"statutNotificationMessage\":\"" + item.statutNotificationMessage + "\",\"dateNotificationMessage\":\"" + item.dateNotificationMessage + "\",\"numMessage\":\""+item.numMessage+"\"}";
+							Data.datanotif += "{\"statutNotificationMessage\":\"" + item.statutNotificationMessage + "\",\"dateNotificationMessage\":\"" + item.dateNotificationMessage + "\",\"numMessage\":\""+item.numMessage+"\"},";
 
 						//	webClient.UploadString (_url,datamessage);
 						//	var resultdelete = db.Query<StatutMessage> (" DELETE FROM StatutLivraison WHERE Id='"+item.Id+"'");
@@ -717,9 +717,9 @@ namespace DMSvStandard
 
 						//API MSG/NOTIF/GPS
 						webClient.UploadString (_url,Data.datajson);
-
+						DBRepository dbr = new DBRepository ();
 						foreach (var item in tablestatutmessage) {
-							var resultdelete = db.Query<StatutMessage> (" DELETE FROM StatutLivraison WHERE _Id=?",item.Id);
+							var resultdelete = dbr.deletenotif(item.Id);
 						}
 						foreach (var item in tablemessage) {							
 							var updatestatutmessage = db.Query<Message> ("UPDATE Message SET statutMessage = 3 WHERE _Id = ?",item.Id);

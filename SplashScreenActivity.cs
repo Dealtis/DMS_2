@@ -155,7 +155,8 @@ namespace DMSvStandard
 				}
 				catch (Exception e)
 				{
-					//Insights.Report (e);
+					
+					Console.Out.Write(e);
 				}
 
 
