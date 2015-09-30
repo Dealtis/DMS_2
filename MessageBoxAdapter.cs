@@ -52,7 +52,7 @@ namespace DMSvStandard
 				txtName.Text = ""+mItems[position].texteMessage+"";
 
 				if(mItems[position].statutMessage == 0){
-					txtstatut ="Importé";
+					txtstatut ="Nouveau";
 				}
 				if(mItems[position].statutMessage == 1){
 					txtstatut ="Lu";
@@ -85,7 +85,7 @@ namespace DMSvStandard
 				txtName.Text = ""+mItems[position].texteMessage+"";
 
 				if(mItems[position].statutMessage == 0){
-					txtstatut ="Importé";
+					txtstatut ="Nouveau";
 				}
 				if(mItems[position].statutMessage == 1){
 					txtstatut ="Lu";

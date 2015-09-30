@@ -470,3 +470,4 @@ C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\o
 C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\res\layout\listeviewdelete.xml
 C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\res\raw\msg.mp3
 C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\res\raw\msg2.mp3
+C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\res\drawable\bleu_buttontwo.xml
