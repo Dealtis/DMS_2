@@ -184,6 +184,14 @@ namespace DMSvStandard
 
 				Data.countram++;
 			}
+
+			var tablemess = db.Query<Message> ("SELECT * FROM Message WHERE statutMessage= 0");
+			foreach( var row in tablemess){
+
+				Data.countmess++;
+			}
+
+
 			if (ApplicationData.Instance.getLivraisonIndicator () == Data.countliv)  {
 				ImageView bggLiv = FindViewById<ImageView>(Resource.Id.bdgLiv);
 				bggLiv.SetImageResource(Resource.Drawable.SBBadgeBGUP);
@@ -198,6 +206,8 @@ namespace DMSvStandard
 
 			ApplicationData.Instance.setLivraisonIndicator (Data.countliv);
 			ApplicationData.Instance.setEnlevementIndicator(Data.countram);
+			ApplicationData.Instance.setmessageIndicator(Data.countmess);
+
 
 
 
@@ -213,8 +223,7 @@ namespace DMSvStandard
 
 			// Get our button from the layout resource,
 			// and attach an event to it
-			m_lblDelivery = FindViewById<TextView> (Resource.Id.lblButton1);
-			m_lblPeekup = FindViewById<TextView> (Resource.Id.lblButton2);
+
 			m_lblNewMsg = FindViewById<TextView> (Resource.Id.lblButton3);
 			//m_lblInbox = FindViewById<TextView> (Resource.Id.lblButton4);
 
@@ -263,6 +272,14 @@ namespace DMSvStandard
 			m_newMsgBadgeText = FindViewById<TextView> (Resource.Id.newMsgBadgeText);
 
 
+
+			ApplicationData.Instance.setLivraisonIndicator (Data.countliv);
+			ApplicationData.Instance.setEnlevementIndicator(Data.countram);
+			ApplicationData.Instance.setmessageIndicator(Data.countmess);
+//
+//			m_newMsgBadgeText.Text = Convert.ToString (Data.countmess);
+//			m_deliveryBadgeText.Text= Convert.ToString (Data.countliv);
+//			m_peekupBadgeText.Text= Convert.ToString (Data.countram);
 			loginCanceled = false;
 
 
@@ -340,11 +357,11 @@ namespace DMSvStandard
 //
 //
 //
-//			indicatorTimer = new System.Timers.Timer();
-//			indicatorTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnIndicatorTimerHandler);
-//			indicatorTimer.Interval = 1000;//ApplicationData.Instance.getConfigurationModel().getInboxUpdateInterval();
-//			indicatorTimer.Enabled = true;
-//			indicatorTimer.Start();
+			indicatorTimer = new System.Timers.Timer();
+			indicatorTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnIndicatorTimerHandler);
+			indicatorTimer.Interval = 1000;//ApplicationData.Instance.getConfigurationModel().getInboxUpdateInterval();
+			indicatorTimer.Enabled = true;
+			indicatorTimer.Start();
 
 		}
 
@@ -378,6 +395,13 @@ namespace DMSvStandard
 				RunOnUiThread (() => m_peekupBadge.Visibility = ViewStates.Visible);
 			} else {
 				RunOnUiThread (() => m_peekupBadge.Visibility = ViewStates.Invisible);
+			}
+
+			if (ApplicationData.Instance.getmessageIndicator () > 0) {
+				RunOnUiThread (() => m_newMsgBadgeText.Text= ApplicationData.Instance.getmessageIndicator ().ToString());
+				RunOnUiThread (() => m_newMsgBadge.Visibility = ViewStates.Visible);
+			} else {
+				RunOnUiThread (() => m_newMsgBadge.Visibility = ViewStates.Invisible);
 			}
 		}
 
@@ -581,6 +605,7 @@ namespace DMSvStandard
 			}
 			ApplicationData.Instance.setLivraisonIndicator (Data.countliv);
 			ApplicationData.Instance.setEnlevementIndicator (Data.countram);
+			ApplicationData.Instance.setmessageIndicator(Data.countmess);
 
 
 
@@ -949,6 +974,7 @@ namespace DMSvStandard
 				}
 				ApplicationData.Instance.setLivraisonIndicator (Data.countliv);
 				ApplicationData.Instance.setEnlevementIndicator (Data.countram);
+				ApplicationData.Instance.setmessageIndicator(Data.countmess);
 
 
 			

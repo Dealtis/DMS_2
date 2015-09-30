@@ -60,6 +60,8 @@ namespace DMSvStandard
 		public static string contentmsg;
 		public static int countliv;
 		public static int countram;
+		public static int countmess;
+
 		public static string datajson;
 
 		public static string datanotif;
