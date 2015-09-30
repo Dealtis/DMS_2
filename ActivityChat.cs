@@ -62,7 +62,7 @@ namespace DMSvStandard
 				i++;
 			}
 
-			if(i > 3){
+			if(i > 6){
 				View view = LayoutInflater.From (this).Inflate (Resource.Layout.ListeViewDelete, null, false);
 				mListView.AddHeaderView (view);
 				view.Click += Btndeletemsg_Click;
@@ -82,6 +82,7 @@ namespace DMSvStandard
 			var tablemsgrecu = db.Query<Message> ("SELECT * FROM Message where statutMessage = 0");
 			foreach (var item in tablemsgrecu) {
 				var updatestatutmessage = db.Query<Message> ("UPDATE Message SET statutMessage = 1 WHERE statutMessage = 0");
+				var resintegstatut = dbr.InsertDataStatutMessage (1,DateTime.Now,item.numMessage);
 			}
 
 		}

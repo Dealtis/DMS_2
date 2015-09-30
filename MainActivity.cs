@@ -166,10 +166,13 @@ namespace DMSvStandard
 
 			Data.countliv = 0;
 			Data.countram = 0;
+			Data.countmess = 0;
 
 
 
-			var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV'");
+			var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND Userandsoft = ?",ApplicationData.UserAndsoft);
+
+
 
 
 
@@ -179,13 +182,16 @@ namespace DMSvStandard
 			}
 
 
-			var tableram = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM'");
+			var tableram = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM' AND Userandsoft = ?",ApplicationData.UserAndsoft);
 			foreach( var rows in tableram){
 
 				Data.countram++;
 			}
 
-			var tablemess = db.Query<Message> ("SELECT * FROM Message WHERE statutMessage= 0");
+			var tablemess = db.Query<Message> ("SELECT * FROM Message WHERE statutMessage = 0 AND codeChauffeur=?",ApplicationData.UserAndsoft);
+
+
+
 			foreach( var row in tablemess){
 
 				Data.countmess++;
@@ -201,15 +207,6 @@ namespace DMSvStandard
 				bggLiv.SetImageResource(Resource.Drawable.SBBadgeBGUP);
 				
 			}
-
-
-
-			ApplicationData.Instance.setLivraisonIndicator (Data.countliv);
-			ApplicationData.Instance.setEnlevementIndicator(Data.countram);
-			ApplicationData.Instance.setmessageIndicator(Data.countmess);
-
-
-
 
 
 			var datedujour = DateTime.Today.DayOfWeek;
@@ -564,6 +561,7 @@ namespace DMSvStandard
 
 			Data.countliv = 0;
 			Data.countram = 0;
+			Data.countmess = 0;
 
 			//SON
 			if (Data.content == "[]") {
@@ -588,7 +586,7 @@ namespace DMSvStandard
 				(Environment.SpecialFolder.Personal), "ormDMS.db3");
 
 			var db = new SQLiteConnection (dbPath);
-			var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV'");
+			var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND Userandsoft = ?",ApplicationData.UserAndsoft);
 
 
 
@@ -598,11 +596,17 @@ namespace DMSvStandard
 			}
 
 
-			var tableram = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM'");
+			var tableram = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM' AND Userandsoft = ?",ApplicationData.UserAndsoft);
 			foreach (var rows in tableram) {
 
 				Data.countram++;
 			}
+		var tablemess = db.Query<Message> ("SELECT * FROM Message WHERE statutMessage = 0 AND codeChauffeur=?",ApplicationData.UserAndsoft);
+			foreach( var row in tablemess){
+
+				Data.countmess++;
+			}
+
 			ApplicationData.Instance.setLivraisonIndicator (Data.countliv);
 			ApplicationData.Instance.setEnlevementIndicator (Data.countram);
 			ApplicationData.Instance.setmessageIndicator(Data.countmess);
@@ -678,10 +682,63 @@ namespace DMSvStandard
 
 						//API GPS OK
 						string _url = "http://dms.jeantettransport.com/api/leslie";
+						string dbPath = System.IO.Path.Combine (System.Environment.GetFolderPath
+							(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
+						var db = new SQLiteConnection (dbPath);
+
+						DBRepository dbr = new DBRepository ();
 						var webClient = new WebClient ();
 
 						try {
 
+
+						//ROUTINE INTEG MESSAGE
+						try {
+							//API LIVRER OK
+							string _urlb = "http://dms.jeantettransport.com/api/leslie?codechauffeur=" + ApplicationData.UserAndsoft +"";
+							var webClientb = new WebClient ();
+							webClientb.Headers [HttpRequestHeader.ContentType] = "application/json";
+							//webClient.Encoding = Encoding.UTF8;
+
+							Data.contentmsg = webClientb.DownloadString (_urlb);
+							Console.Out.WriteLine (">>>>>THREAD INTEG DONE....<<<<<");
+						} catch (Exception ex) {
+							Data.contentmsg = "[]";
+							Insights.Report (ex,Xamarin.Insights.Severity.Error);
+
+						}
+
+						//SON MSG
+						if (Data.contentmsg == "[]") {
+						} else {
+							alertsms ();
+						}
+
+						JArray jsonVal = JArray.Parse (Data.contentmsg) as JArray;
+						var jsonarr = jsonVal;
+
+						foreach (var item in jsonarr) {
+							
+							var resinteg = dbr.InsertDataMessage (Convert.ToString (item ["codeChauffeur"]), Convert.ToString (item ["utilisateurEmetteur"]), Convert.ToString (item ["texteMessage"]),0,DateTime.Now,1, Convert.ToInt32 (item ["numMessage"]));
+							var resintegstatut = dbr.InsertDataStatutMessage(0,DateTime.Now, Convert.ToInt32 (item ["numMessage"]));
+
+							Console.WriteLine (item ["numMessage"]);
+							Console.WriteLine (resinteg);
+
+						}
+						Data.countmess=0;
+
+						var tablemess = db.Query<Message> ("SELECT * FROM Message WHERE statutMessage = 0 AND codeChauffeur=?",ApplicationData.UserAndsoft);
+						foreach( var row in tablemess){
+
+							Data.countmess++;
+						}
+
+
+
+						ApplicationData.Instance.setmessageIndicator(Data.countmess);
+
+					
 						Data.datajson ="";
 						Data.datagps="";
 						Data.datamsg="";
@@ -696,9 +753,7 @@ namespace DMSvStandard
 						//webClient.UploadString (_url, datagps);
 
 
-						string dbPath = System.IO.Path.Combine (System.Environment.GetFolderPath
-							(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
-						var db = new SQLiteConnection (dbPath);
+					
 
 
 
@@ -742,7 +797,7 @@ namespace DMSvStandard
 
 						//API MSG/NOTIF/GPS
 						webClient.UploadString (_url,Data.datajson);
-						DBRepository dbr = new DBRepository ();
+
 						foreach (var item in tablestatutmessage) {
 							var resultdelete = dbr.deletenotif(item.Id);
 						}
@@ -753,54 +808,19 @@ namespace DMSvStandard
 
 
 						} catch (Exception ex) {
+							Data.datajson = "Crash " + ex;
 							Insights.Report (ex,Xamarin.Insights.Severity.Error);
 							Console.Out.Write(ex);
 
 						}
 
-
-					//ROUTINE INTEG MESSAGE
-						try {
-							//API LIVRER OK
-							string _urlb = "http://dms.jeantettransport.com/api/leslie?codechauffeur=" + ApplicationData.UserAndsoft +"";
-							var webClientb = new WebClient ();
-							webClientb.Headers [HttpRequestHeader.ContentType] = "application/json";
-							//webClient.Encoding = Encoding.UTF8;
-
-							Data.contentmsg = webClientb.DownloadString (_urlb);
-							Console.Out.WriteLine (">>>>>THREAD INTEG DONE....<<<<<");
-						} catch (Exception ex) {
-							Data.contentmsg = "[]";
-							Insights.Report (ex,Xamarin.Insights.Severity.Error);
-
-						}
-
-						//SON MSG
-						if (Data.contentmsg == "[]") {
-						} else {
-							alertsms ();
-						}
-
-						JArray jsonVal = JArray.Parse (Data.contentmsg) as JArray;
-						var jsonarr = jsonVal;
-
-						foreach (var item in jsonarr) {
-							DBRepository dbr = new DBRepository ();
-							var resinteg = dbr.InsertDataMessage (Convert.ToString (item ["codeChauffeur"]), Convert.ToString (item ["utilisateurEmetteur"]), Convert.ToString (item ["texteMessage"]),0,DateTime.Now,1, Convert.ToInt32 (item ["numMessage"]));
-							var resintegstatut = dbr.InsertDataStatutMessage(0,DateTime.Now, Convert.ToInt32 (item ["numMessage"]));
-
-							Console.WriteLine (item ["numMessage"]);
-							Console.WriteLine (resinteg);
-
-						}
-
 					
 
 					
 
 
 					
-						//Console.Out.WriteLine (">>>>>THREAD GPS SEND " + datagps);
+					Console.Out.WriteLine (">>>>>THREAD Leslie SEND " +DateTime.Now.Minute+ Data.datajson);
 
 
 					
@@ -957,7 +977,7 @@ namespace DMSvStandard
 				(Environment.SpecialFolder.Personal), "ormDMS.db3");
 
 				var db = new SQLiteConnection (dbPath);
-				var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV'");
+				var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND Userandsoft = ?",ApplicationData.UserAndsoft);
 
 
 
@@ -967,7 +987,7 @@ namespace DMSvStandard
 				}
 
 
-				var tableram = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM'");
+				var tableram = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM' AND Userandsoft = ?",ApplicationData.UserAndsoft);
 				foreach (var rows in tableram) {
 
 					Data.countram++;
@@ -1033,7 +1053,7 @@ namespace DMSvStandard
 		{
 
 			MediaPlayer _player;
-			_player = MediaPlayer.Create(this,Resource.Raw.msg);
+			_player = MediaPlayer.Create(this,Resource.Raw.msg3);
 			_player.Start();
 		}
 

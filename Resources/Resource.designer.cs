@@ -1004,6 +1004,9 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f040003
 			public const int msg2 = 2130968579;
 			
+			// aapt resource value: 0x7f040004
+			public const int msg3 = 2130968580;
+			
 			static Raw()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

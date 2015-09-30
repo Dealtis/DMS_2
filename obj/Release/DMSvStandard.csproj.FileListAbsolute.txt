@@ -356,3 +356,5 @@ C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\o
 C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Release\res\raw\msg2.mp3
 C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Release\R.cs.flag
 C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Release\uploadflags.txt
+C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Release\res\drawable\bleu_buttontwo.xml
+C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Release\res\raw\msg3.mp3

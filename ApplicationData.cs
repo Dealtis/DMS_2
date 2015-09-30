@@ -193,7 +193,7 @@ namespace DMSvStandard
 		public void setmessageIndicator (int _messageIndicator)
 		{
 
-			enlevementIndicator = _messageIndicator;
+			messageIndicator = _messageIndicator;
 			System.Diagnostics.Debug.WriteLine("setmessage - " + messageIndicator.ToString());
 		}
 
