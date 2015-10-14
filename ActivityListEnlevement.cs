@@ -50,7 +50,7 @@ namespace DMSvStandard
 			var db = new SQLiteConnection (dbPath);
 
 
-			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM' order by groupage, Datemission");
+			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM' AND Userandsoft = ? order by groupage, Datemission",ApplicationData.UserAndsoft);
 			var layout = new LinearLayout (this);
 			layout.Orientation = Orientation.Vertical;
 
@@ -228,7 +228,7 @@ namespace DMSvStandard
 				(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
 			var db = new SQLiteConnection (dbPath);
 
-			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM' ORDER by groupage, Datemission");
+			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM' AND Userandsoft = ? ORDER by groupage, Datemission",ApplicationData.UserAndsoft);
 
 			//LISTVIEW
 			mListView = FindViewById<ListView> (Resource.Id.listView1);
