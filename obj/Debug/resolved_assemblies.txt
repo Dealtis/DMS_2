@@ -1,24 +1,8 @@
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\DMSvStandard.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\AndHUD.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\Mono.Android.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\mscorlib.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\Newtonsoft.Json.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\SignaturePad.Android.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\System.Core.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\System.Data.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\System.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\System.Json.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\System.Runtime.Serialization.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\System.Web.Services.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\System.Xml.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\System.Xml.Linq.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\System.Xml.Serialization.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\Xamarin.Android.Support.v4.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\Xamarin.Insights.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\zxing.monoandroid.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\ZXing.Net.Mobile.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\Mono.Data.Tds.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\Mono.Security.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\System.Transactions.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\System.ServiceModel.dll
-C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\assemblies\System.Net.Http.dll
+C:\Users\Romain\Desktop\DMSvStandard\bin\Debug\DMSvStandard.dll
+C:\Users\Romain\Desktop\DMSvStandard\Components\AndHUD-1.3.1\lib\android\AndHUD.dll
+C:\Users\Romain\Desktop\DMSvStandard\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll
+C:\Users\Romain\Desktop\DMSvStandard\Components\signature-pad-1.3.8\lib\android\SignaturePad.Android.dll
+C:\Users\Romain\Desktop\DMSvStandard\packages\Xamarin.Android.Support.v4.22.2.1.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll
+C:\Users\Romain\Desktop\DMSvStandard\packages\Xamarin.Insights.1.11.1\lib\MonoAndroid10\Xamarin.Insights.dll
+C:\Users\Romain\Desktop\DMSvStandard\Components\zxing.net.mobile-1.4.7.2\lib\android\zxing.monoandroid.dll
+C:\Users\Romain\Desktop\DMSvStandard\Components\zxing.net.mobile-1.4.7.2\lib\android\ZXing.Net.Mobile.dll

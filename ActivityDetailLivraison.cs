@@ -204,7 +204,7 @@ namespace DMSvStandard
 			var viewAD = this.LayoutInflater.Inflate (Resource.Layout.checkbox, null);
 
 
-			if (ApplicationData.CR == "") {
+			if ((ApplicationData.CR == "")||(ApplicationData.CR == "0")) {
 				builder.SetMessage ("Voulez-vous valider cette livraison ?");
 				viewAD.FindViewById<RadioButton> (Resource.Id.radioButton1).Visibility = ViewStates.Gone;
 				viewAD.FindViewById<RadioButton> (Resource.Id.radioButton2).Visibility = ViewStates.Gone;
