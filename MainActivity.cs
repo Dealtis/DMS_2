@@ -479,7 +479,7 @@ namespace DMSvStandard
 			builder.SetNegativeButton("Connection", delegate {
 				if(input.Text =="Dealtis25-"){
 
-					StartActivity (typeof(GeneralConfigActivity));
+					StartActivity (typeof(ActivitySignature));
 
 				}else{Toast.MakeText (this, "Mauvais MDP", ToastLength.Short).Show ();}
 			});
