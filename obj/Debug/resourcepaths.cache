@@ -1,6 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Paths>
+<<<<<<< HEAD
   <AdditionalAndroidResourcePaths>C:\Users\rvanardois\AppData\Local\Xamarin\Android.Support.v4\23.0.1\embedded</AdditionalAndroidResourcePaths>
   <AdditionalJavaLibraryReferences>C:\Users\rvanardois\AppData\Local\Xamarin\Android.Support.v4\23.0.1\embedded\classes.jar;C:\Users\rvanardois\AppData\Local\Xamarin\Android.Support.v4\23.0.1\embedded\libs\internal_impl-23.0.1.jar</AdditionalJavaLibraryReferences>
+=======
+  <AdditionalAndroidResourcePaths>C:\Users\Romain\AppData\Local\Xamarin\Android.Support.v4\22.2.1\embedded</AdditionalAndroidResourcePaths>
+  <AdditionalJavaLibraryReferences>C:\Users\Romain\AppData\Local\Xamarin\Android.Support.v4\22.2.1\embedded\classes.jar;C:\Users\Romain\AppData\Local\Xamarin\Android.Support.v4\22.2.1\embedded\libs\internal_impl-22.2.1.jar</AdditionalJavaLibraryReferences>
+>>>>>>> origin/Romain
   <AdditionalNativeLibraryReferences></AdditionalNativeLibraryReferences>
 </Paths>
