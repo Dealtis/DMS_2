@@ -1,28 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="DMS.DMS" android:versionCode="25" android:versionName="2.5.8">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="DMS.DMS" android:versionCode="26" android:versionName="2.6.1">
   <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="21" />
   <application android:label="DMS" android:icon="@drawable/iconapp" android:name="mono.android.app.Application">
-    <activity android:label="Menu" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.MainActivity" />
-    <activity android:label="ActivityAnomalie" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityAnomalie" />
-    <activity android:label="ActivityAnomalie" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityAnomalieEnlevement" />
-    <activity android:label="ActivityDetailLivraison" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityDetailEnlevement" />
-    <activity android:label="ActivityDetailLivraison" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityDetailLivraison" />
-    <activity android:label="ActivityDetailTraiteeLivraison" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityDetailTraiteeLivraison" />
-    <activity android:label="Enlevement" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityListEnlevement" />
-    <activity android:label="Livraison" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityListLivraison" />
-    <activity android:label="ActivityLoginchoose" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityLoginchoose" />
-    <activity android:label="Signature" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivitySignature" />
-    <activity android:label="ActivityTraitee" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityTraitee" />
-    <activity android:label="ActivityTraitee" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.ActivityTraiteeEnlevement" />
-    <activity android:label="AuthConfigActivity" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.AuthConfigActivity" />
-    <activity android:label="GeneralConfigActivity" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.GeneralConfigActivity" />
-    <activity android:configChanges="orientation" android:label="LoginActivity" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.LoginActivity" />
-    <activity android:noHistory="true" android:theme="@style/Theme.Splash" android:name="md57c2c6652a1b0daeb54fdd6abad2db287.SplashActivity">
+    <activity android:label="Menu" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.MainActivity" />
+    <activity android:label="ActivityAnomalie" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivityAnomalie" />
+    <activity android:label="ActivityAnomalie" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivityAnomalieEnlevement" />
+    <activity android:label="ActivityDetailLivraison" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivityDetailEnlevement" />
+    <activity android:label="ActivityDetailLivraison" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivityDetailLivraison" />
+    <activity android:label="ActivityDetailTraiteeLivraison" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivityDetailTraiteeLivraison" />
+    <activity android:label="Enlevement" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivityListEnlevement" />
+    <activity android:label="Livraison" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivityListLivraison" />
+    <activity android:label="ActivityLoginchoose" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivityLoginchoose" />
+    <activity android:label="Signature" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivitySignature" />
+    <activity android:label="ActivityTraitee" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivityTraitee" />
+    <activity android:label="ActivityTraitee" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivityTraiteeEnlevement" />
+    <activity android:label="AuthConfigActivity" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.AuthConfigActivity" />
+    <activity android:label="GeneralConfigActivity" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.GeneralConfigActivity" />
+    <activity android:configChanges="orientation" android:label="LoginActivity" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.LoginActivity" />
+    <activity android:noHistory="true" android:theme="@style/Theme.Splash" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.SplashActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <activity android:label="ActivityChat" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivityChat" />
     <activity android:configChanges="keyboardHidden|orientation|screenLayout" android:label="Scanner" android:name="md5e1d4744ef128cd013cac92521f1a8e76.ZxingActivity" />
     <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="2147483647" android:authorities="DMS.DMS.mono.MonoRuntimeProvider.__mono_init__" />
   </application>

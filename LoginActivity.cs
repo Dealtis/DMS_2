@@ -241,7 +241,7 @@ namespace DMSvStandard
 				}
 				catch (Exception e)
 				{
-					Insights.Report (e);
+					Insights.Report (e,Xamarin.Insights.Severity.Error);
 					Toast.MakeText (this, "Erreur Webclient", ToastLength.Short).Show ();
 				}
 

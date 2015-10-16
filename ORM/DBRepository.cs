@@ -42,7 +42,8 @@ namespace DMSvStandard.ORM
             return result;
             }
             catch (Exception ex)
-            {
+            {	
+				
                 return "Erreur : " + ex.Message;
 
             }
@@ -56,7 +57,7 @@ namespace DMSvStandard.ORM
 					(Environment.SpecialFolder.Personal),"ormDMS.db3");
 				var db = new SQLiteConnection(dbPath);
 				db.CreateTable<StatutLivraison>();
-				Console.Out.WriteLine("!!!!!!!!!!!!CREATE T2!!!!!!!!!!!!!!!!!!!!!!!!");
+				Console.Out.WriteLine("!!!!!!!!!!!!CREATE STATUT!!!!!!!!!!!!!!!!!!!!!!!!");
 
 
 				string result = "Table crée avec succès";
@@ -77,7 +78,49 @@ namespace DMSvStandard.ORM
 					(Environment.SpecialFolder.Personal),"ormDMS.db3");
 				var db = new SQLiteConnection(dbPath);
 				db.CreateTable<TableUser>();
-				Console.Out.WriteLine("!!!!!!!!!!!!CREATE T3!!!!!!!!!!!!!!!!!!!!!!!!");
+				Console.Out.WriteLine("!!!!!!!!!!!!CREATE USER!!!!!!!!!!!!!!!!!!!!!!!!");
+
+
+				string result = "Table crée avec succès";
+				return result;
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
+		public string CreateTableMessage()
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal),"ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				db.CreateTable<Message>();
+				Console.Out.WriteLine("!!!!!!!!!!!!CREATE MESSAGE!!!!!!!!!!!!!!!!!!!!!!!!");
+
+
+				string result = "Table crée avec succès";
+				return result;
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
+		public string CreateTableStatutMessage()
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal),"ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				db.CreateTable<StatutMessage>();
+				Console.Out.WriteLine("!!!!!!!!!!!!CREATE STATUT MESSAGE!!!!!!!!!!!!!!!!!!!!!!!!");
 
 
 				string result = "Table crée avec succès";
@@ -122,6 +165,67 @@ namespace DMSvStandard.ORM
 				db.DeleteAll<TableUser>();
 
 
+
+				string result = "delete";
+				return result;
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
+		public string DropTableMessage()
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal),"ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				db.DeleteAll<Message>();
+
+
+
+				string result = "delete";
+				return result;
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
+		public string DropTableStatutMessage()
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal),"ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				db.DeleteAll<StatutMessage>();
+
+
+
+				string result = "delete";
+				return result;
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
+		public string deletenotif(int id)
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal),"ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				db.Delete<StatutMessage>(id);
 
 				string result = "delete";
 				return result;
@@ -264,8 +368,57 @@ namespace DMSvStandard.ORM
 			}
 		}
 
+		//Insertion des don¨¦es USER
+
+		public string InsertDataMessage(string codeChauffeur,string utilisateurEmetteur, string texteMessage, int statutMessage, DateTime dateImportMessage, int typeMessage, int numMessage)
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal), "ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				Message item = new Message();
+				item.codeChauffeur = codeChauffeur;
+				item.utilisateurEmetteur =  utilisateurEmetteur;				
+				item.texteMessage = texteMessage;
+				item.statutMessage = statutMessage;
+				item.dateImportMessage = dateImportMessage;
+				item.typeMessage = typeMessage;
+				item.numMessage = numMessage;
 
 
+				db.Insert(item);
+				return "Insertion good";
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+		//Insertion des donn¨¦rs STATUT USER
+
+		public string InsertDataStatutMessage(int statutNotificationMessage, DateTime dateNotificationMessage, int numMessage)
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal), "ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				StatutMessage item = new StatutMessage();
+				item.statutNotificationMessage = statutNotificationMessage;
+				item.dateNotificationMessage =  dateNotificationMessage;				
+				item.numMessage = numMessage;
+
+				db.Insert(item);
+				return "Insertion good";
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
 
 
         //SELECT DES DATA'
@@ -747,7 +900,7 @@ namespace DMSvStandard.ORM
 //					item.remarque = remarque;
 //				}
 //				if(libeAnomalie == "Refus¨¦ non command¨¦"){
-//					codeAnomalie = "RENSNC";
+//					codeAnomalie = "RENDIV";
 //					item.statut = statut;
 //					item.codeAnomalie = codeAnomalie;
 //					item.remarque = remarque;
@@ -901,7 +1054,7 @@ namespace DMSvStandard.ORM
 					itembis.imgpath = imgpath;
 				}
 				if(libeAnomalie == "Refuse non commande"){
-					codeAnomalie = "RENSNC";
+					codeAnomalie = "RENDIV";
 					itembis.StatutLivraison = statut;
 					itembis.codeAnomalie = codeAnomalie;
 					itembis.libeAnomalie = libeAnomalie;
@@ -945,6 +1098,22 @@ namespace DMSvStandard.ORM
 					itembis.remarque = remarque;
 					itembis.imgpath = imgpath;
 				}
+				if(libeAnomalie == "Ramasse pas faite"){
+					codeAnomalie = "RAMPFT";
+					itembis.StatutLivraison = statut;
+					itembis.codeAnomalie = codeAnomalie;
+					itembis.libeAnomalie = libeAnomalie;
+					itembis.remarque = remarque;
+					itembis.imgpath = imgpath;
+				}
+				if(libeAnomalie == "Positions non chargees"){
+					codeAnomalie = "RENNCG";
+					itembis.StatutLivraison = statut;
+					itembis.codeAnomalie = codeAnomalie;
+					itembis.libeAnomalie = libeAnomalie;
+					itembis.remarque = remarque;
+					itembis.imgpath = imgpath;
+				}
 				else{
 					itembis.StatutLivraison = statut;
 					itembis.codeAnomalie = codeAnomalie;
@@ -963,6 +1132,27 @@ namespace DMSvStandard.ORM
 
 			}
 		}
+		//UPDATE STATUT MESSAGE 
+		public string UpdateStatutMessage(int statut, int numMessage)
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal), "ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
 
+				var updatelog = db.Query<StatutMessage>("UPDATE StatutMessage SET statutMessage = ? WHERE Id = ?",statut,numMessage);
+
+
+
+				return "Upadate good";
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
     }
+
 }

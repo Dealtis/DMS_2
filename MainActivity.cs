@@ -27,6 +27,17 @@ using Android.Widget;
 using Android.Widget;
 using AndroidHUD;
 
+using System;
+using Android.App;
+using Android.Content;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+using Android.OS;
+using System.Net;
+using System.IO;
+using System.Json;
+using System.Threading.Tasks;
 
 using DMSvStandard;
 
@@ -130,7 +141,11 @@ namespace DMSvStandard
 				Console.Out.Write (">>>>>>>>>>>>>>>>>>LOG FALSE<<<<<<<<<<<<<<<<<<<<<<");
 
 			}
+			Xamarin.Insights.Initialize("4845750bb6fdffe0e3bfaebe810ca335f0f87030", this);
 
+			Insights.Identify(ApplicationData.UserAndsoft,"Name",ApplicationData.UserAndsoft);
+
+			InitializeLocationManager ();
 			bool selectlogin = dbr.Selectlogin (ApplicationData.UserAndsoft);
 			DateTime Selectdatelog = dbr.Selectdatelog (ApplicationData.UserAndsoft);
 
@@ -151,10 +166,13 @@ namespace DMSvStandard
 
 			Data.countliv = 0;
 			Data.countram = 0;
+			Data.countmess = 0;
 
 
 
-			var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV'");
+			var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND Userandsoft = ?",ApplicationData.UserAndsoft);
+
+
 
 
 
@@ -164,11 +182,22 @@ namespace DMSvStandard
 			}
 
 
-			var tableram = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM'");
+			var tableram = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM' AND Userandsoft = ?",ApplicationData.UserAndsoft);
 			foreach( var rows in tableram){
 
 				Data.countram++;
 			}
+
+			var tablemess = db.Query<Message> ("SELECT * FROM Message WHERE statutMessage = 0 AND codeChauffeur=?",ApplicationData.UserAndsoft);
+
+
+
+			foreach( var row in tablemess){
+
+				Data.countmess++;
+			}
+
+
 			if (ApplicationData.Instance.getLivraisonIndicator () == Data.countliv)  {
 				ImageView bggLiv = FindViewById<ImageView>(Resource.Id.bdgLiv);
 				bggLiv.SetImageResource(Resource.Drawable.SBBadgeBGUP);
@@ -178,13 +207,6 @@ namespace DMSvStandard
 				bggLiv.SetImageResource(Resource.Drawable.SBBadgeBGUP);
 				
 			}
-
-
-
-			ApplicationData.Instance.setLivraisonIndicator (Data.countliv);
-			ApplicationData.Instance.setEnlevementIndicator(Data.countram);
-
-
 
 
 			var datedujour = DateTime.Today.DayOfWeek;
@@ -198,10 +220,9 @@ namespace DMSvStandard
 
 			// Get our button from the layout resource,
 			// and attach an event to it
-			m_lblDelivery = FindViewById<TextView> (Resource.Id.lblButton1);
-			m_lblPeekup = FindViewById<TextView> (Resource.Id.lblButton2);
+
 			m_lblNewMsg = FindViewById<TextView> (Resource.Id.lblButton3);
-			m_lblInbox = FindViewById<TextView> (Resource.Id.lblButton4);
+			//m_lblInbox = FindViewById<TextView> (Resource.Id.lblButton4);
 
 //			m_lblActivity = FindViewById<TextView> (Resource.Id.lblButton6);
 //			m_lblTrip = FindViewById<TextView> (Resource.Id.lblButton7);
@@ -223,13 +244,13 @@ namespace DMSvStandard
 			btn2.Click += delegate { peekup_Click();	};
 
 			LinearLayout btn3 = FindViewById<LinearLayout> (Resource.Id.columnlayout2_1);
-			btn3.Click += delegate { newmsg_Click();	};
+			btn3.Click += delegate { chat_Click();	};
 
-			LinearLayout btn4 = FindViewById<LinearLayout> (Resource.Id.columnlayout2_2);
-			btn4.Click += delegate { inbox_Click();	};
+			//LinearLayout btn4 = FindViewById<LinearLayout> (Resource.Id.columnlayout2_2);
+			//btn4.Click += delegate { inbox_Click();	};
 
-			LinearLayout btn5 = FindViewById<LinearLayout> (Resource.Id.columnlayout3_1);
-			btn5.Click += delegate { outbox_Click();	};
+			//LinearLayout btn5 = FindViewById<LinearLayout> (Resource.Id.columnlayout3_1);
+			//btn5.Click += delegate { outbox_Click();	};
 
 			LinearLayout btn8 = FindViewById<LinearLayout> (Resource.Id.columnlayout4_2);
 			btn8.Click += delegate { config_Click();	};
@@ -247,65 +268,22 @@ namespace DMSvStandard
 			m_newMsgBadge.Visibility = ViewStates.Invisible;
 			m_newMsgBadgeText = FindViewById<TextView> (Resource.Id.newMsgBadgeText);
 
-			m_inboxBadge = FindViewById<RelativeLayout> (Resource.Id.inboxBadge);
-			m_inboxBadge.Visibility = ViewStates.Invisible;
-			m_inboxBadgeText = FindViewById<TextView> (Resource.Id.inboxBadgeText);
 
-			m_outboxBadge = FindViewById<RelativeLayout> (Resource.Id.outboxBadge);
-			m_outboxBadge.Visibility = ViewStates.Invisible;
-			m_outboxBadgeText = FindViewById<TextView> (Resource.Id.outboxBadgeText);
 
-			m_configBadge = FindViewById<RelativeLayout> (Resource.Id.configBadge);
-			m_configBadge.Visibility = ViewStates.Invisible;
-			m_configBadgeText = FindViewById<TextView> (Resource.Id.configBadgeText);
-
-//			ConfigurationModel _model = new ConfigurationModel ();
-//			_model.loadConfiguration ();
-//						
-//			ApplicationData.Instance.setConfigurationModel(_model);
+			ApplicationData.Instance.setLivraisonIndicator (Data.countliv);
+			ApplicationData.Instance.setEnlevementIndicator(Data.countram);
+			ApplicationData.Instance.setmessageIndicator(Data.countmess);
 //
-//
-//
-//			ApplicationData.Instance.setTranslator (ApplicationData.Instance.getConfigurationModel ().getLanguage (), "DTMD");
-//
-//			if (ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
-		
-
-
-			//}
-
+//			m_newMsgBadgeText.Text = Convert.ToString (Data.countmess);
+//			m_deliveryBadgeText.Text= Convert.ToString (Data.countliv);
+//			m_peekupBadgeText.Text= Convert.ToString (Data.countram);
 			loginCanceled = false;
-//			if (ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
-//				//START TRIP
-//				if (!ServerActions.Instance.isServerStarted ()) {
-//					ServerActions.Instance.StartServer ();				
-//					ApplicationActions.Instance.initTimers ();
-//
-//					List<TextMessage> existingMessages = ApplicationActions.Instance.loadMessages (TextMessage.MSG_OUTBOX);
-//					ApplicationActions.Instance.updateOutboxMessageList (existingMessages, new List<TextMessage> ());
-//
-//					existingMessages = ApplicationActions.Instance.loadMessages (TextMessage.MSG_INBOX);
-//					ApplicationActions.Instance.updateInboxMessageList (existingMessages, new List<TextMessage> ());
-//				}
-//				if (ApplicationData.Instance.getConfigurationModel().getAutoTrip() == 1)
-//					ApplicationActions.Instance.setTripStarted (false);
-//				else ApplicationActions.Instance.setTripStarted (true);
-//				ApplicationActions.Instance.ChangeTripState ();
-//			}
-			//else ApplicationActions.Instance.restartTimers ();
 
 
 
-			//XAMARIN INSIGHT
-			if (!Insights.IsInitialized) {
-				Xamarin.Insights.Initialize("4845750bb6fdffe0e3bfaebe810ca335f0f87030", this);
-
-			}
 
 
-			Insights.Identify(ApplicationData.UserAndsoft,"Name",ApplicationData.UserAndsoft);
-			InitializeLocationManager ();
-			}
+}
 
 
 
@@ -369,13 +347,13 @@ namespace DMSvStandard
 //			m_lblOutbox.Text = ApplicationData.Instance.getTranslator ().translateMessage ("formmessages.menusentbox");
 //			m_lblConfig.Text = ApplicationData.Instance.getTranslator ().translateMessage ("mainfrom.menuconfig");
 
-			if (indicatorTimer != null)
-				indicatorTimer.Stop ();
-
-
-
-
-
+//			if (indicatorTimer != null)
+//				indicatorTimer.Stop ();
+//
+//
+//
+//
+//
 			indicatorTimer = new System.Timers.Timer();
 			indicatorTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnIndicatorTimerHandler);
 			indicatorTimer.Interval = 1000;//ApplicationData.Instance.getConfigurationModel().getInboxUpdateInterval();
@@ -388,19 +366,19 @@ namespace DMSvStandard
 
 		private void OnIndicatorTimerHandler(object source, System.Timers.ElapsedEventArgs args)
 		{
-			if (ApplicationData.Instance.getOutboxIndicator () > 0) {
-				RunOnUiThread (() => m_outboxBadgeText.Text = ApplicationData.Instance.getOutboxIndicator().ToString());
-				RunOnUiThread (() => m_outboxBadge.Visibility = ViewStates.Visible);
-			} else {
-				RunOnUiThread (() => m_outboxBadge.Visibility = ViewStates.Invisible);
-			}
-
-			if (ApplicationData.Instance.getInboxIndicator () > 0) {
-				RunOnUiThread (() => m_inboxBadgeText.Text= ApplicationData.Instance.getInboxIndicator ().ToString());
-				RunOnUiThread (() => m_inboxBadge.Visibility = ViewStates.Visible);
-			} else {
-				RunOnUiThread (() => m_inboxBadge.Visibility = ViewStates.Invisible);
-			}
+//			if (ApplicationData.Instance.getOutboxIndicator () > 0) {
+//				RunOnUiThread (() => m_outboxBadgeText.Text = ApplicationData.Instance.getOutboxIndicator().ToString());
+//				RunOnUiThread (() => m_outboxBadge.Visibility = ViewStates.Visible);
+//			} else {
+//				RunOnUiThread (() => m_outboxBadge.Visibility = ViewStates.Invisible);
+//			}
+//
+//			if (ApplicationData.Instance.getInboxIndicator () > 0) {
+//				RunOnUiThread (() => m_inboxBadgeText.Text= ApplicationData.Instance.getInboxIndicator ().ToString());
+//				RunOnUiThread (() => m_inboxBadge.Visibility = ViewStates.Visible);
+//			} else {
+//				RunOnUiThread (() => m_inboxBadge.Visibility = ViewStates.Invisible);
+//			}
 
 			if (ApplicationData.Instance.getLivraisonIndicator () > 0) {
 				RunOnUiThread (() => m_deliveryBadgeText.Text= ApplicationData.Instance.getLivraisonIndicator ().ToString());
@@ -415,6 +393,13 @@ namespace DMSvStandard
 			} else {
 				RunOnUiThread (() => m_peekupBadge.Visibility = ViewStates.Invisible);
 			}
+
+			if (ApplicationData.Instance.getmessageIndicator () > 0) {
+				RunOnUiThread (() => m_newMsgBadgeText.Text= ApplicationData.Instance.getmessageIndicator ().ToString());
+				RunOnUiThread (() => m_newMsgBadge.Visibility = ViewStates.Visible);
+			} else {
+				RunOnUiThread (() => m_newMsgBadge.Visibility = ViewStates.Invisible);
+			}
 		}
 
 		protected void delivery_Click()
@@ -425,10 +410,11 @@ namespace DMSvStandard
 //				return;
 //			} else if (ApplicationData.Instance.isAdminLogin ()) {
 //
+
 //				StartActivity(typeof(ActivityListLivraison));
 //			}
 
-			//StartActivity(typeof(ActivityListLivraison));
+			StartActivity(typeof(ActivityListLivraison));
 		}
 
 
@@ -442,16 +428,13 @@ namespace DMSvStandard
 //			} else if (ApplicationData.Instance.isAdminLogin ()) {
 //				StartActivity(typeof(ActivityListEnlevement));
 //			}
+
 			StartActivity(typeof(ActivityListEnlevement));
 		}
 
-		protected void newmsg_Click()
+		protected void chat_Click()
 		{
-
-			//Show an error image with a message with a Dimmed background, and auto-dismiss after 2 seconds
-			AndHUD.Shared.ShowError(this, "Non Disponible", MaskType.Black, TimeSpan.FromSeconds(2));
-
-
+			StartActivity(typeof(ActivityChat));
 		}
 
 
@@ -482,9 +465,7 @@ namespace DMSvStandard
 	
 		protected void config_Click()
 		{
-			//ApplicationData.Instance.setTempConfigModel(ApplicationData.Instance.getConfigurationModel().clone());
-			//StartActivity (typeof(GeneralConfigActivity));
-
+			
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
 
@@ -498,7 +479,7 @@ namespace DMSvStandard
 			builder.SetNegativeButton("Connection", delegate {
 				if(input.Text =="Dealtis25-"){
 
-					StartActivity (typeof(GeneralConfigActivity));
+					StartActivity (typeof(ActivitySignature));
 
 				}else{Toast.MakeText (this, "Mauvais MDP", ToastLength.Short).Show ();}
 			});
@@ -574,12 +555,13 @@ namespace DMSvStandard
 				Console.Out.WriteLine (">>>>>THREAD INTEG DONE....<<<<<");
 			} catch (Exception ex) {
 				Data.content = "[]";
-
+				Insights.Report (ex,Xamarin.Insights.Severity.Error);
 			}
 
 
 			Data.countliv = 0;
 			Data.countram = 0;
+			Data.countmess = 0;
 
 			//SON
 			if (Data.content == "[]") {
@@ -604,7 +586,7 @@ namespace DMSvStandard
 				(Environment.SpecialFolder.Personal), "ormDMS.db3");
 
 			var db = new SQLiteConnection (dbPath);
-			var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV'");
+			var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND Userandsoft = ?",ApplicationData.UserAndsoft);
 
 
 
@@ -614,13 +596,20 @@ namespace DMSvStandard
 			}
 
 
-			var tableram = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM'");
+			var tableram = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM' AND Userandsoft = ?",ApplicationData.UserAndsoft);
 			foreach (var rows in tableram) {
 
 				Data.countram++;
 			}
+		var tablemess = db.Query<Message> ("SELECT * FROM Message WHERE statutMessage = 0 AND codeChauffeur=?",ApplicationData.UserAndsoft);
+			foreach( var row in tablemess){
+
+				Data.countmess++;
+			}
+
 			ApplicationData.Instance.setLivraisonIndicator (Data.countliv);
 			ApplicationData.Instance.setEnlevementIndicator (Data.countram);
+			ApplicationData.Instance.setmessageIndicator(Data.countmess);
 
 
 
@@ -653,7 +642,7 @@ namespace DMSvStandard
 
 				} catch (Exception ex) {
 					Data.content = "[]";
-
+					Insights.Report (ex,Xamarin.Insights.Severity.Error);
 				}
 
 
@@ -676,38 +665,176 @@ namespace DMSvStandard
 			Thread.Sleep (10);
 			ThreadAppGPS.Start ();
 			Console.Out.Write ("///////////////ThreadAppGPS START///////////////");
-//			var gps = new getgpslocation() ;
-//			gps.InitializeLocationManager ();
-			//ApplicationData.ithread++;
+
 		}
 		public void ComPosGPS(){
 			int idgps = 0;
 			while (idgps == 0) {
 
+				//CONN
+				var connectivityManager = (ConnectivityManager)GetSystemService(ConnectivityService);
 
-				try
-				{
-					//API LIVRER OK
-					string _url = "http://dms.jeantettransport.com/api/gps";
-					var webClient = new WebClient();
-					webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
-					//webClient.Encoding = Encoding.UTF8;
+				var activeConnection = connectivityManager.ActiveNetworkInfo;
+				if ((activeConnection != null) && activeConnection.IsConnected) {
 
-					string datagps ="{\"posgps\":\""+ApplicationData.GPS+"\",\"userandsoft\":\""+ApplicationData.UserAndsoft+"\"}";
 
-					webClient.UploadString(_url,datagps);
-					Console.Out.WriteLine(">>>>>THREAD GPS SEND "+datagps);
+
+
+						//API GPS OK
+						string _url = "http://dms.jeantettransport.com/api/leslie";
+						string dbPath = System.IO.Path.Combine (System.Environment.GetFolderPath
+							(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
+						var db = new SQLiteConnection (dbPath);
+
+						DBRepository dbr = new DBRepository ();
+						var webClient = new WebClient ();
+
+						try {
+
+
+						//ROUTINE INTEG MESSAGE
+						try {
+							//API LIVRER OK
+							string _urlb = "http://dms.jeantettransport.com/api/leslie?codechauffeur=" + ApplicationData.UserAndsoft +"";
+							var webClientb = new WebClient ();
+							webClientb.Headers [HttpRequestHeader.ContentType] = "application/json";
+							//webClient.Encoding = Encoding.UTF8;
+
+							Data.contentmsg = webClientb.DownloadString (_urlb);
+							Console.Out.WriteLine (">>>>>THREAD INTEG DONE....<<<<<");
+						} catch (Exception ex) {
+							Data.contentmsg = "[]";
+							Insights.Report (ex,Xamarin.Insights.Severity.Error);
+
+						}
+
+						//SON MSG
+						if (Data.contentmsg == "[]") {
+						} else {
+							alertsms ();
+						}
+
+						JArray jsonVal = JArray.Parse (Data.contentmsg) as JArray;
+						var jsonarr = jsonVal;
+
+						foreach (var item in jsonarr) {
+							
+							var resinteg = dbr.InsertDataMessage (Convert.ToString (item ["codeChauffeur"]), Convert.ToString (item ["utilisateurEmetteur"]), Convert.ToString (item ["texteMessage"]),0,DateTime.Now,1, Convert.ToInt32 (item ["numMessage"]));
+							var resintegstatut = dbr.InsertDataStatutMessage(0,DateTime.Now, Convert.ToInt32 (item ["numMessage"]));
+
+							Console.WriteLine (item ["numMessage"]);
+							Console.WriteLine (resinteg);
+
+						}
+						Data.countmess=0;
+
+						var tablemess = db.Query<Message> ("SELECT * FROM Message WHERE statutMessage = 0 AND codeChauffeur=?",ApplicationData.UserAndsoft);
+						foreach( var row in tablemess){
+
+							Data.countmess++;
+						}
+
+
+
+						ApplicationData.Instance.setmessageIndicator(Data.countmess);
+
+					
+						Data.datajson ="";
+						Data.datagps="";
+						Data.datamsg="";
+						Data.datanotif="";
+
+						webClient.Headers [HttpRequestHeader.ContentType] = "application/json";
+						//webClient.Encoding = Encoding.UTF8;
+
+						Data.datagps = "{\"posgps\":\"" + ApplicationData.GPS + "\",\"userandsoft\":\"" + ApplicationData.UserAndsoft + "\"}";
+
+
+						//webClient.UploadString (_url, datagps);
+
+
+					
+
+
+
+
+						var tablestatutmessage = db.Query<StatutMessage> ("SELECT * FROM StatutMessage");
+
+
+						//SEND NOTIF
+						foreach (var item in tablestatutmessage) {
+							Data.datanotif += "{\"statutNotificationMessage\":\"" + item.statutNotificationMessage + "\",\"dateNotificationMessage\":\"" + item.dateNotificationMessage + "\",\"numMessage\":\""+item.numMessage+"\"},";
+
+						//	webClient.UploadString (_url,datamessage);
+						//	var resultdelete = db.Query<StatutMessage> (" DELETE FROM StatutLivraison WHERE Id='"+item.Id+"'");
+						}
+
+						
+
+
+
+						//SEND MESSAGE
+						var tablemessage = db.Query<Message> ("SELECT * FROM Message WHERE statutMessage = 2");
+						foreach (var item in tablemessage) {
+							Data.datamsg += "{\"codeChauffeur\":\"" + item.codeChauffeur + "\",\"texteMessage\":\"" + item.texteMessage + "\",\"utilisateurEmetteur\":\""+item.utilisateurEmetteur+"\",\"dateImportMessage\":\""+item.dateImportMessage+"\",\"typeMessage\":\""+item.typeMessage+"\"},";
+
+						//	webClient.UploadString (_url,datamessage);
+						// var updatestatutmessage = db.Query<Message> ("UPDATE Message SET statutMessage = 3 WHERE _Id = ?",item.Id);
+						}
+						if(Data.datanotif == ""){
+							Data.datanotif ="{}";
+						}else{
+							Data.datanotif = Data.datanotif.Remove(Data.datanotif.Length - 1);
+						}
+						if(Data.datamsg == ""){
+							Data.datamsg ="{}";
+						}else{
+							Data.datamsg = Data.datamsg.Remove(Data.datamsg.Length - 1);
+						}
+
+						Data.datajson = "{\"suivgps\":"+Data.datagps+",\"statutmessage\":["+Data.datanotif+"],\"Message\":["+Data.datamsg+"]}";
+
+
+						//API MSG/NOTIF/GPS
+						webClient.UploadString (_url,Data.datajson);
+
+						foreach (var item in tablestatutmessage) {
+							var resultdelete = dbr.deletenotif(item.Id);
+						}
+						foreach (var item in tablemessage) {							
+							var updatestatutmessage = db.Query<Message> ("UPDATE Message SET statutMessage = 3 WHERE _Id = ?",item.Id);
+						}
+
+
+
+						} catch (Exception ex) {
+							Data.datajson = "Crash " + ex;
+							Insights.Report (ex,Xamarin.Insights.Severity.Error);
+							Console.Out.Write(ex);
+
+						}
+
+					
+
+					
+
+
+					
+					Console.Out.WriteLine (">>>>>THREAD Leslie SEND " +DateTime.Now.Minute+ Data.datajson);
+
+
+					
+
 
 
 				}
-				catch (Exception e)
-				{
-					Insights.Report (e);
-				}
-
-				Thread.Sleep (300000);
+				Thread.Sleep (120000);
 			}
 		}
+
+
+
+
 		public void ComWebservice(){
 			int idcom = 0;
 			while(idcom == 0){
@@ -740,7 +867,7 @@ namespace DMSvStandard
 						}
 						catch (Exception e)
 						{
-							Insights.Report (e);
+							Insights.Report (e,Xamarin.Insights.Severity.Error);
 						}
 
 				}
@@ -819,6 +946,7 @@ namespace DMSvStandard
 						Console.Out.WriteLine (">>>>>THREAD INTEG DONE....<<<<<");
 					} catch (Exception ex) {
 						Data.content = "[]";
+						Insights.Report (ex,Xamarin.Insights.Severity.Error);
 
 					}
 				
@@ -849,7 +977,7 @@ namespace DMSvStandard
 				(Environment.SpecialFolder.Personal), "ormDMS.db3");
 
 				var db = new SQLiteConnection (dbPath);
-				var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV'");
+				var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND Userandsoft = ?",ApplicationData.UserAndsoft);
 
 
 
@@ -859,13 +987,14 @@ namespace DMSvStandard
 				}
 
 
-				var tableram = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM'");
+				var tableram = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM' AND Userandsoft = ?",ApplicationData.UserAndsoft);
 				foreach (var rows in tableram) {
 
 					Data.countram++;
 				}
 				ApplicationData.Instance.setLivraisonIndicator (Data.countliv);
 				ApplicationData.Instance.setEnlevementIndicator (Data.countram);
+				ApplicationData.Instance.setmessageIndicator(Data.countmess);
 
 
 			
@@ -898,7 +1027,8 @@ namespace DMSvStandard
 
 					} catch (Exception ex) {
 						Data.content = "[]";
-
+							Insights.Report (ex,Xamarin.Insights.Severity.Error);
+						
 					}
 
 
@@ -906,7 +1036,7 @@ namespace DMSvStandard
 		}
 				Console.WriteLine ("///////Thread Integ RUNNING////"+DateTime.Now.Minute);
 				Thread.Sleep (300000);
-				//Thread.Sleep (3000);
+
 		}
 		}
 
@@ -916,6 +1046,14 @@ namespace DMSvStandard
 
 			MediaPlayer _player;
 			_player = MediaPlayer.Create(this,Resource.Raw.beep4);
+			_player.Start();
+		}
+
+		public void alertsms()
+		{
+
+			MediaPlayer _player;
+			_player = MediaPlayer.Create(this,Resource.Raw.msg3);
 			_player.Start();
 		}
 
