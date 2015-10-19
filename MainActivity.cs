@@ -718,7 +718,6 @@ namespace DMSvStandard
 						var jsonarr = jsonVal;
 
 						foreach (var item in jsonarr) {
-							
 							var resinteg = dbr.InsertDataMessage (Convert.ToString (item ["codeChauffeur"]), Convert.ToString (item ["utilisateurEmetteur"]), Convert.ToString (item ["texteMessage"]),0,DateTime.Now,1, Convert.ToInt32 (item ["numMessage"]));
 							var resintegstatut = dbr.InsertDataStatutMessage(0,DateTime.Now, Convert.ToInt32 (item ["numMessage"]));
 
@@ -900,6 +899,10 @@ namespace DMSvStandard
 			int idcom = 0;
 			while (idcom == 0) {
 
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal), "ormDMS.db3");
+
+				var db = new SQLiteConnection(dbPath);
 				// MODIFICATION ALEX Deplacement de la recuperation de l'heure pour la recuperation des data
 
 				if (DateTime.Now.Day < 10) {
@@ -964,19 +967,29 @@ namespace DMSvStandard
 				var jsonarr = jsonVal;
 
 				foreach (var item in jsonarr) {
-					DBRepository dbr = new DBRepository ();
-					var resinteg = dbr.InsertData (Convert.ToString (item ["codeLivraison"]), Convert.ToString (item ["numCommande"]), Convert.ToString (item ["refClient"]), Convert.ToString (item ["nomPayeur"]), Convert.ToString (item ["nomExpediteur"]), Convert.ToString (item ["adresseExpediteur"]), Convert.ToString (item ["villeExpediteur"]), Convert.ToString (item ["CpExpediteur"]), Convert.ToString (item ["dateExpe"]), Convert.ToString (item ["nomClient"]), Convert.ToString (item ["adresseLivraison"]), Convert.ToString (item ["villeLivraison"]), Convert.ToString (item ["CpLivraison"]), Convert.ToString (item ["dateHeure"]), Convert.ToString (item ["poids"]), Convert.ToString (item ["nbrPallette"]), Convert.ToString (item ["nbrColis"]), Convert.ToString (item ["instrucLivraison"]), Convert.ToString (item ["typeMission"]), Convert.ToString (item ["typeSegment"]), Convert.ToString (item ["groupage"]), Convert.ToString (item ["ADRCom"]), Convert.ToString (item ["ADRGrp"]), "0", Convert.ToString (item ["CR"]), DateTime.Now.Day, Convert.ToString (item ["Datemission"]), Convert.ToString (item ["Ordremission"]), Convert.ToString (item ["planDeTransport"]),ApplicationData.UserAndsoft);
+						int verifpos = 0;
+						var verifbasecode = db.Query<ToDoTask>("SELECT count(*) FROM ToDoTask WHERE codeLivraison = ?",Convert.ToString (item ["codeLivraison"]));
+						
+
+						foreach (var pos in verifbasecode) {
+							verifpos++;							
+						}
+
+						DBRepository dbr = new DBRepository ();
+						if (verifpos == 0) {
+							var resinteg = dbr.InsertData (Convert.ToString (item ["codeLivraison"]), Convert.ToString (item ["numCommande"]), Convert.ToString (item ["refClient"]), Convert.ToString (item ["nomPayeur"]), Convert.ToString (item ["nomExpediteur"]), Convert.ToString (item ["adresseExpediteur"]), Convert.ToString (item ["villeExpediteur"]), Convert.ToString (item ["CpExpediteur"]), Convert.ToString (item ["dateExpe"]), Convert.ToString (item ["nomClient"]), Convert.ToString (item ["adresseLivraison"]), Convert.ToString (item ["villeLivraison"]), Convert.ToString (item ["CpLivraison"]), Convert.ToString (item ["dateHeure"]), Convert.ToString (item ["poids"]), Convert.ToString (item ["nbrPallette"]), Convert.ToString (item ["nbrColis"]), Convert.ToString (item ["instrucLivraison"]), Convert.ToString (item ["typeMission"]), Convert.ToString (item ["typeSegment"]), Convert.ToString (item ["groupage"]), Convert.ToString (item ["ADRCom"]), Convert.ToString (item ["ADRGrp"]), "0", Convert.ToString (item ["CR"]), DateTime.Now.Day, Convert.ToString (item ["Datemission"]), Convert.ToString (item ["Ordremission"]), Convert.ToString (item ["planDeTransport"]),ApplicationData.UserAndsoft);
+							Console.WriteLine (resinteg);
+						}
+					
+
 
 					Console.WriteLine (item ["numCommande"]);
-					Console.WriteLine (resinteg);
+					
 
 				}
 
 				//SET BADGE
-				string dbPath = System.IO.Path.Combine (Environment.GetFolderPath
-				(Environment.SpecialFolder.Personal), "ormDMS.db3");
-
-				var db = new SQLiteConnection (dbPath);
+				
 				var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND Userandsoft = ?",ApplicationData.UserAndsoft);
 
 

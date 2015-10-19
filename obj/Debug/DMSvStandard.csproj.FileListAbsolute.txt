@@ -601,3 +601,5 @@ C:\Users\Romain\Desktop\DMSvStandard\obj\Debug\res\drawable\bleu_buttontwo.xml
 C:\Users\Romain\Desktop\DMSvStandard\obj\Debug\res\raw\msg3.mp3
 C:\Users\Romain\Desktop\DMSvStandard\obj\Debug\R.cs.flag
 C:\Users\Romain\Desktop\DMSvStandard\obj\Debug\uploadflags.txt
+C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\res\drawable\backstroke.png
+C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\res\layout\listeviewrowstroke.xml

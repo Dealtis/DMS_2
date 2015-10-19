@@ -183,175 +183,178 @@ namespace DMSvStandard
 			public const int back = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int bleu_button = 2130837510;
+			public const int backstroke = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int bleu_buttontwo = 2130837511;
+			public const int bleu_button = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int bleumenu_button = 2130837512;
+			public const int bleu_buttontwo = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int boxgray = 2130837513;
+			public const int bleumenu_button = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int dealtis_fonte = 2130837514;
+			public const int boxgray = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int dealtis_fonte_ol = 2130837515;
+			public const int dealtis_fonte = 2130837515;
 			
 			// aapt resource value: 0x7f02000c
-			public const int delivery = 2130837516;
+			public const int dealtis_fonte_ol = 2130837516;
 			
 			// aapt resource value: 0x7f02000d
-			public const int Draft = 2130837517;
+			public const int delivery = 2130837517;
 			
 			// aapt resource value: 0x7f02000e
-			public const int DTMD = 2130837518;
+			public const int Draft = 2130837518;
 			
 			// aapt resource value: 0x7f02000f
-			public const int email19 = 2130837519;
+			public const int DTMD = 2130837519;
 			
 			// aapt resource value: 0x7f020010
-			public const int Enl = 2130837520;
+			public const int email19 = 2130837520;
 			
 			// aapt resource value: 0x7f020011
-			public const int fkman = 2130837521;
+			public const int Enl = 2130837521;
 			
 			// aapt resource value: 0x7f020012
-			public const int fkmanbis = 2130837522;
+			public const int fkman = 2130837522;
 			
 			// aapt resource value: 0x7f020013
-			public const int gray_button = 2130837523;
+			public const int fkmanbis = 2130837523;
 			
 			// aapt resource value: 0x7f020014
-			public const int green_listview = 2130837524;
+			public const int gray_button = 2130837524;
 			
 			// aapt resource value: 0x7f020015
-			public const int ic_errorstatus = 2130837525;
+			public const int green_listview = 2130837525;
 			
 			// aapt resource value: 0x7f020016
-			public const int ic_successstatus = 2130837526;
+			public const int ic_errorstatus = 2130837526;
 			
 			// aapt resource value: 0x7f020017
-			public const int Icon = 2130837527;
+			public const int ic_successstatus = 2130837527;
 			
 			// aapt resource value: 0x7f020018
-			public const int iconapp = 2130837528;
+			public const int Icon = 2130837528;
 			
 			// aapt resource value: 0x7f020019
-			public const int imgButtonBgColor = 2130837529;
+			public const int iconapp = 2130837529;
 			
 			// aapt resource value: 0x7f02001a
-			public const int Inbox = 2130837530;
+			public const int imgButtonBgColor = 2130837530;
 			
 			// aapt resource value: 0x7f02001b
-			public const int jaune_button = 2130837531;
+			public const int Inbox = 2130837531;
 			
 			// aapt resource value: 0x7f02001c
-			public const int Liv = 2130837532;
+			public const int jaune_button = 2130837532;
 			
 			// aapt resource value: 0x7f02001d
-			public const int LivAdr = 2130837533;
+			public const int Liv = 2130837533;
 			
 			// aapt resource value: 0x7f02001e
-			public const int Livpadr = 2130837534;
+			public const int LivAdr = 2130837534;
 			
 			// aapt resource value: 0x7f02001f
-			public const int livraison_button = 2130837535;
+			public const int Livpadr = 2130837535;
 			
 			// aapt resource value: 0x7f020020
-			public const int magnifier13 = 2130837536;
+			public const int livraison_button = 2130837536;
 			
 			// aapt resource value: 0x7f020021
-			public const int man13 = 2130837537;
+			public const int magnifier13 = 2130837537;
 			
 			// aapt resource value: 0x7f020022
-			public const int man13bis = 2130837538;
+			public const int man13 = 2130837538;
 			
 			// aapt resource value: 0x7f020023
-			public const int MessageListSelector = 2130837539;
+			public const int man13bis = 2130837539;
 			
 			// aapt resource value: 0x7f020024
-			public const int moinshuitmille = 2130837540;
+			public const int MessageListSelector = 2130837540;
 			
 			// aapt resource value: 0x7f020025
-			public const int newmessageicon = 2130837541;
+			public const int moinshuitmille = 2130837541;
 			
 			// aapt resource value: 0x7f020026
-			public const int newMsg = 2130837542;
+			public const int newmessageicon = 2130837542;
 			
 			// aapt resource value: 0x7f020027
-			public const int nonewmessagesicon = 2130837543;
+			public const int newMsg = 2130837543;
 			
 			// aapt resource value: 0x7f020028
-			public const int outbox = 2130837544;
+			public const int nonewmessagesicon = 2130837544;
 			
 			// aapt resource value: 0x7f020029
-			public const int panneauadrlimite = 2130837545;
+			public const int outbox = 2130837545;
 			
 			// aapt resource value: 0x7f02002a
-			public const int peekup = 2130837546;
+			public const int panneauadrlimite = 2130837546;
 			
 			// aapt resource value: 0x7f02002b
-			public const int plushuitmille = 2130837547;
+			public const int peekup = 2130837547;
 			
 			// aapt resource value: 0x7f02002c
-			public const int receiving5 = 2130837548;
+			public const int plushuitmille = 2130837548;
 			
 			// aapt resource value: 0x7f02002d
-			public const int red_button = 2130837549;
+			public const int receiving5 = 2130837549;
 			
 			// aapt resource value: 0x7f02002e
-			public const int red_listview = 2130837550;
+			public const int red_button = 2130837550;
 			
 			// aapt resource value: 0x7f02002f
-			public const int rounded_text = 2130837551;
+			public const int red_listview = 2130837551;
 			
 			// aapt resource value: 0x7f020030
-			public const int roundedbg = 2130837552;
+			public const int rounded_text = 2130837552;
 			
 			// aapt resource value: 0x7f020031
-			public const int roundedbgdark = 2130837553;
+			public const int roundedbg = 2130837553;
 			
 			// aapt resource value: 0x7f020032
-			public const int SBBadgeBG = 2130837554;
+			public const int roundedbgdark = 2130837554;
 			
 			// aapt resource value: 0x7f020033
-			public const int SBBadgeBGGREEN = 2130837555;
+			public const int SBBadgeBG = 2130837555;
 			
 			// aapt resource value: 0x7f020034
-			public const int SBBadgeBGUP = 2130837556;
+			public const int SBBadgeBGGREEN = 2130837556;
 			
 			// aapt resource value: 0x7f020035
-			public const int send = 2130837557;
+			public const int SBBadgeBGUP = 2130837557;
 			
 			// aapt resource value: 0x7f020036
-			public const int Settings = 2130837558;
+			public const int send = 2130837558;
 			
 			// aapt resource value: 0x7f020037
-			public const int splashscreen = 2130837559;
+			public const int Settings = 2130837559;
 			
 			// aapt resource value: 0x7f020038
-			public const int splashscreeng = 2130837560;
+			public const int splashscreen = 2130837560;
 			
 			// aapt resource value: 0x7f020039
-			public const int transport359 = 2130837561;
+			public const int splashscreeng = 2130837561;
 			
 			// aapt resource value: 0x7f02003a
-			public const int transport359b = 2130837562;
+			public const int transport359 = 2130837562;
 			
 			// aapt resource value: 0x7f02003b
-			public const int trip = 2130837563;
+			public const int transport359b = 2130837563;
 			
 			// aapt resource value: 0x7f02003c
-			public const int Val = 2130837564;
+			public const int trip = 2130837564;
 			
 			// aapt resource value: 0x7f02003d
-			public const int valide_button = 2130837565;
+			public const int Val = 2130837565;
 			
 			// aapt resource value: 0x7f02003e
-			public const int violet_button = 2130837566;
+			public const int valide_button = 2130837566;
+			
+			// aapt resource value: 0x7f02003f
+			public const int violet_button = 2130837567;
 			
 			static Drawable()
 			{
@@ -914,70 +917,73 @@ namespace DMSvStandard
 			public const int ListeViewRowRamasse = 2130903058;
 			
 			// aapt resource value: 0x7f030013
-			public const int ListeViewRowValide = 2130903059;
+			public const int ListeViewRowStroke = 2130903059;
 			
 			// aapt resource value: 0x7f030014
-			public const int loading = 2130903060;
+			public const int ListeViewRowValide = 2130903060;
 			
 			// aapt resource value: 0x7f030015
-			public const int loadingimage = 2130903061;
+			public const int loading = 2130903061;
 			
 			// aapt resource value: 0x7f030016
-			public const int loadingprogress = 2130903062;
+			public const int loadingimage = 2130903062;
 			
 			// aapt resource value: 0x7f030017
-			public const int login = 2130903063;
+			public const int loadingprogress = 2130903063;
 			
 			// aapt resource value: 0x7f030018
-			public const int LoginChoose = 2130903064;
+			public const int login = 2130903064;
 			
 			// aapt resource value: 0x7f030019
-			public const int Main = 2130903065;
+			public const int LoginChoose = 2130903065;
 			
 			// aapt resource value: 0x7f03001a
-			public const int MessageList = 2130903066;
+			public const int Main = 2130903066;
 			
 			// aapt resource value: 0x7f03001b
-			public const int MessageListDelete = 2130903067;
+			public const int MessageList = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
-			public const int MessageListDeleteItem = 2130903068;
+			public const int MessageListDelete = 2130903068;
 			
 			// aapt resource value: 0x7f03001d
-			public const int MessageListItem = 2130903069;
+			public const int MessageListDeleteItem = 2130903069;
 			
 			// aapt resource value: 0x7f03001e
-			public const int MessageListSorting = 2130903070;
+			public const int MessageListItem = 2130903070;
 			
 			// aapt resource value: 0x7f03001f
-			public const int Modal = 2130903071;
+			public const int MessageListSorting = 2130903071;
 			
 			// aapt resource value: 0x7f030020
-			public const int NewMessage = 2130903072;
+			public const int Modal = 2130903072;
 			
 			// aapt resource value: 0x7f030021
-			public const int RowLeft = 2130903073;
+			public const int NewMessage = 2130903073;
 			
 			// aapt resource value: 0x7f030022
-			public const int RowRight = 2130903074;
+			public const int RowLeft = 2130903074;
 			
 			// aapt resource value: 0x7f030023
-			public const int Signature = 2130903075;
+			public const int RowRight = 2130903075;
 			
 			// aapt resource value: 0x7f030024
-			public const int Splashscreen = 2130903076;
+			public const int Signature = 2130903076;
 			
 			// aapt resource value: 0x7f030025
-			public const int SujList = 2130903077;
+			public const int Splashscreen = 2130903077;
 			
 			// aapt resource value: 0x7f030026
-			public const int Webservice = 2130903078;
+			public const int SujList = 2130903078;
 			
 			// aapt resource value: 0x7f030027
-			public const int zxingscanneractivitylayout = 2130903079;
+			public const int Webservice = 2130903079;
 			
 			// aapt resource value: 0x7f030028
-			public const int zxingscannerfragmentlayout = 2130903080;
+			public const int zxingscanneractivitylayout = 2130903080;
+			
+			// aapt resource value: 0x7f030029
+			public const int zxingscannerfragmentlayout = 2130903081;
 			
 			static Layout()
 			{
