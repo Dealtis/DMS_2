@@ -682,7 +682,7 @@ namespace DMSvStandard
 			builder.SetPositiveButton("Annuler", delegate {  });
 
 			builder.SetNegativeButton("Chercher", delegate {				
-				var table = db.Query<ToDoTask>("SELECT * FROM ToDoTask WHERE  typeMission='L' AND typeSegment='LIV' AND Userandsoft = ? AND (numCommande LIKE '%"+editrecherche.Text+"%' OR  villeLivraison LIKE '%"+editrecherche.Text+"%' OR nomPayeur LIKE '%\"+input.Text+\"%'OR CpLivraison LIKE '%"+editrecherche.Text+"%' OR refClient LIKE '%"+editrecherche.Text+"%')",ApplicationData.UserAndsoft);
+				var table = db.Query<ToDoTask>("SELECT * FROM ToDoTask WHERE  typeMission='L' AND typeSegment='LIV' AND Userandsoft = ? AND (numCommande LIKE '%"+editrecherche.Text+"%' OR  villeLivraison LIKE '%"+editrecherche.Text+"%' OR nomPayeur LIKE '%\"+input.Text+\"%'OR CpLivraison LIKE '%"+editrecherche.Text+"%' OR refClient LIKE '%"+editrecherche.Text+"%' OR nomClient LIKE'%"+editrecherche.Text+"%')",ApplicationData.UserAndsoft);
 				textViewGrp.Text = "Recherche \""+editrecherche.Text+"\"";
 
 				//LISTVIEW

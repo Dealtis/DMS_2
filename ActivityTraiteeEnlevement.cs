@@ -657,7 +657,7 @@ namespace DMSvStandard
 			builder.SetPositiveButton("Annuler", delegate {  });
 			builder.SetNegativeButton("Chercher", delegate {
 
-				var table = db.Query<ToDoTask>("SELECT * FROM ToDoTask WHERE typeMission='C' AND typeSegment='RAM' AND (numCommande LIKE '%"+editrecherche.Text+"%' OR  villeLivraison LIKE '%"+editrecherche.Text+"%' OR nomPayeur LIKE '%"+editrecherche.Text+"%'OR CpLivraison LIKE '%"+editrecherche.Text+"%' OR refClient LIKE '%"+editrecherche.Text+"%') OR typeMission='C' AND typeSegment='RAM' AND (numCommande LIKE '%"+editrecherche.Text+"%' OR  villeLivraison LIKE '%"+editrecherche.Text+"%' OR nomPayeur LIKE '%"+editrecherche.Text+"%'OR CpLivraison LIKE '%"+editrecherche.Text+"%' OR refClient LIKE '%"+editrecherche.Text+"%')");
+				var table = db.Query<ToDoTask>("SELECT * FROM ToDoTask WHERE typeMission='C' AND typeSegment='RAM' AND (numCommande LIKE '%"+editrecherche.Text+"%' OR  villeLivraison LIKE '%"+editrecherche.Text+"%' OR nomPayeur LIKE '%"+editrecherche.Text+"%'OR CpLivraison LIKE '%"+editrecherche.Text+"%' OR refClient LIKE '%"+editrecherche.Text+"%') OR typeMission='C' AND typeSegment='RAM' AND (numCommande LIKE '%"+editrecherche.Text+"%' OR  villeLivraison LIKE '%"+editrecherche.Text+"%' OR nomPayeur LIKE '%"+editrecherche.Text+"%'OR CpLivraison LIKE '%"+editrecherche.Text+"%' OR refClient LIKE '%"+editrecherche.Text+"%'OR nomClient LIKE'%"+editrecherche.Text+"%')");
 				textViewGrp.Text = "Recherche \""+editrecherche.Text+"\"";
 
 				//LISTVIEW
