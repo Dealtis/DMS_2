@@ -372,23 +372,23 @@ namespace DMSvStandard
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f090081
-			public const int Image = 2131296385;
-			
-			// aapt resource value: 0x7f09009d
-			public const int SujListView = 2131296413;
-			
 			// aapt resource value: 0x7f090082
-			public const int Text = 2131296386;
+			public const int Image = 2131296386;
+			
+			// aapt resource value: 0x7f09009e
+			public const int SujListView = 2131296414;
 			
 			// aapt resource value: 0x7f090083
-			public const int Text1 = 2131296387;
+			public const int Text = 2131296387;
 			
 			// aapt resource value: 0x7f090084
-			public const int Text2 = 2131296388;
+			public const int Text1 = 2131296388;
 			
 			// aapt resource value: 0x7f090085
-			public const int Text3 = 2131296389;
+			public const int Text2 = 2131296389;
+			
+			// aapt resource value: 0x7f090086
+			public const int Text3 = 2131296390;
 			
 			// aapt resource value: 0x7f09003f
 			public const int _imageView = 2131296319;
@@ -396,92 +396,92 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f090041
 			public const int anomalie = 2131296321;
 			
-			// aapt resource value: 0x7f090069
-			public const int authen = 2131296361;
+			// aapt resource value: 0x7f09006a
+			public const int authen = 2131296362;
 			
-			// aapt resource value: 0x7f09006f
-			public const int bdgLiv = 2131296367;
+			// aapt resource value: 0x7f090070
+			public const int bdgLiv = 2131296368;
 			
-			// aapt resource value: 0x7f090074
-			public const int bdgRam = 2131296372;
+			// aapt resource value: 0x7f090075
+			public const int bdgRam = 2131296373;
 			
-			// aapt resource value: 0x7f09005e
-			public const int btnLivraison = 2131296350;
+			// aapt resource value: 0x7f09005f
+			public const int btnLivraison = 2131296351;
+			
+			// aapt resource value: 0x7f09009c
+			public const int btnLoad = 2131296412;
 			
 			// aapt resource value: 0x7f09009b
-			public const int btnLoad = 2131296411;
+			public const int btnSave = 2131296411;
 			
-			// aapt resource value: 0x7f09009a
-			public const int btnSave = 2131296410;
-			
-			// aapt resource value: 0x7f09005c
-			public const int btnsearch = 2131296348;
+			// aapt resource value: 0x7f09005d
+			public const int btnsearch = 2131296349;
 			
 			// aapt resource value: 0x7f09002e
 			public const int btnsend = 2131296302;
 			
-			// aapt resource value: 0x7f09007f
-			public const int button1 = 2131296383;
-			
 			// aapt resource value: 0x7f090080
-			public const int button2 = 2131296384;
+			public const int button1 = 2131296384;
+			
+			// aapt resource value: 0x7f090081
+			public const int button2 = 2131296385;
 			
 			// aapt resource value: 0x7f09000a
 			public const int buttonpass = 2131296266;
 			
-			// aapt resource value: 0x7f090088
-			public const int chDateAsc = 2131296392;
+			// aapt resource value: 0x7f090089
+			public const int chDateAsc = 2131296393;
 			
-			// aapt resource value: 0x7f09008a
-			public const int chDateDesc = 2131296394;
+			// aapt resource value: 0x7f09008b
+			public const int chDateDesc = 2131296395;
 			
-			// aapt resource value: 0x7f09008d
-			public const int chStateAsc = 2131296397;
+			// aapt resource value: 0x7f09008e
+			public const int chStateAsc = 2131296398;
 			
-			// aapt resource value: 0x7f090090
-			public const int chStateDesc = 2131296400;
+			// aapt resource value: 0x7f090091
+			public const int chStateDesc = 2131296401;
 			
 			// aapt resource value: 0x7f090030
 			public const int checkBox1 = 2131296304;
 			
-			// aapt resource value: 0x7f090086
-			public const int checkbox = 2131296390;
+			// aapt resource value: 0x7f090087
+			public const int checkbox = 2131296391;
 			
 			// aapt resource value: 0x7f09003d
 			public const int client = 2131296317;
 			
-			// aapt resource value: 0x7f090068
-			public const int codebarre = 2131296360;
+			// aapt resource value: 0x7f090069
+			public const int codebarre = 2131296361;
 			
 			// aapt resource value: 0x7f090039
 			public const int codelivraison = 2131296313;
 			
-			// aapt resource value: 0x7f09006c
-			public const int columnlayout1_1 = 2131296364;
+			// aapt resource value: 0x7f09006d
+			public const int columnlayout1_1 = 2131296365;
 			
-			// aapt resource value: 0x7f090071
-			public const int columnlayout1_2 = 2131296369;
+			// aapt resource value: 0x7f090072
+			public const int columnlayout1_2 = 2131296370;
 			
-			// aapt resource value: 0x7f090076
-			public const int columnlayout2_1 = 2131296374;
+			// aapt resource value: 0x7f090077
+			public const int columnlayout2_1 = 2131296375;
 			
-			// aapt resource value: 0x7f09007c
-			public const int columnlayout4_2 = 2131296380;
+			// aapt resource value: 0x7f09007d
+			public const int columnlayout4_2 = 2131296381;
 			
 			// aapt resource value: 0x7f090038
 			public const int commande = 2131296312;
 			
-			// aapt resource value: 0x7f09009e
-			public const int contentFrame = 2131296414;
+			// aapt resource value: 0x7f09009f
+			public const int contentFrame = 2131296415;
 			
-			// aapt resource value: 0x7f09006e
-			public const int deliveryBadge = 2131296366;
+			// aapt resource value: 0x7f09006f
+			public const int deliveryBadge = 2131296367;
 			
-			// aapt resource value: 0x7f090070
-			public const int deliveryBadgeText = 2131296368;
+			// aapt resource value: 0x7f090071
+			public const int deliveryBadgeText = 2131296369;
 			
-			// aapt resource value: 0x7f090095
-			public const int editText1 = 2131296405;
+			// aapt resource value: 0x7f090096
+			public const int editText1 = 2131296406;
 			
 			// aapt resource value: 0x7f090016
 			public const int editTextBarcode = 2131296278;
@@ -531,26 +531,26 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f090003
 			public const int edittext = 2131296259;
 			
-			// aapt resource value: 0x7f090065
-			public const int edittextlogin = 2131296357;
+			// aapt resource value: 0x7f090066
+			public const int edittextlogin = 2131296358;
 			
-			// aapt resource value: 0x7f090067
-			public const int edittextpsw = 2131296359;
-			
-			// aapt resource value: 0x7f090054
-			public const int grp1 = 2131296340;
+			// aapt resource value: 0x7f090068
+			public const int edittextpsw = 2131296360;
 			
 			// aapt resource value: 0x7f090055
-			public const int grp2 = 2131296341;
+			public const int grp1 = 2131296341;
 			
 			// aapt resource value: 0x7f090056
-			public const int grp3 = 2131296342;
+			public const int grp2 = 2131296342;
 			
 			// aapt resource value: 0x7f090057
-			public const int grp4 = 2131296343;
+			public const int grp3 = 2131296343;
 			
 			// aapt resource value: 0x7f090058
-			public const int grp5 = 2131296344;
+			public const int grp4 = 2131296344;
+			
+			// aapt resource value: 0x7f090059
+			public const int grp5 = 2131296345;
 			
 			// aapt resource value: 0x7f09000c
 			public const int imageButton1 = 2131296268;
@@ -561,20 +561,20 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f090004
 			public const int imageView1 = 2131296260;
 			
-			// aapt resource value: 0x7f09007a
-			public const int imageView2 = 2131296378;
+			// aapt resource value: 0x7f09007b
+			public const int imageView2 = 2131296379;
 			
-			// aapt resource value: 0x7f09006b
-			public const int imageView25 = 2131296363;
+			// aapt resource value: 0x7f09006c
+			public const int imageView25 = 2131296364;
 			
-			// aapt resource value: 0x7f090072
-			public const int imageView27 = 2131296370;
+			// aapt resource value: 0x7f090073
+			public const int imageView27 = 2131296371;
 			
-			// aapt resource value: 0x7f09006d
-			public const int imageView28 = 2131296365;
+			// aapt resource value: 0x7f09006e
+			public const int imageView28 = 2131296366;
 			
-			// aapt resource value: 0x7f090077
-			public const int imageView3 = 2131296375;
+			// aapt resource value: 0x7f090078
+			public const int imageView3 = 2131296376;
 			
 			// aapt resource value: 0x7f090008
 			public const int imgcon = 2131296264;
@@ -594,26 +594,26 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f09002b
 			public const int layoutlistlivraison = 2131296299;
 			
-			// aapt resource value: 0x7f09005d
-			public const int layoutlisttraitee = 2131296349;
+			// aapt resource value: 0x7f09005e
+			public const int layoutlisttraitee = 2131296350;
 			
-			// aapt resource value: 0x7f090078
-			public const int lblButton3 = 2131296376;
+			// aapt resource value: 0x7f090079
+			public const int lblButton3 = 2131296377;
 			
-			// aapt resource value: 0x7f09007d
-			public const int lblButton8 = 2131296381;
+			// aapt resource value: 0x7f09007e
+			public const int lblButton8 = 2131296382;
 			
-			// aapt resource value: 0x7f090087
-			public const int lblDateAsc = 2131296391;
+			// aapt resource value: 0x7f090088
+			public const int lblDateAsc = 2131296392;
 			
-			// aapt resource value: 0x7f090089
-			public const int lblDateDesc = 2131296393;
+			// aapt resource value: 0x7f09008a
+			public const int lblDateDesc = 2131296394;
 			
-			// aapt resource value: 0x7f09008c
-			public const int lblStateAsc = 2131296396;
+			// aapt resource value: 0x7f09008d
+			public const int lblStateAsc = 2131296397;
 			
-			// aapt resource value: 0x7f09008f
-			public const int lblStateDesc = 2131296399;
+			// aapt resource value: 0x7f090090
+			public const int lblStateDesc = 2131296400;
 			
 			// aapt resource value: 0x7f09000d
 			public const int lblTitle = 2131296269;
@@ -624,59 +624,59 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f09000b
 			public const int linearLayout2 = 2131296267;
 			
-			// aapt resource value: 0x7f09007e
-			public const int linearLayout3 = 2131296382;
+			// aapt resource value: 0x7f09007f
+			public const int linearLayout3 = 2131296383;
 			
-			// aapt resource value: 0x7f09008b
-			public const int linearLayout4 = 2131296395;
+			// aapt resource value: 0x7f09008c
+			public const int linearLayout4 = 2131296396;
 			
-			// aapt resource value: 0x7f09008e
-			public const int linearLayout5 = 2131296398;
-			
-			// aapt resource value: 0x7f090091
-			public const int linearLayout6 = 2131296401;
+			// aapt resource value: 0x7f09008f
+			public const int linearLayout5 = 2131296399;
 			
 			// aapt resource value: 0x7f090092
-			public const int linearLayout7 = 2131296402;
+			public const int linearLayout6 = 2131296402;
 			
-			// aapt resource value: 0x7f09005a
-			public const int listView1 = 2131296346;
+			// aapt resource value: 0x7f090093
+			public const int linearLayout7 = 2131296403;
+			
+			// aapt resource value: 0x7f09005b
+			public const int listView1 = 2131296347;
 			
 			// aapt resource value: 0x7f09002c
 			public const int listViewBox = 2131296300;
 			
-			// aapt resource value: 0x7f090062
-			public const int loadingImage = 2131296354;
-			
-			// aapt resource value: 0x7f090060
-			public const int loadingProgressBar = 2131296352;
-			
 			// aapt resource value: 0x7f090063
-			public const int loadingProgressWheel = 2131296355;
+			public const int loadingImage = 2131296355;
 			
-			// aapt resource value: 0x7f09006a
-			public const int mainLayout = 2131296362;
+			// aapt resource value: 0x7f090061
+			public const int loadingProgressBar = 2131296353;
 			
-			// aapt resource value: 0x7f090079
-			public const int newMsgBadge = 2131296377;
+			// aapt resource value: 0x7f090064
+			public const int loadingProgressWheel = 2131296356;
 			
-			// aapt resource value: 0x7f09007b
-			public const int newMsgBadgeText = 2131296379;
+			// aapt resource value: 0x7f09006b
+			public const int mainLayout = 2131296363;
+			
+			// aapt resource value: 0x7f09007a
+			public const int newMsgBadge = 2131296378;
+			
+			// aapt resource value: 0x7f09007c
+			public const int newMsgBadgeText = 2131296380;
 			
 			// aapt resource value: 0x7f090005
 			public const int openCamera = 2131296261;
 			
-			// aapt resource value: 0x7f090093
-			public const int pass = 2131296403;
+			// aapt resource value: 0x7f090094
+			public const int pass = 2131296404;
 			
-			// aapt resource value: 0x7f090073
-			public const int peekupBadge = 2131296371;
+			// aapt resource value: 0x7f090074
+			public const int peekupBadge = 2131296372;
 			
-			// aapt resource value: 0x7f090075
-			public const int peekupBadgeText = 2131296373;
+			// aapt resource value: 0x7f090076
+			public const int peekupBadgeText = 2131296374;
 			
-			// aapt resource value: 0x7f09009c
-			public const int progressBar1 = 2131296412;
+			// aapt resource value: 0x7f09009d
+			public const int progressBar1 = 2131296413;
 			
 			// aapt resource value: 0x7f090035
 			public const int radioButton1 = 2131296309;
@@ -693,8 +693,11 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f090032
 			public const int relativeLayout2 = 2131296306;
 			
-			// aapt resource value: 0x7f090098
-			public const int rootView = 2131296408;
+			// aapt resource value: 0x7f090053
+			public const int retour = 2131296339;
+			
+			// aapt resource value: 0x7f090099
+			public const int rootView = 2131296409;
 			
 			// aapt resource value: 0x7f09000f
 			public const int rowLayout1 = 2131296271;
@@ -732,8 +735,8 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f090036
 			public const int scrollView1 = 2131296310;
 			
-			// aapt resource value: 0x7f090099
-			public const int signatureView = 2131296409;
+			// aapt resource value: 0x7f09009a
+			public const int signatureView = 2131296410;
 			
 			// aapt resource value: 0x7f090002
 			public const int spinnerAnomalie = 2131296258;
@@ -750,14 +753,14 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f090037
 			public const int tableLayout1 = 2131296311;
 			
-			// aapt resource value: 0x7f090096
-			public const int tableRow1 = 2131296406;
+			// aapt resource value: 0x7f090097
+			public const int tableRow1 = 2131296407;
 			
-			// aapt resource value: 0x7f090064
-			public const int textView1 = 2131296356;
+			// aapt resource value: 0x7f090065
+			public const int textView1 = 2131296357;
 			
-			// aapt resource value: 0x7f090066
-			public const int textView2 = 2131296358;
+			// aapt resource value: 0x7f090067
+			public const int textView2 = 2131296359;
 			
 			// aapt resource value: 0x7f090015
 			public const int textViewBarcode = 2131296277;
@@ -774,8 +777,8 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f09004c
 			public const int textViewGPS = 2131296332;
 			
-			// aapt resource value: 0x7f090059
-			public const int textViewGrp = 2131296345;
+			// aapt resource value: 0x7f09005a
+			public const int textViewGrp = 2131296346;
 			
 			// aapt resource value: 0x7f090010
 			public const int textViewHeader1 = 2131296272;
@@ -798,8 +801,8 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f090044
 			public const int textViewPhone = 2131296324;
 			
-			// aapt resource value: 0x7f090061
-			public const int textViewStatus = 2131296353;
+			// aapt resource value: 0x7f090062
+			public const int textViewStatus = 2131296354;
 			
 			// aapt resource value: 0x7f09001d
 			public const int textViewTXPassword = 2131296285;
@@ -822,20 +825,20 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f090031
 			public const int textcr = 2131296305;
 			
-			// aapt resource value: 0x7f090097
-			public const int textds = 2131296407;
+			// aapt resource value: 0x7f090098
+			public const int textds = 2131296408;
 			
 			// aapt resource value: 0x7f09003a
 			public const int title = 2131296314;
 			
-			// aapt resource value: 0x7f090053
-			public const int toutgrp = 2131296339;
+			// aapt resource value: 0x7f090054
+			public const int toutgrp = 2131296340;
 			
-			// aapt resource value: 0x7f09005b
-			public const int traitees = 2131296347;
+			// aapt resource value: 0x7f09005c
+			public const int traitees = 2131296348;
 			
-			// aapt resource value: 0x7f09005f
-			public const int txtName = 2131296351;
+			// aapt resource value: 0x7f090060
+			public const int txtName = 2131296352;
 			
 			// aapt resource value: 0x7f090009
 			public const int txttable = 2131296265;
@@ -846,8 +849,8 @@ namespace DMSvStandard
 			// aapt resource value: 0x7f090006
 			public const int valideAnomalie = 2131296262;
 			
-			// aapt resource value: 0x7f090094
-			public const int validpass = 2131296404;
+			// aapt resource value: 0x7f090095
+			public const int validpass = 2131296405;
 			
 			static Id()
 			{
@@ -887,106 +890,109 @@ namespace DMSvStandard
 			public const int GeneralConfig = 2130903047;
 			
 			// aapt resource value: 0x7f030008
-			public const int ListeEnlevement = 2130903048;
+			public const int ImageView = 2130903048;
 			
 			// aapt resource value: 0x7f030009
-			public const int ListeLivraison = 2130903049;
+			public const int ListeEnlevement = 2130903049;
 			
 			// aapt resource value: 0x7f03000a
-			public const int ListeLivraisonMultiGrp = 2130903050;
+			public const int ListeLivraison = 2130903050;
 			
 			// aapt resource value: 0x7f03000b
-			public const int ListeTraitee = 2130903051;
+			public const int ListeLivraisonMultiGrp = 2130903051;
 			
 			// aapt resource value: 0x7f03000c
-			public const int ListeTraiteeEnlevement = 2130903052;
+			public const int ListeTraitee = 2130903052;
 			
 			// aapt resource value: 0x7f03000d
-			public const int ListeViewDelete = 2130903053;
+			public const int ListeTraiteeEnlevement = 2130903053;
 			
 			// aapt resource value: 0x7f03000e
-			public const int ListeViewRow = 2130903054;
+			public const int ListeViewDelete = 2130903054;
 			
 			// aapt resource value: 0x7f03000f
-			public const int ListeViewRowADR = 2130903055;
+			public const int ListeViewRow = 2130903055;
 			
 			// aapt resource value: 0x7f030010
-			public const int ListeViewRowAnomalie = 2130903056;
+			public const int ListeViewRowADR = 2130903056;
 			
 			// aapt resource value: 0x7f030011
-			public const int ListeViewRowAnomaliePJ = 2130903057;
+			public const int ListeViewRowAnomalie = 2130903057;
 			
 			// aapt resource value: 0x7f030012
-			public const int ListeViewRowRamasse = 2130903058;
+			public const int ListeViewRowAnomaliePJ = 2130903058;
 			
 			// aapt resource value: 0x7f030013
-			public const int ListeViewRowStroke = 2130903059;
+			public const int ListeViewRowRamasse = 2130903059;
 			
 			// aapt resource value: 0x7f030014
-			public const int ListeViewRowValide = 2130903060;
+			public const int ListeViewRowStroke = 2130903060;
 			
 			// aapt resource value: 0x7f030015
-			public const int loading = 2130903061;
+			public const int ListeViewRowValide = 2130903061;
 			
 			// aapt resource value: 0x7f030016
-			public const int loadingimage = 2130903062;
+			public const int loading = 2130903062;
 			
 			// aapt resource value: 0x7f030017
-			public const int loadingprogress = 2130903063;
+			public const int loadingimage = 2130903063;
 			
 			// aapt resource value: 0x7f030018
-			public const int login = 2130903064;
+			public const int loadingprogress = 2130903064;
 			
 			// aapt resource value: 0x7f030019
-			public const int LoginChoose = 2130903065;
+			public const int login = 2130903065;
 			
 			// aapt resource value: 0x7f03001a
-			public const int Main = 2130903066;
+			public const int LoginChoose = 2130903066;
 			
 			// aapt resource value: 0x7f03001b
-			public const int MessageList = 2130903067;
+			public const int Main = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
-			public const int MessageListDelete = 2130903068;
+			public const int MessageList = 2130903068;
 			
 			// aapt resource value: 0x7f03001d
-			public const int MessageListDeleteItem = 2130903069;
+			public const int MessageListDelete = 2130903069;
 			
 			// aapt resource value: 0x7f03001e
-			public const int MessageListItem = 2130903070;
+			public const int MessageListDeleteItem = 2130903070;
 			
 			// aapt resource value: 0x7f03001f
-			public const int MessageListSorting = 2130903071;
+			public const int MessageListItem = 2130903071;
 			
 			// aapt resource value: 0x7f030020
-			public const int Modal = 2130903072;
+			public const int MessageListSorting = 2130903072;
 			
 			// aapt resource value: 0x7f030021
-			public const int NewMessage = 2130903073;
+			public const int Modal = 2130903073;
 			
 			// aapt resource value: 0x7f030022
-			public const int RowLeft = 2130903074;
+			public const int NewMessage = 2130903074;
 			
 			// aapt resource value: 0x7f030023
-			public const int RowRight = 2130903075;
+			public const int RowLeft = 2130903075;
 			
 			// aapt resource value: 0x7f030024
-			public const int Signature = 2130903076;
+			public const int RowRight = 2130903076;
 			
 			// aapt resource value: 0x7f030025
-			public const int Splashscreen = 2130903077;
+			public const int Signature = 2130903077;
 			
 			// aapt resource value: 0x7f030026
-			public const int SujList = 2130903078;
+			public const int Splashscreen = 2130903078;
 			
 			// aapt resource value: 0x7f030027
-			public const int Webservice = 2130903079;
+			public const int SujList = 2130903079;
 			
 			// aapt resource value: 0x7f030028
-			public const int zxingscanneractivitylayout = 2130903080;
+			public const int Webservice = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public const int zxingscannerfragmentlayout = 2130903081;
+			public const int zxingscanneractivitylayout = 2130903081;
+			
+			// aapt resource value: 0x7f03002a
+			public const int zxingscannerfragmentlayout = 2130903082;
 			
 			static Layout()
 			{

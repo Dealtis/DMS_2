@@ -72,8 +72,8 @@
             <ImageView
                 android:src="@android:drawable/ic_menu_gallery"
                 android:id="@+id/_imageView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_width="247.0dp"
+                android:layout_height="150.3dp" />
         </TableLayout>
     </ScrollView>
     <LinearLayout

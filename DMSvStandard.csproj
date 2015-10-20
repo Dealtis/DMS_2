@@ -114,6 +114,7 @@
     <Compile Include="ActivityChat.cs" />
     <Compile Include="MessageBoxAdapter.cs" />
     <Compile Include="StatutMessage.cs" />
+    <Compile Include="ImageDetailView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -239,6 +240,7 @@
     <AndroidResource Include="Resources\Raw\msg3.mp3" />
     <AndroidResource Include="Resources\drawable\backstroke.png" />
     <AndroidResource Include="Resources\layout\ListeViewRowStroke.axml" />
+    <AndroidResource Include="Resources\layout\ImageView.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="packages\Xamarin.Insights.1.11.1\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('packages\Xamarin.Insights.1.11.1\build\MonoAndroid10\Xamarin.Insights.targets')" />

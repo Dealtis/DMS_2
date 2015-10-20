@@ -94,7 +94,7 @@ namespace DMSvStandard
 			//HIDE IMAGEBOX
 			ImageView _imageView = FindViewById<ImageView> (Resource.Id._imageView);
 			_imageView.Visibility = ViewStates.Gone;
-
+			_imageView.Click += btnimg_Click;
 
 			//FONTSNEXALIGHT
 			Typeface nexalight = Typeface.CreateFromAsset (Application.Context.Assets, "fonts/NexaLight.ttf");
@@ -120,10 +120,9 @@ namespace DMSvStandard
 				var resimg = dbr.GetImageAnomalie (i);
 				_imageView.Visibility = ViewStates.Visible;
 
-				int height = _imageView.Height;
-				int width = _imageView.Width ;
 
-				App.bitmap = resimg.LoadAndResizeBitmap (width, height);
+
+				App.bitmap = resimg.LoadAndResizeBitmap (500, 500);
 				_imageView.SetImageBitmap (App.bitmap);
 			}
 
@@ -165,7 +164,9 @@ namespace DMSvStandard
 
 
 		}
-
+		public void btnimg_Click(object sender, EventArgs e){
+			StartActivity (typeof(ImageDetailView));
+		}
 		public void btnValide_Click(object sender, EventArgs e)
 		{	
 
