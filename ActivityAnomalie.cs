@@ -210,11 +210,11 @@ namespace DMSvStandard
 			DBRepository dbrbis = new DBRepository();
 
 			if (App._file == null) {
-				var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2",App.txtSpin,txtRem.Text,null);
+				var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2",App.txtSpin,Convert.ToString(txtRem.Text),null);
 				System.Console.Out.WriteLine (resultfor);
 			
 			} else {
-				var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2",App.txtSpin,txtRem.Text,App._file.Path);
+				var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2",App.txtSpin,Convert.ToString(txtRem.Text),App._file.Path);
 				System.Console.Out.WriteLine (resultfor);
 			}
 

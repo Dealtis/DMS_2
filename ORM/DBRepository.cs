@@ -396,9 +396,9 @@ namespace DMSvStandard.ORM
 
 			}
 		}
-		//Insertion des donn¨¦rs STATUT USER
+		//Insertion des donn¨¦es STATUT MESSAGE
 
-		public string InsertDataStatutMessage(int statutNotificationMessage, DateTime dateNotificationMessage, int numMessage)
+		public string InsertDataStatutMessage(int statutNotificationMessage, DateTime dateNotificationMessage, int numMessage, string numCommande, string groupage)
 		{
 			try
 			{
@@ -409,6 +409,8 @@ namespace DMSvStandard.ORM
 				item.statutNotificationMessage = statutNotificationMessage;
 				item.dateNotificationMessage =  dateNotificationMessage;				
 				item.numMessage = numMessage;
+				item.numCommande = numCommande;
+				item.groupage = groupage;
 
 				db.Insert(item);
 				return "Insertion good";
@@ -663,7 +665,7 @@ namespace DMSvStandard.ORM
 			var db = new SQLiteConnection(dbPath);
 			string output = "";
 			var item = db.Get<ToDoTask>(id);
-			output += "\n"+item.numCommande+item.ADRLiv+"\n"+item.libeAnomalie;
+			output += "\n"+item.numCommande+item.ADRLiv+"\n"+item.libeAnomalie+"\n"+item.remarque;
 			return output;
 
 		}

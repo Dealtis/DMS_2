@@ -82,7 +82,7 @@ namespace DMSvStandard
 			var tablemsgrecu = db.Query<Message> ("SELECT * FROM Message where statutMessage = 0");
 			foreach (var item in tablemsgrecu) {
 				var updatestatutmessage = db.Query<Message> ("UPDATE Message SET statutMessage = 1 WHERE statutMessage = 0");
-				var resintegstatut = dbr.InsertDataStatutMessage (1,DateTime.Now,item.numMessage);
+				var resintegstatut = dbr.InsertDataStatutMessage (1,DateTime.Now,item.numMessage,"","");
 			}
 
 		}

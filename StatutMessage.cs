@@ -30,6 +30,12 @@ namespace DMSvStandard
 
 		public int numMessage { get; set; }
 
+		public string numCommande { get; set; }
+
+		public string groupage { get; set; }
+
+
+
 	}
 }
 
