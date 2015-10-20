@@ -255,29 +255,6 @@ namespace DMSvStandard
 		}
 
 		public void updateValideStatut(){
-//
-//
-//			string datapost ="{\"codesuiviliv\":\"RAMCFM\",\"memosuiviliv\":\"Validée\",\"libellesuiviliv\":\"\",\"commandesuiviliv\":\""+ApplicationData.codemissionactive+"\",\"datesuiviliv\":\""+ApplicationData.datedj+"\"}  ";
-//			Console.Out.WriteLine("!!!!!!!!!!!!DATA CREE!!!!!!!!!!!!!!!!!!!!!!!!");
-//
-//
-//			//				Console.Out.WriteLine("!!!!!!!!!!!!!!!SEND!!!!!!!!!!!!!!!!!!!!!!!!");
-//
-//			//RECUP ID 
-//			string id = Intent.GetStringExtra ("ID");
-//			int i = int.Parse(id);
-//
-//			//AJOUT DANS LA BASE POUR ENVOIE AVEC THREAD
-//			DBRepository dbr = new DBRepository();
-//			//INSERT DATA STATUT
-//			var resultbis = dbr.InsertDataStatut(i,"RamCFM","1","",""+ApplicationData.codemissionactive+"","Validée",""+ApplicationData.datedj+"",""+datapost+"");
-//
-//			DBRepository dbrbis = new DBRepository();
-//
-//			//var resulttri = dbrbis.UpdateStatutValide(i,"1","","",null);
-//			var resultfor = dbrbis.UpdateStatutValideLivraison(i,"1","","",null);
-//			//Toast.MakeText(this, "UPDATE VALIDE", ToastLength.Short).Show();
-
 
 			//RECUP ID 
 			string id = Intent.GetStringExtra ("ID");
@@ -286,7 +263,7 @@ namespace DMSvStandard
 			DBRepository dbrbis = new DBRepository();
 
 			//var resulttri = dbrbis.UpdateStatutValide(i,"1","","",null);
-			var resultfor = dbrbis.UpdateStatutValideLivraison(i,"1","","",null);
+			var resultfor = dbrbis.UpdateStatutValideLivraison(i,"1","","","",null);
 			//Toast.MakeText(this, "UPDATE VALIDE", ToastLength.Short).Show();
 
 		}

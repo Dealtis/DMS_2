@@ -92,7 +92,7 @@ namespace DMSvStandard
 
 			spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
 			var adapter = ArrayAdapter.CreateFromResource (
-				this, Resource.Array.anomalielist, Android.Resource.Layout.SimpleSpinnerItem);
+				this, Resource.Array.anomalielivraisonlist, Android.Resource.Layout.SimpleSpinnerItem);
 
 			adapter.SetDropDownViewResource (Android.Resource.Layout.SimpleSpinnerDropDownItem);
 			spinner.Adapter = adapter;
@@ -209,23 +209,8 @@ namespace DMSvStandard
 
 			DBRepository dbrbis = new DBRepository();
 
-			if (App._file == null) {
-				var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2",App.txtSpin,Convert.ToString(txtRem.Text),null);
-				System.Console.Out.WriteLine (resultfor);
-			
-			} else {
-				var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2",App.txtSpin,Convert.ToString(txtRem.Text),App._file.Path);
-				System.Console.Out.WriteLine (resultfor);
-			}
-
-
-			//var resulttri = dbrbis.UpdateStatutValide(i,"2",App.txtSpin,txtRem.Text,App.bitmap);
-			//Toast.MakeText(this, resultfor, ToastLength.Long).Show();
-
-
-			  
 			if(App.txtSpin == "Livre avec manquant"){
-				App.codeanomalie = "LIVMQP";
+				App.codeanomalie = "LIVRMQ";
 
 			}
 			if(App.txtSpin == "Livre avec reserves pour avaries"){
@@ -283,17 +268,42 @@ namespace DMSvStandard
 			if(App.txtSpin == "Rendu non justifie"){
 				App.codeanomalie = "RENNJU";
 			}
-			if (App.txtSpin == "Ramasse pas faite") {
-				App.codeanomalie = "RAMPFT";
+			//MODIFICATION 20/10/2015
+			if(App.txtSpin == "Fermeture hebdomadaire"){
+				App.codeanomalie = "RENFHB";
 			}
-			if (App.txtSpin == "Positions non chargees") {
+			if(App.txtSpin == "Non charge"){
 				App.codeanomalie = "RENNCG";
 			}
+			if(App.txtSpin == "Inventaire"){
+				App.codeanomalie = "RENINV";
+			}
+			if(App.txtSpin == "Refuse manquant partiel"){
+				App.codeanomalie = "RENMQP";
+			}
+
+
+
+			if (App._file == null) {
+				var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2",App.txtSpin,Convert.ToString(txtRem.Text),App.codeanomalie,null);
+				System.Console.Out.WriteLine (resultfor);
+			
+			} else {
+				var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2",App.txtSpin,Convert.ToString(txtRem.Text),App.codeanomalie,App._file.Path);
+				System.Console.Out.WriteLine (resultfor);
+			}
+
 			if(App.txtSpin == "Restaure en non traite"){
-				var resultyyy = dbrbis.UpdateStatutValideLivraison (i,"0",null,null,null);
+				var resultyyy = dbrbis.UpdateStatutValideLivraison (i,"0",null,null,null,null);
+
 				StartActivity(typeof(MainActivity));
 				Finish ();
 			}
+
+	
+
+
+
 
 			  
 

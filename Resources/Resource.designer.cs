@@ -72,7 +72,10 @@ namespace DMSvStandard
 		{
 			
 			// aapt resource value: 0x7f080000
-			public const int anomalielist = 2131230720;
+			public const int anomalielivraisonlist = 2131230720;
+			
+			// aapt resource value: 0x7f080001
+			public const int anomalieramasselist = 2131230721;
 			
 			static Array()
 			{

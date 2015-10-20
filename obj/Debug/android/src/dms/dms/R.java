@@ -9,7 +9,8 @@ package dms.dms;
 
 public final class R {
     public static final class array {
-        public static final int anomalielist=0x7f080000;
+        public static final int anomalielivraisonlist=0x7f080000;
+        public static final int anomalieramasselist=0x7f080001;
     }
     public static final class attr {
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",

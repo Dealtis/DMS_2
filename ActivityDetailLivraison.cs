@@ -291,7 +291,7 @@ namespace DMSvStandard
 			DBRepository dbrbis = new DBRepository();
 
 			//var resulttri = dbrbis.UpdateStatutValide(i,"1","","",null);
-			var resultfor = dbrbis.UpdateStatutValideLivraison(i,"1","","",null);
+			var resultfor = dbrbis.UpdateStatutValideLivraison(i,"1","","","",null);
 			//Toast.MakeText(this, "UPDATE VALIDE", ToastLength.Short).Show();
 		}
 
