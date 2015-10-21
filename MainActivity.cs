@@ -466,33 +466,12 @@ namespace DMSvStandard
 		protected void config_Click()
 		{
 			
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-
-			EditText input = new EditText(this);
-			input.InputType = Android.Text.InputTypes.TextVariationPassword | Android.Text.InputTypes.ClassText;
-			builder.SetTitle("Configuration");
-			builder.SetView (input);
-			//builder.SetMessage("Voulez-vous valider cette livraison ?");
-			builder.SetCancelable(false);
-			builder.SetPositiveButton("Annuler", delegate {  });
-			builder.SetNegativeButton("Connection", delegate {
-				if(input.Text =="Dealtis25-"){
-
-					StartActivity (typeof(ActivitySignature));
-
-				}else{Toast.MakeText (this, "Mauvais MDP", ToastLength.Short).Show ();}
-			});
-			builder.Show();
 
 		}
 
 		protected void config_LongClick(){
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-
-
-		
+					
 			builder.SetTitle("Deconnexion");
 
 			builder.SetMessage("Voulez-vous vous déconnecter ?");

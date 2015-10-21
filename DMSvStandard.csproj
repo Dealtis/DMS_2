@@ -241,6 +241,7 @@
     <AndroidResource Include="Resources\drawable\backstroke.png" />
     <AndroidResource Include="Resources\layout\ListeViewRowStroke.axml" />
     <AndroidResource Include="Resources\layout\ImageView.axml" />
+    <AndroidResource Include="Resources\drawable\Logout.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="packages\Xamarin.Insights.1.11.1\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('packages\Xamarin.Insights.1.11.1\build\MonoAndroid10\Xamarin.Insights.targets')" />

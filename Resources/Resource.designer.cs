@@ -267,97 +267,100 @@ namespace DMSvStandard
 			public const int livraison_button = 2130837536;
 			
 			// aapt resource value: 0x7f020021
-			public const int magnifier13 = 2130837537;
+			public const int Logout = 2130837537;
 			
 			// aapt resource value: 0x7f020022
-			public const int man13 = 2130837538;
+			public const int magnifier13 = 2130837538;
 			
 			// aapt resource value: 0x7f020023
-			public const int man13bis = 2130837539;
+			public const int man13 = 2130837539;
 			
 			// aapt resource value: 0x7f020024
-			public const int MessageListSelector = 2130837540;
+			public const int man13bis = 2130837540;
 			
 			// aapt resource value: 0x7f020025
-			public const int moinshuitmille = 2130837541;
+			public const int MessageListSelector = 2130837541;
 			
 			// aapt resource value: 0x7f020026
-			public const int newmessageicon = 2130837542;
+			public const int moinshuitmille = 2130837542;
 			
 			// aapt resource value: 0x7f020027
-			public const int newMsg = 2130837543;
+			public const int newmessageicon = 2130837543;
 			
 			// aapt resource value: 0x7f020028
-			public const int nonewmessagesicon = 2130837544;
+			public const int newMsg = 2130837544;
 			
 			// aapt resource value: 0x7f020029
-			public const int outbox = 2130837545;
+			public const int nonewmessagesicon = 2130837545;
 			
 			// aapt resource value: 0x7f02002a
-			public const int panneauadrlimite = 2130837546;
+			public const int outbox = 2130837546;
 			
 			// aapt resource value: 0x7f02002b
-			public const int peekup = 2130837547;
+			public const int panneauadrlimite = 2130837547;
 			
 			// aapt resource value: 0x7f02002c
-			public const int plushuitmille = 2130837548;
+			public const int peekup = 2130837548;
 			
 			// aapt resource value: 0x7f02002d
-			public const int receiving5 = 2130837549;
+			public const int plushuitmille = 2130837549;
 			
 			// aapt resource value: 0x7f02002e
-			public const int red_button = 2130837550;
+			public const int receiving5 = 2130837550;
 			
 			// aapt resource value: 0x7f02002f
-			public const int red_listview = 2130837551;
+			public const int red_button = 2130837551;
 			
 			// aapt resource value: 0x7f020030
-			public const int rounded_text = 2130837552;
+			public const int red_listview = 2130837552;
 			
 			// aapt resource value: 0x7f020031
-			public const int roundedbg = 2130837553;
+			public const int rounded_text = 2130837553;
 			
 			// aapt resource value: 0x7f020032
-			public const int roundedbgdark = 2130837554;
+			public const int roundedbg = 2130837554;
 			
 			// aapt resource value: 0x7f020033
-			public const int SBBadgeBG = 2130837555;
+			public const int roundedbgdark = 2130837555;
 			
 			// aapt resource value: 0x7f020034
-			public const int SBBadgeBGGREEN = 2130837556;
+			public const int SBBadgeBG = 2130837556;
 			
 			// aapt resource value: 0x7f020035
-			public const int SBBadgeBGUP = 2130837557;
+			public const int SBBadgeBGGREEN = 2130837557;
 			
 			// aapt resource value: 0x7f020036
-			public const int send = 2130837558;
+			public const int SBBadgeBGUP = 2130837558;
 			
 			// aapt resource value: 0x7f020037
-			public const int Settings = 2130837559;
+			public const int send = 2130837559;
 			
 			// aapt resource value: 0x7f020038
-			public const int splashscreen = 2130837560;
+			public const int Settings = 2130837560;
 			
 			// aapt resource value: 0x7f020039
-			public const int splashscreeng = 2130837561;
+			public const int splashscreen = 2130837561;
 			
 			// aapt resource value: 0x7f02003a
-			public const int transport359 = 2130837562;
+			public const int splashscreeng = 2130837562;
 			
 			// aapt resource value: 0x7f02003b
-			public const int transport359b = 2130837563;
+			public const int transport359 = 2130837563;
 			
 			// aapt resource value: 0x7f02003c
-			public const int trip = 2130837564;
+			public const int transport359b = 2130837564;
 			
 			// aapt resource value: 0x7f02003d
-			public const int Val = 2130837565;
+			public const int trip = 2130837565;
 			
 			// aapt resource value: 0x7f02003e
-			public const int valide_button = 2130837566;
+			public const int Val = 2130837566;
 			
 			// aapt resource value: 0x7f02003f
-			public const int violet_button = 2130837567;
+			public const int valide_button = 2130837567;
+			
+			// aapt resource value: 0x7f020040
+			public const int violet_button = 2130837568;
 			
 			static Drawable()
 			{

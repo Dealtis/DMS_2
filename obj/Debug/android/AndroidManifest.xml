@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="DMS.DMS" android:versionCode="26" android:versionName="2.6.1">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="DMS.DMS" android:versionCode="27" android:versionName="2.6.2">
   <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="21" />
   <application android:label="DMS" android:icon="@drawable/iconapp" android:name="mono.android.app.Application" android:debuggable="true">
     <activity android:label="Menu" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.MainActivity" />
