@@ -490,7 +490,10 @@ namespace DMSvStandard
 
 		protected void delivery_LongClick(){
 
+			string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+				(Environment.SpecialFolder.Personal), "ormDMS.db3");
 
+			var db = new SQLiteConnection(dbPath);
 			// MODIFICATION ALEX Deplacement de la recuperation de l'heure pour la recuperation des data
 
 			if (DateTime.Now.Day < 10) {
@@ -552,19 +555,30 @@ namespace DMSvStandard
 			var jsonarr = jsonVal;
 
 			foreach (var item in jsonarr) {
+				int verifpos = 0;
+				var verifbasecode = db.Query<ToDoTask>("SELECT count(*) FROM ToDoTask WHERE codeLivraison = ?",Convert.ToString (item ["codeLivraison"]));
+
+
+				foreach (var pos in verifbasecode) {
+					verifpos++;							
+				}
+
 				DBRepository dbr = new DBRepository ();
-				var resinteg = dbr.InsertData (Convert.ToString (item ["codeLivraison"]), Convert.ToString (item ["numCommande"]), Convert.ToString (item ["refClient"]), Convert.ToString (item ["nomPayeur"]), Convert.ToString (item ["nomExpediteur"]), Convert.ToString (item ["adresseExpediteur"]), Convert.ToString (item ["villeExpediteur"]), Convert.ToString (item ["CpExpediteur"]), Convert.ToString (item ["dateExpe"]), Convert.ToString (item ["nomClient"]), Convert.ToString (item ["adresseLivraison"]), Convert.ToString (item ["villeLivraison"]), Convert.ToString (item ["CpLivraison"]), Convert.ToString (item ["dateHeure"]), Convert.ToString (item ["poids"]), Convert.ToString (item ["nbrPallette"]), Convert.ToString (item ["nbrColis"]), Convert.ToString (item ["instrucLivraison"]), Convert.ToString (item ["typeMission"]), Convert.ToString (item ["typeSegment"]), Convert.ToString (item ["groupage"]), Convert.ToString (item ["ADRCom"]), Convert.ToString (item ["ADRGrp"]), "0", Convert.ToString (item ["CR"]), DateTime.Now.Day, Convert.ToString (item ["Datemission"]), Convert.ToString (item ["Ordremission"]), Convert.ToString (item ["planDeTransport"]),ApplicationData.UserAndsoft);
+				if (verifpos == 0) {
+					var resinteg = dbr.InsertData (Convert.ToString (item ["codeLivraison"]), Convert.ToString (item ["numCommande"]), Convert.ToString (item ["refClient"]), Convert.ToString (item ["nomPayeur"]), Convert.ToString (item ["nomExpediteur"]), Convert.ToString (item ["adresseExpediteur"]), Convert.ToString (item ["villeExpediteur"]), Convert.ToString (item ["CpExpediteur"]), Convert.ToString (item ["dateExpe"]), Convert.ToString (item ["nomClient"]), Convert.ToString (item ["adresseLivraison"]), Convert.ToString (item ["villeLivraison"]), Convert.ToString (item ["CpLivraison"]), Convert.ToString (item ["dateHeure"]), Convert.ToString (item ["poids"]), Convert.ToString (item ["nbrPallette"]), Convert.ToString (item ["nbrColis"]), Convert.ToString (item ["instrucLivraison"]), Convert.ToString (item ["typeMission"]), Convert.ToString (item ["typeSegment"]), Convert.ToString (item ["groupage"]), Convert.ToString (item ["ADRCom"]), Convert.ToString (item ["ADRGrp"]), "0", Convert.ToString (item ["CR"]), DateTime.Now.Day, Convert.ToString (item ["Datemission"]), Convert.ToString (item ["Ordremission"]), Convert.ToString (item ["planDeTransport"]),ApplicationData.UserAndsoft);
+					var resintegnotif = dbr.InsertDataStatutMessage (10,DateTime.Now,1,Convert.ToString (item ["numCommande"]), Convert.ToString (item ["groupage"]));
+					Console.WriteLine (resintegnotif);
+					Console.WriteLine (resinteg);
+				}
+
+
 
 				Console.WriteLine (item ["numCommande"]);
-				Console.WriteLine (resinteg);
 
 			}
 
 			//SET BADGE
-			string dbPath = System.IO.Path.Combine (Environment.GetFolderPath
-				(Environment.SpecialFolder.Personal), "ormDMS.db3");
 
-			var db = new SQLiteConnection (dbPath);
 			var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND Userandsoft = ?",ApplicationData.UserAndsoft);
 
 
@@ -660,7 +674,7 @@ namespace DMSvStandard
 
 
 						//API GPS OK
-						string _url = "http://dms.jeantettransport.com/api/leslie";
+						string _url = "http://dms.jeantettransport.com/api/leslie2";
 						string dbPath = System.IO.Path.Combine (System.Environment.GetFolderPath
 							(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
 						var db = new SQLiteConnection (dbPath);
@@ -674,7 +688,7 @@ namespace DMSvStandard
 						//ROUTINE INTEG MESSAGE
 						try {
 							//API LIVRER OK
-							string _urlb = "http://dms.jeantettransport.com/api/leslie?codechauffeur=" + ApplicationData.UserAndsoft +"";
+							string _urlb = "http://dms.jeantettransport.com/api/leslie2?codechauffeur=" + ApplicationData.UserAndsoft +"";
 							var webClientb = new WebClient ();
 							webClientb.Headers [HttpRequestHeader.ContentType] = "application/json";
 							//webClient.Encoding = Encoding.UTF8;
@@ -738,10 +752,11 @@ namespace DMSvStandard
 
 						var tablestatutmessage = db.Query<StatutMessage> ("SELECT * FROM StatutMessage");
 
-
+						//SIMULATION
+						//var resintegnotif = dbr.InsertDataStatutMessage (10,DateTime.Now,0,"1510057005","GR150108");
 						//SEND NOTIF
 						foreach (var item in tablestatutmessage) {
-							Data.datanotif += "{\"statutNotificationMessage\":\"" + item.statutNotificationMessage + "\",\"dateNotificationMessage\":\"" + item.dateNotificationMessage + "\",\"numMessage\":\""+item.numMessage+"\"},";
+							Data.datanotif += "{\"statutNotificationMessage\":\"" + item.statutNotificationMessage + "\",\"dateNotificationMessage\":\"" + item.dateNotificationMessage + "\",\"numMessage\":\""+item.numMessage+"\",\"numCommande\":\""+item.numCommande+"\",\"groupage\":\""+item.groupage+"\"},";
 
 						//	webClient.UploadString (_url,datamessage);
 						//	var resultdelete = db.Query<StatutMessage> (" DELETE FROM StatutLivraison WHERE Id='"+item.Id+"'");
@@ -774,14 +789,23 @@ namespace DMSvStandard
 
 
 						//API MSG/NOTIF/GPS
-						webClient.UploadString (_url,Data.datajson);
 
-						foreach (var item in tablestatutmessage) {
-							var resultdelete = dbr.deletenotif(item.Id);
+						try{
+							webClient.UploadString (_url,Data.datajson);
+							foreach (var item in tablestatutmessage) {
+								var resultdelete = dbr.deletenotif(item.Id);
+							}
+							foreach (var item in tablemessage) {							
+								var updatestatutmessage = db.Query<Message> ("UPDATE Message SET statutMessage = 3 WHERE _Id = ?",item.Id);
+							}
 						}
-						foreach (var item in tablemessage) {							
-							var updatestatutmessage = db.Query<Message> ("UPDATE Message SET statutMessage = 3 WHERE _Id = ?",item.Id);
+						catch (Exception e)
+						{
+							Insights.Report (e,Xamarin.Insights.Severity.Error);
 						}
+
+
+
 
 
 
@@ -957,7 +981,8 @@ namespace DMSvStandard
 						DBRepository dbr = new DBRepository ();
 						if (verifpos == 0) {
 							var resinteg = dbr.InsertData (Convert.ToString (item ["codeLivraison"]), Convert.ToString (item ["numCommande"]), Convert.ToString (item ["refClient"]), Convert.ToString (item ["nomPayeur"]), Convert.ToString (item ["nomExpediteur"]), Convert.ToString (item ["adresseExpediteur"]), Convert.ToString (item ["villeExpediteur"]), Convert.ToString (item ["CpExpediteur"]), Convert.ToString (item ["dateExpe"]), Convert.ToString (item ["nomClient"]), Convert.ToString (item ["adresseLivraison"]), Convert.ToString (item ["villeLivraison"]), Convert.ToString (item ["CpLivraison"]), Convert.ToString (item ["dateHeure"]), Convert.ToString (item ["poids"]), Convert.ToString (item ["nbrPallette"]), Convert.ToString (item ["nbrColis"]), Convert.ToString (item ["instrucLivraison"]), Convert.ToString (item ["typeMission"]), Convert.ToString (item ["typeSegment"]), Convert.ToString (item ["groupage"]), Convert.ToString (item ["ADRCom"]), Convert.ToString (item ["ADRGrp"]), "0", Convert.ToString (item ["CR"]), DateTime.Now.Day, Convert.ToString (item ["Datemission"]), Convert.ToString (item ["Ordremission"]), Convert.ToString (item ["planDeTransport"]),ApplicationData.UserAndsoft);
-							var resintegnotif = dbr.InsertDataStatutMessage (10,DateTime.Now,0,Convert.ToString (item ["numCommande"]), Convert.ToString (item ["groupage"]));
+							var resintegnotif = dbr.InsertDataStatutMessage (10,DateTime.Now,1,Convert.ToString (item ["numCommande"]), Convert.ToString (item ["groupage"]));
+							Console.WriteLine (resintegnotif);
 							Console.WriteLine (resinteg);
 						}
 					
@@ -1122,10 +1147,6 @@ namespace DMSvStandard
 		//			_locationManager.RemoveUpdates(this);
 		//			Log.Debug(LogTag, "No longer listening for location updates.");
 		//		}
-
-
-
-
 	}
 }
 

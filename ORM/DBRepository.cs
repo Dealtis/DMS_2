@@ -413,7 +413,7 @@ namespace DMSvStandard.ORM
 				item.groupage = groupage;
 
 				db.Insert(item);
-				return "Insertion good";
+				return "WWWWWWWInsertion"+statutNotificationMessage+" "+numCommande;
 			}
 			catch (Exception ex)
 			{
