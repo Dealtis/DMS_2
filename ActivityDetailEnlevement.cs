@@ -60,7 +60,9 @@ namespace DMSvStandard
 			var resfor = dbr.GetInfoClient(i);
 			var ressix = dbr.GetInfoSupp(i);
 			var resstatut = dbr.GetStatutLivraison(i);
-
+			var resanomalie = dbr.GetAnomalie (i);
+			var resdestfinal = dbr.GetFinalDest (i);
+			var restypepos = dbr.GetTypePosition (i);
 			//INSERT DATA STATUT
 			//var resultbis = dbr.InsertDataStatut(i,"0","0","");
 
@@ -91,6 +93,24 @@ namespace DMSvStandard
 			TextView client = FindViewById<TextView>(Resource.Id.client);
 			client.Text = "Client";
 
+
+
+			TextView anomaliet = FindViewById<TextView> (Resource.Id.anomaliet);
+			TextView anomalie = FindViewById<TextView> (Resource.Id.infoanomalie);
+			anomalie.Text = resanomalie;
+
+			TextView destfinal = FindViewById<TextView> (Resource.Id.destfinal);
+			destfinal.Visibility = ViewStates.Gone;
+			destfinal.Text = resdestfinal;
+
+			if (restypepos == "C") {
+				destfinal.Visibility = ViewStates.Visible;
+			}
+
+			//Hide box anomalie if no anomalie
+			anomalie.Visibility = ViewStates.Gone;
+			anomaliet.Visibility = ViewStates.Gone;
+
 			//HIDE IMAGEBOX
 			ImageView _imageView = FindViewById<ImageView> (Resource.Id._imageView);
 			_imageView.Visibility = ViewStates.Gone;
@@ -104,6 +124,9 @@ namespace DMSvStandard
 			title.SetTypeface(nexabold, TypefaceStyle.Normal);
 			infosupp.SetTypeface(nexalight, TypefaceStyle.Normal);
 			client.SetTypeface(nexabold, TypefaceStyle.Normal);
+			destfinal.SetTypeface(nexabold, TypefaceStyle.Normal);
+			anomalie.SetTypeface(nexabold, TypefaceStyle.Normal);
+			anomaliet.SetTypeface(nexabold, TypefaceStyle.Normal);
 
 			infolivraison.SetTypeface(nexalight, TypefaceStyle.Normal);
 			infoclient.SetTypeface(nexalight, TypefaceStyle.Normal);
@@ -113,7 +136,10 @@ namespace DMSvStandard
 				title.SetBackgroundColor(Color.IndianRed);
 				commande.SetBackgroundColor(Color.IndianRed);
 				client.SetBackgroundColor(Color.IndianRed);
+				anomaliet.SetBackgroundColor(Color.IndianRed);
 
+				anomalie.Visibility = ViewStates.Visible;
+				anomaliet.Visibility = ViewStates.Visible;
 
 				//SET IMAGE
 
@@ -178,19 +204,21 @@ namespace DMSvStandard
 			var viewAD = this.LayoutInflater.Inflate (Resource.Layout.checkbox, null);
 
 
-			if (ApplicationData.CR == "") {
+			if ((ApplicationData.CR == "")||(ApplicationData.CR == "0")) {
 				builder.SetMessage ("Voulez-vous valider cette livraison ?");
 				viewAD.FindViewById<RadioButton> (Resource.Id.radioButton1).Visibility = ViewStates.Gone;
 				viewAD.FindViewById<RadioButton> (Resource.Id.radioButton2).Visibility = ViewStates.Gone;
+				viewAD.FindViewById<TextView> (Resource.Id.textcr).Visibility = ViewStates.Gone;
 			} else {
-				builder.SetMessage ("Avez vous perçu le CR,?\n Si oui, valider cette livraison ?");		
+				builder.SetMessage ("Avez vous perçu le CR,?\n Si oui, valider cette livraison ?");
+				viewAD.FindViewById<TextView> (Resource.Id.textcr).Text=ApplicationData.CR;
 			}
 
 
 
 			builder.SetView (viewAD);
 
-			viewAD.FindViewById<TextView> (Resource.Id.textcr).Text=ApplicationData.CR;
+
 
 			builder.SetCancelable(false);
 			builder.SetPositiveButton("Oui", delegate {

@@ -53,6 +53,7 @@ namespace DMSvStandard
 			var restri = dbr.GetTitle(i);
 			var resfor = dbr.GetInfoClient(i);
 			var ressix = dbr.GetInfoSupp(i);
+			var resanomalie = dbr.GetAnomalie (i);
 
 			//INSERT DATA STATUT
 			//var resultbis = dbr.InsertDataStatut(i,"0","0","Pas de remarque");
@@ -83,6 +84,13 @@ namespace DMSvStandard
 			TextView client = FindViewById<TextView>(Resource.Id.client);
 			client.Text = "Client";
 
+			TextView anomaliet = FindViewById<TextView> (Resource.Id.anomaliet);
+			TextView anomalie = FindViewById<TextView> (Resource.Id.infoanomalie);
+			anomalie.Text = resanomalie;
+
+			//Hide box anomalie if no anomalie
+			anomalie.Visibility = ViewStates.Gone;
+			anomaliet.Visibility = ViewStates.Gone;
 
 			//FONTSNEXALIGHT
 			Typeface nexalight = Typeface.CreateFromAsset (Application.Context.Assets, "fonts/NexaLight.ttf");

@@ -68,7 +68,7 @@
       <HintPath>packages\Xamarin.Insights.1.11.1\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Android.Support.v4">
-      <HintPath>packages\Xamarin.Android.Support.v4.23.0.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+      <HintPath>packages\Xamarin.Android.Support.v4.23.0.1.3\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -82,7 +82,6 @@
     <Compile Include="ActivityAnomalieEnlevement.cs" />
     <Compile Include="ActivityDetailEnlevement.cs" />
     <Compile Include="ActivityDetailLivraison.cs" />
-    <Compile Include="ActivityDetailTraiteeLivraison.cs" />
     <Compile Include="ActivityListEnlevement.cs" />
     <Compile Include="ActivityListLivraison.cs" />
     <Compile Include="ActivityLoginchoose.cs" />

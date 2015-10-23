@@ -7,7 +7,6 @@
     <activity android:label="ActivityAnomalie" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivityAnomalieEnlevement" />
     <activity android:label="ActivityDetailLivraison" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivityDetailEnlevement" />
     <activity android:label="ActivityDetailLivraison" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivityDetailLivraison" />
-    <activity android:label="ActivityDetailTraiteeLivraison" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivityDetailTraiteeLivraison" />
     <activity android:label="Enlevement" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivityListEnlevement" />
     <activity android:label="Livraison" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivityListLivraison" />
     <activity android:label="ActivityLoginchoose" android:name="md5c112529a4d1270c980c0d8ae7ec648cc.ActivityLoginchoose" />

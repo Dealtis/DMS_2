@@ -291,7 +291,7 @@ namespace DMSvStandard.ORM
 
 
         //Insertion des données
-		public string InsertData(string codeLivraison,string numCommande, string refClient, string nomPayeur, string nomExpediteur,string adresseExpediteur, string villeExpediteur, string CpExpediteur, string dateExpe, string nomClient, string adresseLivraison, string villeLivraison, string CpLivraison, string dateHeure, string poids, string nbrPallette, string nbrColis, string instrucLivraison, string typeMission, string typeSegment, string GROUPAGE,string AdrLiv, string AdrGrp, string statutLivraison, string CR,int dateBDD, string Datemission, string Ordremission, string planDeTransport, string Userandsoft)
+		public string InsertData(string codeLivraison,string numCommande, string refClient, string nomPayeur, string nomExpediteur,string adresseExpediteur, string villeExpediteur, string CpExpediteur, string dateExpe, string nomClient, string adresseLivraison, string villeLivraison, string CpLivraison, string dateHeure, string poids, string nbrPallette, string nbrColis, string instrucLivraison, string typeMission, string typeSegment, string GROUPAGE,string AdrLiv, string AdrGrp, string statutLivraison, string CR,int dateBDD, string Datemission, string Ordremission, string planDeTransport, string Userandsoft, string nomClientLivraison, string villeClientLivraison)
         {
             try
             {
@@ -330,6 +330,8 @@ namespace DMSvStandard.ORM
 				item.Ordremission = Ordremission;
 				item.planDeTransport = planDeTransport;
 				item.Userandsoft = Userandsoft;
+				item.nomClientLivraison = nomClientLivraison;
+				item.villeClientLivraison = villeClientLivraison;
 
 
                 db.Insert(item);
@@ -665,7 +667,30 @@ namespace DMSvStandard.ORM
 			var db = new SQLiteConnection(dbPath);
 			string output = "";
 			var item = db.Get<ToDoTask>(id);
-			output += "\n"+item.numCommande+item.ADRLiv+"\n"+item.libeAnomalie+"\n"+item.remarque;
+			output += "\n"+item.numCommande+"\n";
+			return output;
+
+		}
+		public string GetFinalDest(int id)
+		{
+			string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+				(Environment.SpecialFolder.Personal), "ormDMS.db3");
+			var db = new SQLiteConnection(dbPath);
+			string output = "";
+			var item = db.Get<ToDoTask>(id);
+			output += "\n"+item.nomClientLivraison+"\n"+item.villeClientLivraison+"";
+			return output;
+
+		}
+
+		public string GetAnomalie(int id)
+		{
+			string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+				(Environment.SpecialFolder.Personal), "ormDMS.db3");
+			var db = new SQLiteConnection(dbPath);
+			string output = "";
+			var item = db.Get<ToDoTask>(id);
+			output += "\n"+item.libeAnomalie+"\n"+item.remarque;
 			return output;
 
 		}
@@ -727,8 +752,18 @@ namespace DMSvStandard.ORM
 
 		}
 
-		//GET STATUT LIVRAISON
+		//GET TYPE POSITION
+		public string GetTypePosition(int id)
+		{
+			string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+				(Environment.SpecialFolder.Personal), "ormDMS.db3");
+			var db = new SQLiteConnection(dbPath);
+			string output = "";
+			var item = db.Get<ToDoTask>(id);
+			output += item.typeMission;
+			return output;
 
+		}
 
 
 

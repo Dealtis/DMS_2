@@ -555,21 +555,21 @@ namespace DMSvStandard
 			var jsonarr = jsonVal;
 
 			foreach (var item in jsonarr) {
-				int verifpos = 0;
-				var verifbasecode = db.Query<ToDoTask>("SELECT count(*) FROM ToDoTask WHERE codeLivraison = ?",Convert.ToString (item ["codeLivraison"]));
+//				int verifpos = 0;
+//				var verifbasecode = db.Query<ToDoTask>("SELECT count(*) FROM ToDoTask WHERE codeLivraison = ?",Convert.ToString (item ["codeLivraison"]));
 
-
-				foreach (var pos in verifbasecode) {
-					verifpos++;							
-				}
+//
+//				foreach (var pos in verifbasecode) {
+//					verifpos++;							
+//				}
 
 				DBRepository dbr = new DBRepository ();
-				if (verifpos == 0) {
-					var resinteg = dbr.InsertData (Convert.ToString (item ["codeLivraison"]), Convert.ToString (item ["numCommande"]), Convert.ToString (item ["refClient"]), Convert.ToString (item ["nomPayeur"]), Convert.ToString (item ["nomExpediteur"]), Convert.ToString (item ["adresseExpediteur"]), Convert.ToString (item ["villeExpediteur"]), Convert.ToString (item ["CpExpediteur"]), Convert.ToString (item ["dateExpe"]), Convert.ToString (item ["nomClient"]), Convert.ToString (item ["adresseLivraison"]), Convert.ToString (item ["villeLivraison"]), Convert.ToString (item ["CpLivraison"]), Convert.ToString (item ["dateHeure"]), Convert.ToString (item ["poids"]), Convert.ToString (item ["nbrPallette"]), Convert.ToString (item ["nbrColis"]), Convert.ToString (item ["instrucLivraison"]), Convert.ToString (item ["typeMission"]), Convert.ToString (item ["typeSegment"]), Convert.ToString (item ["groupage"]), Convert.ToString (item ["ADRCom"]), Convert.ToString (item ["ADRGrp"]), "0", Convert.ToString (item ["CR"]), DateTime.Now.Day, Convert.ToString (item ["Datemission"]), Convert.ToString (item ["Ordremission"]), Convert.ToString (item ["planDeTransport"]),ApplicationData.UserAndsoft);
+				//if (verifpos == 0) {
+				var resinteg = dbr.InsertData (Convert.ToString (item ["codeLivraison"]), Convert.ToString (item ["numCommande"]), Convert.ToString (item ["refClient"]), Convert.ToString (item ["nomPayeur"]), Convert.ToString (item ["nomExpediteur"]), Convert.ToString (item ["adresseExpediteur"]), Convert.ToString (item ["villeExpediteur"]), Convert.ToString (item ["CpExpediteur"]), Convert.ToString (item ["dateExpe"]), Convert.ToString (item ["nomClient"]), Convert.ToString (item ["adresseLivraison"]), Convert.ToString (item ["villeLivraison"]), Convert.ToString (item ["CpLivraison"]), Convert.ToString (item ["dateHeure"]), Convert.ToString (item ["poids"]), Convert.ToString (item ["nbrPallette"]), Convert.ToString (item ["nbrColis"]), Convert.ToString (item ["instrucLivraison"]), Convert.ToString (item ["typeMission"]), Convert.ToString (item ["typeSegment"]), Convert.ToString (item ["groupage"]), Convert.ToString (item ["ADRCom"]), Convert.ToString (item ["ADRGrp"]), "0", Convert.ToString (item ["CR"]), DateTime.Now.Day, Convert.ToString (item ["Datemission"]), Convert.ToString (item ["Ordremission"]), Convert.ToString (item ["planDeTransport"]),ApplicationData.UserAndsoft,Convert.ToString (item ["nomClientLivraison"]),Convert.ToString (item ["villeClientLivraison"]));
 					var resintegnotif = dbr.InsertDataStatutMessage (10,DateTime.Now,1,Convert.ToString (item ["numCommande"]), Convert.ToString (item ["groupage"]));
 					Console.WriteLine (resintegnotif);
 					Console.WriteLine (resinteg);
-				}
+				//}
 
 
 
@@ -674,7 +674,7 @@ namespace DMSvStandard
 
 
 						//API GPS OK
-						string _url = "http://dms.jeantettransport.com/api/leslie2";
+						string _url = "http://dms.jeantettransport.com/api/leslie";
 						string dbPath = System.IO.Path.Combine (System.Environment.GetFolderPath
 							(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
 						var db = new SQLiteConnection (dbPath);
@@ -688,7 +688,7 @@ namespace DMSvStandard
 						//ROUTINE INTEG MESSAGE
 						try {
 							//API LIVRER OK
-							string _urlb = "http://dms.jeantettransport.com/api/leslie2?codechauffeur=" + ApplicationData.UserAndsoft +"";
+							string _urlb = "http://dms.jeantettransport.com/api/leslie?codechauffeur=" + ApplicationData.UserAndsoft +"";
 							var webClientb = new WebClient ();
 							webClientb.Headers [HttpRequestHeader.ContentType] = "application/json";
 							//webClient.Encoding = Encoding.UTF8;
@@ -970,21 +970,21 @@ namespace DMSvStandard
 				var jsonarr = jsonVal;
 
 				foreach (var item in jsonarr) {
-						int verifpos = 0;
-						var verifbasecode = db.Query<ToDoTask>("SELECT count(*) FROM ToDoTask WHERE codeLivraison = ?",Convert.ToString (item ["codeLivraison"]));
+						//int verifpos = 0;
+						//var verifbasecode = db.Query<ToDoTask>("SELECT count(*) FROM ToDoTask WHERE codeLivraison = ?",Convert.ToString (item ["codeLivraison"]));
 						
 
-						foreach (var pos in verifbasecode) {
-							verifpos++;							
-						}
+						//foreach (var pos in verifbasecode) {
+						//	verifpos++;							
+						//}
 
 						DBRepository dbr = new DBRepository ();
-						if (verifpos == 0) {
-							var resinteg = dbr.InsertData (Convert.ToString (item ["codeLivraison"]), Convert.ToString (item ["numCommande"]), Convert.ToString (item ["refClient"]), Convert.ToString (item ["nomPayeur"]), Convert.ToString (item ["nomExpediteur"]), Convert.ToString (item ["adresseExpediteur"]), Convert.ToString (item ["villeExpediteur"]), Convert.ToString (item ["CpExpediteur"]), Convert.ToString (item ["dateExpe"]), Convert.ToString (item ["nomClient"]), Convert.ToString (item ["adresseLivraison"]), Convert.ToString (item ["villeLivraison"]), Convert.ToString (item ["CpLivraison"]), Convert.ToString (item ["dateHeure"]), Convert.ToString (item ["poids"]), Convert.ToString (item ["nbrPallette"]), Convert.ToString (item ["nbrColis"]), Convert.ToString (item ["instrucLivraison"]), Convert.ToString (item ["typeMission"]), Convert.ToString (item ["typeSegment"]), Convert.ToString (item ["groupage"]), Convert.ToString (item ["ADRCom"]), Convert.ToString (item ["ADRGrp"]), "0", Convert.ToString (item ["CR"]), DateTime.Now.Day, Convert.ToString (item ["Datemission"]), Convert.ToString (item ["Ordremission"]), Convert.ToString (item ["planDeTransport"]),ApplicationData.UserAndsoft);
+
+						var resinteg = dbr.InsertData (Convert.ToString (item ["codeLivraison"]), Convert.ToString (item ["numCommande"]), Convert.ToString (item ["refClient"]), Convert.ToString (item ["nomPayeur"]), Convert.ToString (item ["nomExpediteur"]), Convert.ToString (item ["adresseExpediteur"]), Convert.ToString (item ["villeExpediteur"]), Convert.ToString (item ["CpExpediteur"]), Convert.ToString (item ["dateExpe"]), Convert.ToString (item ["nomClient"]), Convert.ToString (item ["adresseLivraison"]), Convert.ToString (item ["villeLivraison"]), Convert.ToString (item ["CpLivraison"]), Convert.ToString (item ["dateHeure"]), Convert.ToString (item ["poids"]), Convert.ToString (item ["nbrPallette"]), Convert.ToString (item ["nbrColis"]), Convert.ToString (item ["instrucLivraison"]), Convert.ToString (item ["typeMission"]), Convert.ToString (item ["typeSegment"]), Convert.ToString (item ["groupage"]), Convert.ToString (item ["ADRCom"]), Convert.ToString (item ["ADRGrp"]), "0", Convert.ToString (item ["CR"]), DateTime.Now.Day, Convert.ToString (item ["Datemission"]), Convert.ToString (item ["Ordremission"]), Convert.ToString (item ["planDeTransport"]),ApplicationData.UserAndsoft,Convert.ToString (item ["nomClientLivraison"]),Convert.ToString (item ["villeClientLivraison"]));
 							var resintegnotif = dbr.InsertDataStatutMessage (10,DateTime.Now,1,Convert.ToString (item ["numCommande"]), Convert.ToString (item ["groupage"]));
 							Console.WriteLine (resintegnotif);
 							Console.WriteLine (resinteg);
-						}
+
 					
 
 
