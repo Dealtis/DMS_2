@@ -358,3 +358,7 @@ C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\o
 C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Release\uploadflags.txt
 C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Release\res\drawable\bleu_buttontwo.xml
 C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Release\res\raw\msg3.mp3
+C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Release\res\drawable\backstroke.png
+C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Release\res\layout\listeviewrowstroke.xml
+C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Release\res\layout\imageview.xml
+C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Release\res\drawable\logout.png

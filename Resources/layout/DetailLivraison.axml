@@ -35,7 +35,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/destfinal"
-                android:textSize="22dp" />
+                android:textSize="22dp"
+                android:gravity="center" />
             <TextView
                 android:text="Livraison"
                 android:id="@+id/title"

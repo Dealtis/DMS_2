@@ -68,7 +68,7 @@ namespace DMSvStandard
 
 
 
-				txtdatestatut.Text="Le"+mItems[position].dateImportMessage.Day+" à "+mItems[position].dateImportMessage.Hour+":"+mItems[position].dateImportMessage.Minute+" "+txtstatut+"";
+				txtdatestatut.Text="Le "+mItems[position].dateImportMessage.Day+" à "+mItems[position].dateImportMessage.Hour+":"+mItems[position].dateImportMessage.Minute+" "+txtstatut+"";
 			}else{
 
 
@@ -97,7 +97,7 @@ namespace DMSvStandard
 					txtstatut ="Envoyé";
 				}
 
-				txtdatestatut.Text="Le"+mItems[position].dateImportMessage.Day+" à "+mItems[position].dateImportMessage.Hour+":"+mItems[position].dateImportMessage.Minute+" "+txtstatut+"";
+				txtdatestatut.Text="Le "+mItems[position].dateImportMessage.Day+" à "+mItems[position].dateImportMessage.Hour+":"+mItems[position].dateImportMessage.Minute+" "+txtstatut+"";
 			}
 
 			return row;

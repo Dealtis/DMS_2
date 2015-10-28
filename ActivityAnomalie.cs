@@ -281,8 +281,9 @@ namespace DMSvStandard
 			if(App.txtSpin == "Refuse manquant partiel"){
 				App.codeanomalie = "RENMQP";
 			}
-
-
+			if(App.txtSpin == "Restaure en non traite"){
+				App.codeanomalie = "RESTNT";
+			}
 
 			if (App._file == null) {
 				var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2",App.txtSpin,Convert.ToString(txtRem.Text),App.codeanomalie,null);

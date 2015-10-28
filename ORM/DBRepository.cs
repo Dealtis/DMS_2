@@ -678,7 +678,7 @@ namespace DMSvStandard.ORM
 			var db = new SQLiteConnection(dbPath);
 			string output = "";
 			var item = db.Get<ToDoTask>(id);
-			output += "\n"+item.nomClientLivraison+"\n"+item.villeClientLivraison+"";
+			output += ""+item.nomClientLivraison+"\n"+item.villeClientLivraison+"";
 			return output;
 
 		}

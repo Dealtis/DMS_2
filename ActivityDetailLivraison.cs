@@ -149,9 +149,9 @@ namespace DMSvStandard
 			title.SetTypeface(nexabold, TypefaceStyle.Normal);
 			infosupp.SetTypeface(nexalight, TypefaceStyle.Normal);
 			client.SetTypeface(nexabold, TypefaceStyle.Normal);
-			destfinal.SetTypeface(nexabold, TypefaceStyle.Normal);
-			anomalie.SetTypeface(nexabold, TypefaceStyle.Normal);
-			anomaliet.SetTypeface(nexabold, TypefaceStyle.Normal);
+			destfinal.SetTypeface(nexalight, TypefaceStyle.Normal);
+			anomalie.SetTypeface(nexalight, TypefaceStyle.Normal);
+			anomaliet.SetTypeface(nexalight, TypefaceStyle.Normal);
 			infolivraison.SetTypeface(nexalight, TypefaceStyle.Normal);
 			infoclient.SetTypeface(nexalight, TypefaceStyle.Normal);
 

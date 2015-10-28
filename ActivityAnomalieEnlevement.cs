@@ -252,6 +252,9 @@ namespace DMSvStandard
 			if (App.txtSpin == "Ramasse diverse") {
 				App.codeanomalie = "RAMDIV";
 			}
+			if(App.txtSpin == "Restaure en non traite"){
+				App.codeanomalie = "RESTNT";
+			}
 
 
 
