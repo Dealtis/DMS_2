@@ -60,7 +60,9 @@ namespace DMSvStandard
 			var resfor = dbr.GetInfoClient(i);
 			var ressix = dbr.GetInfoSupp(i);
 			var resstatut = dbr.GetStatutLivraison(i);
-
+			var resanomalie = dbr.GetAnomalie (i);
+			var resdestfinal = dbr.GetFinalDest (i);
+			var restypepos = dbr.GetTypePosition (i);
 			//INSERT DATA STATUT
 			//var resultbis = dbr.InsertDataStatut(i,"0","0","");
 
@@ -91,10 +93,28 @@ namespace DMSvStandard
 			TextView client = FindViewById<TextView>(Resource.Id.client);
 			client.Text = "Client";
 
+
+
+			TextView anomaliet = FindViewById<TextView> (Resource.Id.anomaliet);
+			TextView anomalie = FindViewById<TextView> (Resource.Id.infoanomalie);
+			anomalie.Text = resanomalie;
+
+			TextView destfinal = FindViewById<TextView> (Resource.Id.destfinal);
+			destfinal.Visibility = ViewStates.Gone;
+			destfinal.Text = resdestfinal;
+
+			if (restypepos == "C") {
+				destfinal.Visibility = ViewStates.Visible;
+			}
+
+			//Hide box anomalie if no anomalie
+			anomalie.Visibility = ViewStates.Gone;
+			anomaliet.Visibility = ViewStates.Gone;
+
 			//HIDE IMAGEBOX
 			ImageView _imageView = FindViewById<ImageView> (Resource.Id._imageView);
 			_imageView.Visibility = ViewStates.Gone;
-
+			_imageView.Click += btnimg_Click;
 
 			//FONTSNEXALIGHT
 			Typeface nexalight = Typeface.CreateFromAsset (Application.Context.Assets, "fonts/NexaLight.ttf");
@@ -104,7 +124,9 @@ namespace DMSvStandard
 			title.SetTypeface(nexabold, TypefaceStyle.Normal);
 			infosupp.SetTypeface(nexalight, TypefaceStyle.Normal);
 			client.SetTypeface(nexabold, TypefaceStyle.Normal);
-
+			destfinal.SetTypeface(nexalight, TypefaceStyle.Normal);
+			anomalie.SetTypeface(nexalight, TypefaceStyle.Normal);
+			anomaliet.SetTypeface(nexalight, TypefaceStyle.Normal);
 			infolivraison.SetTypeface(nexalight, TypefaceStyle.Normal);
 			infoclient.SetTypeface(nexalight, TypefaceStyle.Normal);
 
@@ -113,17 +135,19 @@ namespace DMSvStandard
 				title.SetBackgroundColor(Color.IndianRed);
 				commande.SetBackgroundColor(Color.IndianRed);
 				client.SetBackgroundColor(Color.IndianRed);
+				anomaliet.SetBackgroundColor(Color.IndianRed);
 
+				anomalie.Visibility = ViewStates.Visible;
+				anomaliet.Visibility = ViewStates.Visible;
 
 				//SET IMAGE
 
 				var resimg = dbr.GetImageAnomalie (i);
 				_imageView.Visibility = ViewStates.Visible;
 
-				int height = _imageView.Height;
-				int width = _imageView.Width ;
 
-				App.bitmap = resimg.LoadAndResizeBitmap (width, height);
+
+				App.bitmap = resimg.LoadAndResizeBitmap (500, 500);
 				_imageView.SetImageBitmap (App.bitmap);
 			}
 
@@ -165,7 +189,9 @@ namespace DMSvStandard
 
 
 		}
-
+		public void btnimg_Click(object sender, EventArgs e){
+			StartActivity (typeof(ImageDetailView));
+		}
 		public void btnValide_Click(object sender, EventArgs e)
 		{	
 
@@ -177,19 +203,21 @@ namespace DMSvStandard
 			var viewAD = this.LayoutInflater.Inflate (Resource.Layout.checkbox, null);
 
 
-			if (ApplicationData.CR == "") {
+			if ((ApplicationData.CR == "")||(ApplicationData.CR == "0")) {
 				builder.SetMessage ("Voulez-vous valider cette livraison ?");
 				viewAD.FindViewById<RadioButton> (Resource.Id.radioButton1).Visibility = ViewStates.Gone;
 				viewAD.FindViewById<RadioButton> (Resource.Id.radioButton2).Visibility = ViewStates.Gone;
+				viewAD.FindViewById<TextView> (Resource.Id.textcr).Visibility = ViewStates.Gone;
 			} else {
-				builder.SetMessage ("Avez vous perçu le CR,?\n Si oui, valider cette livraison ?");		
+				builder.SetMessage ("Avez vous perçu le CR,?\n Si oui, valider cette livraison ?");
+				viewAD.FindViewById<TextView> (Resource.Id.textcr).Text=ApplicationData.CR;
 			}
 
 
 
 			builder.SetView (viewAD);
 
-			viewAD.FindViewById<TextView> (Resource.Id.textcr).Text=ApplicationData.CR;
+
 
 			builder.SetCancelable(false);
 			builder.SetPositiveButton("Oui", delegate {
@@ -230,7 +258,7 @@ namespace DMSvStandard
 
 
 
-				string datapost ="{\"codesuiviliv\":\"RAMCFM\",\"memosuiviliv\":\"Validée+"+typecr+"\",\"libellesuiviliv\":\"\",\"commandesuiviliv\":\""+ApplicationData.codemissionactive+"\",\"groupagesuiviliv\":\""+ApplicationData.groupagemissionactive+"\",\"datesuiviliv\":\""+ApplicationData.datedj+"\",\"posgps\":\""+ApplicationData.GPS+"\"}";
+				string datapost ="{\"codesuiviliv\":\"RAMCFM\",\"memosuiviliv\":\""+typecr+"\",\"libellesuiviliv\":\"\",\"commandesuiviliv\":\""+ApplicationData.codemissionactive+"\",\"groupagesuiviliv\":\""+ApplicationData.groupagemissionactive+"\",\"datesuiviliv\":\""+ApplicationData.datedj+"\",\"posgps\":\""+ApplicationData.GPS+"\"}";
 				Console.Out.WriteLine("!!!!!!!!!!!!DATA CREE!!!!!!!!!!!!!!!!!!!!!!!!");
 
 
@@ -255,29 +283,6 @@ namespace DMSvStandard
 		}
 
 		public void updateValideStatut(){
-//
-//
-//			string datapost ="{\"codesuiviliv\":\"RAMCFM\",\"memosuiviliv\":\"Validée\",\"libellesuiviliv\":\"\",\"commandesuiviliv\":\""+ApplicationData.codemissionactive+"\",\"datesuiviliv\":\""+ApplicationData.datedj+"\"}  ";
-//			Console.Out.WriteLine("!!!!!!!!!!!!DATA CREE!!!!!!!!!!!!!!!!!!!!!!!!");
-//
-//
-//			//				Console.Out.WriteLine("!!!!!!!!!!!!!!!SEND!!!!!!!!!!!!!!!!!!!!!!!!");
-//
-//			//RECUP ID 
-//			string id = Intent.GetStringExtra ("ID");
-//			int i = int.Parse(id);
-//
-//			//AJOUT DANS LA BASE POUR ENVOIE AVEC THREAD
-//			DBRepository dbr = new DBRepository();
-//			//INSERT DATA STATUT
-//			var resultbis = dbr.InsertDataStatut(i,"RamCFM","1","",""+ApplicationData.codemissionactive+"","Validée",""+ApplicationData.datedj+"",""+datapost+"");
-//
-//			DBRepository dbrbis = new DBRepository();
-//
-//			//var resulttri = dbrbis.UpdateStatutValide(i,"1","","",null);
-//			var resultfor = dbrbis.UpdateStatutValideLivraison(i,"1","","",null);
-//			//Toast.MakeText(this, "UPDATE VALIDE", ToastLength.Short).Show();
-
 
 			//RECUP ID 
 			string id = Intent.GetStringExtra ("ID");
@@ -286,7 +291,7 @@ namespace DMSvStandard
 			DBRepository dbrbis = new DBRepository();
 
 			//var resulttri = dbrbis.UpdateStatutValide(i,"1","","",null);
-			var resultfor = dbrbis.UpdateStatutValideLivraison(i,"1","","",null);
+			var resultfor = dbrbis.UpdateStatutValideLivraison(i,"1","","","",null);
 			//Toast.MakeText(this, "UPDATE VALIDE", ToastLength.Short).Show();
 
 		}

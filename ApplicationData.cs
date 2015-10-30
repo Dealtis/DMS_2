@@ -183,6 +183,20 @@ namespace DMSvStandard
 			System.Diagnostics.Debug.WriteLine("setEnlevement - " + enlevementIndicator.ToString());
 		}
 
+		//MSG
+		private int messageIndicator;
+
+
+		public int getmessageIndicator()
+		{ return messageIndicator; }
+
+		public void setmessageIndicator (int _messageIndicator)
+		{
+
+			messageIndicator = _messageIndicator;
+			System.Diagnostics.Debug.WriteLine("setmessage - " + messageIndicator.ToString());
+		}
+
         private int inboxIndicator;
 
         public int getInboxIndicator()

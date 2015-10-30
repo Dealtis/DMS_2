@@ -42,7 +42,8 @@ namespace DMSvStandard.ORM
             return result;
             }
             catch (Exception ex)
-            {
+            {	
+				
                 return "Erreur : " + ex.Message;
 
             }
@@ -56,7 +57,7 @@ namespace DMSvStandard.ORM
 					(Environment.SpecialFolder.Personal),"ormDMS.db3");
 				var db = new SQLiteConnection(dbPath);
 				db.CreateTable<StatutLivraison>();
-				Console.Out.WriteLine("!!!!!!!!!!!!CREATE T2!!!!!!!!!!!!!!!!!!!!!!!!");
+				Console.Out.WriteLine("!!!!!!!!!!!!CREATE STATUT!!!!!!!!!!!!!!!!!!!!!!!!");
 
 
 				string result = "Table cr閑 avec succ鑣";
@@ -77,7 +78,49 @@ namespace DMSvStandard.ORM
 					(Environment.SpecialFolder.Personal),"ormDMS.db3");
 				var db = new SQLiteConnection(dbPath);
 				db.CreateTable<TableUser>();
-				Console.Out.WriteLine("!!!!!!!!!!!!CREATE T3!!!!!!!!!!!!!!!!!!!!!!!!");
+				Console.Out.WriteLine("!!!!!!!!!!!!CREATE USER!!!!!!!!!!!!!!!!!!!!!!!!");
+
+
+				string result = "Table cr閑 avec succ鑣";
+				return result;
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
+		public string CreateTableMessage()
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal),"ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				db.CreateTable<Message>();
+				Console.Out.WriteLine("!!!!!!!!!!!!CREATE MESSAGE!!!!!!!!!!!!!!!!!!!!!!!!");
+
+
+				string result = "Table cr閑 avec succ鑣";
+				return result;
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
+		public string CreateTableStatutMessage()
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal),"ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				db.CreateTable<StatutMessage>();
+				Console.Out.WriteLine("!!!!!!!!!!!!CREATE STATUT MESSAGE!!!!!!!!!!!!!!!!!!!!!!!!");
 
 
 				string result = "Table cr閑 avec succ鑣";
@@ -122,6 +165,67 @@ namespace DMSvStandard.ORM
 				db.DeleteAll<TableUser>();
 
 
+
+				string result = "delete";
+				return result;
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
+		public string DropTableMessage()
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal),"ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				db.DeleteAll<Message>();
+
+
+
+				string result = "delete";
+				return result;
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
+		public string DropTableStatutMessage()
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal),"ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				db.DeleteAll<StatutMessage>();
+
+
+
+				string result = "delete";
+				return result;
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+
+		public string deletenotif(int id)
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal),"ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				db.Delete<StatutMessage>(id);
 
 				string result = "delete";
 				return result;
@@ -187,7 +291,7 @@ namespace DMSvStandard.ORM
 
 
         //Insertion des donn閑s
-		public string InsertData(string codeLivraison,string numCommande, string refClient, string nomPayeur, string nomExpediteur,string adresseExpediteur, string villeExpediteur, string CpExpediteur, string dateExpe, string nomClient, string adresseLivraison, string villeLivraison, string CpLivraison, string dateHeure, string poids, string nbrPallette, string nbrColis, string instrucLivraison, string typeMission, string typeSegment, string GROUPAGE,string AdrLiv, string AdrGrp, string statutLivraison, string CR,int dateBDD, string Datemission, string Ordremission, string planDeTransport, string Userandsoft)
+		public string InsertData(string codeLivraison,string numCommande, string refClient, string nomPayeur, string nomExpediteur,string adresseExpediteur, string villeExpediteur, string CpExpediteur, string dateExpe, string nomClient, string adresseLivraison, string villeLivraison, string CpLivraison, string dateHeure, string poids, string nbrPallette, string nbrColis, string instrucLivraison, string typeMission, string typeSegment, string GROUPAGE,string AdrLiv, string AdrGrp, string statutLivraison, string CR,int dateBDD, string Datemission, string Ordremission, string planDeTransport, string Userandsoft, string nomClientLivraison, string villeClientLivraison)
         {
             try
             {
@@ -226,6 +330,8 @@ namespace DMSvStandard.ORM
 				item.Ordremission = Ordremission;
 				item.planDeTransport = planDeTransport;
 				item.Userandsoft = Userandsoft;
+				item.nomClientLivraison = nomClientLivraison;
+				item.villeClientLivraison = villeClientLivraison;
 
 
                 db.Insert(item);
@@ -264,8 +370,59 @@ namespace DMSvStandard.ORM
 			}
 		}
 
+		//Insertion des donées USER
+
+		public string InsertDataMessage(string codeChauffeur,string utilisateurEmetteur, string texteMessage, int statutMessage, DateTime dateImportMessage, int typeMessage, int numMessage)
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal), "ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				Message item = new Message();
+				item.codeChauffeur = codeChauffeur;
+				item.utilisateurEmetteur =  utilisateurEmetteur;				
+				item.texteMessage = texteMessage;
+				item.statutMessage = statutMessage;
+				item.dateImportMessage = dateImportMessage;
+				item.typeMessage = typeMessage;
+				item.numMessage = numMessage;
 
 
+				db.Insert(item);
+				return "Insertion good";
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
+		//Insertion des données STATUT MESSAGE
+
+		public string InsertDataStatutMessage(int statutNotificationMessage, DateTime dateNotificationMessage, int numMessage, string numCommande, string groupage)
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal), "ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
+				StatutMessage item = new StatutMessage();
+				item.statutNotificationMessage = statutNotificationMessage;
+				item.dateNotificationMessage =  dateNotificationMessage;				
+				item.numMessage = numMessage;
+				item.numCommande = numCommande;
+				item.groupage = groupage;
+
+				db.Insert(item);
+				return "WWWWWWWInsertion"+statutNotificationMessage+" "+numCommande;
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
 
 
         //SELECT DES DATA'
@@ -510,7 +667,30 @@ namespace DMSvStandard.ORM
 			var db = new SQLiteConnection(dbPath);
 			string output = "";
 			var item = db.Get<ToDoTask>(id);
-			output += "\n"+item.numCommande+item.ADRLiv+"\n"+item.libeAnomalie;
+			output += "\n"+item.numCommande+"\n";
+			return output;
+
+		}
+		public string GetFinalDest(int id)
+		{
+			string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+				(Environment.SpecialFolder.Personal), "ormDMS.db3");
+			var db = new SQLiteConnection(dbPath);
+			string output = "";
+			var item = db.Get<ToDoTask>(id);
+			output += ""+item.nomClientLivraison+"\n"+item.villeClientLivraison+"";
+			return output;
+
+		}
+
+		public string GetAnomalie(int id)
+		{
+			string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+				(Environment.SpecialFolder.Personal), "ormDMS.db3");
+			var db = new SQLiteConnection(dbPath);
+			string output = "";
+			var item = db.Get<ToDoTask>(id);
+			output += "\n"+item.libeAnomalie+"\n"+item.remarque;
 			return output;
 
 		}
@@ -572,8 +752,18 @@ namespace DMSvStandard.ORM
 
 		}
 
-		//GET STATUT LIVRAISON
+		//GET TYPE POSITION
+		public string GetTypePosition(int id)
+		{
+			string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+				(Environment.SpecialFolder.Personal), "ormDMS.db3");
+			var db = new SQLiteConnection(dbPath);
+			string output = "";
+			var item = db.Get<ToDoTask>(id);
+			output += item.typeMission;
+			return output;
 
+		}
 
 
 
@@ -664,148 +854,7 @@ namespace DMSvStandard.ORM
 
 
 
-
-
-
-
-
-		//UPDATE STATUT VALIDE
-//		public string UpdateStatutValide(int id, string statut, string libeAnomalie, string remarque, Bitmap imagelink)
-//		{
-//			try
-//			{
-//				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
-//					(Environment.SpecialFolder.Personal), "ormDMS.db3");
-//				var db = new SQLiteConnection(dbPath);
-//
-//
-//
-//
-//				var item = db.Get<StatutLivraison>(id);
-//				item.statut = statut;
-//				item.libeAnomalie = libeAnomalie;
-//
-//				string codeAnomalie = "";
-//				if(libeAnomalie == "Livré avec manquant"){
-//					codeAnomalie = "LIVMQP";
-//					item.statut = statut;
-//					item.codeAnomalie = codeAnomalie;
-//					item.remarque = remarque;
-//				}
-//				if(libeAnomalie == "Livré avec réserves pour avaries"){
-//					codeAnomalie = "LIVRCA";
-//					item.statut = statut;
-//					item.codeAnomalie = codeAnomalie;
-//					item.remarque = remarque;
-//				}
-//				if(libeAnomalie == "Livré mais récépissé non rendu"){
-//					codeAnomalie = "LIVDOC";
-//					item.statut = statut;
-//					item.codeAnomalie = codeAnomalie;
-//					item.remarque = remarque;
-//				}
-//				if(libeAnomalie == "Livré avec manquants + avraries"){
-//					codeAnomalie = "LIVRMA";
-//					item.statut = statut;
-//					item.codeAnomalie = codeAnomalie;
-//					item.remarque = remarque;
-//				}
-//				if(libeAnomalie == "Refusé pour avaries"){
-//					codeAnomalie = "RENAVA";
-//					item.statut = statut;
-//					item.codeAnomalie = codeAnomalie;
-//					item.remarque = remarque;
-//				}
-//				if(libeAnomalie == "Avisé (avis de passage)"){
-//					codeAnomalie = "RENAVI";
-//					item.statut = statut;
-//					item.codeAnomalie = codeAnomalie;
-//					item.remarque = remarque;
-//				}
-//				if(libeAnomalie == "Rendu non livré : complément adresse"){
-//					codeAnomalie = "RENCAD";
-//					item.statut = statut;
-//					item.codeAnomalie = codeAnomalie;
-//					item.remarque = remarque;
-//				}
-//				if(libeAnomalie == "Refus divers ou sans motifs"){
-//					codeAnomalie = "RENDIV";
-//					item.statut = statut;
-//					item.codeAnomalie = codeAnomalie;
-//					item.remarque = remarque;
-//				}
-//				if(libeAnomalie == "Refusé manque BL"){
-//					codeAnomalie = "RENDOC";
-//					item.statut = statut;
-//					item.codeAnomalie = codeAnomalie;
-//					item.remarque = remarque;
-//				}
-//				if(libeAnomalie == "Refusé manquant partiel"){
-//					codeAnomalie = "RENMQP";
-//					item.statut = statut;
-//					item.codeAnomalie = codeAnomalie;
-//					item.remarque = remarque;
-//				}
-//				if(libeAnomalie == "Refusé non commandé"){
-//					codeAnomalie = "RENSNC";
-//					item.statut = statut;
-//					item.codeAnomalie = codeAnomalie;
-//					item.remarque = remarque;
-//				}
-//				if(libeAnomalie == "Refusé cause port dû"){
-//					codeAnomalie = "RENSPD";
-//					item.statut = statut;
-//					item.codeAnomalie = codeAnomalie;
-//					item.remarque = remarque;
-//				}
-//				if(libeAnomalie == "Refusé cause contre remboursement"){
-//					codeAnomalie = "RENDRB";
-//					item.statut = statut;
-//					item.codeAnomalie = codeAnomalie;
-//					item.remarque = remarque;
-//				}
-//				if(libeAnomalie == "Refusé livraison trop tardive"){
-//					codeAnomalie = "RENTAR";
-//					item.statut = statut;
-//					item.codeAnomalie = codeAnomalie;
-//					item.remarque = remarque;
-//				}
-//				if(libeAnomalie == "Erreur sur commande"){
-//					codeAnomalie = "ERROR";
-//					item.statut = statut;
-//					item.codeAnomalie = codeAnomalie;
-//					item.remarque = remarque;
-//				}
-//				if(libeAnomalie == "Restaure en non traite"){
-//					codeAnomalie = "";
-//
-//					item.statut= "0";
-//				}
-//				else{
-//					item.statut = statut;
-//					item.codeAnomalie = codeAnomalie;
-//					item.remarque = remarque;
-//
-//				}
-//
-//				item.codeAnomalie = codeAnomalie;
-//				item.remarque = remarque;
-//				//item.image = imagelink;
-//				db.Update(item);
-//
-//
-//				return "UpdateStatutGood";
-//
-//			}
-//			catch (Exception ex)
-//			{
-//				return "Erreur : " + ex.Message;
-//
-//			}
-//		}
-
-
-		public string UpdateStatutValideLivraison(int id, string statut, string libeAnomalie, string remarque,string imgpath)
+		public string UpdateStatutValideLivraison(int id, string statut, string libeAnomalie,string remarque,string codeAnomalie,string imgpath)
 		{
 			try
 			{
@@ -817,141 +866,13 @@ namespace DMSvStandard.ORM
 
 				var itembis = dbbis.Get<ToDoTask>(id);
 
+				itembis.StatutLivraison = statut;
+				itembis.codeAnomalie = codeAnomalie;
+				itembis.libeAnomalie = libeAnomalie;
+				itembis.remarque = remarque;
+				itembis.imgpath = imgpath;
+				itembis.codeAnomalie = codeAnomalie;
 
-
-				string codeAnomalie = "";
-				if(libeAnomalie == "Livre avec manquant"){
-					codeAnomalie = "LIVMQP";
-					itembis.StatutLivraison = statut;
-					itembis.codeAnomalie = codeAnomalie;
-					itembis.libeAnomalie = libeAnomalie;
-					itembis.remarque = remarque;
-					itembis.imgpath = imgpath;
-				}
-				if(libeAnomalie == "Livre avec reserves pour avaries"){
-					codeAnomalie = "LIVRCA";
-					itembis.StatutLivraison = statut;
-					itembis.codeAnomalie = codeAnomalie;
-					itembis.libeAnomalie = libeAnomalie;
-					itembis.remarque = remarque;
-					itembis.imgpath = imgpath;
-				}
-				if(libeAnomalie == "Livre mais recepisse non rendu"){
-					codeAnomalie = "LIVDOC";
-					itembis.StatutLivraison = statut;
-					itembis.codeAnomalie = codeAnomalie;
-					itembis.libeAnomalie = libeAnomalie;
-					itembis.remarque = remarque;
-					itembis.imgpath = imgpath;
-				}
-				if(libeAnomalie == "Livre avec manquants + avaries"){
-					 codeAnomalie = "LIVRMA";
-					itembis.StatutLivraison = statut;
-					itembis.codeAnomalie = codeAnomalie;
-					itembis.libeAnomalie = libeAnomalie;
-					itembis.remarque = remarque;
-					itembis.imgpath = imgpath;
-				}
-				if(libeAnomalie == "Refusé pour avaries"){
-					codeAnomalie = "RENAVA";
-					itembis.StatutLivraison = statut;
-					itembis.codeAnomalie = codeAnomalie;
-					itembis.libeAnomalie = libeAnomalie;
-					itembis.remarque = remarque;
-					itembis.imgpath = imgpath;
-				}
-				if(libeAnomalie == "Avise (avis de passage)"){
-					codeAnomalie = "RENAVI";
-					itembis.StatutLivraison = statut;
-					itembis.codeAnomalie = codeAnomalie;
-					itembis.libeAnomalie = libeAnomalie;
-					itembis.remarque = remarque;
-					itembis.imgpath = imgpath;
-				}
-				if(libeAnomalie == "Rendu non livre : complement adresse"){
-					codeAnomalie = "RENCAD";
-					itembis.StatutLivraison = statut;
-					itembis.codeAnomalie = codeAnomalie;
-					itembis.libeAnomalie = libeAnomalie;
-					itembis.remarque = remarque;
-					itembis.imgpath = imgpath;
-				}
-				if(libeAnomalie == "Refus divers ou sans motifs"){
-					codeAnomalie = "RENDIV";
-					itembis.StatutLivraison = statut;
-					itembis.codeAnomalie = codeAnomalie;
-					itembis.libeAnomalie = libeAnomalie;
-					itembis.remarque = remarque;
-					itembis.imgpath = imgpath;
-				}
-				if(libeAnomalie == "Refuse manque BL"){
-					codeAnomalie = "RENDOC";
-					itembis.StatutLivraison = statut;
-					itembis.codeAnomalie = codeAnomalie;
-					itembis.libeAnomalie = libeAnomalie;
-					itembis.remarque = remarque;
-					itembis.imgpath = imgpath;
-				}
-				if(libeAnomalie == "Refuse manquant partiel"){
-					codeAnomalie = "RENMQP";
-					itembis.StatutLivraison = statut;
-					itembis.codeAnomalie = codeAnomalie;
-					itembis.libeAnomalie = libeAnomalie;
-					itembis.remarque = remarque;
-					itembis.imgpath = imgpath;
-				}
-				if(libeAnomalie == "Refuse non commande"){
-					codeAnomalie = "RENSNC";
-					itembis.StatutLivraison = statut;
-					itembis.codeAnomalie = codeAnomalie;
-					itembis.libeAnomalie = libeAnomalie;
-					itembis.remarque = remarque;
-					itembis.imgpath = imgpath;
-				}
-				if(libeAnomalie == "Refuse cause port du"){
-					codeAnomalie = "RENSPD";
-					itembis.StatutLivraison = statut;
-					itembis.codeAnomalie = codeAnomalie;
-					itembis.libeAnomalie = libeAnomalie;
-					itembis.remarque = remarque;
-					itembis.imgpath = imgpath;
-				}
-				if(libeAnomalie == "Refuse cause contre remboursement"){
-					codeAnomalie = "RENDRB";
-					itembis.StatutLivraison = statut;
-					itembis.codeAnomalie = codeAnomalie;
-					itembis.libeAnomalie = libeAnomalie;
-					itembis.remarque = remarque;
-					itembis.imgpath = imgpath;
-				}
-				if(libeAnomalie == "Refuse livraison trop tardive"){
-					codeAnomalie = "RENTAR";
-					itembis.StatutLivraison = statut;
-					itembis.codeAnomalie = codeAnomalie;
-					itembis.libeAnomalie = libeAnomalie;
-					itembis.remarque = remarque;
-					itembis.imgpath = imgpath;
-				}
-				if(libeAnomalie == "Restaure en non traite"){
-					codeAnomalie = "";
-
-					itembis.StatutLivraison= "0";
-				}
-				if(libeAnomalie == "Rendu non justifie"){
-					codeAnomalie = "RENNJU";
-					itembis.StatutLivraison = statut;
-					itembis.codeAnomalie = codeAnomalie;
-					itembis.libeAnomalie = libeAnomalie;
-					itembis.remarque = remarque;
-					itembis.imgpath = imgpath;
-				}
-				else{
-					itembis.StatutLivraison = statut;
-					itembis.codeAnomalie = codeAnomalie;
-					itembis.libeAnomalie = libeAnomalie;
-					itembis.remarque = remarque;
-					itembis.imgpath = imgpath;
-				}
 				dbbis.Update(itembis);
 
 				return "UpdateStatutLivraisonGood";
@@ -963,6 +884,27 @@ namespace DMSvStandard.ORM
 
 			}
 		}
+		//UPDATE STATUT MESSAGE 
+		public string UpdateStatutMessage(int statut, int numMessage)
+		{
+			try
+			{
+				string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+					(Environment.SpecialFolder.Personal), "ormDMS.db3");
+				var db = new SQLiteConnection(dbPath);
 
+				var updatelog = db.Query<StatutMessage>("UPDATE StatutMessage SET statutMessage = ? WHERE Id = ?",statut,numMessage);
+
+
+
+				return "Upadate good";
+			}
+			catch (Exception ex)
+			{
+				return "Erreur : " + ex.Message;
+
+			}
+		}
     }
+
 }

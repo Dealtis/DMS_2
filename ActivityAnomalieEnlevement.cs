@@ -118,7 +118,7 @@ namespace DMSvStandard
 
 			spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
 			var adapter = ArrayAdapter.CreateFromResource (
-				this, Resource.Array.anomalielist, Android.Resource.Layout.SimpleSpinnerItem);
+				this, Resource.Array.anomalieramasselist, Android.Resource.Layout.SimpleSpinnerItem);
 
 			adapter.SetDropDownViewResource (Android.Resource.Layout.SimpleSpinnerDropDownItem);
 			spinner.Adapter = adapter;
@@ -232,99 +232,49 @@ namespace DMSvStandard
 
 
 			EditText txtRem = FindViewById<EditText>(Resource.Id.edittext);
-			//String txtSpin = mySpinner.getSelectedItem().toString();
-
-//			txtRem.KeyPress += (object sender, View.KeyEventArgs e) => {
-//				e.Handled = false;
-//				if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter) 
-//				{
-//					txtRem.InputType =0;
-//				} 
-//				else 
-//				{
-//					e.Handled = false;
-//				}
-//			};
 
 
 
 			DBRepository dbrbis = new DBRepository();
 
+			if (App.txtSpin == "Ramasse pas faite") {
+				App.codeanomalie = "RAMPFT";
+			}
+			if (App.txtSpin == "Positions non chargees") {
+				App.codeanomalie = "RENNCG";
+			}
+			if (App.txtSpin == "Avis de passage") {
+				App.codeanomalie = "RENAVI";
+			}
+			if (App.txtSpin == "Fermeture hebdomadaire") {
+				App.codeanomalie = "RENFHB";
+			}
+			if (App.txtSpin == "Ramasse diverse") {
+				App.codeanomalie = "RAMDIV";
+			}
+			if(App.txtSpin == "Restaure en non traite"){
+				App.codeanomalie = "RESTNT";
+			}
+
+
+
 
 			if (App._file == null) {
-				var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2",App.txtSpin,txtRem.Text,null);
+				var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2",App.txtSpin,txtRem.Text,App.codeanomalie,null);
 				System.Console.Out.WriteLine (resultfor);
 
 			} else {
-				var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2",App.txtSpin,txtRem.Text,App._file.Path);
+				var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2",App.txtSpin,txtRem.Text,App.codeanomalie,App._file.Path);
 				System.Console.Out.WriteLine (resultfor);
 			}
 
-
-			if(App.txtSpin == "Livre avec manquant"){
-				App.codeanomalie = "LIVMQP";
-
-			}
-			if(App.txtSpin == "Livre avec reserves pour avaries"){
-				App.codeanomalie = "LIVRCA";
-
-			}
-			if(App.txtSpin == "Livre mais recepisse non rendu"){
-				App.codeanomalie = "LIVDOC";
-
-			}
-			if(App.txtSpin == "Livre avec manquants + avaries"){
-				App.codeanomalie = "LIVRMA";
-
-			}
-			if(App.txtSpin == "Refuse pour avaries"){
-				App.codeanomalie = "RENAVA";
-
-			}
-			if(App.txtSpin == "Avise (avis de passage)"){
-				App.codeanomalie = "RENAVI";
-
-			}
-			if(App.txtSpin == "Rendu non livre : complement adresse"){
-				App.codeanomalie = "RENCAD";
-
-			}
-			if(App.txtSpin == "Refus divers ou sans motifs"){
-				App.codeanomalie = "RENDIV";
-
-			}
-			if(App.txtSpin == "Refuse manque BL"){
-				App.codeanomalie = "RENDOC";
-
-			}
-			if(App.txtSpin == "Refuse manquant partiel"){
-				App.codeanomalie = "RENMQP";
-
-			}
-			if(App.txtSpin == "Refuse non commande"){
-				App.codeanomalie = "RENSNC";
-
-			}
-			if(App.txtSpin == "Refuse cause port du"){
-				App.codeanomalie = "RENSPD";
-
-			}
-			if(App.txtSpin == "Refuse cause contre remboursement"){
-				App.codeanomalie = "RENDRB";
-
-			}
-			if(App.txtSpin == "Refuse livraison trop tardive"){
-				App.codeanomalie = "RENTAR";
-
-			}
-			if(App.txtSpin == "Rendu non justifie"){
-				App.codeanomalie = "RENNJU";
-			}
 			if(App.txtSpin == "Restaure en non traite"){
-				var resultyyy = dbrbis.UpdateStatutValideLivraison (i,"0",null,null,null);
+				var resultyyy = dbrbis.UpdateStatutValideLivraison (i,"0",null,null,null,null);
 				StartActivity(typeof(MainActivity));
 				Finish ();
 			}
+
+
 
 
 

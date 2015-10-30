@@ -31,6 +31,13 @@
                 android:id="@+id/codelivraison"
                 android:textSize="22dp" />
             <TextView
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/destfinal"
+                android:textSize="22dp"
+                android:gravity="center" />
+            <TextView
                 android:text="Livraison"
                 android:id="@+id/title"
                 android:gravity="center"
@@ -69,11 +76,25 @@
                 android:id="@+id/infoclient"
                 android:textSize="18dp"
                 android:gravity="center" />
+            <TextView
+                android:text="Anomalie"
+                android:id="@+id/anomaliet"
+                android:gravity="center"
+                android:textSize="24dp"
+                android:textColor="#ff000000"
+                android:background="#ff33dbff" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/infoanomalie"
+                android:textSize="18dp"
+                android:gravity="center" />
             <ImageView
                 android:src="@android:drawable/ic_menu_gallery"
                 android:id="@+id/_imageView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_width="247.0dp"
+                android:layout_height="150.3dp" />
         </TableLayout>
     </ScrollView>
     <LinearLayout

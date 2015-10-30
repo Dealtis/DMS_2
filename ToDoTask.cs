@@ -125,6 +125,10 @@ namespace DMSvStandard
 		[MaxLength(50)]
 		public string Userandsoft{ get; set; }
 
+		public string nomClientLivraison{ get; set; }
+
+		public string villeClientLivraison{ get; set; }
+
 
            
 	       

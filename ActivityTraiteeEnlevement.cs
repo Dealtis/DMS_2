@@ -41,13 +41,13 @@ namespace DMSvStandard
 			var db = new SQLiteConnection(dbPath);
 
 
-			var table = db.Query<ToDoTask>("SELECT * FROM ToDoTask WHERE StatutLivraison = '1' AND typeMission='C' OR StatutLivraison = '2' AND typeMission='C' ORDER BY _Id DESC");
+			var table = db.Query<ToDoTask>("SELECT * FROM ToDoTask WHERE StatutLivraison = '1' AND typeMission='C' AND typeSegment='RAM' OR StatutLivraison = '2' AND typeMission='C'AND typeSegment='RAM' ORDER BY _Id DESC");
 			var layout = new LinearLayout(this);
 
 
 			//GRP
 			Appli.nbgroupage = 0;
-			var grp = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '1' OR StatutLivraison = '2' AND typeMission='C' GROUP BY groupage");
+			var grp = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '1' AND typeMission='C' AND typeSegment='RAM' OR StatutLivraison = '2' AND typeMission='C' AND typeSegment='RAM' GROUP BY groupage");
 			var i = 0;
 			foreach (var item in grp){
 				Appli.groupagestring = Convert.ToString(item.groupage);
@@ -657,7 +657,7 @@ namespace DMSvStandard
 			builder.SetPositiveButton("Annuler", delegate {  });
 			builder.SetNegativeButton("Chercher", delegate {
 
-				var table = db.Query<ToDoTask>("SELECT * FROM ToDoTask WHERE typeMission='C' AND typeSegment='RAM' AND (numCommande LIKE '%"+editrecherche.Text+"%' OR  villeLivraison LIKE '%"+editrecherche.Text+"%' OR nomPayeur LIKE '%"+editrecherche.Text+"%'OR CpLivraison LIKE '%"+editrecherche.Text+"%' OR refClient LIKE '%"+editrecherche.Text+"%') OR typeMission='C' AND typeSegment='RAM' AND (numCommande LIKE '%"+editrecherche.Text+"%' OR  villeLivraison LIKE '%"+editrecherche.Text+"%' OR nomPayeur LIKE '%"+editrecherche.Text+"%'OR CpLivraison LIKE '%"+editrecherche.Text+"%' OR refClient LIKE '%"+editrecherche.Text+"%')");
+				var table = db.Query<ToDoTask>("SELECT * FROM ToDoTask WHERE typeMission='C' AND typeSegment='RAM' AND (numCommande LIKE '%"+editrecherche.Text+"%' OR  villeLivraison LIKE '%"+editrecherche.Text+"%' OR nomPayeur LIKE '%"+editrecherche.Text+"%'OR CpLivraison LIKE '%"+editrecherche.Text+"%' OR refClient LIKE '%"+editrecherche.Text+"%') OR typeMission='C' AND typeSegment='RAM' AND (numCommande LIKE '%"+editrecherche.Text+"%' OR  villeLivraison LIKE '%"+editrecherche.Text+"%' OR nomPayeur LIKE '%"+editrecherche.Text+"%'OR CpLivraison LIKE '%"+editrecherche.Text+"%' OR refClient LIKE '%"+editrecherche.Text+"%'OR nomClient LIKE'%"+editrecherche.Text+"%')");
 				textViewGrp.Text = "Recherche \""+editrecherche.Text+"\"";
 
 				//LISTVIEW

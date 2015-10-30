@@ -1,16 +1,15 @@
 ﻿<Properties StartupItem="DMSvStandard.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.EMU_SCREEN" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MainActivity.cs">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="MainActivity.cs" Line="906" Column="4" />
+      <File FileName="ToDoTask.cs" Line="123" Column="29" />
+      <File FileName="MainActivity.cs" Line="1" Column="1" />
+      <File FileName="ORM\DBRepository.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - vTESTPROP\getgpslocation.cs" line="28" column="1" />
-      <Breakpoint file="C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\ActivityAnomalie.cs" line="212" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.DMSvStandard AndroidDesignerPreferredDevice="3.7&quot; WVGA (Nexus One)" />
+  <MonoDevelop.Ide.ItemProperties.DMSvStandard AndroidDesignerPreferredDevice="Nexus 4" />
 </Properties>
