@@ -10,34 +10,19 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using Android.App;
-using Android.App;
 using Android.Content;
 using Android.Graphics;
-using Android.Locations;
 using Android.Locations;
 using Android.Media;
 using Android.Net;
 using Android.OS;
-using Android.OS;
 using Android.Runtime;
-
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Android.Widget;
 using AndroidHUD;
 
-using System;
-using Android.App;
-using Android.Content;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Android.OS;
-using System.Net;
-using System.IO;
-using System.Json;
-using System.Threading.Tasks;
+
 
 using DMSvStandard;
 
@@ -556,7 +541,7 @@ namespace DMSvStandard
 
 			foreach (var item in jsonarr) {
 				int verifpos = 0;
-				var verifbasecode = db.Query<ToDoTask>("SELECT * FROM ToDoTask WHERE numCommande = ?",Convert.ToString (item ["numCommande"]));
+				var verifbasecode = db.Query<ToDoTask>("SELECT * FROM ToDoTask WHERE numCommande = ? and groupage=?",Convert.ToString (item ["numCommande"]),Convert.ToString (item ["groupage"]));
 
 
 
@@ -975,7 +960,7 @@ namespace DMSvStandard
 
 					foreach (var item in jsonarr) {
 						int verifpos = 0;
-						var verifbasecode = db.Query<ToDoTask>("SELECT * FROM ToDoTask WHERE numCommande = ?",Convert.ToString (item ["numCommande"]));
+						var verifbasecode = db.Query<ToDoTask>("SELECT * FROM ToDoTask WHERE numCommande = ? and groupage=?",Convert.ToString (item ["numCommande"]),Convert.ToString (item ["groupage"]));
 
 
 
