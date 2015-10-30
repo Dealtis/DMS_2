@@ -1,5 +1,7 @@
 ﻿using Android.Net;
 using DMSvStandard;
+using System.IO;
+using System.Net;
 
 namespace DMSvStandard
 {
@@ -120,7 +122,12 @@ namespace DMSvStandard
 
 			App.bitmap = null;
 
-			updateAnomalieStatut();
+			if (App.txtSpin == "Choisir une anomalie" ) {
+				Toast.MakeText (this,"Merci de choisir une anomalie", ToastLength.Long).Show ();
+			} else {
+				updateAnomalieStatut();
+				StartActivity (typeof(MainActivity));
+			}
 
 
 
@@ -133,17 +140,23 @@ namespace DMSvStandard
 //			string id = Intent.GetStringExtra("ID");
 //			StartActivity(activity2);
 
-			StartActivity (typeof(MainActivity));
+
 		}
 
 
 		private void spinner_ItemSelected (object sender, AdapterView.ItemSelectedEventArgs e)
 		{
 			Spinner spinner = (Spinner)sender;
-
+			EditText txtRem = FindViewById<EditText>(Resource.Id.edittext);
 			string txtSpin = string.Format ("{0}", spinner.GetItemAtPosition (e.Position));
 
 			App.txtSpin = txtSpin;
+
+			if (App.txtSpin == "Restaure en non traite" || App.txtSpin == "Choisir une anomalie" ) {
+				txtRem.Visibility = Android.Views.ViewStates.Gone;
+			} else {
+				txtRem.Visibility = Android.Views.ViewStates.Visible;
+			}
 			//Toast.MakeText (this, App.txtSpin, ToastLength.Long).Show ();
 		}
 
@@ -172,17 +185,25 @@ namespace DMSvStandard
 				_imageView = FindViewById<ImageView> (Resource.Id.imageView1);
 				_imageView.SetImageBitmap (App.bitmap);
 				
+				
 
 		}
 
 		private void TakeAPicture(object sender, EventArgs eventArgs)
-		{
+		{	
+			//RECUP ID 
+			string id = Intent.GetStringExtra ("ID");
+			int i = int.Parse(id);
+
+			DBRepository dbr = new DBRepository();
+
+			var numCom = dbr.GetnumCommande(i);
 			Intent intent = new Intent(MediaStore.ActionImageCapture);
 			//var activity2 = new Intent(this, typeof(ActivityAnomalie));
-			string dateoj=  Convert.ToString (DateTime.Now.Day)+ Convert.ToString(DateTime.Now.Month) + Convert.ToString(DateTime.Now.Year) + Convert.ToString(DateTime.Now.Minute) + Convert.ToString(DateTime.Now.Millisecond);
+			string dateoj=  Convert.ToString (DateTime.Now.Day)+ Convert.ToString(DateTime.Now.Month) + Convert.ToString(DateTime.Now.Year) + Convert.ToString(DateTime.Now.Minute);
 
 
-			App._file = new Java.IO.File(App._dir, String.Format("photo_"+dateoj+".jpg", Guid.NewGuid()));
+			App._file = new Java.IO.File(App._dir, String.Format("photo_"+dateoj+"_"+numCom+".jpg", Guid.NewGuid()));
 
 			intent.PutExtra(MediaStore.ExtraOutput, Uri.FromFile(App._file));
 			_imageView.SetImageBitmap (App.bitmap);
@@ -191,10 +212,6 @@ namespace DMSvStandard
 			System.Console.Out.WriteLine("!!!!!!!!!!!!START ACTIVITY!!!!!!!!!!!!!!!!!!!!!!!!");
 
 			System.Console.Out.WriteLine("!!!!!!!!!!!!BITMAP UP!!!!!!!!!!!!!!!!!!!!!!!!");
-
-
-
-
 		}
 
 
@@ -292,8 +309,10 @@ namespace DMSvStandard
 			} else {
 				var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2",App.txtSpin,Convert.ToString(txtRem.Text),App.codeanomalie,App._file.Path);
 				System.Console.Out.WriteLine (resultfor);
-			}
 
+				UploadFile ("ftp://10.1.2.75",App._file.Path,"DMS","Linuxr00tn","");
+			}
+			
 			if(App.txtSpin == "Restaure en non traite"){
 				var resultyyy = dbrbis.UpdateStatutValideLivraison (i,"0",null,null,null,null);
 
@@ -327,9 +346,34 @@ namespace DMSvStandard
 
 
 		}
-
-				public override void OnBackPressed ()
-				{
+		public static string UploadFile(string FtpUrl, string fileName, string userName, string password,string
+			UploadDirectory="")
+		{
+		try{
+			string PureFileName = new FileInfo(fileName).Name;
+			String uploadUrl = String.Format("{0}{1}/{2}", FtpUrl,UploadDirectory,PureFileName);
+			FtpWebRequest req = (FtpWebRequest)FtpWebRequest.Create(uploadUrl);
+			req.Proxy = null;
+			req.Method = WebRequestMethods.Ftp.UploadFile;
+			req.Credentials = new NetworkCredential(userName,password);
+			req.UseBinary = true;
+			req.UsePassive = true;
+			byte[] data = File.ReadAllBytes(fileName);
+			req.ContentLength = data.Length;
+			System.IO.Stream stream = req.GetRequestStream();
+			stream.Write(data, 0, data.Length);
+			stream.Close();
+			FtpWebResponse res = (FtpWebResponse)req.GetResponse();
+			return res.StatusDescription;
+			
+			} catch (Exception ex) {
+				UploadFile ("ftp://10.1.2.75",App._file.Path,"DMS","Linuxr00tn","");
+				return "ERREUR";
+			}
+		}
+	public override void OnBackPressed ()
+		{	
+			
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.SetTitle("Validation");
 			builder.SetMessage("Voulez-vous annulée l'anomalie ?");

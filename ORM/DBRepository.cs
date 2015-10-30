@@ -19,10 +19,7 @@ namespace DMSvStandard.ORM
                 (Environment.SpecialFolder.Personal),"ormDMS.db3");
             var db = new SQLiteConnection(dbPath);
             output += "\nDatabase crée...";
-            return output;
-
-
-            
+            return output;            
         }
 
         //création des tables
@@ -668,6 +665,17 @@ namespace DMSvStandard.ORM
 			string output = "";
 			var item = db.Get<ToDoTask>(id);
 			output += "\n"+item.numCommande+"\n";
+			return output;
+
+		}
+		public string GetnumCommande(int id)
+		{
+			string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
+				(Environment.SpecialFolder.Personal), "ormDMS.db3");
+			var db = new SQLiteConnection(dbPath);
+			string output = "";
+			var item = db.Get<ToDoTask>(id);
+			output += item.numCommande;
 			return output;
 
 		}

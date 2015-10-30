@@ -24,6 +24,7 @@ using AndroidHUD;
 
 
 
+
 using DMSvStandard;
 
 using DMSvStandard.ORM;
@@ -238,7 +239,8 @@ namespace DMSvStandard
 			//btn5.Click += delegate { outbox_Click();	};
 
 			LinearLayout btn8 = FindViewById<LinearLayout> (Resource.Id.columnlayout4_2);
-			btn8.Click += delegate { config_Click();	};
+			btn8.Click += delegate { 
+				config_Click();	};
 			btn8.LongClick += delegate	{ config_LongClick();};
 
 			m_deliveryBadge = FindViewById<RelativeLayout> (Resource.Id.deliveryBadge); 
@@ -450,9 +452,12 @@ namespace DMSvStandard
 	
 		protected void config_Click()
 		{
-			
+
+
+
 
 		}
+
 
 		protected void config_LongClick(){
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -472,7 +477,7 @@ namespace DMSvStandard
 			});
 			builder.Show();
 		}
-
+			
 		protected void delivery_LongClick(){
 
 			string dbPath = System.IO.Path.Combine(Environment.GetFolderPath

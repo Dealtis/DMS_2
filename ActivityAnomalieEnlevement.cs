@@ -1,5 +1,7 @@
-﻿using DMSvStandard;
-using Android.Net;
+﻿using Android.Net;
+using DMSvStandard;
+using System.IO;
+using System.Net;
 
 namespace DMSvStandard
 {
@@ -13,29 +15,13 @@ namespace DMSvStandard
 	using Android.OS;
 	using Android.Provider;
 	using Android.Widget;
-
-	using System.Linq;
-	using System.Text;
-
-
-
-
-
-	using Android.Runtime;
-	using Android.Views;
-
-	using Newtonsoft;
-
-
-
 	using DMSvStandard.ORM;
-
-
-	using Java.IO;
-
+	using SQLite;
 	using Environment = Android.OS.Environment;
-	using Uri = Android.Net.Uri;
 
+
+
+	using Uri = Android.Net.Uri;
 
 
 	using System.Data;
@@ -144,7 +130,13 @@ namespace DMSvStandard
 			int i = int.Parse(idDATA);
 
 			App.bitmap = null;
-			updateAnomalieStatut();
+
+			if (App.txtSpin == "Choisir une anomalie" ) {
+				Toast.MakeText (this,"Merci de choisir une anomalie", ToastLength.Long).Show ();
+			} else {
+				updateAnomalieStatut();
+				StartActivity (typeof(MainActivity));
+			}
 
 
 
@@ -157,18 +149,23 @@ namespace DMSvStandard
 			//			string id = Intent.GetStringExtra("ID");
 			//			StartActivity(activity2);
 
-			StartActivity (typeof(MainActivity));
+
 		}
 
 
 		private void spinner_ItemSelected (object sender, AdapterView.ItemSelectedEventArgs e)
 		{
 			Spinner spinner = (Spinner)sender;
-
+			EditText txtRem = FindViewById<EditText>(Resource.Id.edittext);
 			string txtSpin = string.Format ("{0}", spinner.GetItemAtPosition (e.Position));
 
 			App.txtSpin = txtSpin;
-			//Toast.MakeText (this, App.txtSpin, ToastLength.Long).Show ();
+
+			if (App.txtSpin == "Restaure en non traite" || App.txtSpin == "Choisir une anomalie" ) {
+				txtRem.Visibility = Android.Views.ViewStates.Gone;
+			} else {
+				txtRem.Visibility = Android.Views.ViewStates.Visible;
+			}
 		}
 
 
@@ -206,9 +203,19 @@ namespace DMSvStandard
 
 		private void TakeAPicture(object sender, EventArgs eventArgs)
 		{
+			//RECUP ID 
+			string id = Intent.GetStringExtra ("ID");
+			int i = int.Parse(id);
+
+			DBRepository dbr = new DBRepository();
+
+			var numCom = dbr.GetnumCommande(i);
 			Intent intent = new Intent(MediaStore.ActionImageCapture);
 			//var activity2 = new Intent(this, typeof(ActivityAnomalie));
-			App._file = new Java.IO.File(App._dir,System.String.Format("photo_{0}.jpg", Guid.NewGuid()));
+			string dateoj=  Convert.ToString (DateTime.Now.Day)+ Convert.ToString(DateTime.Now.Month) + Convert.ToString(DateTime.Now.Year) + Convert.ToString(DateTime.Now.Minute);
+
+
+			App._file = new Java.IO.File(App._dir, String.Format("photo_"+dateoj+"_"+numCom+".jpg", Guid.NewGuid()));
 
 			intent.PutExtra(MediaStore.ExtraOutput, Uri.FromFile(App._file));
 			_imageView.SetImageBitmap (App.bitmap);
@@ -217,10 +224,6 @@ namespace DMSvStandard
 			System.Console.Out.WriteLine("!!!!!!!!!!!!START ACTIVITY!!!!!!!!!!!!!!!!!!!!!!!!");
 
 			System.Console.Out.WriteLine("!!!!!!!!!!!!BITMAP UP!!!!!!!!!!!!!!!!!!!!!!!!");
-
-
-
-
 		}
 
 
@@ -266,6 +269,8 @@ namespace DMSvStandard
 			} else {
 				var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2",App.txtSpin,txtRem.Text,App.codeanomalie,App._file.Path);
 				System.Console.Out.WriteLine (resultfor);
+
+				UploadFile ("ftp://10.1.2.75",App._file.Path,"DMS","Linuxr00tn","");
 			}
 
 			if(App.txtSpin == "Restaure en non traite"){
@@ -297,7 +302,25 @@ namespace DMSvStandard
 
 
 		}
-
+		public static string UploadFile(string FtpUrl, string fileName, string userName, string password,string
+			UploadDirectory="")
+		{
+			string PureFileName = new FileInfo(fileName).Name;
+			String uploadUrl = String.Format("{0}{1}/{2}", FtpUrl,UploadDirectory,PureFileName);
+			FtpWebRequest req = (FtpWebRequest)FtpWebRequest.Create(uploadUrl);
+			req.Proxy = null;
+			req.Method = WebRequestMethods.Ftp.UploadFile;
+			req.Credentials = new NetworkCredential(userName,password);
+			req.UseBinary = true;
+			req.UsePassive = true;
+			byte[] data = File.ReadAllBytes(fileName);
+			req.ContentLength = data.Length;
+			System.IO.Stream stream = req.GetRequestStream();
+			stream.Write(data, 0, data.Length);
+			stream.Close();
+			FtpWebResponse res = (FtpWebResponse)req.GetResponse();
+			return res.StatusDescription;
+		}
 		public override void OnBackPressed ()
 		{
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);

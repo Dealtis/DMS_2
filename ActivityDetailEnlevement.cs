@@ -173,6 +173,7 @@ namespace DMSvStandard
 		void BtnAnomalie_Click (object sender, EventArgs e)
 		{
 
+			App.bitmap =null;
 
 			//RECUP ID 
 			string idDATA = Intent.GetStringExtra ("ID");

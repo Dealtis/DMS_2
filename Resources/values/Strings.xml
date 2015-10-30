@@ -7,7 +7,8 @@
     <item name="android:windowNoTitle">true</item>
   </style>
   <string-array name="anomalielivraisonlist">
-        <item>Restaure en non traite</item>
+  			<item>Choisir une anomalie</item>
+        	<item>Restaure en non traite</item>
         	<item>Livre avec manquant</item>
         	<item>Livre avec reserves pour avaries</item>
         	<item>Livre avec manquants + avaries</item>
@@ -31,6 +32,7 @@
 
 
     <string-array name="anomalieramasselist">
+    	<item>Choisir une anomalie</item>
         <item>Restaure en non traite</item>       
         <item>Ramasse pas faite</item>
         <item>Positions non chargees</item>

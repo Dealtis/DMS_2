@@ -56,7 +56,7 @@ namespace DMSvStandard
 
 			//GRP
 			Appli.nbgroupage = 0;
-			var grp = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM' GROUP BY groupage");
+			var grp = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM' AND Userandsoft = ? GROUP BY groupage",ApplicationData.User);
 			var i = 0;
 			foreach (var item in grp){
 				Appli.groupagestring = Convert.ToString(item.groupage);
