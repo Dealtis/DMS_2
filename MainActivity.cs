@@ -458,7 +458,7 @@ namespace DMSvStandard
 
 		}
 
-
+	
 		protected void config_LongClick(){
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 					
@@ -879,7 +879,7 @@ namespace DMSvStandard
 				//Console.Out.WriteLine (resultdrop);
 				Console.Out.WriteLine(">>>>>THREAD NO DATA ....<<<<<"+DateTime.Now.Minute);
 				Console.WriteLine("///////Thread Com RUNNING////");
-					Thread.Sleep (300000);
+
 					//Thread.Sleep (3000);
 			}else{
 
@@ -887,7 +887,7 @@ namespace DMSvStandard
 				Console.Out.WriteLine(">>>>>NO CONNECTION WAIT ....<<<<<");
 			}
 
-			
+				Thread.Sleep (300000);
 			}
 		}
 

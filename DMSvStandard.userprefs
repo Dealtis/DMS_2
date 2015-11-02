@@ -1,16 +1,18 @@
 ﻿<Properties StartupItem="DMSvStandard.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.15229521650207" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MainActivity.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.0edc3be0" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ActivityListLivraison.cs">
     <Files>
-      <File FileName="MainActivity.cs" Line="517" Column="16" />
-      <File FileName="ORM\DBRepository.cs" Line="22" Column="27" />
-      <File FileName="ActivityAnomalie.cs" Line="185" Column="13" />
+      <File FileName="MainActivity.cs" Line="630" Column="29" />
+      <File FileName="ORM\DBRepository.cs" Line="671" Column="31" />
+      <File FileName="ActivityAnomalie.cs" Line="125" Column="4" />
+      <File FileName="ActivityAnomalieEnlevement.cs" Line="152" Column="4" />
+      <File FileName="Resources\values\Strings.xml" Line="32" Column="5" />
+      <File FileName="ActivityListEnlevement.cs" Line="63" Column="34" />
+      <File FileName="ActivityListLivraison.cs" Line="55" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\ActivityAnomalie.cs" line="288" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.DMSvStandard AndroidDesignerPreferredDevice="Nexus 4" />

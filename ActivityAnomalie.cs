@@ -2,6 +2,10 @@
 using DMSvStandard;
 using System.IO;
 using System.Net;
+using System.Threading;
+using Java.IO;
+using System.Threading.Tasks;
+
 
 namespace DMSvStandard
 {
@@ -26,8 +30,10 @@ namespace DMSvStandard
 
 	public static class App{
 		public static Java.IO.File _file;
+		public static string _rfile;
 		public static Java.IO.File _dir;     
 		public static Bitmap bitmap;
+		public static Bitmap rbitmap;
 		public static string txtSpin;
 		public static string codeanomalie;
 		public static string codebarre;
@@ -112,6 +118,22 @@ namespace DMSvStandard
 			int height = Resources.DisplayMetrics.HeightPixels;
 			int width = _imageView.Height ;
 			App.bitmap = App._file.Path.LoadAndResizeBitmap (width, height);
+
+			Android.Graphics.Bitmap bmp = Android.Graphics.BitmapFactory.DecodeFile (App._file.Path);
+			Bitmap rbmp = Bitmap.CreateScaledBitmap(bmp, bmp.Width/5,bmp.Height/5, true);
+				string newPath = App._file.Path.Replace(".jpg", "_R.jpg");
+				using (var fs = new FileStream (newPath, FileMode.OpenOrCreate)) {
+				rbmp.Compress (Android.Graphics.Bitmap.CompressFormat.Jpeg,100, fs);
+			}
+			App._rfile = newPath;
+			App.rbitmap = rbmp;
+
+
+
+
+
+		
+
 		}
 
 		void BtnAnomalieValide_Click (object sender, EventArgs e)
@@ -125,6 +147,8 @@ namespace DMSvStandard
 			if (App.txtSpin == "Choisir une anomalie" ) {
 				Toast.MakeText (this,"Merci de choisir une anomalie", ToastLength.Long).Show ();
 			} else {
+
+
 				updateAnomalieStatut();
 				StartActivity (typeof(MainActivity));
 			}
@@ -206,12 +230,16 @@ namespace DMSvStandard
 			App._file = new Java.IO.File(App._dir, String.Format("photo_"+dateoj+"_"+numCom+".jpg", Guid.NewGuid()));
 
 			intent.PutExtra(MediaStore.ExtraOutput, Uri.FromFile(App._file));
+
+
+		
+
+
+
 			_imageView.SetImageBitmap (App.bitmap);
 			setBitmap();
 			StartActivityForResult(intent, 0);
-			System.Console.Out.WriteLine("!!!!!!!!!!!!START ACTIVITY!!!!!!!!!!!!!!!!!!!!!!!!");
-
-			System.Console.Out.WriteLine("!!!!!!!!!!!!BITMAP UP!!!!!!!!!!!!!!!!!!!!!!!!");
+	
 		}
 
 
@@ -310,7 +338,17 @@ namespace DMSvStandard
 				var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2",App.txtSpin,Convert.ToString(txtRem.Text),App.codeanomalie,App._file.Path);
 				System.Console.Out.WriteLine (resultfor);
 
-				UploadFile ("ftp://10.1.2.75",App._file.Path,"DMS","Linuxr00tn","");
+
+				//Thread ThreaduploadPictures = new Thread(new ThreadStart(,));
+				//ThreaduploadPictures.Start(); 
+
+
+				//Thread thread = new Thread(UploadFile);
+				//thread.Start("ftp://10.1.2.75",App._file.Path,"DMS","Linuxr00tn","");
+
+
+				Thread thread = new Thread(() => UploadFile("ftp://10.1.2.75",App._rfile,"DMS","Linuxr00tn",""));
+				thread.Start ();
 			}
 			
 			if(App.txtSpin == "Restaure en non traite"){
@@ -346,8 +384,8 @@ namespace DMSvStandard
 
 
 		}
-		public static string UploadFile(string FtpUrl, string fileName, string userName, string password,string
-			UploadDirectory="")
+
+		public string  UploadFile(string FtpUrl, string fileName, string userName, string password,string UploadDirectory="")
 		{
 		try{
 			string PureFileName = new FileInfo(fileName).Name;
@@ -358,17 +396,20 @@ namespace DMSvStandard
 			req.Credentials = new NetworkCredential(userName,password);
 			req.UseBinary = true;
 			req.UsePassive = true;
-			byte[] data = File.ReadAllBytes(fileName);
+			byte[] data = System.IO.File.ReadAllBytes(fileName);
 			req.ContentLength = data.Length;
 			System.IO.Stream stream = req.GetRequestStream();
 			stream.Write(data, 0, data.Length);
 			stream.Close();
 			FtpWebResponse res = (FtpWebResponse)req.GetResponse();
+			Console.Out.Write("FTP//"+res.StatusDescription+"\n");
 			return res.StatusDescription;
 			
 			} catch (Exception ex) {
-				UploadFile ("ftp://10.1.2.75",App._file.Path,"DMS","Linuxr00tn","");
-				return "ERREUR";
+				Thread.Sleep (120000);
+				UploadFile (FtpUrl,fileName,userName,password,"");
+				Console.Out.Write("ERREUR");
+				return "erreur";
 			}
 		}
 	public override void OnBackPressed ()

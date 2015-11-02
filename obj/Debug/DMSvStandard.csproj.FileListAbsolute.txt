@@ -619,7 +619,6 @@ C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\bin\Debug\ZXing.Net.Mobile
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\bin\Debug\zxing.monoandroid.xml
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\bin\Debug\Newtonsoft.Json.xml
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\bin\Debug\Xamarin.Insights.xml
-C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\DMSvStandard.csprojResolveAssemblyReference.cache
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\DMSvStandard.dll
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\DMSvStandard.pdb
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\android\bin\DMS.DMS.apk
