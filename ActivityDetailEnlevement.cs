@@ -233,7 +233,7 @@ namespace DMSvStandard
 
 
 				string typecr ="";
-
+				EditText txtRem = viewAD.FindViewById<EditText>(Resource.Id.edittext);
 				if (viewAD.FindViewById<RadioButton> (Resource.Id.radioButton2).Checked) {
 
 					typecr="Cheque";
@@ -259,7 +259,7 @@ namespace DMSvStandard
 
 
 
-				string datapost ="{\"codesuiviliv\":\"RAMCFM\",\"memosuiviliv\":\""+typecr+"\",\"libellesuiviliv\":\"\",\"commandesuiviliv\":\""+ApplicationData.codemissionactive+"\",\"groupagesuiviliv\":\""+ApplicationData.groupagemissionactive+"\",\"datesuiviliv\":\""+ApplicationData.datedj+"\",\"posgps\":\""+ApplicationData.GPS+"\"}";
+				string datapost ="{\"codesuiviliv\":\"RAMCFM\",\"memosuiviliv\":\""+Convert.ToString(txtRem.Text)+"\",\"libellesuiviliv\":\"\",\"commandesuiviliv\":\""+ApplicationData.codemissionactive+"\",\"groupagesuiviliv\":\""+ApplicationData.groupagemissionactive+"\",\"datesuiviliv\":\""+ApplicationData.datedj+"\",\"posgps\":\""+ApplicationData.GPS+"\"}";
 				Console.Out.WriteLine("!!!!!!!!!!!!DATA CREE!!!!!!!!!!!!!!!!!!!!!!!!");
 
 
@@ -314,10 +314,6 @@ namespace DMSvStandard
 		//		{
 		//			StartActivity(typeof(ActivityListLivraison));
 		//		}
-
-
-
-
 
 	}
 }

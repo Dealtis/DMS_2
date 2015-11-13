@@ -179,6 +179,8 @@ namespace DMSvStandard
 				commande.SetBackgroundColor(Color.LightGreen);
 				client.SetBackgroundColor(Color.LightGreen);
 			}
+
+
             //Button VALIDE
             Button btnValide = FindViewById<Button>(Resource.Id.valide);
             btnValide.Click += btnValide_Click;
@@ -226,6 +228,7 @@ namespace DMSvStandard
 			var viewAD = this.LayoutInflater.Inflate (Resource.Layout.checkbox, null);
 
 
+
 			if ((ApplicationData.CR == "")||(ApplicationData.CR == "0")) {
 				builder.SetMessage ("Voulez-vous valider cette livraison ?");
 				viewAD.FindViewById<RadioButton> (Resource.Id.radioButton1).Visibility = ViewStates.Gone;
@@ -255,6 +258,7 @@ namespace DMSvStandard
 
 
 				string typecr ="";
+				EditText txtRem = viewAD.FindViewById<EditText>(Resource.Id.edittext);
 
 				if (viewAD.FindViewById<RadioButton> (Resource.Id.radioButton2).Checked) {
 					
@@ -282,7 +286,7 @@ namespace DMSvStandard
 			
 
 
-				string datapost ="{\"codesuiviliv\":\"LIVCFM\",\"memosuiviliv\":\""+typecr+"\",\"libellesuiviliv\":\"\",\"commandesuiviliv\":\""+ApplicationData.codemissionactive+"\",\"groupagesuiviliv\":\""+ApplicationData.groupagemissionactive+"\",\"datesuiviliv\":\""+ApplicationData.datedj+"\",\"posgps\":\""+ApplicationData.GPS+"\"}";
+				string datapost ="{\"codesuiviliv\":\"LIVCFM\",\"memosuiviliv\":\""+Convert.ToString(txtRem.Text)+"\",\"libellesuiviliv\":\"\",\"commandesuiviliv\":\""+ApplicationData.codemissionactive+"\",\"groupagesuiviliv\":\""+ApplicationData.groupagemissionactive+"\",\"datesuiviliv\":\""+ApplicationData.datedj+"\",\"posgps\":\""+ApplicationData.GPS+"\"}";
 				Console.Out.WriteLine("!!!!!!!!!!!!DATA CREE!!!!!!!!!!!!!!!!!!!!!!!!");
 
 
@@ -292,10 +296,8 @@ namespace DMSvStandard
 				//INSERT DATA STATUT
 				var resultbis = dbr.InsertDataStatut(i,"LIVCFM","1","",""+ApplicationData.codemissionactive+"","Validée",""+ApplicationData.datedj+"",""+datapost+"");
 				Console.Out.WriteLine(resultbis);
-				//IF CR PARTICULIER AUTRE EVENT
 
 
-				//MAJ SIGNATURE
 				StartActivity(typeof(MainActivity));
 			});
 			builder.SetNegativeButton("Non", delegate {

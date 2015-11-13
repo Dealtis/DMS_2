@@ -288,7 +288,7 @@ namespace DMSvStandard.ORM
 
 
         //Insertion des données
-		public string InsertData(string codeLivraison,string numCommande, string refClient, string nomPayeur, string nomExpediteur,string adresseExpediteur, string villeExpediteur, string CpExpediteur, string dateExpe, string nomClient, string adresseLivraison, string villeLivraison, string CpLivraison, string dateHeure, string poids, string nbrPallette, string nbrColis, string instrucLivraison, string typeMission, string typeSegment, string GROUPAGE,string AdrLiv, string AdrGrp, string statutLivraison, string CR,int dateBDD, string Datemission, string Ordremission, string planDeTransport, string Userandsoft, string nomClientLivraison, string villeClientLivraison)
+		public string InsertData(string codeLivraison,string numCommande, string refClient, string nomPayeur, string nomExpediteur,string adresseExpediteur, string villeExpediteur, string CpExpediteur, string dateExpe, string nomClient, string adresseLivraison, string villeLivraison, string CpLivraison, string dateHeure, string poids, string nbrPallette, string nbrColis, string instrucLivraison, string typeMission, string typeSegment, string GROUPAGE,string AdrLiv, string AdrGrp, string statutLivraison, string CR,int dateBDD, string Datemission, string Ordremission, string planDeTransport, string Userandsoft, string nomClientLivraison, string villeClientLivraison, string imgpath)
         {
             try
             {
@@ -329,6 +329,7 @@ namespace DMSvStandard.ORM
 				item.Userandsoft = Userandsoft;
 				item.nomClientLivraison = nomClientLivraison;
 				item.villeClientLivraison = villeClientLivraison;
+				item.imgpath = imgpath;
 
 
                 db.Insert(item);

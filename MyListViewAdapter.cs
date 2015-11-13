@@ -37,7 +37,7 @@ namespace DMSvStandard
 		{
 			View row = convertView;
 
-			if((mItems[position].StatutLivraison == "0")&&(mItems[position].typeMission == "L")){
+			if((mItems[position].StatutLivraison == "0")&&(mItems[position].typeMission == "L")&&(mItems[position].imgpath == null)){
 				if (mItems [position].ADRLiv == "1") {
 					row = LayoutInflater.From (mContext).Inflate (Resource.Layout.ListeViewRowADR, null, false);
 				} else {
@@ -52,7 +52,7 @@ namespace DMSvStandard
 				txtName.Text = "OT: "+mItems[position].numCommande+" "+mItems[position].planDeTransport+"\n"+mItems[position].ADRGrp+mItems[position].nomPayeur+"\n"+mItems[position].CpLivraison+"."+mItems[position].villeLivraison+"\tCol: "+mItems[position].nbrColis+" Pal:"+mItems[position].nbrPallette+"\n"+mItems [position].instrucLivraison;
 				ApplicationData.CR = mItems [position].CR;
 			}
-			if((mItems[position].StatutLivraison == "0")&&(mItems[position].typeMission == "C")){
+			if((mItems[position].StatutLivraison == "0")&&(mItems[position].typeMission == "C")&&(mItems[position].imgpath == null)){
 				if(row == null){
 					row = LayoutInflater.From (mContext).Inflate (Resource.Layout.ListeViewRowRamasse,null,false);
 				}
@@ -96,6 +96,19 @@ namespace DMSvStandard
 			if((mItems[position].StatutLivraison == "2")&&(mItems[position].imgpath != null)){
 				if(row == null){
 					row = LayoutInflater.From (mContext).Inflate (Resource.Layout.ListeViewRowAnomaliePJ,null,false);
+				}
+				TextView txtName = row.FindViewById<TextView> (Resource.Id.txtName);
+				//FONTSNEXALIGHT
+				Typeface tf = Typeface.CreateFromAsset (Application.Context.Assets, "fonts/NexaLight.ttf");
+				txtName.SetTypeface(tf, TypefaceStyle.Normal);
+				txtName.Text = "OT: "+mItems[position].numCommande+" "+mItems[position].planDeTransport+"\n"+mItems[position].ADRGrp+mItems[position].nomPayeur+"\n"+mItems[position].CpLivraison+"."+mItems[position].villeLivraison+"\tCol: "+mItems[position].nbrColis+" Pal:"+mItems[position].nbrPallette+"\n"+mItems [position].instrucLivraison;
+
+				//txtName.Text = mItems[position].nomClient+"\n"+mItems[position].CpLivraison+"."+mItems[position].villeLivraison+"\tCol: "+mItems[position].nbrColis+" Pal:"+mItems[position].nbrPallette+"\n"+mItems[position].instrucLivraison;
+				ApplicationData.CR = mItems [position].CR;
+			}
+			if(mItems[position].imgpath == "SUPPLIV"){
+				if(row == null){
+					row = LayoutInflater.From (mContext).Inflate (Resource.Layout.ListeViewRowStroke,null,false);
 				}
 				TextView txtName = row.FindViewById<TextView> (Resource.Id.txtName);
 				//FONTSNEXALIGHT

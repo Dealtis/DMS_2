@@ -62,7 +62,16 @@ namespace DMSvStandard
 
 
 			//System.Console.Out.WriteLine("!!!!!!!!!!!!BITMAP SUPP!!!!!!!!!!!!!!!!!!!!!!!!");
-			initProcess ();
+
+			int height = Resources.DisplayMetrics.HeightPixels;
+			int width = _imageView.Height ;
+			App.bitmap = App._file.Path.LoadAndResizeBitmap (width, height);
+
+			Thread threadInit = new Thread(() => initProcess());
+			threadInit.Start ();
+
+
+			//initProcess ();
 			setBitmap ();
 			System.Console.Out.WriteLine("!!!!!!!!!!!!BITMAP UP!!!!!!!!!!!!!!!!!!!!!!!!");
 
@@ -115,25 +124,18 @@ namespace DMSvStandard
 		}
 		public void initProcess()
 		{	
-			int height = Resources.DisplayMetrics.HeightPixels;
-			int width = _imageView.Height ;
-			App.bitmap = App._file.Path.LoadAndResizeBitmap (width, height);
-
+			Button btnAnomalieValide = FindViewById<Button>(Resource.Id.valideAnomalie);
+			//btnAnomalieValide.Visibility = Android.Views.ViewStates.Invisible;
 			Android.Graphics.Bitmap bmp = Android.Graphics.BitmapFactory.DecodeFile (App._file.Path);
 			Bitmap rbmp = Bitmap.CreateScaledBitmap(bmp, bmp.Width/5,bmp.Height/5, true);
-				string newPath = App._file.Path.Replace(".jpg", "_R.jpg");
+			string newPath = App._file.Path.Replace(".jpg", "-1_1.jpg");
 				using (var fs = new FileStream (newPath, FileMode.OpenOrCreate)) {
 				rbmp.Compress (Android.Graphics.Bitmap.CompressFormat.Jpeg,100, fs);
 			}
 			App._rfile = newPath;
 			App.rbitmap = rbmp;
-
-
-
-
-
-		
-
+			//Toast.MakeText (this,"Photo prête pour envoi", ToastLength.Long).Show ();
+			//btnAnomalieValide.Visibility = Android.Views.ViewStates.Visible;
 		}
 
 		void BtnAnomalieValide_Click (object sender, EventArgs e)
@@ -224,10 +226,10 @@ namespace DMSvStandard
 			var numCom = dbr.GetnumCommande(i);
 			Intent intent = new Intent(MediaStore.ActionImageCapture);
 			//var activity2 = new Intent(this, typeof(ActivityAnomalie));
-			string dateoj=  Convert.ToString (DateTime.Now.Day)+ Convert.ToString(DateTime.Now.Month) + Convert.ToString(DateTime.Now.Year) + Convert.ToString(DateTime.Now.Minute);
+			string dateoj=  Convert.ToString (DateTime.Now.Day)+ Convert.ToString(DateTime.Now.Month);
 
 
-			App._file = new Java.IO.File(App._dir, String.Format("photo_"+dateoj+"_"+numCom+".jpg", Guid.NewGuid()));
+			App._file = new Java.IO.File(App._dir, String.Format(""+dateoj+"_"+numCom+".jpg", Guid.NewGuid()));
 
 			intent.PutExtra(MediaStore.ExtraOutput, Uri.FromFile(App._file));
 
@@ -254,82 +256,135 @@ namespace DMSvStandard
 
 			DBRepository dbrbis = new DBRepository();
 
-			if(App.txtSpin == "Livre avec manquant"){
+//			if(App.txtSpin == "Livre avec manquant"){
+//				App.codeanomalie = "LIVRMQ";
+//			}
+//			if(App.txtSpin == "Livre avec reserves pour avaries"){
+//				App.codeanomalie = "LIVRCA";			}
+//			if(App.txtSpin == "Livre mais recepisse non rendu"){
+//				App.codeanomalie = "LIVDOC";
+//			}
+//			if(App.txtSpin == "Livre avec manquants + avaries"){
+//				App.codeanomalie = "LIVRMA";
+//			}
+//			if(App.txtSpin == "Refuse pour avaries"){
+//				App.codeanomalie = "RENAVA";
+//			}
+//			if(App.txtSpin == "Avise (avis de passage)"){
+//				App.codeanomalie = "RENAVI";
+//
+//			}
+//			if(App.txtSpin == "Rendu non livre : complement adresse"){
+//				App.codeanomalie = "RENCAD";
+//			}
+//			if(App.txtSpin == "Refus divers ou sans motifs"){
+//				App.codeanomalie = "RENDIV";
+//
+//			}
+//			if(App.txtSpin == "Refuse manque BL"){
+//				App.codeanomalie = "RENDOC";
+//			}
+//			if(App.txtSpin == "Refuse manquant partiel"){
+//				App.codeanomalie = "RENMQP";
+//			}
+//			if(App.txtSpin == "Refuse non commande"){
+//				App.codeanomalie = "RENDIV";
+//			}
+//			if(App.txtSpin == "Refuse cause port du"){
+//				App.codeanomalie = "RENSPD";
+//			}
+//			if(App.txtSpin == "Refuse cause contre remboursement"){
+//				App.codeanomalie = "RENDRB";
+//			}
+//			if(App.txtSpin == "Refuse livraison trop tardive"){
+//				App.codeanomalie = "RENTAR";
+//			}
+//			if(App.txtSpin == "Rendu non justifie"){
+//				App.codeanomalie = "RENNJU";
+//			}
+//			if(App.txtSpin == "Fermeture hebdomadaire"){
+//				App.codeanomalie = "RENFHB";
+//			}
+//			if(App.txtSpin == "Non charge"){
+//				App.codeanomalie = "RENNCG";
+//			}
+//			if(App.txtSpin == "Inventaire"){
+//				App.codeanomalie = "RENINV";
+//			}
+//			if(App.txtSpin == "Refuse manquant partiel"){
+//				App.codeanomalie = "RENMQP";
+//			}
+//			if(App.txtSpin == "Restaure en non traite"){
+//				App.codeanomalie = "RESTNT";
+//			}
+
+			switch(App.txtSpin)
+			{
+
+			case "Livre avec manquant":
 				App.codeanomalie = "LIVRMQ";
+				break;
 
-			}
-			if(App.txtSpin == "Livre avec reserves pour avaries"){
+			case "Livre avec reserves pour avaries":
 				App.codeanomalie = "LIVRCA";
+				break;
 
-			}
-			if(App.txtSpin == "Livre mais recepisse non rendu"){
+			case "Livre mais recepisse non rendu":
 				App.codeanomalie = "LIVDOC";
+				break;
 
-			}
-			if(App.txtSpin == "Livre avec manquants + avaries"){
-				App.codeanomalie = "LIVRMA";
-
-			}
-			if(App.txtSpin == "Refuse pour avaries"){
+			case "Livre avec manquants + avaries":
+					App.codeanomalie = "LIVRMA";
+				break;
+			case "Refuse pour avaries":
 				App.codeanomalie = "RENAVA";
-
-			}
-			if(App.txtSpin == "Avise (avis de passage)"){
+				break;
+			case "Avise (avis de passage)":
 				App.codeanomalie = "RENAVI";
-
-			}
-			if(App.txtSpin == "Rendu non livre : complement adresse"){
+				break;
+			case "Rendu non livre : complement adresse":
 				App.codeanomalie = "RENCAD";
-
-			}
-			if(App.txtSpin == "Refus divers ou sans motifs"){
-				App.codeanomalie = "RENDIV";
-
-			}
-			if(App.txtSpin == "Refuse manque BL"){
+				break;
+			case "Refus divers ou sans motifs":
+					App.codeanomalie = "RENDIV";
+				break;
+			case "Refuse manque BL":
 				App.codeanomalie = "RENDOC";
-
-			}
-			if(App.txtSpin == "Refuse manquant partiel"){
+				break;
+			case "Refuse manquant partiel":
 				App.codeanomalie = "RENMQP";
-
-			}
-			if(App.txtSpin == "Refuse non commande"){
+				break;
+			case "Refuse non commande":
 				App.codeanomalie = "RENDIV";
-
+				break;
+			case "Refuse cause port du":
+					App.codeanomalie = "RENSPD";
+				break;
+			case "Refuse cause contre remboursement":
+					App.codeanomalie = "RENDRB";
+				break;
+			case "Refuse livraison trop tardive":
+					App.codeanomalie = "RENTAR";
+				break;
+			case "Rendu non justifie":
+					App.codeanomalie = "RENNJU";
+				break;
+			case "Fermeture hebdomadaire":
+					App.codeanomalie = "RENFHB";
+				break;
+			case "Non charge":
+					App.codeanomalie = "RENNCG";
+				break;
+			case "Inventaire":
+					App.codeanomalie = "RENINV";
+				break;
+			case "Restaure en non traite":
+					App.codeanomalie = "RESTNT";
+				break;
+			default:
+				
+				break;
 			}
-			if(App.txtSpin == "Refuse cause port du"){
-				App.codeanomalie = "RENSPD";
-
-			}
-			if(App.txtSpin == "Refuse cause contre remboursement"){
-				App.codeanomalie = "RENDRB";
-
-			}
-			if(App.txtSpin == "Refuse livraison trop tardive"){
-				App.codeanomalie = "RENTAR";
-
-			}
-			if(App.txtSpin == "Rendu non justifie"){
-				App.codeanomalie = "RENNJU";
-			}
-			//MODIFICATION 20/10/2015
-			if(App.txtSpin == "Fermeture hebdomadaire"){
-				App.codeanomalie = "RENFHB";
-			}
-			if(App.txtSpin == "Non charge"){
-				App.codeanomalie = "RENNCG";
-			}
-			if(App.txtSpin == "Inventaire"){
-				App.codeanomalie = "RENINV";
-			}
-			if(App.txtSpin == "Refuse manquant partiel"){
-				App.codeanomalie = "RENMQP";
-			}
-			if(App.txtSpin == "Restaure en non traite"){
-				App.codeanomalie = "RESTNT";
-			}
-
 			if (App._file == null) {
 				var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2",App.txtSpin,Convert.ToString(txtRem.Text),App.codeanomalie,null);
 				System.Console.Out.WriteLine (resultfor);
@@ -406,7 +461,7 @@ namespace DMSvStandard
 			return res.StatusDescription;
 			
 			} catch (Exception ex) {
-				Thread.Sleep (120000);
+				//Thread.Sleep (12000);
 				UploadFile (FtpUrl,fileName,userName,password,"");
 				Console.Out.Write("ERREUR");
 				return "erreur";

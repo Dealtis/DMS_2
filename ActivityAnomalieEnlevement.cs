@@ -2,6 +2,9 @@
 using DMSvStandard;
 using System.IO;
 using System.Net;
+using System.Threading;
+using Java.IO;
+using System.Threading.Tasks;
 
 namespace DMSvStandard
 {
@@ -66,8 +69,12 @@ namespace DMSvStandard
 			// and cause the application to crash.
 
 
-			//System.Console.Out.WriteLine("!!!!!!!!!!!!BITMAP SUPP!!!!!!!!!!!!!!!!!!!!!!!!");
-			initProcess ();
+			int height = Resources.DisplayMetrics.HeightPixels;
+			int width = _imageView.Height ;
+			App.bitmap = App._file.Path.LoadAndResizeBitmap (width, height);
+
+			Thread threadInit = new Thread(() => initProcess());
+			threadInit.Start ();
 			setBitmap ();
 			System.Console.Out.WriteLine("!!!!!!!!!!!!BITMAP UP!!!!!!!!!!!!!!!!!!!!!!!!");
 
@@ -118,9 +125,14 @@ namespace DMSvStandard
 		}
 		public void initProcess()
 		{	
-			int height = Resources.DisplayMetrics.HeightPixels;
-			int width = _imageView.Height ;
-			App.bitmap = App._file.Path.LoadAndResizeBitmap (width, height);
+			Android.Graphics.Bitmap bmp = Android.Graphics.BitmapFactory.DecodeFile (App._file.Path);
+			Bitmap rbmp = Bitmap.CreateScaledBitmap(bmp, bmp.Width/5,bmp.Height/5, true);
+			string newPath = App._file.Path.Replace(".jpg", "-1_1.jpg");
+			using (var fs = new FileStream (newPath, FileMode.OpenOrCreate)) {
+				rbmp.Compress (Android.Graphics.Bitmap.CompressFormat.Jpeg,100, fs);
+			}
+			App._rfile = newPath;
+			App.rbitmap = rbmp;
 		}
 
 		void BtnAnomalieValide_Click (object sender, EventArgs e)
@@ -197,8 +209,6 @@ namespace DMSvStandard
 			//				}
 
 			_imageView.SetImageBitmap (App.bitmap);
-
-
 		}
 
 		private void TakeAPicture(object sender, EventArgs eventArgs)
@@ -212,10 +222,10 @@ namespace DMSvStandard
 			var numCom = dbr.GetnumCommande(i);
 			Intent intent = new Intent(MediaStore.ActionImageCapture);
 			//var activity2 = new Intent(this, typeof(ActivityAnomalie));
-			string dateoj=  Convert.ToString (DateTime.Now.Day)+ Convert.ToString(DateTime.Now.Month) + Convert.ToString(DateTime.Now.Year) + Convert.ToString(DateTime.Now.Minute);
+			string dateoj=  Convert.ToString (DateTime.Now.Day)+ Convert.ToString(DateTime.Now.Month);
 
 
-			App._file = new Java.IO.File(App._dir, String.Format("photo_"+dateoj+"_"+numCom+".jpg", Guid.NewGuid()));
+			App._file = new Java.IO.File(App._dir, String.Format(""+dateoj+"_"+numCom+".jpg", Guid.NewGuid()));
 
 			intent.PutExtra(MediaStore.ExtraOutput, Uri.FromFile(App._file));
 			_imageView.SetImageBitmap (App.bitmap);
@@ -240,26 +250,48 @@ namespace DMSvStandard
 
 			DBRepository dbrbis = new DBRepository();
 
-			if (App.txtSpin == "Ramasse pas faite") {
+//			if (App.txtSpin == "Ramasse pas faite") {
+//				App.codeanomalie = "RAMPFT";
+//			}
+//			if (App.txtSpin == "Positions non chargees") {
+//				App.codeanomalie = "RENNCG";
+//			}
+//			if (App.txtSpin == "Avis de passage") {
+//				App.codeanomalie = "RENAVI";
+//			}
+//			if (App.txtSpin == "Fermeture hebdomadaire") {
+//				App.codeanomalie = "RENFHB";
+//			}
+//			if (App.txtSpin == "Ramasse diverse") {
+//				App.codeanomalie = "RAMDIV";
+//			}
+//			if(App.txtSpin == "Restaure en non traite"){
+//				App.codeanomalie = "RESTNT";
+//			}
+
+			switch(App.txtSpin)
+			{
+			case "Ramasse pas faite":
 				App.codeanomalie = "RAMPFT";
-			}
-			if (App.txtSpin == "Positions non chargees") {
+				break;
+			case "Positions non chargees":
 				App.codeanomalie = "RENNCG";
-			}
-			if (App.txtSpin == "Avis de passage") {
+				break;
+			case "Avis de passage":
 				App.codeanomalie = "RENAVI";
-			}
-			if (App.txtSpin == "Fermeture hebdomadaire") {
+				break;
+			case "Fermeture hebdomadaire":
 				App.codeanomalie = "RENFHB";
-			}
-			if (App.txtSpin == "Ramasse diverse") {
+				break;
+			case "Ramasse diverse":
 				App.codeanomalie = "RAMDIV";
-			}
-			if(App.txtSpin == "Restaure en non traite"){
+				break;
+			case "Restaure en non traite":
 				App.codeanomalie = "RESTNT";
+				break;
+			default:
+				break;
 			}
-
-
 
 
 			if (App._file == null) {
@@ -270,7 +302,8 @@ namespace DMSvStandard
 				var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2",App.txtSpin,txtRem.Text,App.codeanomalie,App._file.Path);
 				System.Console.Out.WriteLine (resultfor);
 
-				UploadFile ("ftp://10.1.2.75",App._file.Path,"DMS","Linuxr00tn","");
+				Thread thread = new Thread(() => UploadFile("ftp://10.1.2.75",App._rfile,"DMS","Linuxr00tn",""));
+				thread.Start ();
 			}
 
 			if(App.txtSpin == "Restaure en non traite"){
@@ -302,24 +335,33 @@ namespace DMSvStandard
 
 
 		}
-		public static string UploadFile(string FtpUrl, string fileName, string userName, string password,string
+		public string UploadFile(string FtpUrl, string fileName, string userName, string password,string
 			UploadDirectory="")
 		{
-			string PureFileName = new FileInfo(fileName).Name;
-			String uploadUrl = String.Format("{0}{1}/{2}", FtpUrl,UploadDirectory,PureFileName);
-			FtpWebRequest req = (FtpWebRequest)FtpWebRequest.Create(uploadUrl);
-			req.Proxy = null;
-			req.Method = WebRequestMethods.Ftp.UploadFile;
-			req.Credentials = new NetworkCredential(userName,password);
-			req.UseBinary = true;
-			req.UsePassive = true;
-			byte[] data = File.ReadAllBytes(fileName);
-			req.ContentLength = data.Length;
-			System.IO.Stream stream = req.GetRequestStream();
-			stream.Write(data, 0, data.Length);
-			stream.Close();
-			FtpWebResponse res = (FtpWebResponse)req.GetResponse();
-			return res.StatusDescription;
+			try{
+				string PureFileName = new FileInfo(fileName).Name;
+				String uploadUrl = String.Format("{0}{1}/{2}", FtpUrl,UploadDirectory,PureFileName);
+				FtpWebRequest req = (FtpWebRequest)FtpWebRequest.Create(uploadUrl);
+				req.Proxy = null;
+				req.Method = WebRequestMethods.Ftp.UploadFile;
+				req.Credentials = new NetworkCredential(userName,password);
+				req.UseBinary = true;
+				req.UsePassive = true;
+				byte[] data = System.IO.File.ReadAllBytes(fileName);
+				req.ContentLength = data.Length;
+				System.IO.Stream stream = req.GetRequestStream();
+				stream.Write(data, 0, data.Length);
+				stream.Close();
+				FtpWebResponse res = (FtpWebResponse)req.GetResponse();
+				Console.Out.Write("FTP//"+res.StatusDescription+"\n");
+				return res.StatusDescription;
+
+			} catch (Exception ex) {
+				Thread.Sleep (12000);
+				UploadFile (FtpUrl,fileName,userName,password,"");
+				Console.Out.Write("ERREUR");
+				return "erreur";
+			}
 		}
 		public override void OnBackPressed ()
 		{

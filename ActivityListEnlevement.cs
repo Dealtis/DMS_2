@@ -724,14 +724,18 @@ namespace DMSvStandard
 
 
 		void MListView_ItemClick (object sender, AdapterView.ItemClickEventArgs e)
-		{	
+		{
+			if(mItems[e.Position].imgpath == "SUPPLIV"){
+				AndHUD.Shared.ShowError(this, "Cette position a été supprimée de ce groupage", AndroidHUD.MaskType.Clear, TimeSpan.FromSeconds(3));
+			}else{
+				var activity2 = new Intent(this, typeof(ActivityDetailEnlevement));
+				activity2.PutExtra("ID", Convert.ToString(mItems[e.Position].Id));
+				ApplicationData.CR = mItems[e.Position].CR;
 
-			var activity2 = new Intent(this, typeof(ActivityDetailEnlevement));
-			activity2.PutExtra("ID", Convert.ToString(mItems[e.Position].Id));
-			ApplicationData.CR = mItems[e.Position].CR;
+				string id = Intent.GetStringExtra("ID");
+				StartActivity(activity2);
+			}
 
-			string id = Intent.GetStringExtra("ID");
-			StartActivity(activity2);
 		}
 
 		void MListView_ItemLongClick (object sender, AdapterView.ItemLongClickEventArgs e)

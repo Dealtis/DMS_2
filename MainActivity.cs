@@ -21,7 +21,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using AndroidHUD;
-
+using Android.Telephony;
 
 
 
@@ -120,17 +120,23 @@ namespace DMSvStandard
 
 			DBRepository dbr = new DBRepository ();
 
+			TelephonyManager mTelephonyMgr;
+
+			mTelephonyMgr = (TelephonyManager)GetSystemService(TelephonyService);
+
+			var Number = mTelephonyMgr.Line1Number;
+
+
 			bool resdate = dbr.Selectlogone ();
 
 			if(resdate == false){
 				StartActivity(typeof(LoginActivity));
 				Console.Out.Write (">>>>>>>>>>>>>>>>>>LOG FALSE<<<<<<<<<<<<<<<<<<<<<<");
-
-			}
+							}
 			Xamarin.Insights.Initialize("4845750bb6fdffe0e3bfaebe810ca335f0f87030", this);
 
 			Insights.Identify(ApplicationData.UserAndsoft,"Name",ApplicationData.UserAndsoft);
-
+			Insights.Identify(null, Insights.Traits.Description, Number);
 			InitializeLocationManager ();
 			bool selectlogin = dbr.Selectlogin (ApplicationData.UserAndsoft);
 			DateTime Selectdatelog = dbr.Selectdatelog (ApplicationData.UserAndsoft);
@@ -143,11 +149,6 @@ namespace DMSvStandard
 				Console.Out.Write (">>>>>>>>>>>>>>>>>>THREAD START<<<<<<<<<<<<<<<<<<<<<<");
 				ApplicationData.ithread++;
 			}
-
-
-
-
-
 			//SET BADGE
 
 			Data.countliv = 0;
@@ -327,20 +328,8 @@ namespace DMSvStandard
 			//m_lblTitle.Text = String.Format("{0},{1}", _currentLocation.Latitude, _currentLocation.Longitude);
 
 			this.Title = "DMS";
-//			m_lblDelivery.Text = ApplicationData.Instance.getTranslator ().translateMessage ("mainfrom.menuLivraison");
-//			m_lblPeekup.Text = ApplicationData.Instance.getTranslator ().translateMessage ("mainfrom.menuEnlevement");
-//			m_lblNewMsg.Text = ApplicationData.Instance.getTranslator ().translateMessage ("formmessages.menunew");
-//			m_lblInbox.Text = ApplicationData.Instance.getTranslator ().translateMessage ("formmessages.menuinbox");
-//			m_lblOutbox.Text = ApplicationData.Instance.getTranslator ().translateMessage ("formmessages.menusentbox");
-//			m_lblConfig.Text = ApplicationData.Instance.getTranslator ().translateMessage ("mainfrom.menuconfig");
 
-//			if (indicatorTimer != null)
-//				indicatorTimer.Stop ();
-//
-//
-//
-//
-//
+
 			indicatorTimer = new System.Timers.Timer();
 			indicatorTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnIndicatorTimerHandler);
 			indicatorTimer.Interval = 1000;//ApplicationData.Instance.getConfigurationModel().getInboxUpdateInterval();
@@ -409,13 +398,6 @@ namespace DMSvStandard
 		protected void peekup_Click()
 		{
 			
-//			if (!ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
-//				Toast.MakeText (this, ApplicationData.Instance.getTranslator ().translateMessage ("confignotdane"), ToastLength.Short).Show ();
-//				return;
-//			} else if (ApplicationData.Instance.isAdminLogin ()) {
-//				StartActivity(typeof(ActivityListEnlevement));
-//			}
-
 			StartActivity(typeof(ActivityListEnlevement));
 		}
 
@@ -452,8 +434,9 @@ namespace DMSvStandard
 	
 		protected void config_Click()
 		{
-
-
+			string dbPath = System.IO.Path.Combine (System.Environment.GetFolderPath
+				(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
+			var db = new SQLiteConnection (dbPath);
 
 
 		}
@@ -558,7 +541,7 @@ namespace DMSvStandard
 
 				if (verifpos > 1) {
 				} else {
-					var resinteg = dbr.InsertData (Convert.ToString (item ["codeLivraison"]), Convert.ToString (item ["numCommande"]), Convert.ToString (item ["refClient"]), Convert.ToString (item ["nomPayeur"]), Convert.ToString (item ["nomExpediteur"]), Convert.ToString (item ["adresseExpediteur"]), Convert.ToString (item ["villeExpediteur"]), Convert.ToString (item ["CpExpediteur"]), Convert.ToString (item ["dateExpe"]), Convert.ToString (item ["nomClient"]), Convert.ToString (item ["adresseLivraison"]), Convert.ToString (item ["villeLivraison"]), Convert.ToString (item ["CpLivraison"]), Convert.ToString (item ["dateHeure"]), Convert.ToString (item ["poids"]), Convert.ToString (item ["nbrPallette"]), Convert.ToString (item ["nbrColis"]), Convert.ToString (item ["instrucLivraison"]), Convert.ToString (item ["typeMission"]), Convert.ToString (item ["typeSegment"]), Convert.ToString (item ["groupage"]), Convert.ToString (item ["ADRCom"]), Convert.ToString (item ["ADRGrp"]), "0", Convert.ToString (item ["CR"]), DateTime.Now.Day, Convert.ToString (item ["Datemission"]), Convert.ToString (item ["Ordremission"]), Convert.ToString (item ["planDeTransport"]), ApplicationData.UserAndsoft, Convert.ToString (item ["nomClientLivraison"]), Convert.ToString (item ["villeClientLivraison"]));
+					var resinteg = dbr.InsertData (Convert.ToString (item ["codeLivraison"]), Convert.ToString (item ["numCommande"]), Convert.ToString (item ["refClient"]), Convert.ToString (item ["nomPayeur"]), Convert.ToString (item ["nomExpediteur"]), Convert.ToString (item ["adresseExpediteur"]), Convert.ToString (item ["villeExpediteur"]), Convert.ToString (item ["CpExpediteur"]), Convert.ToString (item ["dateExpe"]), Convert.ToString (item ["nomClient"]), Convert.ToString (item ["adresseLivraison"]), Convert.ToString (item ["villeLivraison"]), Convert.ToString (item ["CpLivraison"]), Convert.ToString (item ["dateHeure"]), Convert.ToString (item ["poids"]), Convert.ToString (item ["nbrPallette"]), Convert.ToString (item ["nbrColis"]), Convert.ToString (item ["instrucLivraison"]), Convert.ToString (item ["typeMission"]), Convert.ToString (item ["typeSegment"]), Convert.ToString (item ["groupage"]), Convert.ToString (item ["ADRCom"]), Convert.ToString (item ["ADRGrp"]), "0", Convert.ToString (item ["CR"]), DateTime.Now.Day, Convert.ToString (item ["Datemission"]), Convert.ToString (item ["Ordremission"]), Convert.ToString (item ["planDeTransport"]), ApplicationData.UserAndsoft, Convert.ToString (item ["nomClientLivraison"]), Convert.ToString (item ["villeClientLivraison"]),null);
 					var resintegnotif = dbr.InsertDataStatutMessage (10, DateTime.Now, 1, Convert.ToString (item ["numCommande"]), Convert.ToString (item ["groupage"]));
 					Console.WriteLine (resintegnotif);
 					Console.WriteLine (resinteg);
@@ -696,20 +679,37 @@ namespace DMSvStandard
 						}
 
 						//SON MSG
-						if (Data.contentmsg == "[]") {
-						} else {
-							alertsms ();
-						}
+//						if (Data.contentmsg == "[]") {
+//						} else {
+//							
+//						}
 
 						JArray jsonVal = JArray.Parse (Data.contentmsg) as JArray;
 						var jsonarr = jsonVal;
-
+					
 						foreach (var item in jsonarr) {
-							var resinteg = dbr.InsertDataMessage (Convert.ToString (item ["codeChauffeur"]), Convert.ToString (item ["utilisateurEmetteur"]), Convert.ToString (item ["texteMessage"]),0,DateTime.Now,1, Convert.ToInt32 (item ["numMessage"]));
-							var resintegstatut = dbr.InsertDataStatutMessage(0,DateTime.Now, Convert.ToInt32 (item ["numMessage"]),"","");
 
-							Console.WriteLine (item ["numMessage"]);
-							Console.WriteLine (resinteg);
+							switch((Convert.ToString ((item ["texteMessage"]))).Substring(0,9))
+							{
+							case "%%SUPPLIV":
+								var updatestatt = db.Query<ToDoTask>("UPDATE ToDoTask SET imgpath = 'SUPPLIV' WHERE numCommande = ?",(Convert.ToString (item ["texteMessage"])).Remove((Convert.ToString (item ["texteMessage"])).Length - 2).Substring(10));														
+								var resstatut = dbr.InsertDataStatutMessage (1,DateTime.Now,Convert.ToInt32 (item ["numMessage"]),"","");
+								break;
+							case "%%RETOLIV":
+								var updatestattretour = db.Query<ToDoTask>("UPDATE ToDoTask SET imgpath = null WHERE numCommande = ?",(Convert.ToString (item ["texteMessage"])).Remove((Convert.ToString (item ["texteMessage"])).Length - 2).Substring(10));														
+								var resstatutbis = dbr.InsertDataStatutMessage (1,DateTime.Now,Convert.ToInt32 (item ["numMessage"]),"","");
+								break;
+							default:
+								var resinteg = dbr.InsertDataMessage (Convert.ToString (item ["codeChauffeur"]), Convert.ToString (item ["utilisateurEmetteur"]), Convert.ToString (item ["texteMessage"]),0,DateTime.Now,1, Convert.ToInt32 (item ["numMessage"]));
+								var resintegstatut = dbr.InsertDataStatutMessage(0,DateTime.Now, Convert.ToInt32 (item ["numMessage"]),"","");
+								alertsms ();
+								Console.WriteLine (item ["numMessage"]);
+								Console.WriteLine (resinteg);
+								break;
+
+
+							}
+					
 
 						}
 						Data.countmess=0;
@@ -993,7 +993,7 @@ namespace DMSvStandard
 
 				//SET BADGE
 				
-				var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND Userandsoft = ?",ApplicationData.UserAndsoft);
+					var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND Userandsoft = ?",ApplicationData.UserAndsoft);
 
 
 
@@ -1003,7 +1003,7 @@ namespace DMSvStandard
 				}
 
 
-				var tableram = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM' AND Userandsoft = ?",ApplicationData.UserAndsoft);
+					var tableram = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='C' AND typeSegment='RAM' AND Userandsoft = ?",ApplicationData.UserAndsoft);
 				foreach (var rows in tableram) {
 
 					Data.countram++;
@@ -1090,7 +1090,7 @@ namespace DMSvStandard
 			{
 
 				ApplicationData.GPS = ""+_currentLocation.Latitude+";"+ _currentLocation.Longitude+"";
-					//Toast.MakeText (this,ApplicationData.GPS, ToastLength.Short).Show ();
+				//Toast.MakeText (this,ApplicationData.GPS, ToastLength.Short).Show ();
 
 			}
 		}
