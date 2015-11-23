@@ -11,7 +11,7 @@ public class ProgressWheel_SpinHandler
 		__md_methods = 
 			"n_handleMessage:(Landroid/os/Message;)V:GetHandleMessage_Landroid_os_Message_Handler\n" +
 			"";
-		mono.android.Runtime.register ("AndroidHUD.ProgressWheel/SpinHandler, AndHUD, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null", ProgressWheel_SpinHandler.class, __md_methods);
+		mono.android.Runtime.register ("AndroidHUD.ProgressWheel+SpinHandler, AndHUD, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null", ProgressWheel_SpinHandler.class, __md_methods);
 	}
 
 
@@ -19,7 +19,7 @@ public class ProgressWheel_SpinHandler
 	{
 		super ();
 		if (getClass () == ProgressWheel_SpinHandler.class)
-			mono.android.TypeManager.Activate ("AndroidHUD.ProgressWheel/SpinHandler, AndHUD, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null", "", this, new java.lang.Object[] {  });
+			mono.android.TypeManager.Activate ("AndroidHUD.ProgressWheel+SpinHandler, AndHUD, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null", "", this, new java.lang.Object[] {  });
 	}
 
 
@@ -27,7 +27,7 @@ public class ProgressWheel_SpinHandler
 	{
 		super (p0);
 		if (getClass () == ProgressWheel_SpinHandler.class)
-			mono.android.TypeManager.Activate ("AndroidHUD.ProgressWheel/SpinHandler, AndHUD, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null", "Android.OS.Handler/ICallback, Mono.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065", this, new java.lang.Object[] { p0 });
+			mono.android.TypeManager.Activate ("AndroidHUD.ProgressWheel+SpinHandler, AndHUD, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null", "Android.OS.Handler+ICallback, Mono.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065", this, new java.lang.Object[] { p0 });
 	}
 
 
@@ -35,7 +35,7 @@ public class ProgressWheel_SpinHandler
 	{
 		super (p0);
 		if (getClass () == ProgressWheel_SpinHandler.class)
-			mono.android.TypeManager.Activate ("AndroidHUD.ProgressWheel/SpinHandler, AndHUD, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null", "Android.OS.Looper, Mono.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065", this, new java.lang.Object[] { p0 });
+			mono.android.TypeManager.Activate ("AndroidHUD.ProgressWheel+SpinHandler, AndHUD, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null", "Android.OS.Looper, Mono.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065", this, new java.lang.Object[] { p0 });
 	}
 
 
@@ -43,7 +43,7 @@ public class ProgressWheel_SpinHandler
 	{
 		super (p0, p1);
 		if (getClass () == ProgressWheel_SpinHandler.class)
-			mono.android.TypeManager.Activate ("AndroidHUD.ProgressWheel/SpinHandler, AndHUD, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null", "Android.OS.Looper, Mono.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065:Android.OS.Handler/ICallback, Mono.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065", this, new java.lang.Object[] { p0, p1 });
+			mono.android.TypeManager.Activate ("AndroidHUD.ProgressWheel+SpinHandler, AndHUD, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null", "Android.OS.Looper, Mono.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065:Android.OS.Handler+ICallback, Mono.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065", this, new java.lang.Object[] { p0, p1 });
 	}
 
 

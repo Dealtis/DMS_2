@@ -5,6 +5,7 @@ C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\android\assets
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\android\assets\Newtonsoft.Json.dll
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\android\assets\SignaturePad.Android.dll
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\android\assets\System.Core.dll
+C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\android\assets\System.Data.dll
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\android\assets\System.dll
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\android\assets\System.Runtime.Serialization.dll
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\android\assets\System.Web.Services.dll
@@ -13,5 +14,6 @@ C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\android\assets
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\android\assets\Xamarin.Insights.dll
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\android\assets\zxing.monoandroid.dll
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\android\assets\ZXing.Net.Mobile.dll
+C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\android\assets\System.ServiceModel.Internals.dll
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\android\assets\System.ServiceModel.dll
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\android\assets\System.Net.Http.dll

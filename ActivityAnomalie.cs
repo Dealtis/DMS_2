@@ -67,8 +67,8 @@ namespace DMSvStandard
 			int width = _imageView.Height ;
 			App.bitmap = App._file.Path.LoadAndResizeBitmap (width, height);
 
-			Thread threadInit = new Thread(() => initProcess());
-			threadInit.Start ();
+			//Thread threadInit = new Thread(() => initProcess());
+			//threadInit.Start ();
 
 
 			//initProcess ();
@@ -126,14 +126,7 @@ namespace DMSvStandard
 		{	
 			Button btnAnomalieValide = FindViewById<Button>(Resource.Id.valideAnomalie);
 			//btnAnomalieValide.Visibility = Android.Views.ViewStates.Invisible;
-			Android.Graphics.Bitmap bmp = Android.Graphics.BitmapFactory.DecodeFile (App._file.Path);
-			Bitmap rbmp = Bitmap.CreateScaledBitmap(bmp, bmp.Width/5,bmp.Height/5, true);
-			string newPath = App._file.Path.Replace(".jpg", "-1_1.jpg");
-				using (var fs = new FileStream (newPath, FileMode.OpenOrCreate)) {
-				rbmp.Compress (Android.Graphics.Bitmap.CompressFormat.Jpeg,100, fs);
-			}
-			App._rfile = newPath;
-			App.rbitmap = rbmp;
+
 			//Toast.MakeText (this,"Photo prête pour envoi", ToastLength.Long).Show ();
 			//btnAnomalieValide.Visibility = Android.Views.ViewStates.Visible;
 		}
@@ -401,6 +394,14 @@ namespace DMSvStandard
 				//Thread thread = new Thread(UploadFile);
 				//thread.Start("ftp://10.1.2.75",App._file.Path,"DMS","Linuxr00tn","");
 
+				Android.Graphics.Bitmap bmp = Android.Graphics.BitmapFactory.DecodeFile (App._file.Path);
+				Bitmap rbmp = Bitmap.CreateScaledBitmap(bmp, bmp.Width/5,bmp.Height/5, true);
+				string newPath = App._file.Path.Replace(".jpg", "-1_1.jpg");
+				using (var fs = new FileStream (newPath, FileMode.OpenOrCreate)) {
+					rbmp.Compress (Android.Graphics.Bitmap.CompressFormat.Jpeg,100, fs);
+				}
+				App._rfile = newPath;
+				App.rbitmap = rbmp;
 
 				Thread thread = new Thread(() => UploadFile("ftp://10.1.2.75",App._rfile,"DMS","Linuxr00tn",""));
 				thread.Start ();

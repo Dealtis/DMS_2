@@ -87,6 +87,7 @@ class MonoPackageManager_Resources {
 		"Xamarin.Insights.dll",
 		"zxing.monoandroid.dll",
 		"ZXing.Net.Mobile.dll",
+		"System.ServiceModel.Internals.dll",
 	};
 	public static final String[] Dependencies = new String[]{
 	};

@@ -17,8 +17,10 @@ C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\android\assets\X
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\android\assets\Xamarin.Insights.dll
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\android\assets\zxing.monoandroid.dll
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\android\assets\ZXing.Net.Mobile.dll
+C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\android\assets\System.Numerics.dll
+C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\android\assets\System.Transactions.dll
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\android\assets\Mono.Data.Tds.dll
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\android\assets\Mono.Security.dll
-C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\android\assets\System.Transactions.dll
+C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\android\assets\System.ServiceModel.Internals.dll
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\android\assets\System.ServiceModel.dll
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\android\assets\System.Net.Http.dll

@@ -605,7 +605,6 @@ C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\o
 C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\res\drawable\logout.png
 C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\R.cs.flag
 C:\Users\rvanardois\Documents\APP\VSTANDARD\DMSvStandard\DMSvStandard - v2.5.8\obj\Debug\uploadflags.txt
-C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\DMSvStandard.csprojResolveAssemblyReference.cache
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\bin\Debug\DMSvStandard.dll
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\bin\Debug\DMSvStandard.pdb
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\bin\Debug\DMS.DMS.apk

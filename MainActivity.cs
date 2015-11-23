@@ -694,10 +694,15 @@ namespace DMSvStandard
 							case "%%SUPPLIV":
 								var updatestatt = db.Query<ToDoTask>("UPDATE ToDoTask SET imgpath = 'SUPPLIV' WHERE numCommande = ?",(Convert.ToString (item ["texteMessage"])).Remove((Convert.ToString (item ["texteMessage"])).Length - 2).Substring(10));														
 								var resstatut = dbr.InsertDataStatutMessage (1,DateTime.Now,Convert.ToInt32 (item ["numMessage"]),"","");
+								var resintegmsgsuppliv = dbr.InsertDataMessage (Convert.ToString (item ["codeChauffeur"]), Convert.ToString (item ["utilisateurEmetteur"]),"La position "+(Convert.ToString (item ["texteMessage"])).Remove((Convert.ToString (item ["texteMessage"])).Length - 2).Substring(10)+" a été supprimée de votre tournée",0,DateTime.Now,1, Convert.ToInt32 (item ["numMessage"]));
 								break;
 							case "%%RETOLIV":
 								var updatestattretour = db.Query<ToDoTask>("UPDATE ToDoTask SET imgpath = null WHERE numCommande = ?",(Convert.ToString (item ["texteMessage"])).Remove((Convert.ToString (item ["texteMessage"])).Length - 2).Substring(10));														
 								var resstatutbis = dbr.InsertDataStatutMessage (1,DateTime.Now,Convert.ToInt32 (item ["numMessage"]),"","");
+								break;
+							case "%%SUPPGRP":
+								var supgrp = db.Query<ToDoTask>("DELETE from ToDoTask where groupage = ?",(Convert.ToString (item ["texteMessage"])).Remove((Convert.ToString (item ["texteMessage"])).Length - 2).Substring(10));														
+								var ressupgrp = dbr.InsertDataStatutMessage (1,DateTime.Now,Convert.ToInt32 (item ["numMessage"]),"","");
 								break;
 							default:
 								var resinteg = dbr.InsertDataMessage (Convert.ToString (item ["codeChauffeur"]), Convert.ToString (item ["utilisateurEmetteur"]), Convert.ToString (item ["texteMessage"]),0,DateTime.Now,1, Convert.ToInt32 (item ["numMessage"]));
@@ -706,8 +711,6 @@ namespace DMSvStandard
 								Console.WriteLine (item ["numMessage"]);
 								Console.WriteLine (resinteg);
 								break;
-
-
 							}
 					
 
@@ -977,7 +980,7 @@ namespace DMSvStandard
 
 						if (verifpos > 1) {
 						} else {
-							var resinteg = dbr.InsertData (Convert.ToString (item ["codeLivraison"]), Convert.ToString (item ["numCommande"]), Convert.ToString (item ["refClient"]), Convert.ToString (item ["nomPayeur"]), Convert.ToString (item ["nomExpediteur"]), Convert.ToString (item ["adresseExpediteur"]), Convert.ToString (item ["villeExpediteur"]), Convert.ToString (item ["CpExpediteur"]), Convert.ToString (item ["dateExpe"]), Convert.ToString (item ["nomClient"]), Convert.ToString (item ["adresseLivraison"]), Convert.ToString (item ["villeLivraison"]), Convert.ToString (item ["CpLivraison"]), Convert.ToString (item ["dateHeure"]), Convert.ToString (item ["poids"]), Convert.ToString (item ["nbrPallette"]), Convert.ToString (item ["nbrColis"]), Convert.ToString (item ["instrucLivraison"]), Convert.ToString (item ["typeMission"]), Convert.ToString (item ["typeSegment"]), Convert.ToString (item ["groupage"]), Convert.ToString (item ["ADRCom"]), Convert.ToString (item ["ADRGrp"]), "0", Convert.ToString (item ["CR"]), DateTime.Now.Day, Convert.ToString (item ["Datemission"]), Convert.ToString (item ["Ordremission"]), Convert.ToString (item ["planDeTransport"]), ApplicationData.UserAndsoft, Convert.ToString (item ["nomClientLivraison"]), Convert.ToString (item ["villeClientLivraison"]));
+							var resinteg = dbr.InsertData (Convert.ToString (item ["codeLivraison"]), Convert.ToString (item ["numCommande"]), Convert.ToString (item ["refClient"]), Convert.ToString (item ["nomPayeur"]), Convert.ToString (item ["nomExpediteur"]), Convert.ToString (item ["adresseExpediteur"]), Convert.ToString (item ["villeExpediteur"]), Convert.ToString (item ["CpExpediteur"]), Convert.ToString (item ["dateExpe"]), Convert.ToString (item ["nomClient"]), Convert.ToString (item ["adresseLivraison"]), Convert.ToString (item ["villeLivraison"]), Convert.ToString (item ["CpLivraison"]), Convert.ToString (item ["dateHeure"]), Convert.ToString (item ["poids"]), Convert.ToString (item ["nbrPallette"]), Convert.ToString (item ["nbrColis"]), Convert.ToString (item ["instrucLivraison"]), Convert.ToString (item ["typeMission"]), Convert.ToString (item ["typeSegment"]), Convert.ToString (item ["groupage"]), Convert.ToString (item ["ADRCom"]), Convert.ToString (item ["ADRGrp"]), "0", Convert.ToString (item ["CR"]), DateTime.Now.Day, Convert.ToString (item ["Datemission"]), Convert.ToString (item ["Ordremission"]), Convert.ToString (item ["planDeTransport"]), ApplicationData.UserAndsoft, Convert.ToString (item ["nomClientLivraison"]), Convert.ToString (item ["villeClientLivraison"]),null);
 							var resintegnotif = dbr.InsertDataStatutMessage (10, DateTime.Now, 1, Convert.ToString (item ["numCommande"]), Convert.ToString (item ["groupage"]));
 							Console.WriteLine (resintegnotif);
 							Console.WriteLine (resinteg);
@@ -1131,20 +1134,6 @@ namespace DMSvStandard
 			Console.Out.Write("Using " + _locationProvider + ".");
 
 		}
-
-		//		protected override void OnResume()
-		//		{
-		//			base.OnResume();
-		//			_locationManager.RequestLocationUpdates(_locationProvider, 0, 0, this);
-		//			Console.Out.Write("Listening for location updates using " + _locationProvider + ".");
-		//		}
-		//
-		//		protected override void OnPause()
-		//		{
-		//			base.OnPause();
-		//			_locationManager.RemoveUpdates(this);
-		//			Log.Debug(LogTag, "No longer listening for location updates.");
-		//		}
 	}
 }
 

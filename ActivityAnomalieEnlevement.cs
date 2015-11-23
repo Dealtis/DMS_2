@@ -73,8 +73,8 @@ namespace DMSvStandard
 			int width = _imageView.Height ;
 			App.bitmap = App._file.Path.LoadAndResizeBitmap (width, height);
 
-			Thread threadInit = new Thread(() => initProcess());
-			threadInit.Start ();
+			//Thread threadInit = new Thread(() => initProcess());
+			//threadInit.Start ();
 			setBitmap ();
 			System.Console.Out.WriteLine("!!!!!!!!!!!!BITMAP UP!!!!!!!!!!!!!!!!!!!!!!!!");
 
@@ -125,14 +125,7 @@ namespace DMSvStandard
 		}
 		public void initProcess()
 		{	
-			Android.Graphics.Bitmap bmp = Android.Graphics.BitmapFactory.DecodeFile (App._file.Path);
-			Bitmap rbmp = Bitmap.CreateScaledBitmap(bmp, bmp.Width/5,bmp.Height/5, true);
-			string newPath = App._file.Path.Replace(".jpg", "-1_1.jpg");
-			using (var fs = new FileStream (newPath, FileMode.OpenOrCreate)) {
-				rbmp.Compress (Android.Graphics.Bitmap.CompressFormat.Jpeg,100, fs);
-			}
-			App._rfile = newPath;
-			App.rbitmap = rbmp;
+
 		}
 
 		void BtnAnomalieValide_Click (object sender, EventArgs e)
@@ -301,6 +294,17 @@ namespace DMSvStandard
 			} else {
 				var resultfor = dbrbis.UpdateStatutValideLivraison(i,"2",App.txtSpin,txtRem.Text,App.codeanomalie,App._file.Path);
 				System.Console.Out.WriteLine (resultfor);
+
+
+				Android.Graphics.Bitmap bmp = Android.Graphics.BitmapFactory.DecodeFile (App._file.Path);
+				Bitmap rbmp = Bitmap.CreateScaledBitmap(bmp, bmp.Width/5,bmp.Height/5, true);
+				string newPath = App._file.Path.Replace(".jpg", "-1_1.jpg");
+				using (var fs = new FileStream (newPath, FileMode.OpenOrCreate)) {
+					rbmp.Compress (Android.Graphics.Bitmap.CompressFormat.Jpeg,100, fs);
+				}
+				App._rfile = newPath;
+				App.rbitmap = rbmp;
+
 
 				Thread thread = new Thread(() => UploadFile("ftp://10.1.2.75",App._rfile,"DMS","Linuxr00tn",""));
 				thread.Start ();
