@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="DMS.DMS" android:versionCode="28" android:versionName="2.6.3">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="DMS.DMS" android:versionCode="29" android:versionName="2.6.3">
 	<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="21" />
 	<application android:label="DMS" android:icon="@drawable/iconapp"></application>
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

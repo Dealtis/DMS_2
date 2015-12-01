@@ -306,7 +306,7 @@ namespace DMSvStandard
 				App.rbitmap = rbmp;
 
 
-				Thread thread = new Thread(() => UploadFile("ftp://10.1.2.75",App._rfile,"DMS","Linuxr00tn",""));
+				Thread thread = new Thread(() => UploadFile("ftp://77.158.93.75",App._rfile,"DMS","Linuxr00tn",""));
 				thread.Start ();
 			}
 

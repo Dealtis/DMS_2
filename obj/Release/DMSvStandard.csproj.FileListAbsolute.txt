@@ -493,3 +493,4 @@ C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\res\layout\ima
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\res\drawable\logout.png
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\R.cs.flag
 C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\uploadflags.txt
+C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Release\DMSvStandard.csprojResolveAssemblyReference.cache
