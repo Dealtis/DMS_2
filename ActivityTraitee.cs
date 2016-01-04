@@ -41,7 +41,7 @@ namespace DMSvStandard
 			var db = new SQLiteConnection(dbPath);
 
 
-			var table = db.Query<ToDoTask>("SELECT * FROM ToDoTask WHERE StatutLivraison = '1' AND typeMission='L' AND typeSegment='LIV' OR StatutLivraison = '2' AND typeMission='L' AND typeSegment='LIV' ORDER BY _Id DESC");
+			var table = db.Query<ToDoTask>("SELECT * FROM ToDoTask WHERE StatutLivraison = '1' AND typeMission='L' AND typeSegment='LIV' OR StatutLivraison = '2' AND typeMission='L' AND typeSegment='LIV' ORDER BY Ordremission DESC");
 			var layout = new LinearLayout(this);
 
 
@@ -216,7 +216,7 @@ namespace DMSvStandard
 				(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
 			var db = new SQLiteConnection (dbPath);
 
-			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '1' AND typeMission='L' AND typeSegment='LIV' OR StatutLivraison = '2' AND typeMission='L' AND typeSegment='LIV' ORDER BY _Id DESC");
+			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '1' AND typeMission='L' AND typeSegment='LIV' OR StatutLivraison = '2' AND typeMission='L' AND typeSegment='LIV' ORDER BY Ordremission DESC");
 			//LISTVIEW
 			mListView = FindViewById<ListView> (Resource.Id.listView1);
 
@@ -283,7 +283,7 @@ namespace DMSvStandard
 				(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
 			var db = new SQLiteConnection (dbPath);
 
-			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '1' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[0]+ "' OR StatutLivraison = '2' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[0]+"' ORDER BY _Id DESC");
+			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '1' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[0]+ "' OR StatutLivraison = '2' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[0]+"' ORDER BY Ordremission DESC");
 			//LISTVIEW
 			mListView = FindViewById<ListView> (Resource.Id.listView1);
 
@@ -354,7 +354,7 @@ namespace DMSvStandard
 				(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
 			var db = new SQLiteConnection (dbPath);
 		
-			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '1' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[1]+"' OR StatutLivraison = '2' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[1]+"' ORDER BY _Id DESC");
+			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '1' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[1]+"' OR StatutLivraison = '2' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[1]+"' ORDER BY Ordremission DESC");
 			//LISTVIEW
 			mListView = FindViewById<ListView> (Resource.Id.listView1);
 
@@ -423,7 +423,7 @@ namespace DMSvStandard
 				(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
 			var db = new SQLiteConnection (dbPath);
 
-			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '1' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[2]+"' OR StatutLivraison = '2' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[2]+"' ORDER BY _Id DESC");
+			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '1' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[2]+"' OR StatutLivraison = '2' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[2]+"' ORDER BY Ordremission DESC");
 
 			//LISTVIEW
 			mListView = FindViewById<ListView> (Resource.Id.listView1);
@@ -493,7 +493,7 @@ namespace DMSvStandard
 
 
 
-			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '1' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[3]+"' OR StatutLivraison = '2' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[3]+"' ORDER BY _Id DESC");
+			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '1' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[3]+"' OR StatutLivraison = '2' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[3]+"' ORDER BY Ordremission DESC");
 
 			//LISTVIEW
 			mListView = FindViewById<ListView> (Resource.Id.listView1);
@@ -566,7 +566,7 @@ namespace DMSvStandard
 
 
 
-			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '1' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[4]+"' OR StatutLivraison = '2' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[4]+"' ORDER BY _Id DESC");
+			var table = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '1' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[4]+"' OR StatutLivraison = '2' AND typeMission='L' AND typeSegment='LIV' AND groupage='"+Appli.grp[4]+"' ORDER BY Ordremission DESC");
 
 			//LISTVIEW
 			mListView = FindViewById<ListView> (Resource.Id.listView1);
