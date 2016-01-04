@@ -1,11 +1,11 @@
 ﻿<Properties StartupItem="DMSvStandard.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.EMU_SCREEN" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.EMU_SCREEN" />
   <MonoDevelop.Ide.Workbench ActiveDocument="ActivityListLivraison.cs">
     <Files>
-      <File FileName="MyListViewAdapter.cs" Line="78" Column="43" />
-      <File FileName="ActivityListLivraison.cs" Line="116" Column="69" />
-      <File FileName="ToDoTask.cs" Line="114" Column="3" />
-      <File FileName="MainActivity.cs" Line="703" Column="25" />
+      <File FileName="MyListViewAdapter.cs" Line="1" Column="1" />
+      <File FileName="ActivityListLivraison.cs" Line="93" Column="31" />
+      <File FileName="ToDoTask.cs" Line="1" Column="1" />
+      <File FileName="MainActivity.cs" Line="864" Column="121" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
