@@ -2,25 +2,25 @@
 <Paths>
   <Jars></Jars>
   <ResolvedResourceDirectories>
-    <ResolvedResourceDirectory>C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\AndHUD\library_project_imports\res</ResolvedResourceDirectory>
-    <ResolvedResourceDirectory>C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\SignaturePad.Android\library_project_imports\res</ResolvedResourceDirectory>
-    <ResolvedResourceDirectory>C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\Xamarin.Insights\library_project_imports\res</ResolvedResourceDirectory>
-    <ResolvedResourceDirectory>C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\zxing.monoandroid\library_project_imports\res</ResolvedResourceDirectory>
-    <ResolvedResourceDirectory>C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\ZXing.Net.Mobile\library_project_imports\res</ResolvedResourceDirectory>
+    <ResolvedResourceDirectory>F:\Dealtis\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\AndHUD\library_project_imports\res</ResolvedResourceDirectory>
+    <ResolvedResourceDirectory>F:\Dealtis\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\SignaturePad.Android\library_project_imports\res</ResolvedResourceDirectory>
+    <ResolvedResourceDirectory>F:\Dealtis\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\Xamarin.Insights\library_project_imports\res</ResolvedResourceDirectory>
+    <ResolvedResourceDirectory>F:\Dealtis\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\zxing.monoandroid\library_project_imports\res</ResolvedResourceDirectory>
+    <ResolvedResourceDirectory>F:\Dealtis\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\ZXing.Net.Mobile\library_project_imports\res</ResolvedResourceDirectory>
   </ResolvedResourceDirectories>
   <ResolvedAssetDirectories>
-    <ResolvedAssetDirectory>C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\AndHUD\library_project_imports\assets</ResolvedAssetDirectory>
-    <ResolvedAssetDirectory>C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\SignaturePad.Android\library_project_imports\assets</ResolvedAssetDirectory>
-    <ResolvedAssetDirectory>C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\Xamarin.Insights\library_project_imports\assets</ResolvedAssetDirectory>
-    <ResolvedAssetDirectory>C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\zxing.monoandroid\library_project_imports\assets</ResolvedAssetDirectory>
-    <ResolvedAssetDirectory>C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\ZXing.Net.Mobile\library_project_imports\assets</ResolvedAssetDirectory>
+    <ResolvedAssetDirectory>F:\Dealtis\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\AndHUD\library_project_imports\assets</ResolvedAssetDirectory>
+    <ResolvedAssetDirectory>F:\Dealtis\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\SignaturePad.Android\library_project_imports\assets</ResolvedAssetDirectory>
+    <ResolvedAssetDirectory>F:\Dealtis\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\Xamarin.Insights\library_project_imports\assets</ResolvedAssetDirectory>
+    <ResolvedAssetDirectory>F:\Dealtis\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\zxing.monoandroid\library_project_imports\assets</ResolvedAssetDirectory>
+    <ResolvedAssetDirectory>F:\Dealtis\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\ZXing.Net.Mobile\library_project_imports\assets</ResolvedAssetDirectory>
   </ResolvedAssetDirectories>
   <ResolvedEnvironmentFiles />
   <ResolvedResourceDirectoryStamps>
-    <ResolvedResourceDirectoryStamp>C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\AndHUD.stamp</ResolvedResourceDirectoryStamp>
-    <ResolvedResourceDirectoryStamp>C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\SignaturePad.Android.stamp</ResolvedResourceDirectoryStamp>
-    <ResolvedResourceDirectoryStamp>C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\Xamarin.Insights.stamp</ResolvedResourceDirectoryStamp>
-    <ResolvedResourceDirectoryStamp>C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\zxing.monoandroid.stamp</ResolvedResourceDirectoryStamp>
-    <ResolvedResourceDirectoryStamp>C:\Users\rvanardois\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\ZXing.Net.Mobile.stamp</ResolvedResourceDirectoryStamp>
+    <ResolvedResourceDirectoryStamp>F:\Dealtis\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\AndHUD.stamp</ResolvedResourceDirectoryStamp>
+    <ResolvedResourceDirectoryStamp>F:\Dealtis\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\SignaturePad.Android.stamp</ResolvedResourceDirectoryStamp>
+    <ResolvedResourceDirectoryStamp>F:\Dealtis\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\Xamarin.Insights.stamp</ResolvedResourceDirectoryStamp>
+    <ResolvedResourceDirectoryStamp>F:\Dealtis\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\zxing.monoandroid.stamp</ResolvedResourceDirectoryStamp>
+    <ResolvedResourceDirectoryStamp>F:\Dealtis\Documents\APP\DMS\C#\DMSvStandard\obj\Debug\__library_projects__\ZXing.Net.Mobile.stamp</ResolvedResourceDirectoryStamp>
   </ResolvedResourceDirectoryStamps>
 </Paths>

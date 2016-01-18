@@ -627,13 +627,13 @@ namespace DMSvStandard
 			Thread ThreadAppInteg = new Thread(new ThreadStart(this.Integdata));
 			Thread ThreadAppCom = new Thread(new ThreadStart(this.ComWebservice));
 			Thread ThreadAppGPS = new Thread(new ThreadStart(this.ComPosGPS));
-			ThreadAppCom.Start();
+			//ThreadAppCom.Start();
 			Console.Out.Write ("///////////////ThreadAppCom START///////////////");
 			Thread.Sleep (10);
-			ThreadAppInteg.Start();
+			//ThreadAppInteg.Start();
 			Console.Out.Write ("///////////////ThreadAppInteg START///////////////");
 			Thread.Sleep (10);
-			ThreadAppGPS.Start ();
+			//ThreadAppGPS.Start ();
 			Console.Out.Write ("///////////////ThreadAppGPS START///////////////");
 
 		}

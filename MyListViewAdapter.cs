@@ -37,88 +37,40 @@ namespace DMSvStandard
 		{
 			View row = convertView;
 
-			if((mItems[position].StatutLivraison == "0")&&(mItems[position].typeMission == "L")&&(mItems[position].imgpath == null)){
-				if (mItems [position].ADRLiv == "1") {
-					row = LayoutInflater.From (mContext).Inflate (Resource.Layout.ListeViewRowADR, null, false);
-				} else {
-					row = LayoutInflater.From (mContext).Inflate (Resource.Layout.ListeViewRow, null, false);
+			if (row == null) {
+				switch (mItems [position].StatutLivraison) {
+				default:
+					break;
+				case "0":
+					if (mItems [position].typeMission == "L") {
+						row = LayoutInflater.From (mContext).Inflate (Resource.Layout.ListeViewRow, null, false);
+					} else {
+						row = LayoutInflater.From (mContext).Inflate (Resource.Layout.ListeViewRowRamasse, null, false);
+					}
+					break;
+				case "1":
+					row = LayoutInflater.From (mContext).Inflate (Resource.Layout.ListeViewRowValide, null, false);
+					break;
+				case "2":
+					if (mItems [position].imgpath == null) {
+						row = LayoutInflater.From (mContext).Inflate (Resource.Layout.ListeViewRowAnomalie, null, false);
+					} else {
+						row = LayoutInflater.From (mContext).Inflate (Resource.Layout.ListeViewRowAnomaliePJ,null,false);
+					}
+					break;
 				}
-
-			TextView txtName = row.FindViewById<TextView> (Resource.Id.txtName);
-				//HorizontalScrollView rmq = row.FindViewById<HorizontalScrollView> (Resource.Id.rmq);
-				//FONTSNEXALIGHT
-				Typeface tf = Typeface.CreateFromAsset (Application.Context.Assets, "fonts/NexaLight.ttf");
-				txtName.SetTypeface(tf, TypefaceStyle.Normal);
-				txtName.Text = "OT: "+mItems[position].numCommande+" "+mItems[position].planDeTransport+"\n"+mItems[position].ADRGrp+mItems[position].nomPayeur+"\n"+mItems[position].CpLivraison+"."+mItems[position].villeLivraison+"\tCol: "+mItems[position].nbrColis+" Pal:"+mItems[position].nbrPallette+"\n"+mItems [position].instrucLivraison;
-				ApplicationData.CR = mItems [position].CR;
-			}
-			if((mItems[position].StatutLivraison == "0")&&(mItems[position].typeMission == "C")&&(mItems[position].imgpath == null)){
-				if(row == null){
-					row = LayoutInflater.From (mContext).Inflate (Resource.Layout.ListeViewRowRamasse,null,false);
-				}
-				TextView txtName = row.FindViewById<TextView> (Resource.Id.txtName);
-				//HorizontalScrollView rmq = row.FindViewById<HorizontalScrollView> (Resource.Id.rmq);
-				//FONTSNEXALIGHT
-				Typeface tf = Typeface.CreateFromAsset (Application.Context.Assets, "fonts/NexaLight.ttf");
-				txtName.SetTypeface(tf, TypefaceStyle.Normal);
-				txtName.Text = "OT: "+mItems[position].numCommande+" "+mItems[position].planDeTransport+"\n"+mItems[position].ADRGrp+mItems[position].nomPayeur+"\n"+mItems[position].CpLivraison+"."+mItems[position].villeLivraison+"\tCol: "+mItems[position].nbrColis+" Pal:"+mItems[position].nbrPallette+"\n"+mItems [position].instrucLivraison;
-
-				//txtName.Text = mItems[position].nomPayeur+"\n"+mItems[position].CpLivraison+"."+mItems[position].villeLivraison+"\tCol: "+mItems[position].nbrColis+" Pal:"+mItems[position].nbrPallette+"\n"+mItems [position].instrucLivraison;
-				ApplicationData.CR = mItems [position].CR;
-			}
-			if(mItems[position].StatutLivraison == "1"){
-				if(row == null){
-					row = LayoutInflater.From (mContext).Inflate (Resource.Layout.ListeViewRowValide,null,false);
-				}
-				TextView txtName = row.FindViewById<TextView> (Resource.Id.txtName);
-				//FONTSNEXALIGHT
-				Typeface tf = Typeface.CreateFromAsset (Application.Context.Assets, "fonts/NexaLight.ttf");
-				txtName.SetTypeface(tf, TypefaceStyle.Normal);
-
-				txtName.Text = "OT: "+mItems[position].numCommande+" "+mItems[position].planDeTransport+"\n"+mItems[position].ADRGrp+mItems[position].nomPayeur+"\n"+mItems[position].CpLivraison+"."+mItems[position].villeLivraison+"\tCol: "+mItems[position].nbrColis+" Pal:"+mItems[position].nbrPallette+"\n"+mItems [position].instrucLivraison;
-
-				//ancien de rominoutxtName.Text = mItems[position].nomClient+"\n"+mItems[position].CpLivraison+"."+mItems[position].villeLivraison+"\tCol: "+mItems[position].nbrColis+" Pal:"+mItems[position].nbrPallette+"\n"+mItems[position].instrucLivraison;
-				ApplicationData.CR = mItems [position].CR;
-			}
-			if((mItems[position].StatutLivraison == "2")&&(mItems[position].imgpath == null)){
-				if(row == null){
-					row = LayoutInflater.From (mContext).Inflate (Resource.Layout.ListeViewRowAnomalie,null,false);
-				}
-				TextView txtName = row.FindViewById<TextView> (Resource.Id.txtName);
-				//FONTSNEXALIGHT
-				Typeface tf = Typeface.CreateFromAsset (Application.Context.Assets, "fonts/NexaLight.ttf");
-				txtName.SetTypeface(tf, TypefaceStyle.Normal);
-				txtName.Text = "OT: "+mItems[position].numCommande+" "+mItems[position].planDeTransport+"\n"+mItems[position].ADRGrp+mItems[position].nomPayeur+"\n"+mItems[position].CpLivraison+"."+mItems[position].villeLivraison+"\tCol: "+mItems[position].nbrColis+" Pal:"+mItems[position].nbrPallette+"\n"+mItems [position].instrucLivraison;
-
-				//txtName.Text = mItems[position].nomClient+"\n"+mItems[position].CpLivraison+"."+mItems[position].villeLivraison+"\tCol: "+mItems[position].nbrColis+" Pal:"+mItems[position].nbrPallette+"\n"+mItems[position].instrucLivraison;
-				ApplicationData.CR = mItems [position].CR;
-			}
-			if((mItems[position].StatutLivraison == "2")&&(mItems[position].imgpath != null)){
-				if(row == null){
-					row = LayoutInflater.From (mContext).Inflate (Resource.Layout.ListeViewRowAnomaliePJ,null,false);
-				}
-				TextView txtName = row.FindViewById<TextView> (Resource.Id.txtName);
-				//FONTSNEXALIGHT
-				Typeface tf = Typeface.CreateFromAsset (Application.Context.Assets, "fonts/NexaLight.ttf");
-				txtName.SetTypeface(tf, TypefaceStyle.Normal);
-				txtName.Text = "OT: "+mItems[position].numCommande+" "+mItems[position].planDeTransport+"\n"+mItems[position].ADRGrp+mItems[position].nomPayeur+"\n"+mItems[position].CpLivraison+"."+mItems[position].villeLivraison+"\tCol: "+mItems[position].nbrColis+" Pal:"+mItems[position].nbrPallette+"\n"+mItems [position].instrucLivraison;
-
-				//txtName.Text = mItems[position].nomClient+"\n"+mItems[position].CpLivraison+"."+mItems[position].villeLivraison+"\tCol: "+mItems[position].nbrColis+" Pal:"+mItems[position].nbrPallette+"\n"+mItems[position].instrucLivraison;
-				ApplicationData.CR = mItems [position].CR;
-			}
-			if(mItems[position].imgpath == "SUPPLIV"){
-				if(row == null){
+				if(mItems[position].imgpath == "SUPPLIV"){
 					row = LayoutInflater.From (mContext).Inflate (Resource.Layout.ListeViewRowStroke,null,false);
 				}
-				TextView txtName = row.FindViewById<TextView> (Resource.Id.txtName);
-				//FONTSNEXALIGHT
-				Typeface tf = Typeface.CreateFromAsset (Application.Context.Assets, "fonts/NexaLight.ttf");
-				txtName.SetTypeface(tf, TypefaceStyle.Normal);
-				txtName.Text = "OT: "+mItems[position].numCommande+" "+mItems[position].planDeTransport+"\n"+mItems[position].ADRGrp+mItems[position].nomPayeur+"\n"+mItems[position].CpLivraison+"."+mItems[position].villeLivraison+"\tCol: "+mItems[position].nbrColis+" Pal:"+mItems[position].nbrPallette+"\n"+mItems [position].instrucLivraison;
-
-				//txtName.Text = mItems[position].nomClient+"\n"+mItems[position].CpLivraison+"."+mItems[position].villeLivraison+"\tCol: "+mItems[position].nbrColis+" Pal:"+mItems[position].nbrPallette+"\n"+mItems[position].instrucLivraison;
-				ApplicationData.CR = mItems [position].CR;
 			}
+
+			TextView txtName = row.FindViewById<TextView> (Resource.Id.txtName);
+			//FONTSNEXALIGHT
+			Typeface tf = Typeface.CreateFromAsset (Application.Context.Assets, "fonts/NexaLight.ttf");
+			txtName.SetTypeface(tf, TypefaceStyle.Normal);
+			txtName.Text = "OT: "+mItems[position].numCommande+" "+mItems[position].planDeTransport+"\n"+mItems[position].ADRGrp+mItems[position].nomPayeur+"\n"+mItems[position].CpLivraison+"."+mItems[position].villeLivraison+"\tCol: "+mItems[position].nbrColis+" Pal:"+mItems[position].nbrPallette+"\n"+mItems [position].instrucLivraison;
+
+			ApplicationData.CR = mItems [position].CR;
 
 			return row;
 	}

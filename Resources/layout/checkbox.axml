@@ -8,7 +8,7 @@
         android:minHeight="25px"
         android:layout_width="199.4dp"
         android:layout_height="wrap_content"
-        android:id="@+id/relativeLayout1"
+        android:id="@+id/partic"
         android:layout_gravity="center">
         <ImageView
             android:id="@+id/imageView1"
@@ -61,5 +61,6 @@
         android:layout_height="wrap_content"
         android:phoneNumber="false"
         android:password="false"
-        android:inputType="textLongMessage" />
+        android:inputType="textLongMessage"
+        android:hint="Remarque supplémentaire (facultatif)" />
 </LinearLayout>

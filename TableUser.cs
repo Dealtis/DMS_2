@@ -38,6 +38,9 @@ namespace DMSvStandard
 		public string usermdp { get; set; }
 
 
+		public int dmspartic { get; set; }
+
+
 	}
 
 }

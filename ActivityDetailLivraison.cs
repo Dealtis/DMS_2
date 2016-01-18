@@ -23,9 +23,6 @@ using System.Data;
 using System.IO;
 using SQLite;
 
-
-
-
 using AndroidHUD;
 
 using System.Json;

@@ -85,8 +85,7 @@ namespace DMSvStandard
 				(Environment.SpecialFolder.Personal), "ormDMS.db3");
 
 			var db = new SQLiteConnection(dbPath);
-
-							
+					
 
 
 
