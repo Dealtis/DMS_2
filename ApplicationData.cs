@@ -48,6 +48,8 @@ namespace DMSvStandard
 		public static string UserAndsoft;
 		public static string UserTransic;
 
+
+
         private ApplicationData()
         {            
             translator = null;

@@ -28,7 +28,7 @@ namespace DMSvStandard
 	using Uri = Android.Net.Uri;
 
 
-	public static class App{
+	public class App{
 		public static Java.IO.File _file;
 		public static string _rfile;
 		public static Java.IO.File _dir;     
@@ -37,6 +37,10 @@ namespace DMSvStandard
 		public static string txtSpin;
 		public static string codeanomalie;
 		public static string codebarre;
+		public static Java.IO.File logtxt;
+		public static Java.IO.File dir_logtxt;
+		public static string path_logtxt;
+	
 	}
 
 
@@ -147,19 +151,6 @@ namespace DMSvStandard
 				updateAnomalieStatut();
 				StartActivity (typeof(MainActivity));
 			}
-
-
-
-
-//			var activity2 = new Intent(this, typeof(ActivityAnomalie));
-//			activity2.PutExtra("ID", idDATA);
-//
-//
-//
-//			string id = Intent.GetStringExtra("ID");
-//			StartActivity(activity2);
-
-
 		}
 
 
@@ -219,7 +210,7 @@ namespace DMSvStandard
 			var numCom = dbr.GetnumCommande(i);
 			Intent intent = new Intent(MediaStore.ActionImageCapture);
 			//var activity2 = new Intent(this, typeof(ActivityAnomalie));
-			string dateoj=  Convert.ToString (DateTime.Now.Day)+ Convert.ToString(DateTime.Now.Month);
+			string dateoj=  Convert.ToString (DateTime.Now.Day) + Convert.ToString(DateTime.Now.Month);
 
 
 			App._file = new Java.IO.File(App._dir, String.Format(""+dateoj+"_"+numCom+".jpg", Guid.NewGuid()));
@@ -249,68 +240,6 @@ namespace DMSvStandard
 
 			DBRepository dbrbis = new DBRepository();
 
-//			if(App.txtSpin == "Livre avec manquant"){
-//				App.codeanomalie = "LIVRMQ";
-//			}
-//			if(App.txtSpin == "Livre avec reserves pour avaries"){
-//				App.codeanomalie = "LIVRCA";			}
-//			if(App.txtSpin == "Livre mais recepisse non rendu"){
-//				App.codeanomalie = "LIVDOC";
-//			}
-//			if(App.txtSpin == "Livre avec manquants + avaries"){
-//				App.codeanomalie = "LIVRMA";
-//			}
-//			if(App.txtSpin == "Refuse pour avaries"){
-//				App.codeanomalie = "RENAVA";
-//			}
-//			if(App.txtSpin == "Avise (avis de passage)"){
-//				App.codeanomalie = "RENAVI";
-//
-//			}
-//			if(App.txtSpin == "Rendu non livre : complement adresse"){
-//				App.codeanomalie = "RENCAD";
-//			}
-//			if(App.txtSpin == "Refus divers ou sans motifs"){
-//				App.codeanomalie = "RENDIV";
-//
-//			}
-//			if(App.txtSpin == "Refuse manque BL"){
-//				App.codeanomalie = "RENDOC";
-//			}
-//			if(App.txtSpin == "Refuse manquant partiel"){
-//				App.codeanomalie = "RENMQP";
-//			}
-//			if(App.txtSpin == "Refuse non commande"){
-//				App.codeanomalie = "RENDIV";
-//			}
-//			if(App.txtSpin == "Refuse cause port du"){
-//				App.codeanomalie = "RENSPD";
-//			}
-//			if(App.txtSpin == "Refuse cause contre remboursement"){
-//				App.codeanomalie = "RENDRB";
-//			}
-//			if(App.txtSpin == "Refuse livraison trop tardive"){
-//				App.codeanomalie = "RENTAR";
-//			}
-//			if(App.txtSpin == "Rendu non justifie"){
-//				App.codeanomalie = "RENNJU";
-//			}
-//			if(App.txtSpin == "Fermeture hebdomadaire"){
-//				App.codeanomalie = "RENFHB";
-//			}
-//			if(App.txtSpin == "Non charge"){
-//				App.codeanomalie = "RENNCG";
-//			}
-//			if(App.txtSpin == "Inventaire"){
-//				App.codeanomalie = "RENINV";
-//			}
-//			if(App.txtSpin == "Refuse manquant partiel"){
-//				App.codeanomalie = "RENMQP";
-//			}
-//			if(App.txtSpin == "Restaure en non traite"){
-//				App.codeanomalie = "RESTNT";
-//			}
-
 			switch(App.txtSpin)
 			{
 
@@ -339,7 +268,7 @@ namespace DMSvStandard
 				App.codeanomalie = "RENCAD";
 				break;
 			case "Refus divers ou sans motifs":
-					App.codeanomalie = "RENDIV";
+				App.codeanomalie = "RENDIV";
 				break;
 			case "Refuse manque BL":
 				App.codeanomalie = "RENDOC";
@@ -412,14 +341,7 @@ namespace DMSvStandard
 
 				StartActivity(typeof(MainActivity));
 				Finish ();
-			}
-
-	
-
-
-
-
-			  
+			}			  
 
 				string datapost ="{\"codesuiviliv\":\""+App.codeanomalie+"\",\"memosuiviliv\":\""+Convert.ToString(txtRem.Text)+"\",\"libellesuiviliv\":\""+Convert.ToString(App.txtSpin)+"\",\"commandesuiviliv\":\""+ApplicationData.codemissionactive+"\",\"groupagesuiviliv\":\""+ApplicationData.groupagemissionactive+"\",\"datesuiviliv\":\""+ApplicationData.datedj+"\",\"posgps\":\""+ApplicationData.GPS+"\"}";
 

@@ -139,7 +139,55 @@
             d1p1:orientation="vertical"
             d1p1:clickable="true"
             d1p1:background="@drawable/bleu_button"
-            d1p1:layout_width="match_parent"
+            d1p1:layout_width="wrap_content"
+            d1p1:layout_height="match_parent"
+            d1p1:layout_weight="1.13">
+            <ImageView
+                d1p1:layout_width="64dp"
+                d1p1:layout_height="match_parent"
+                d1p1:src="@drawable/newMsg"
+                d1p1:layout_gravity="center_horizontal"
+                d1p1:id="@+id/imageView3" />
+            <TextView
+                d1p1:id="@+id/lblButton3"
+                d1p1:layout_width="wrap_content"
+                d1p1:layout_height="match_parent"
+                d1p1:layout_gravity="center_horizontal"
+                d1p1:layout_marginLeft="2dp"
+                d1p1:text="New Message"
+                d1p1:textStyle="bold"
+                d1p1:textColor="#ff000000" />
+            <RelativeLayout
+                d1p1:id="@+id/newMsgBadge"
+                d1p1:layout_width="match_parent"
+                d1p1:layout_height="match_parent"
+                d1p1:layout_marginLeft="40dp"
+                d1p1:layout_marginTop="-80dp">
+                <ImageView
+                    d1p1:layout_width="wrap_content"
+                    d1p1:layout_height="wrap_content"
+                    d1p1:adjustViewBounds="true"
+                    d1p1:src="@drawable/SBBadgeBG"
+                    d1p1:layout_centerInParent="true"
+                    d1p1:id="@+id/imageView2" />
+                <TextView
+                    d1p1:id="@+id/newMsgBadgeText"
+                    d1p1:layout_width="wrap_content"
+                    d1p1:layout_height="wrap_content"
+                    d1p1:textStyle="bold"
+                    d1p1:text="22"
+                    d1p1:layout_centerInParent="true"
+                    d1p1:textSize="12dp"
+                    d1p1:textColor="#ffffffff"
+                    d1p1:paddingBottom="5dp" />
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            d1p1:id="@+id/columnlayout2_1"
+            d1p1:orientation="vertical"
+            d1p1:clickable="true"
+            d1p1:background="@drawable/bleu_button"
+            d1p1:layout_width="wrap_content"
             d1p1:layout_height="match_parent"
             d1p1:layout_weight="1">
             <ImageView

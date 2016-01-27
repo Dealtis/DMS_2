@@ -8,7 +8,7 @@ namespace DMSvStandard.ORM
 {
     public class DBRepository
     {
-        //création de la database
+        //cr¨¦ation de la database
         public string CreateDB()
         {
             var output = "";
@@ -20,7 +20,7 @@ namespace DMSvStandard.ORM
             return output;            
         }
 
-        //création des tables
+        //cr¨¦tion des tables
         public string CreateTable()
         {
             try
@@ -35,6 +35,7 @@ namespace DMSvStandard.ORM
             
             string result = "Table crée avec succès";
             return result;
+		
             }
             catch (Exception ex)
             {	

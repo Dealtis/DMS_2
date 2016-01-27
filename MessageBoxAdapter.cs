@@ -51,6 +51,8 @@ namespace DMSvStandard
 				txtName.SetTypeface(tf, TypefaceStyle.Normal);
 				txtName.Text = ""+mItems[position].texteMessage+"";
 
+
+
 				if(mItems[position].statutMessage == 0){
 					txtstatut ="Nouveau";
 				}
@@ -63,12 +65,7 @@ namespace DMSvStandard
 				if(mItems[position].statutMessage == 3){
 					txtstatut ="Envoyé";
 				}
-
-
-
-
-
-				txtdatestatut.Text="Le "+mItems[position].dateImportMessage.Day+" à "+mItems[position].dateImportMessage.Hour+":"+mItems[position].dateImportMessage.Minute+" "+txtstatut+"";
+				txtdatestatut.Text="Le "+mItems[position].dateImportMessage.Day+" à "+mItems[position].dateImportMessage.Hour+":"+mItems[position].dateImportMessage.Minute+" "+txtstatut+" par "+mItems[position].utilisateurEmetteur;
 			}else{
 
 
@@ -97,7 +94,7 @@ namespace DMSvStandard
 					txtstatut ="Envoyé";
 				}
 
-				txtdatestatut.Text="Le "+mItems[position].dateImportMessage.Day+" à "+mItems[position].dateImportMessage.Hour+":"+mItems[position].dateImportMessage.Minute+" "+txtstatut+"";
+				txtdatestatut.Text="Le "+mItems[position].dateImportMessage.Day+" à "+mItems[position].dateImportMessage.Hour+":"+mItems[position].dateImportMessage.Minute+" "+txtstatut+" par "+mItems[position].utilisateurEmetteur;
 			}
 
 			return row;

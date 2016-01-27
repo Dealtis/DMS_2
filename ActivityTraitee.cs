@@ -717,7 +717,6 @@ namespace DMSvStandard
 			activity2.PutExtra("ID", Convert.ToString(mItems[e.Position].Id));
 
 
-
 			string id = Intent.GetStringExtra("ID");
 			StartActivity(activity2);
 		}

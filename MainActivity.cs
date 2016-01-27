@@ -29,7 +29,6 @@ using DMSvStandard;
 
 using DMSvStandard.ORM;
 
-
 using Newtonsoft;
 using Newtonsoft.Json.Linq;
 using SQLite;
@@ -41,10 +40,10 @@ namespace DMSvStandard
 {
 	/*	public class TrustAllCertificatePolicy : System.Net.ICertificatePolicy
 	{
-		public TrustAllCertificatePolicy() 
+		public TrustAllCertificatePolicy()
 		{}
 
-		public bool CheckValidationResult(ServicePoint sp, 
+		public bool CheckValidationResult(ServicePoint sp,
 			X509Certificate cert,WebRequest req, int problem)
 		{
 			return true;
@@ -54,7 +53,7 @@ namespace DMSvStandard
 	[Activity (Label = "Menu",Theme = "@android:style/Theme.Black.NoTitleBar",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
 	public class MainActivity : Activity, ILocationListener
 	{
-		
+
 
 
 		TextView m_lblDelivery=null;
@@ -98,7 +97,6 @@ namespace DMSvStandard
 		private static MainActivity appContext;
 		public bool loginCanceled = false;
 		private static readonly int ButtonClickNotificationId = 1000;
-
 
 
 		protected override void OnCreate (Bundle bundle)
@@ -159,11 +157,7 @@ namespace DMSvStandard
 
 			var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND Userandsoft = ?",ApplicationData.UserAndsoft);
 
-
-
-
-
-			foreach( var row in tableliv){ 
+			foreach( var row in tableliv){
 
 				Data.countliv++;
 			}
@@ -192,7 +186,7 @@ namespace DMSvStandard
 			if (ApplicationData.Instance.getEnlevementIndicator ()  == Data.countram) {
 				ImageView bggLiv = FindViewById<ImageView>(Resource.Id.bdgRam);
 				bggLiv.SetImageResource(Resource.Drawable.SBBadgeBGUP);
-				
+
 			}
 
 
@@ -240,11 +234,11 @@ namespace DMSvStandard
 			//btn5.Click += delegate { outbox_Click();	};
 
 			LinearLayout btn8 = FindViewById<LinearLayout> (Resource.Id.columnlayout4_2);
-			btn8.Click += delegate { 
+			btn8.Click += delegate {
 				config_Click();	};
 			btn8.LongClick += delegate	{ config_LongClick();};
 
-			m_deliveryBadge = FindViewById<RelativeLayout> (Resource.Id.deliveryBadge); 
+			m_deliveryBadge = FindViewById<RelativeLayout> (Resource.Id.deliveryBadge);
 			m_deliveryBadge.Visibility = ViewStates.Invisible;
 			m_deliveryBadgeText = FindViewById<TextView> (Resource.Id.deliveryBadgeText);
 
@@ -266,6 +260,31 @@ namespace DMSvStandard
 //			m_deliveryBadgeText.Text= Convert.ToString (Data.countliv);
 //			m_peekupBadgeText.Text= Convert.ToString (Data.countram);
 			loginCanceled = false;
+
+
+			//FICHIER LOG
+			//création du dossier dans les documents pour les logs, création si inexistant
+			App.dir_logtxt = new Java.IO.File(Android.OS.Environment.DirectoryDownloads, "DMS/logs");
+
+			if (!App.dir_logtxt.Exists())
+			{
+				App.dir_logtxt.Mkdirs();
+			}
+
+
+			//test de l'exisatnte du fichier log
+
+			if (App.path_logtxt != null) {
+				App.logtxt = new Java.IO.File(App.dir_logtxt, App.path_logtxt);
+				if (App.logtxt.Exists()) {
+					string txt_file_log = App.logtxt.Name.ToString().Substring(0,9);
+				}
+				//verif de la date
+			} else {
+				App.path_logtxt = "DMS/logs/";
+				App.logtxt = new Java.IO.File(App.dir_logtxt, ""+DateTime.Now.Day+"_"+DateTime.Now.Month+""+ApplicationData.UserAndsoft+"_log.txt");
+			}
+
 
 
 
@@ -319,7 +338,7 @@ namespace DMSvStandard
 		}
 
 		protected void initView()
-		{	
+		{
 
 			Context context = this.ApplicationContext;
 			var version = context.PackageManager.GetPackageInfo(context.PackageName, 0).VersionName;
@@ -380,7 +399,7 @@ namespace DMSvStandard
 
 		protected void delivery_Click()
         {
-            
+
 //			if (!ApplicationData.Instance.getConfigurationModel ().isConfigurationDane ()) {
 //				Toast.MakeText (this, ApplicationData.Instance.getTranslator ().translateMessage ("confignotdane"), ToastLength.Short).Show ();
 //				return;
@@ -397,7 +416,7 @@ namespace DMSvStandard
 
 		protected void peekup_Click()
 		{
-			
+
 			StartActivity(typeof(ActivityListEnlevement));
 		}
 
@@ -431,7 +450,7 @@ namespace DMSvStandard
 
 		}
 
-	
+
 		protected void config_Click()
 		{
 			string dbPath = System.IO.Path.Combine (System.Environment.GetFolderPath
@@ -441,10 +460,10 @@ namespace DMSvStandard
 
 		}
 
-	
+
 		protected void config_LongClick(){
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-					
+
 			builder.SetTitle("Deconnexion");
 
 			builder.SetMessage("Voulez-vous vous déconnecter ?");
@@ -455,12 +474,12 @@ namespace DMSvStandard
 				var resetuser = dbr.UpdateLogin(false,DateTime.Now,ApplicationData.UserAndsoft);
 
 				StartActivity (typeof(LoginActivity));
-				
+
 
 			});
 			builder.Show();
 		}
-			
+
 		protected void delivery_LongClick(){
 
 			string dbPath = System.IO.Path.Combine(Environment.GetFolderPath
@@ -627,13 +646,13 @@ namespace DMSvStandard
 			Thread ThreadAppInteg = new Thread(new ThreadStart(this.Integdata));
 			Thread ThreadAppCom = new Thread(new ThreadStart(this.ComWebservice));
 			Thread ThreadAppGPS = new Thread(new ThreadStart(this.ComPosGPS));
-			//ThreadAppCom.Start();
+			ThreadAppCom.Start();
 			Console.Out.Write ("///////////////ThreadAppCom START///////////////");
 			Thread.Sleep (10);
-			//ThreadAppInteg.Start();
+			ThreadAppInteg.Start();
 			Console.Out.Write ("///////////////ThreadAppInteg START///////////////");
 			Thread.Sleep (10);
-			//ThreadAppGPS.Start ();
+			ThreadAppGPS.Start ();
 			Console.Out.Write ("///////////////ThreadAppGPS START///////////////");
 
 		}
@@ -681,27 +700,27 @@ namespace DMSvStandard
 						//SON MSG
 //						if (Data.contentmsg == "[]") {
 //						} else {
-//							
+//
 //						}
 
 						JArray jsonVal = JArray.Parse (Data.contentmsg) as JArray;
 						var jsonarr = jsonVal;
-					
+
 						foreach (var item in jsonarr) {
 
 							switch((Convert.ToString ((item ["texteMessage"]))).Substring(0,9))
 							{
 							case "%%SUPPLIV":
-								var updatestatt = db.Query<ToDoTask>("UPDATE ToDoTask SET imgpath = 'SUPPLIV' WHERE numCommande = ?",(Convert.ToString (item ["texteMessage"])).Remove((Convert.ToString (item ["texteMessage"])).Length - 2).Substring(10));														
+								var updatestatt = db.Query<ToDoTask>("UPDATE ToDoTask SET imgpath = 'SUPPLIV' WHERE numCommande = ?",(Convert.ToString (item ["texteMessage"])).Remove((Convert.ToString (item ["texteMessage"])).Length - 2).Substring(10));
 								var resstatut = dbr.InsertDataStatutMessage (1,DateTime.Now,Convert.ToInt32 (item ["numMessage"]),"","");
 								var resintegmsgsuppliv = dbr.InsertDataMessage (Convert.ToString (item ["codeChauffeur"]), Convert.ToString (item ["utilisateurEmetteur"]),"La position "+(Convert.ToString (item ["texteMessage"])).Remove((Convert.ToString (item ["texteMessage"])).Length - 2).Substring(10)+" a été supprimée de votre tournée",0,DateTime.Now,1, Convert.ToInt32 (item ["numMessage"]));
 								break;
 							case "%%RETOLIV":
-								var updatestattretour = db.Query<ToDoTask>("UPDATE ToDoTask SET imgpath = null WHERE numCommande = ?",(Convert.ToString (item ["texteMessage"])).Remove((Convert.ToString (item ["texteMessage"])).Length - 2).Substring(10));														
+								var updatestattretour = db.Query<ToDoTask>("UPDATE ToDoTask SET imgpath = null WHERE numCommande = ?",(Convert.ToString (item ["texteMessage"])).Remove((Convert.ToString (item ["texteMessage"])).Length - 2).Substring(10));
 								var resstatutbis = dbr.InsertDataStatutMessage (1,DateTime.Now,Convert.ToInt32 (item ["numMessage"]),"","");
 								break;
 							case "%%SUPPGRP":
-								var supgrp = db.Query<ToDoTask>("DELETE from ToDoTask where groupage = ?",(Convert.ToString (item ["texteMessage"])).Remove((Convert.ToString (item ["texteMessage"])).Length - 2).Substring(10));														
+								var supgrp = db.Query<ToDoTask>("DELETE from ToDoTask where groupage = ?",(Convert.ToString (item ["texteMessage"])).Remove((Convert.ToString (item ["texteMessage"])).Length - 2).Substring(10));
 								var ressupgrp = dbr.InsertDataStatutMessage (1,DateTime.Now,Convert.ToInt32 (item ["numMessage"]),"","");
 								break;
 							default:
@@ -712,7 +731,7 @@ namespace DMSvStandard
 								Console.WriteLine (resinteg);
 								break;
 							}
-					
+
 
 						}
 						Data.countmess=0;
@@ -727,7 +746,7 @@ namespace DMSvStandard
 
 						ApplicationData.Instance.setmessageIndicator(Data.countmess);
 
-					
+
 						Data.datajson ="";
 						Data.datagps="";
 						Data.datamsg="";
@@ -742,7 +761,7 @@ namespace DMSvStandard
 						//webClient.UploadString (_url, datagps);
 
 
-					
+
 
 
 
@@ -759,7 +778,7 @@ namespace DMSvStandard
 						//	var resultdelete = db.Query<StatutMessage> (" DELETE FROM StatutLivraison WHERE Id='"+item.Id+"'");
 						}
 
-						
+
 
 
 
@@ -784,7 +803,6 @@ namespace DMSvStandard
 
 						Data.datajson = "{\"suivgps\":"+Data.datagps+",\"statutmessage\":["+Data.datanotif+"],\"Message\":["+Data.datamsg+"]}";
 
-
 						//API MSG/NOTIF/GPS
 
 						try{
@@ -792,7 +810,7 @@ namespace DMSvStandard
 							foreach (var item in tablestatutmessage) {
 								var resultdelete = dbr.deletenotif(item.Id);
 							}
-							foreach (var item in tablemessage) {							
+							foreach (var item in tablemessage) {
 								var updatestatutmessage = db.Query<Message> ("UPDATE Message SET statutMessage = 3 WHERE _Id = ?",item.Id);
 							}
 						}
@@ -813,16 +831,16 @@ namespace DMSvStandard
 
 						}
 
-					
-
-					
 
 
-					
+
+
+
+
 					Console.Out.WriteLine (">>>>>THREAD Leslie SEND " +DateTime.Now.Minute+ Data.datajson);
 
 
-					
+
 
 
 
@@ -870,7 +888,7 @@ namespace DMSvStandard
 						}
 
 				}
-				
+
 
 				DBRepository dbr = new DBRepository();
 				//var resultdrop = dbr.DropTableStatut();
@@ -878,7 +896,7 @@ namespace DMSvStandard
 						Console.Out.WriteLine(">>>>>Après "+item.codesuiviliv+""+item.id+"<br>");
 					}
 
-				
+
 				//Console.Out.WriteLine (resultdrop);
 				Console.Out.WriteLine(">>>>>THREAD NO DATA ....<<<<<"+DateTime.Now.Minute);
 				Console.WriteLine("///////Thread Com RUNNING////");
@@ -886,7 +904,7 @@ namespace DMSvStandard
 					//Thread.Sleep (3000);
 			}else{
 
-				
+
 				Console.Out.WriteLine(">>>>>NO CONNECTION WAIT ....<<<<<");
 			}
 
@@ -952,7 +970,7 @@ namespace DMSvStandard
 						Insights.Report (ex,Xamarin.Insights.Severity.Error);
 
 					}
-				
+
 
 				Data.countliv = 0;
 				Data.countram = 0;
@@ -992,10 +1010,10 @@ namespace DMSvStandard
 
 
 					}
-						
+
 
 				//SET BADGE
-				
+
 					var tableliv = db.Query<ToDoTask> ("SELECT * FROM ToDoTask WHERE StatutLivraison = '0' AND typeMission='L' AND typeSegment='LIV' AND Userandsoft = ?",ApplicationData.UserAndsoft);
 
 
@@ -1016,7 +1034,7 @@ namespace DMSvStandard
 				ApplicationData.Instance.setmessageIndicator(Data.countmess);
 
 
-			
+
 
 
 
@@ -1047,7 +1065,7 @@ namespace DMSvStandard
 					} catch (Exception ex) {
 						Data.content = "[]";
 							Insights.Report (ex,Xamarin.Insights.Severity.Error);
-						
+
 					}
 
 
@@ -1086,7 +1104,7 @@ namespace DMSvStandard
 			_currentLocation = location;
 			if (_currentLocation == null)
 			{
-				
+
 				ApplicationData.GPS = "Unable to determine your location.";
 			}
 			else
@@ -1116,7 +1134,7 @@ namespace DMSvStandard
 		void InitializeLocationManager()
 		{
 			_locationManager = (LocationManager)GetSystemService(LocationService);
-		
+
 			Criteria criteriaForLocationService = new Criteria
 			{
 				Accuracy = Accuracy.Fine
@@ -1136,5 +1154,3 @@ namespace DMSvStandard
 		}
 	}
 }
-
-

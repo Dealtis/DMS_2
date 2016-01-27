@@ -154,6 +154,7 @@ namespace DMSvStandard
 
 			//COLOR
 			if (resstatut == "2") {
+				App.bitmap = null;
 				title.SetBackgroundColor(Color.IndianRed);
 				commande.SetBackgroundColor(Color.IndianRed);
 				client.SetBackgroundColor(Color.IndianRed);

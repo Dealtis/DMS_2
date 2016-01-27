@@ -70,7 +70,7 @@ namespace DMSvStandard
 			txtName.SetTypeface(tf, TypefaceStyle.Normal);
 			txtName.Text = "OT: "+mItems[position].numCommande+" "+mItems[position].planDeTransport+"\n"+mItems[position].ADRGrp+mItems[position].nomPayeur+"\n"+mItems[position].CpLivraison+"."+mItems[position].villeLivraison+"\tCol: "+mItems[position].nbrColis+" Pal:"+mItems[position].nbrPallette+"\n"+mItems [position].instrucLivraison;
 
-			ApplicationData.CR = mItems [position].CR;
+			//ApplicationData.CR = mItems [position].CR;
 
 			return row;
 	}

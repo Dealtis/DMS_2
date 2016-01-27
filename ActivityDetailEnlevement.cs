@@ -43,9 +43,7 @@ namespace DMSvStandard
 				(System.Environment.SpecialFolder.Personal), "ormDMS.db3");
 			var db = new SQLiteConnection(dbPath);
 
-
-
-			//RECUP ID 
+			//RECUP ID
 			string id = Intent.GetStringExtra ("ID");
 
 
@@ -175,7 +173,7 @@ namespace DMSvStandard
 
 			App.bitmap =null;
 
-			//RECUP ID 
+			//RECUP ID
 			string idDATA = Intent.GetStringExtra ("ID");
 			int i = int.Parse(idDATA);
 
@@ -194,7 +192,7 @@ namespace DMSvStandard
 			StartActivity (typeof(ImageDetailView));
 		}
 		public void btnValide_Click(object sender, EventArgs e)
-		{	
+		{
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -203,18 +201,10 @@ namespace DMSvStandard
 			//BNT PART et CR
 			var viewAD = this.LayoutInflater.Inflate (Resource.Layout.checkbox, null);
 
-
-			if ((ApplicationData.CR == "")||(ApplicationData.CR == "0")) {
-				builder.SetMessage ("Voulez-vous valider cette livraison ?");
-				viewAD.FindViewById<RadioButton> (Resource.Id.radioButton1).Visibility = ViewStates.Gone;
-				viewAD.FindViewById<RadioButton> (Resource.Id.radioButton2).Visibility = ViewStates.Gone;
-				viewAD.FindViewById<TextView> (Resource.Id.textcr).Visibility = ViewStates.Gone;
-			} else {
-				builder.SetMessage ("Avez vous perçu le CR,?\n Si oui, valider cette livraison ?");
-				viewAD.FindViewById<TextView> (Resource.Id.textcr).Text=ApplicationData.CR;
-			}
-
-
+			builder.SetMessage ("Voulez-vous valider cette livraison ?");
+			viewAD.FindViewById<RadioButton> (Resource.Id.radioButton1).Visibility = ViewStates.Gone;
+			viewAD.FindViewById<RadioButton> (Resource.Id.radioButton2).Visibility = ViewStates.Gone;
+			viewAD.FindViewById<TextView> (Resource.Id.textcr).Visibility = ViewStates.Gone;
 
 			builder.SetView (viewAD);
 
@@ -225,25 +215,23 @@ namespace DMSvStandard
 
 				//AJOUT DANS LA BASE POUR ENVOIE AVEC THREAD
 				DBRepository dbr = new DBRepository();
-				//RECUP ID 
+				//RECUP ID
 				string id = Intent.GetStringExtra ("ID");
 				int i = int.Parse(id);
 
-				updateValideStatut();			
+				updateValideStatut();
 
 
-				string typecr ="";
+
 				EditText txtRem = viewAD.FindViewById<EditText>(Resource.Id.edittext);
 				if (viewAD.FindViewById<RadioButton> (Resource.Id.radioButton2).Checked) {
 
-					typecr="Cheque";
 					string datapostcheque ="{\"codesuiviliv\":\"CHEQUE\",\"memosuiviliv\":\"cheque"+ApplicationData.CR+"\",\"libellesuiviliv\":\"\",\"commandesuiviliv\":\""+ApplicationData.codemissionactive+"\",\"groupagesuiviliv\":\""+ApplicationData.groupagemissionactive+"\",\"datesuiviliv\":\""+ApplicationData.datedj+"\",\"posgps\":\""+ApplicationData.GPS+"\"}";
 					var resulfour = dbr.InsertDataStatut(i,"CHEQUE","1","",""+ApplicationData.codemissionactive+"","cheque",""+ApplicationData.datedj+"",""+datapostcheque+"");
 					Console.Out.WriteLine(resulfour);
 				}
 				if (viewAD.FindViewById<RadioButton> (Resource.Id.radioButton1).Checked) {
 
-					typecr="Espece";
 					string datapostparti ="{\"codesuiviliv\":\"ESPECE\",\"memosuiviliv\":\"espece"+ApplicationData.CR+"\",\"libellesuiviliv\":\"\",\"commandesuiviliv\":\""+ApplicationData.codemissionactive+"\",\"groupagesuiviliv\":\""+ApplicationData.groupagemissionactive+"\",\"datesuiviliv\":\""+ApplicationData.datedj+"\",\"posgps\":\""+ApplicationData.GPS+"\"}";
 					var resultfive = dbr.InsertDataStatut(i,"ESPECE","1","",""+ApplicationData.codemissionactive+"","espece",""+ApplicationData.datedj+"",""+datapostparti+"");
 					Console.Out.WriteLine(resultfive);
@@ -285,7 +273,7 @@ namespace DMSvStandard
 
 		public void updateValideStatut(){
 
-			//RECUP ID 
+			//RECUP ID
 			string id = Intent.GetStringExtra ("ID");
 			int i = int.Parse(id);
 
@@ -299,7 +287,7 @@ namespace DMSvStandard
 
 		public void updateAnomalieStatut(){
 
-			//RECUP ID 
+			//RECUP ID
 			string id = Intent.GetStringExtra ("ID");
 			int i = int.Parse(id);
 
